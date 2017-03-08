@@ -1,0 +1,39 @@
+{
+  "name": "soundcloud",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "auth0-lock": "^10.12.2",
+    "electron": "^1.6.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "react-router-dom": "next",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "soundcloud": "^3.1.2",
+    "styled-components": "^1.4.4"
+  },
+  "devDependencies": {
+    "concurrently": "^3.4.0",
+    "electron-packager": "^8.5.2",
+    "react-scripts": "0.9.3",
+    "redux-devtools": "^3.3.2",
+    "wait-on": "^2.0.2"
+  },
+  "main": "src/main.js",
+  "homepage": "./",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "scripts": {
+    "react-start": "BROWSER=none NODE_PATH=src/ react-scripts start",
+    "electron-start": "ELECTRON_DEV=1 electron .",
+    "electron-build": "electron-packager ./ --overwrite",
+    "react-build": "react-scripts build",
+    "start": "PORT=3000 concurrently 'yarn react-start' 'wait-on http://localhost:3000 && yarn electron-start'",
+    "test": "react-scripts test --env=jsdom",
+    "build": "yarn react-build && yarn electron-build",
+    "eject": "react-scripts eject"
+  }
+}
