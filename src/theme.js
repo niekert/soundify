@@ -1,7 +1,10 @@
-export const colors = {
-  primaryBackground: '#121314',
-  secondaryBackground: '#222326',
-  primaryText: '#dfe0e6',
-  secondaryText: '#88898c',
-  active: '#84bd00',
+export default {
+  colors: {
+    primaryBackground: '#121314',
+    secondaryBackground: '#222326',
+    primaryText: '#dfe0e6',
+    secondaryText: '#88898c',
+    active: '#84bd00',
+    outline: '#222326'
+  }
 }

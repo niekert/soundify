@@ -20,8 +20,6 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch, ownProps) {
-  console.log('ownProps is', ownProps);
-
   return {
     onInit: () => dispatch(initAuth())
   }
