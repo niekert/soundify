@@ -2,11 +2,14 @@ import SC from 'soundcloud';
 import queryString from 'query-string';
 
 export const AUTH_TOKEN = 'AUTH_TOKEN';
+export const AUTH_START = 'AUTH_START';
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_CALLBACK = 'SCConnect';
 
 export function attemptAuth () {
   return dispatch => {
+    dispatch({ type: AUTH_START });
+
     SC.initialize({
       client_id: '509e98546922430580cad848eeb0e25d',
       redirect_uri: 'http://localhost:8080/callback'
@@ -29,6 +32,8 @@ export function authCallback (location) {
 
 export function fetchAuthedUser (authToken) {
   return dispatch => {
+    dispatch({ type: AUTH_START, payload: authToken });
+
     fetch(`//api.soundcloud.com/me?oauth_token=${authToken}`)
       .then(resp => resp.json())
       .then(data => dispatch(authUser(data)));

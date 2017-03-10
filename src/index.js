@@ -8,7 +8,11 @@ import thunkMiddleware from 'redux-thunk';
 import './index.css';
 
 ReactDOM.render(
-  <Provider store={createStore(rootReducer, applyMiddleware(thunkMiddleware))}>
+  <Provider store={createStore(
+    rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(thunkMiddleware))}
+  >
     <AppContainer />
   </Provider>,
   document.getElementById('root')
