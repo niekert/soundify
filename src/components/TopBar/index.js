@@ -2,14 +2,14 @@ import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 import UserDropdown from './UserDropdown';
 import LoginContainer from 'containers/LoginContainer';
-import Link from 'components/Link';
-import { STATUS_DONE } from 'constants';
+import NavLink from './NavLink';
 import SoundCloudLogo from './SoundCloudLogo';
 
 const Wrapper = styled.div`
   display: flex;
   height: 50px;
   padding: 0 25px;
+  max-width: 1000px;
   justify-content: space-between;
   width: 100%;
   border-bottom: 1px solid ${props => props.theme.colors.outline}
@@ -37,10 +37,6 @@ const LinksContainer = styled.div`
   flex: 1;
 `;
 
-const NavLink = styled(Link)`
-  padding: 0 15px;
-`
-
 const Right = styled.div`
   display: flex;
   align-items: flex-end;
@@ -52,15 +48,24 @@ class TopBar extends PureComponent {
   };
 
   render () {
-    const { user } = this.props;
+    const { user } = this.props.auth;
+    console.log('props is', this.props);
 
     return (
       <Wrapper>
         <Logo />
         <Title>SoundCloud</Title>
         <LinksContainer>
-          <NavLink to="/stream">Stream</NavLink>
-          <NavLink to="/likes">My Likes</NavLink>
+          <NavLink
+            to="/stream"
+          >
+            Stream
+          </NavLink>
+          <NavLink
+            to="/likes"
+          >
+            My Likes
+          </NavLink>
         </LinksContainer>
         <Right>
           {user ?

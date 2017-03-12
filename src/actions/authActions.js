@@ -60,7 +60,6 @@ export function initAuth (authToken) {
 }
 
 function authToken(token) {
-  console.log('token', token);
   return {
     type: AUTH_TOKEN,
     payload: token
