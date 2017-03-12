@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { initAuth } from 'actions/authActions';
+import { STATUS_DONE } from 'constants';
 import App from 'components/App';
 
 class AppContainer extends Component {
@@ -9,13 +10,19 @@ class AppContainer extends Component {
   }
 
   render() {
-    return <App />
+    if (STATUS_DONE.includes(this.props.status)) {
+      return <App />
+    }
+
+    return (
+      <div>.... Loading....</div>
+    );
   }
 }
 
 function mapStateToProps (state) {
   return {
-    status: state.status
+    status: state.auth.status
   };
 }
 

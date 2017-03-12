@@ -1,6 +1,6 @@
 
-export const STATUS_INITIAL = 0;
-export const STATUS_PENDING = 1;
-export const STATUS_OK = 2;
-export const STATUS_ERROR = -1;
-export const STATUS_DONE = [1, 2];
+export const STATUS_INITIAL = 'initial';
+export const STATUS_PENDING = 'pending';
+export const STATUS_OK = 'OK';
+export const STATUS_ERROR = 'ERROR';
+export const STATUS_DONE = [STATUS_OK, STATUS_ERROR];

@@ -6,7 +6,8 @@ import {
 import { STATUS_OK, STATUS_PENDING, STATUS_ERROR } from 'constants';
 
 const emptyTimeline = {
-  data: null,
+  tracks: [],
+  error: null,
   status: STATUS_PENDING
 };
 
@@ -15,20 +16,20 @@ export default (state = {}, action) => {
     case FETCH_TIMELINE:
       return {
         ...state,
-        [action.payload.type]: emptyTimeline
+        [action.payload]: emptyTimeline
       };
     case FETCH_TIMELINE_SUCCESS:
       return {
         ...state,
         [action.payload.type]: {
-          data: action.payload.data,
+          tracks: action.payload.data,
           status: STATUS_OK
         }
       };
     case FETCH_TIMELINE_ERROR:
       return {
         [action.payload.type]: {
-          data: action.payload.data,
+          error: action.payload.data,
           status: STATUS_ERROR
         }
       };
