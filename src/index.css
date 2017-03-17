@@ -69,3 +69,7 @@ html {
 button {
   border: none;
 }
+
+button:focus {
+	outline: none;
+}

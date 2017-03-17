@@ -6,7 +6,7 @@ import {
 import { STATUS_OK, STATUS_PENDING, STATUS_ERROR } from 'constants';
 
 const emptyTimeline = {
-  tracks: [],
+  trackIds: [],
   error: null,
   status: STATUS_PENDING
 };
@@ -22,7 +22,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         [action.payload.type]: {
-          tracks: action.payload.data,
+          trackIds: action.payload.data.map(track => track.id),
           status: STATUS_OK
         }
       };

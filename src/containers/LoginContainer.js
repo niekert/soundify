@@ -1,11 +1,12 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { attemptAuth, authCallback } from '../actions/authActions';
 import LoginButton from 'components/TopBar/LoginButton';
+import { attemptAuth, authCallback } from '../actions/authActions';
 
 class LoginContainer extends PureComponent {
   static propTypes = {
-    onLogin: PropTypes.func.isRequired
+    onLogin: PropTypes.func.isRequired,
+    onAuthCallback: PropTypes.func.isRequired,
   };
 
   componentWillUnmount() {
@@ -18,29 +19,23 @@ class LoginContainer extends PureComponent {
   };
 
   _onAuthMessageReceived = ({ data }) => {
-    if(data.type === 'SCConnect') {
+    if (data.type === 'SCConnect') {
       // The SC SDK needs to auth with a location object
       const location = JSON.parse(data.location);
       this.props.onAuthCallback(location);
     }
   };
 
-  render () {
+  render() {
     return (
       <LoginButton onLoginClicked={this._onLoginClicked} />
     );
   }
 }
 
-const mapStateToProps = state => {
-  return state;
-};
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onLogin: () => dispatch(attemptAuth()),
+  onAuthCallback: data => authCallback(data),
+});
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    onLogin: () => dispatch(attemptAuth()),
-    onAuthCallback: (data) => dispatch(authCallback(data))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default connect(null, mapDispatchToProps)(LoginContainer);

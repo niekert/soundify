@@ -6,13 +6,17 @@ import NavLink from './NavLink';
 import SoundCloudLogo from './SoundCloudLogo';
 
 const Wrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: ${props => props.theme.colors.secondaryBackground}
   display: flex;
   height: 50px;
   padding: 0 25px;
-  max-width: 1000px;
   justify-content: space-between;
   width: 100%;
-  border-bottom: 1px solid ${props => props.theme.colors.outline}
+  box-shadow: 0 2px 7px 7px rgba(0, 0, 0, .1);
 `;
 
 const Logo = styled(SoundCloudLogo)`
