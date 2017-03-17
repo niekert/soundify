@@ -2,11 +2,18 @@ const { app, BrowserWindow } = require('electron');
 
 let mainWindow;
 
-function createWindow () {
+function createWindow() {
   const port = process.env.PORT || 3000; // Default to port 3000
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1440, height: 900 })
+  mainWindow = new BrowserWindow({
+    width: 1440,
+    height: 900,
+    experimentalFeatures: true,
+    webPreferences: {
+      experimentalFeatures: true,
+    },
+  });
 
   const isDev = !!process.env.ELECTRON_DEV;
 
@@ -19,7 +26,7 @@ function createWindow () {
 
   // Do special things on development
   if (isDev) {
-    mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools();
   }
 }
 

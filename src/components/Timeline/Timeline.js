@@ -1,46 +1,60 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { STATUS_OK } from 'constants';
-import Track from './Track';
 import styled from 'styled-components';
+import { STATUS_OK, STATUS_INITIAL } from 'constants';
+import Track from './Track';
 
 const Wrapper = styled.div`
   flex: 1;
-`
+`;
 
 const Loading = styled.div`
 
-`
+`; // TODO:
 
 const TrackContainer = styled.ul`
-  padding: 30px;
+  padding-top: 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-`
+`;
 
 class Timeline extends PureComponent {
   static propTypes = {
-    timeline: PropTypes.object
+    tracks: PropTypes.array,
+    status: PropTypes.string,
+    isPlaying: PropTypes.bool.isRequired,
+    activeTrackId: PropTypes.number,
+    trackClicked: PropTypes.func.isRequired,
   };
 
-  _renderTrackList () {
-    const { timeline } = this.props;
-    const tracks = timeline.tracks.map(track => (
-      <Track key={track.id} track={track} onClick={() => console.log('woo')} />
-    ));
+  static defaultProps = {
+    tracks: [],
+    status: STATUS_INITIAL,
+    activeTrackId: null,
+  }
+
+  _renderTrackList() {
+    const { tracks, trackClicked, activeTrackId, isPlaying } = this.props;
 
     return (
       <TrackContainer>
-        {tracks}
+        {tracks.map(track => (
+          <Track
+            key={track.id}
+            isPlaying={track.id === activeTrackId && isPlaying}
+            track={track}
+            onClick={trackClicked}
+          />
+        ))}
       </TrackContainer>
     );
   }
 
-  render () {
-    const { timeline } = this.props;
+  render() {
+    const { status } = this.props;
 
     const content =
-      timeline && timeline.status === STATUS_OK ?
+      status === STATUS_OK ?
         this._renderTrackList() :
         <Loading />;
 

@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import styled from 'styled-components';
+import ArtWork from 'components/track/ArtWork';
+import PlayOverlay from './PlayOverlay';
 
 const Wrapper = styled.div`
   position: relative;
@@ -10,15 +12,23 @@ const Wrapper = styled.div`
   height: 270px;
   width: 200px;
   background: ${props => props.theme.colors.secondaryBackground}
-`
+`;
 
-const ArtWork = styled.div`
+const PlayerArtwork = styled(ArtWork)`
+  position: relative;
   background-repeat: none;
   background-size: cover;
   width: 100%;
   height: 200px;
-  background-image: url(${props => props.url});
-`
+
+  & .playOverlay {
+    display: none;
+  }
+
+  &:hover .playOverlay {
+    display: flex;
+  }
+`;
 
 const Meta = styled.div`
   padding: 0 15px;
@@ -27,8 +37,7 @@ const Meta = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-`
+`;
 
 const Title = styled.span`
   font-size: .8em;
@@ -37,41 +46,50 @@ const Title = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   color: ${props => props.theme.colors.primaryText}
-`
+`;
 
 const User = styled.span`
   font-size: .7em;
   margin-top: 5px;
   color: ${props => props.theme.colors.secondaryText}
-`
+`;
 
+class Track extends PureComponent {
+  static propTypes = {
+    track: PropTypes.object.isRequired,
+    isPlaying: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+  };
 
-function getArtworkUrl (ArtWorkUrl) {
-  if (!ArtWorkUrl) {
-    return null; // TODO: default artwork
+  static defaultProps = {
+    isPlaying: false,
+  };
+
+  _onTrackClicked = () => {
+    this.props.onClick(this.props.track.id, !this.props.isPlaying);
   }
 
-  return ArtWorkUrl.replace('large.jpg', 't500x500.jpg');
-}
+  render () {
+    const { track } = this.props;
 
-const Track = ({ onClick, track }) => {
-  return (
-    <Wrapper>
-      <ArtWork url={getArtworkUrl(track.artwork_url)}>
-
-      </ArtWork>
-      <Meta>
-        <Title>{track.title}</Title>
-        <User>{track.user.username}</User>
-      </Meta>
-    </Wrapper>
-  )
-}
-
-Track.propTypes = {
-  track: PropTypes.object.isRequired,
-  isPlaying: PropTypes.bool,
-  onClick: PropTypes.func.isRequired
+    return (
+      <Wrapper>
+        <PlayerArtwork
+          onClick={this._onTrackClicked}
+          artworkUrl={track.artwork_url}
+        >
+          <PlayOverlay
+            className="playOverlay"
+            isPlaying={this.props.isPlaying}
+          />
+        </PlayerArtwork>
+        <Meta>
+          <Title>{track.title}</Title>
+          <User>{track.user.username}</User>
+        </Meta>
+      </Wrapper>
+    );
+  }
 }
 
 export default Track;
