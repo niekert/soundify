@@ -1,27 +1,31 @@
 import React, { PureComponent, PropTypes } from 'react';
-import Timeline from '../components/Timeline/Timeline';
+import { connect } from 'react-redux';
 import { fetchLikes, TIMELINE_TYPE_LIKES } from 'actions/timelineActions';
 import { tracksByIds } from 'selectors/tracks';
 import { toggleTrack } from 'actions/playerActions';
-import { connect } from 'react-redux';
+import withUser from 'containers/hocs/withUser';
+import Timeline from '../components/Timeline/Timeline';
 
 class LikesContainer extends PureComponent {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
     tracks: PropTypes.arrayOf(PropTypes.object),
     isPlaying: PropTypes.bool.isRequired,
     status: PropTypes.string.isRequired,
-    authToken: PropTypes.string.isRequired,
     fetchLikes: PropTypes.func.isRequired,
     toggleTrack: PropTypes.func.isRequired,
     type: PropTypes.string,
   };
 
+  static defaultProps = {
+    tracks: [],
+  };
+
   componentDidMount() {
-    this.props.fetchLikes(this.props.authToken);
+    this.props.fetchLikes();
   }
 
   render() {
+    console.log('props is', this.props);
     const { tracks, status, activeTrackId, isPlaying } = this.props;
 
     return (
@@ -37,7 +41,7 @@ class LikesContainer extends PureComponent {
   }
 }
 
-function mapStateToProps (state, ownProps) {
+function mapStateToProps(state) {
   // TODO: Selector
   const timeline = state.timelines[TIMELINE_TYPE_LIKES];
   const tracks = timeline ?
@@ -50,15 +54,10 @@ function mapStateToProps (state, ownProps) {
     isPlaying: state.player.isPlaying,
     activeTrackId: state.player.activeTrackId,
     status: timeline && timeline.status,
-    authToken: state.auth.token,
   };
 }
 
-function mapDispatchToProps (dispatch, ownProps) {
-  return {
-    toggleTrack: (trackId, isPlaying) => dispatch(toggleTrack(trackId, isPlaying)),
-    fetchLikes: (authToken) => dispatch(fetchLikes(authToken))
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LikesContainer);
+export default withUser(connect(mapStateToProps, {
+  toggleTrack,
+  fetchLikes,
+})(LikesContainer));
