@@ -3,7 +3,7 @@ import NavButton from './NavButton';
 
 class LoginButton extends Component {
   static propTypes = {
-    onLoginClicked: PropTypes.func.isRequired
+    onLoginClicked: PropTypes.func.isRequired,
   };
 
   render() {

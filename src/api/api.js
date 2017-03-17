@@ -4,7 +4,7 @@ import { CLIENT_ID, REDIRECT_URL } from 'constants';
 const localstorageKey = 'authToken';
 
 const api = {
-  token: window.localStorage.getItem(localstorageKey),
+  token: null && window.localStorage.getItem(localstorageKey),
 
   attemptAuth() {
     SC.initialize({
