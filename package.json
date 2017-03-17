@@ -1,5 +1,5 @@
 {
-  "name": "soundcloud",
+  "name": "soundify",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
