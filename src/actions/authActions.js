@@ -44,7 +44,6 @@ export function onAuthCallback(location) {
 export function attemptAuth() {
   return (dispatch) => {
     api.attemptAuth().then(() => {
-      debugger;
       dispatch(fetchAuthedUser());
     })
     .catch(error => ({

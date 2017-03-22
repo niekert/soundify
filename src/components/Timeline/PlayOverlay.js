@@ -17,12 +17,12 @@ const PlayerIcon = styled.div`
     width: 35%;
     fill: white;
   }
-`
+`;
 
 const PlayIcon = styled(Play)`
   position: relative;
   left: 2px;
-`
+`;
 
 const Wrapper = styled.div`
   position: absolute;
@@ -34,7 +34,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, .3);
-`
+`;
 
 
 const PlayOverlay = ({ isPlaying, className }) => (
@@ -46,7 +46,10 @@ const PlayOverlay = ({ isPlaying, className }) => (
 );
 PlayOverlay.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  className: PropTypes.string // TODO: fix this ugly hack
-}
+  className: PropTypes.string, // TODO: fix this ugly hack
+};
+PlayOverlay.defaultProps = {
+  className: '',
+};
 
 export default PlayOverlay;

@@ -22,7 +22,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         [action.payload.type]: {
-          trackIds: action.payload.data.map(track => track.id),
+          trackIds: action.payload.trackIds,
           status: STATUS_OK
         }
       };

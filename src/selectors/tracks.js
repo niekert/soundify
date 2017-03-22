@@ -1,5 +1,5 @@
-export const tracksByIds = (tracks, trackIds) => {
-  return trackIds.map(trackId => tracks[trackId]);
+export const tracksByIds = (entities, trackIds) => {
+  return trackIds.map(trackId => entities.tracks[trackId]);
 }
 
-export const trackById = (tracks, trackId) => tracks[trackId];
+export const trackById = (entities, trackId) => entities.tracks[trackId];
