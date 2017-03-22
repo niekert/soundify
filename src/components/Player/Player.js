@@ -1,5 +1,6 @@
 import React, { PropTypes, PureComponent } from 'react';
 import styled from 'styled-components';
+import { NEXT, PREV } from 'actions/playerActions';
 import { CLIENT_ID } from 'constants';
 import PlayerContent from './PlayerContent';
 
@@ -19,6 +20,7 @@ const Wrapper = styled.div`
 class Player extends PureComponent {
   static propTypes = {
     togglePlaying: PropTypes.func.isRequired,
+    changeTrack: PropTypes.func.isRequired,
     active: PropTypes.bool.isRequired,
     track: PropTypes.object,
     isPlaying: PropTypes.bool.isRequired,
@@ -74,11 +76,12 @@ class Player extends PureComponent {
 
 
   _onNext = () => {
-
+    this.props.changeTrack(NEXT);
   };
 
   _onPrev = () => {
-
+    console.log('prev');
+    this.props.changeTrack(PREV);
   };
 
   _onTogglePlay = () => {

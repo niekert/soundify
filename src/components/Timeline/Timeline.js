@@ -24,6 +24,7 @@ class Timeline extends PureComponent {
     status: PropTypes.string,
     isPlaying: PropTypes.bool.isRequired,
     activeTrackId: PropTypes.number,
+    type: PropTypes.string.isRequired,
     trackClicked: PropTypes.func.isRequired,
   };
 
@@ -31,6 +32,14 @@ class Timeline extends PureComponent {
     tracks: [],
     status: STATUS_INITIAL,
     activeTrackId: null,
+  }
+
+  _onTrackClicked = (trackId, toggle) => {
+    this.props.trackClicked({
+      trackId,
+      isPlaying: toggle,
+      timelineId: this.props.type,
+    });
   }
 
   _renderTrackList() {
@@ -43,7 +52,7 @@ class Timeline extends PureComponent {
             key={track.id}
             isPlaying={track.id === activeTrackId && isPlaying}
             track={track}
-            onClick={trackClicked}
+            onClick={this._onTrackClicked}
           />
         ))}
       </TrackContainer>

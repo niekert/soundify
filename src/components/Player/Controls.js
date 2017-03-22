@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PlayIcon from 'components/icons/Play';
+import NextTrackIcon from 'components/icons/NextTrack';
+import PreviousTrackIcon from 'components/icons/PreviousTrack';
 import PauseIcon from 'components/icons/Pause';
 import SeekBar from './SeekBar';
 
@@ -19,6 +21,23 @@ const PlayerButtons = styled.div`
   align-items: center;
 `;
 
+const IconCss = css`
+  svg {
+    color: ${props => props.theme.colors.secondaryText};
+    height: 50%;
+    width: 50%;
+    position: relative;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+
+    svg {
+      color: ${props => props.theme.colors.primaryText}
+    }
+  }
+`;
+
 const PlayButton = styled.button`
   height: 40px;
   width: 40px;
@@ -34,20 +53,17 @@ const PlayButton = styled.button`
   justify-content: center;
   transition: transform .1s ease-out, color .1s ease-out;
 
-  svg {
-    fill: ${props => props.theme.colors.secondaryText};
-    height: 50%;
-    width: 50%;
-    position: relative;
-  }
+  ${IconCss}
+`;
 
-  &:hover {
-    transform: scale(1.05);
+const ChangeTrackButton = styled.button`
+  color: ${props => props.theme.colors.secondaryText};
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background: none;
 
-    svg {
-      fill: ${props => props.theme.colors.primaryText}
-    }
-  }
+  ${IconCss}
 `;
 
 class Controls extends Component {
@@ -80,11 +96,15 @@ class Controls extends Component {
     return (
       <Wrapper>
         <PlayerButtons>
-          <button onClick={onPrev} />
+          <ChangeTrackButton onClick={onPrev}>
+            <PreviousTrackIcon />
+          </ChangeTrackButton>
           <PlayButton onClick={onTogglePlay}>
             {isPlaying ? <PauseIcon /> : <PlayIcon />}
           </PlayButton>
-          <button onClick={onNext} />
+          <ChangeTrackButton onClick={onNext}>
+            <NextTrackIcon />
+          </ChangeTrackButton>
         </PlayerButtons>
         <SeekBar
           playedSeconds={playedSeconds}

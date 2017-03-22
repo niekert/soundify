@@ -15,12 +15,14 @@ function fetchTimeline(type) {
 }
 
 function fetchTimelineSuccess(type, json) {
+  const normalized = normalize(json, schema.arrayOfTracks);
   return {
     type: FETCH_TIMELINE_SUCCESS,
     payload: {
       type,
-      data: json,
+      trackIds: normalized.result
     },
+    entities: normalized.entities
   };
 }
 

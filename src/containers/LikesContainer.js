@@ -45,7 +45,7 @@ function mapStateToProps(state) {
   // TODO: Selector
   const timeline = state.timelines[TIMELINE_TYPE_LIKES];
   const tracks = timeline ?
-    tracksByIds(state.tracks, timeline.trackIds) :
+    tracksByIds(state.entities, timeline.trackIds) :
     [];
 
   return {
