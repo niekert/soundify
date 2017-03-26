@@ -8,12 +8,16 @@ import styled, { ThemeProvider } from 'styled-components';
 import theme from 'theme';
 import PlayerContainer from 'containers/PlayerContainer';
 import TopBarContainer from 'containers/TopBarContainer';
-import LikesContainer from 'containers/LikesContainer'
+import SidebarContainer from 'containers/SidebarContainer';
+import TimelineContainer from 'containers/TimelineContainer';
+import LikesContainer from 'containers/LikesContainer';
+import RoutewithProps from 'components/RouteWithProps';
 import AuthCallback from './AuthCallback';
 import './App.css';
 
 const AppShell = styled.div`
-  min-height: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
   width: 100%;
   max-width: 1300px;
   max-width: 100%;
@@ -29,7 +33,13 @@ const Content = styled.section`
   display: flex;
   margin-top: 50px;
   margin-bottom: 100px;
-  max-width: 1300px;
+  width: 100%;
+`;
+
+const MainContent = styled.div`
+  flex: 1;
+  display: flex;
+  overflow: scroll;
 `;
 
 class App extends Component {
@@ -40,9 +50,12 @@ class App extends Component {
           <AppShell>
             <TopBarContainer />
             <Content>
-              <Route exact path="/" component={Content} />
-              <Route exact path="/likes" component={LikesContainer} />
-              <Route path="/callback" component={AuthCallback} />
+              <SidebarContainer />
+              <MainContent>
+                <Route exact path="/" component={Content} />
+                <Route path="/playlist/:id" component={TimelineContainer} />
+                <Route path="/callback" component={AuthCallback} />
+              </MainContent>
             </Content>
             <PlayerContainer />
           </AppShell>

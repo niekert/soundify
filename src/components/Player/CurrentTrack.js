@@ -35,17 +35,15 @@ const Artist = styled.span`
 `;
 
 const CurrentTrack = ({ track }) => {
-  if (!track) {
-    return null;
-  }
-
   return (
     <Wrapper>
-      <PlayerArtwork artworkUrl={track.artwork_url} />
-      <Meta>
-        <Title>{track.title}</Title>
-        <Artist>{track.user.username}</Artist>
-      </Meta>
+      {track && [
+        <PlayerArtwork artworkUrl={track.artwork_url} />,
+        <Meta>
+          <Title>{track.title}</Title>
+          <Artist>{track.user.username}</Artist>
+        </Meta>,
+      ]}
     </Wrapper>
   );
 };

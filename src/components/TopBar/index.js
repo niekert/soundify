@@ -53,7 +53,6 @@ class TopBar extends PureComponent {
 
   render () {
     const { user } = this.props.auth;
-    console.log('props is', this.props);
 
     return (
       <Wrapper>

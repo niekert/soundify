@@ -8,7 +8,7 @@ const defaultPlayerState = {
 };
 
 export default (state = defaultPlayerState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case TOGGLE_TRACK:
       const { trackId, isPlaying, timelineId } = action.payload;
       return {

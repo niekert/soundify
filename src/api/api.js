@@ -2,6 +2,9 @@ import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URL } from 'constants';
 
 const localstorageKey = 'authToken';
+function fetchWithToken(path, token) {
+  return fetch(`https://api.soundcloud.com${path}?oauth_token=${token}`);
+}
 
 const api = {
   token: window.localStorage.getItem(localstorageKey),
@@ -35,6 +38,11 @@ const api = {
 
   setToken(token) {
     this.token = token;
+  },
+
+  fetchPlaylists(userId = 'me') {
+    return fetchWithToken(`/users/${userId}/playlists`, this.token)
+      .then(resp => resp.json());
   },
 
   fetchLikes() {
