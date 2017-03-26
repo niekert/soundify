@@ -50,7 +50,7 @@ class App extends Component {
           <AppShell>
             <TopBarContainer />
             <Content>
-              <SidebarContainer />
+              <Route path="/" component={SidebarContainer} />
               <MainContent>
                 <Route exact path="/" component={Content} />
                 <Route path="/playlist/:id" component={TimelineContainer} />
