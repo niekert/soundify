@@ -31,7 +31,6 @@ class TimelineContainer extends PureComponent {
   }
 
   render() {
-    console.log('match is', this.props.match);
     const {
       tracks,
       status,
