@@ -1,21 +1,24 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 import { STATUS_OK, STATUS_INITIAL } from 'constants';
+import Loader from 'components/Loader';
 import Track from './Track';
 
 const Wrapper = styled.div`
   flex: 1;
+  width: 100%;
 `;
 
-const Loading = styled.div`
-
-`; // TODO:
+const Loading = styled(Loader)`
+  width: 100%;
+`;
 
 const TrackContainer = styled.ul`
   padding-top: 15px;
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 class Timeline extends PureComponent {
@@ -65,7 +68,7 @@ class Timeline extends PureComponent {
     const content =
       status === STATUS_OK ?
         this._renderTrackList() :
-        <Loading />;
+        <Loader />;
 
     return (
       <Wrapper>

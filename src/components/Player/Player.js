@@ -14,7 +14,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   transition: transform .2s ease-out;
-  transform: ${props => props.active ? 'translateY(0)' : 'translateY(100%)'}
 `;
 
 class Player extends PureComponent {
@@ -113,22 +112,20 @@ class Player extends PureComponent {
     } = this.props;
 
     return (
-      <Wrapper active={active}>
+      <Wrapper>
         <audio
           ref={c => this._audioElement = c} // eslint-disable-line no-return-assign
           src={track && `${track.stream_url}?client_id=${CLIENT_ID}`}
         />
-        {track && (
-          <PlayerContent
-            totalSeconds={this.state.totalSeconds}
-            playedSeconds={this.state.playedSeconds}
-            track={track}
-            isPlaying={isPlaying}
-            onNext={this._onNext}
-            onPrev={this._onPrev}
-            onTogglePlay={this._onTogglePlay}
-          />
-        )}
+        <PlayerContent
+          totalSeconds={this.state.totalSeconds}
+          playedSeconds={this.state.playedSeconds}
+          track={track}
+          isPlaying={isPlaying}
+          onNext={this._onNext}
+          onPrev={this._onPrev}
+          onTogglePlay={this._onTogglePlay}
+        />
       </Wrapper>
     );
   }

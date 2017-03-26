@@ -1,31 +1,44 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchLikes, TIMELINE_TYPE_LIKES } from 'actions/timelineActions';
+import { fetchTimeline, TIMELINE_TYPE_LIKES } from 'actions/timelineActions';
 import { tracksByIds } from 'selectors/tracks';
+import { timelineById } from 'selectors/timeline';
 import { toggleTrack } from 'actions/playerActions';
 import withUser from 'containers/hocs/withUser';
 import Timeline from '../components/Timeline/Timeline';
 
-class LikesContainer extends PureComponent {
+class TimelineContainer extends PureComponent {
   static propTypes = {
     tracks: PropTypes.arrayOf(PropTypes.object),
+    match: PropTypes.object.isRequired,
     isPlaying: PropTypes.bool.isRequired,
+    activeTrackId: PropTypes.number,
     status: PropTypes.string.isRequired,
-    fetchLikes: PropTypes.func.isRequired,
+    fetchTimeline: PropTypes.func.isRequired,
     toggleTrack: PropTypes.func.isRequired,
-    type: PropTypes.string,
+    options: PropTypes.object,
   };
 
   static defaultProps = {
+    activeTrackId: null,
     tracks: [],
+    options: {},
   };
 
   componentDidMount() {
-    this.props.fetchLikes();
+    const { match, options } = this.props;
+    this.props.fetchTimeline(match.params.id, options);
   }
 
   render() {
-    const { tracks, status, activeTrackId, isPlaying } = this.props;
+    console.log('match is', this.props.match);
+    const {
+      tracks,
+      status,
+      match,
+      activeTrackId,
+      isPlaying,
+     } = this.props;
 
     return (
       <Timeline
@@ -34,15 +47,16 @@ class LikesContainer extends PureComponent {
         status={status}
         isPlaying={isPlaying}
         activeTrackId={activeTrackId}
-        type={TIMELINE_TYPE_LIKES}
+        type={match.params.id}
       />
     );
   }
 }
 
-function mapStateToProps(state) {
-  // TODO: Selector
-  const timeline = state.timelines[TIMELINE_TYPE_LIKES];
+function mapStateToProps(state, ownProps) {
+  const { match } = ownProps;
+
+  const timeline = timelineById(state.timelines, match.params.id);
   const tracks = timeline ?
     tracksByIds(state.entities, timeline.trackIds) :
     [];
@@ -58,5 +72,5 @@ function mapStateToProps(state) {
 
 export default withUser(connect(mapStateToProps, {
   toggleTrack,
-  fetchLikes,
-})(LikesContainer));
+  fetchTimeline,
+})(TimelineContainer));
