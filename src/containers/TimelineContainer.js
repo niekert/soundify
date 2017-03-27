@@ -58,7 +58,7 @@ class TimelineContainer extends PureComponent {
         status={status}
         isPlaying={isPlaying}
         activeTrackId={activeTrackId}
-        type={match.params.id}
+        type={match.params.id || match.params.playlistType}
       />
     );
   }
@@ -66,9 +66,10 @@ class TimelineContainer extends PureComponent {
 
 function mapStateToProps(state, ownProps) {
   const { match } = ownProps;
+  const { id, playlistType } = match.params;
 
-  const timelineId = match.params.id || match.params.type; // for /likes, need to think of better way
-  const timeline = timelineById(state.entities, state.timelines, timelineId);
+  const timelineId = id || playlistType; // for /likes, need to think of better way
+  const timeline = timelineById(state.entities.timelines, timelineId);
   const tracks = timeline ?
     tracksByIds(state.entities, timeline.tracks) :
     [];

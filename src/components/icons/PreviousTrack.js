@@ -13,7 +13,7 @@ const PreviousTrack = ({ fill, ...props }) => (
   </svg>
 );
 
-PreviousTrack.PropTypes = {
+PreviousTrack.propTypes = {
   fill: PropTypes.string,
 };
 PreviousTrack.defaultProps = {

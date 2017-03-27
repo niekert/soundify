@@ -6,7 +6,7 @@ export const TOGGLE_PLAYING = 'TOGGLE_PLAYING';
 export const NEXT = 'NEXT';
 export const PREV = 'PREV';
 
-export function toggleTrack ({ trackId, isPlaying = true, timelineId }) {
+export function toggleTrack({ trackId, isPlaying = true, timelineId }) {
   return {
     type: TOGGLE_TRACK,
     payload: {
@@ -17,21 +17,21 @@ export function toggleTrack ({ trackId, isPlaying = true, timelineId }) {
   };
 }
 
-export function changeTrack (changeType) {
+export function changeTrack(changeType) {
   return (dispatch, getState) => {
-    const { timelines, player } = getState();
+    const { entities, player } = getState();
     const { activeTimelineId, activeTrackId } = player;
 
-    const timeline = timelineById(timelines, activeTimelineId);
+    const timeline = timelineById(entities.timelines, activeTimelineId);
     const currentTrackIndex = trackIndex(timeline, activeTrackId);
     const nextTrackIndexModifier = changeType === PREV ? -1 : 1;
-    const nextTrackId = timeline.trackIds[currentTrackIndex + nextTrackIndexModifier];
+    const nextTrackId = timeline.tracks[currentTrackIndex + nextTrackIndexModifier];
 
     dispatch(toggleTrack({
       trackId: nextTrackId,
-      isPlaying: true
+      isPlaying: true,
     }));
-  }
+  };
 }
 
 export function togglePlaying (toggle) {

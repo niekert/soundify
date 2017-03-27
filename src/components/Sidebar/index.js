@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
-import NavLink from 'components/TopBar/NavLink';
+import { NavLink } from 'react-router-dom';
 
 const SidebarWrapper = styled.div`
   min-width: 200px;
@@ -8,7 +8,8 @@ const SidebarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background: ${props => props.theme.colors.primaryBackground};
+  background: ${props => props.theme.colors.secondaryBackground};
+  z-index: 999999;
 `;
 
 const Label = styled.label`
@@ -21,9 +22,28 @@ const Label = styled.label`
 
 const Link = styled(NavLink)`
   display: block;
+  color: ${props => props.theme.colors.secondaryText};
+  text-decoration: none;
+  outline: none;
   padding: 10px 0;
   font-weight: 300;
+
+  &.${props => props.activeClassName} {
+    color: ${props => props.theme.colors.primaryText}
+  }
+
+  &.${props => props.activeClassName}:before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    height: 15px;
+    background: ${props => props.theme.colors.active};
+    width: 5px;
+  }
 `;
+Link.defaultProps = {
+  activeClassName: 'active',
+};
 
 const Section = styled.div`
   flex-basis: 33%;
