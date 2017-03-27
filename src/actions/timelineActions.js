@@ -21,7 +21,10 @@ function fetchTimelineSuccess({ type, id, json}) {
 export function fetchTimeline(type, { id = type }) {
   const fetchTypeMap = {
     likes: () => api.fetchLikes()
-      .then(json => ({ tracks: json })),
+      .then(json => ({
+        id: 'likes',
+        tracks: json,
+      })),
     playlist: () => api.fetchPlaylist(id),
   };
 

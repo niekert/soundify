@@ -1,6 +1,4 @@
-import { get } from 'lodash';
-
-export const timelineById = (entities, timelines, type) => get(entities, ['timelines', type]);
-export const trackIndex = (timeline, trackId) => timeline.trackIds.findIndex(id => id === trackId);
+export const timelineById = (timelines, id) => timelines[id];
+export const trackIndex = (timeline, trackId) => timeline.tracks.findIndex(id => id === trackId);
 
 
