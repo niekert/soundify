@@ -42,12 +42,17 @@ const api = {
 
   fetchPlaylists(userId = 'me') {
     return fetchWithToken(`/users/${userId}/playlists`, this.token)
-      .then(resp => resp.json());
+      .then(resp => resp.json()); // TODO: error handling
+  },
+
+  fetchPlaylist(playlistId) {
+    return fetchWithToken(`/playlists/${playlistId}`, this.token)
+      .then(resp => resp.json()); // TODO: error handling
   },
 
   fetchLikes() {
     return fetch(`https://api.soundcloud.com/me/favorites?oauth_token=${this.token}`)
-      .then(response => response.json());
+      .then(response => response.json()); // TODO: Error handling
   },
 
 };
