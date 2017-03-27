@@ -20,13 +20,15 @@ class Player extends PureComponent {
   static propTypes = {
     togglePlaying: PropTypes.func.isRequired,
     changeTrack: PropTypes.func.isRequired,
-    active: PropTypes.bool.isRequired,
+    active: PropTypes.bool,
     track: PropTypes.object,
-    isPlaying: PropTypes.bool.isRequired,
+    isPlaying: PropTypes.bool,
   };
 
   static defaultProps = {
     track: null,
+    active: false,
+    isPlaying: false,
   }
 
   state = {

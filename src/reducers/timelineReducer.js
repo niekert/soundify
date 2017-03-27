@@ -6,29 +6,29 @@ import {
 import { STATUS_OK, STATUS_PENDING, STATUS_ERROR } from 'constants';
 
 const emptyTimeline = {
-  trackIds: [],
+  timelineId: null,
   error: null,
   status: STATUS_PENDING,
 };
 
-export default (state = {}, action) => {
-  switch(action.type) {
+export default (state = [], action) => {
+  switch (action.type) {
     case FETCH_TIMELINE:
       return {
         ...state,
-        [action.payload]: emptyTimeline,
+        [action.payload.id]: emptyTimeline,
       };
     case FETCH_TIMELINE_SUCCESS:
       return {
         ...state,
-        [action.payload.type]: {
-          trackIds: action.payload.trackIds,
+        [action.payload.id]: {
+          timelineId: action.payload.id,
           status: STATUS_OK,
         },
       };
     case FETCH_TIMELINE_ERROR:
       return {
-        [action.payload.type]: {
+        [action.payload.id]: {
           error: action.payload.data,
           status: STATUS_ERROR,
         },

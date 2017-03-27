@@ -40,9 +40,9 @@ const Active = styled.div`
 class SeekBar extends PureComponent {
   static propTypes = {
     totalSeconds: PropTypes.number,
-    isPlaying: PropTypes.bool,
+    isPlaying: PropTypes.bool, // eslint-disable-line
     playedSeconds: PropTypes.number,
-    onSeek: PropTypes.func.isRequired,
+    onSeek: PropTypes.func.isRequired, // eslint-disable-line
   };
 
   static defaultProps = {
@@ -52,7 +52,10 @@ class SeekBar extends PureComponent {
   };
 
   render() {
-    const { totalSeconds, playedSeconds, isPlaying } = this.props;
+    const {
+      totalSeconds,
+      playedSeconds,
+    } = this.props;
     const percentage = Number((playedSeconds / totalSeconds) * 100).toFixed(2);
 
     return (

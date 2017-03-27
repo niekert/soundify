@@ -10,8 +10,6 @@ import PlayerContainer from 'containers/PlayerContainer';
 import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';
 import TimelineContainer from 'containers/TimelineContainer';
-import LikesContainer from 'containers/LikesContainer';
-import RoutewithProps from 'components/RouteWithProps';
 import AuthCallback from './AuthCallback';
 import './App.css';
 
@@ -53,7 +51,7 @@ class App extends Component {
               <Route path="/" component={SidebarContainer} />
               <MainContent>
                 <Route exact path="/" component={Content} />
-                <Route path="/playlist/:id" component={TimelineContainer} />
+                <Route path="/s/:playlistType/:id?" component={TimelineContainer} />
                 <Route path="/callback" component={AuthCallback} />
               </MainContent>
             </Content>

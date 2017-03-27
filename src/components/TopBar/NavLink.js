@@ -20,18 +20,27 @@ const Wrapper = styled(Link)`
   }
 `;
 
-class NavLink extends React.Component {
+class NavLink extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired,
+    location: PropTypes.object,
+    history: PropTypes.object,
+    to: PropTypes.string,
     children: PropTypes.node.isRequired,
   };
 
-  render () {
+  static defaultProps = {
+    location: {},
+    history: {},
+    to: '',
+  };
+
+  render() {
     const {
       match,
       children,
-      location,
-      history,
+      location, // eslint-disable-line
+      history, // eslint-disable-line
       to,
       ...props
     } = this.props;

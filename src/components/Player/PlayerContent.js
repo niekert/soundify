@@ -12,8 +12,12 @@ const Wrapper = styled.div`
 
 class PlayerContent extends PureComponent {
   static propTypes = {
-    track: PropTypes.object.isRequired,
+    track: PropTypes.object,
     ...Controls.propTypes,
+  };
+
+  static defaultProps = {
+    track: null,
   };
 
   render() {

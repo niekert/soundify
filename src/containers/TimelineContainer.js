@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { STATUS_INITIAL, STATUS_OK } from 'constants';
 import { fetchTimeline, TIMELINE_TYPE_LIKES } from 'actions/timelineActions';
 import { tracksByIds } from 'selectors/tracks';
 import { timelineById } from 'selectors/timeline';
@@ -16,18 +17,29 @@ class TimelineContainer extends PureComponent {
     status: PropTypes.string.isRequired,
     fetchTimeline: PropTypes.func.isRequired,
     toggleTrack: PropTypes.func.isRequired,
-    options: PropTypes.object,
   };
 
   static defaultProps = {
     activeTrackId: null,
     tracks: [],
-    options: {},
   };
 
   componentDidMount() {
-    const { match, options } = this.props;
-    this.props.fetchTimeline(match.params.id, options);
+    const { match } = this.props;
+    const { playlistType, id } = match.params;
+    this.props.fetchTimeline(playlistType, { id });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { playlistType, id: nextId } = nextProps.match.params;
+    const { id: currentId, playlistType: currentType } = this.props.match.params;
+    if (
+      (playlistType !== currentType ||
+      nextId !== currentId) &&
+      nextProps.status === STATUS_INITIAL
+    ) {
+      this.props.fetchTimeline(playlistType, { id: nextId });
+    }
   }
 
   render() {
@@ -55,9 +67,10 @@ class TimelineContainer extends PureComponent {
 function mapStateToProps(state, ownProps) {
   const { match } = ownProps;
 
-  const timeline = timelineById(state.timelines, match.params.id);
+  const timelineId = match.params.id || match.params.type; // for /likes, need to think of better way
+  const timeline = timelineById(state.entities, state.timelines, timelineId);
   const tracks = timeline ?
-    tracksByIds(state.entities, timeline.trackIds) :
+    tracksByIds(state.entities, timeline.tracks) :
     [];
 
   return {
@@ -65,7 +78,7 @@ function mapStateToProps(state, ownProps) {
     tracks,
     isPlaying: state.player.isPlaying,
     activeTrackId: state.player.activeTrackId,
-    status: timeline && timeline.status,
+    status: timeline ? STATUS_OK : STATUS_INITIAL,
   };
 }
 

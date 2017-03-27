@@ -6,21 +6,23 @@ export const FETCH_TIMELINE = 'FETCH_TIMELINE';
 export const FETCH_TIMELINES_SUCCESS = 'FETCH_TIMELINES_SUCCESS';
 export const FETCH_TIMELINE_SUCCESS = 'FETCH_TIMELINE_SUCCESS';
 
-function fetchTimelineSuccess(type, json) {
-  const normalized = normalize(json, schema.arrayOfTracks);
+function fetchTimelineSuccess({ type, id, json}) {
+  const normalized = normalize(json, schema.timeline);
   return {
     type: FETCH_TIMELINE_SUCCESS,
     payload: {
       type,
-      trackIds: normalized.result,
+      id,
     },
     entities: normalized.entities,
   };
 }
 
-export function fetchTimeline(type) {
+export function fetchTimeline(type, { id = type }) {
   const fetchTypeMap = {
-    likes: () => api.fetchLikes(),
+    likes: () => api.fetchLikes()
+      .then(json => ({ tracks: json })),
+    playlist: () => api.fetchPlaylist(id),
   };
 
   return (dispatch) => {
@@ -34,12 +36,13 @@ export function fetchTimeline(type) {
       console.error(`${type} is not a known type`);
     }
 
-    apiCall()
+    apiCall(id)
       .then((json) => {
-        dispatch(fetchTimelineSuccess(
+        dispatch(fetchTimelineSuccess({
           type,
+          id,
           json,
-        ));
+        }));
       });
   };
 }

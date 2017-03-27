@@ -9,9 +9,9 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const Loading = styled(Loader)`
-  width: 100%;
-`;
+const NoTracks = styled.h1`
+
+`; // TODO: style
 
 const TrackContainer = styled.ul`
   padding-top: 15px;
@@ -46,7 +46,21 @@ class Timeline extends PureComponent {
   }
 
   _renderTrackList() {
-    const { tracks, trackClicked, activeTrackId, isPlaying } = this.props;
+    const {
+      tracks,
+      status,
+      activeTrackId,
+      isPlaying,
+    } = this.props;
+
+    // Placeholder for when there are no tracks
+    if (status === STATUS_OK && !tracks.length) {
+      return (
+        <NoTracks>
+          There are no tracks here (yet). add one.
+        </NoTracks>
+      );
+    }
 
     return (
       <TrackContainer>
