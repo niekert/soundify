@@ -32,17 +32,30 @@ const Input = styled.input`
   border-radius: 3px;
 `;
 
-const Searchbar = ({ onSearch }) => (
+const Searchbar = ({ query, history, match, onChange }) => (
   <Form
-    onSubmit={onSearch}
+    onSubmit={(e) => {
+      e.preventDefault();
+      history.push(`/search/${query}`);
+    }}
   >
     <IconWrapper>
       <SearchIcon />
     </IconWrapper>
     <Input
       type="text"
+      value={decodeURIComponent(query)}
+      onChange={ev => onChange(ev.target.value)}
     />
   </Form>
 );
+Searchbar.propTypes = {
+  submitSearch: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  query: PropTypes.string,
+};
+Searchbar.defaultProps = {
+  query: '',
+};
 
 export default Searchbar;
