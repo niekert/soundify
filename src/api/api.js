@@ -14,7 +14,7 @@ function fetchWithToken(path, token, options = {}) {
 }
 
 const api = {
-  token: window.localStorage.getItem(localstorageKey),
+  token: false && window.localStorage.getItem(localstorageKey),
 
   attemptAuth() {
     SC.initialize({

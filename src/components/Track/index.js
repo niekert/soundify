@@ -1,6 +1,6 @@
 import React, { PropTypes, PureComponent } from 'react';
 import styled from 'styled-components';
-import ArtWork from 'components/track/ArtWork';
+import ArtWork from 'components/Track/ArtWork';
 import PlayOverlay from './PlayOverlay';
 
 const Wrapper = styled.div`

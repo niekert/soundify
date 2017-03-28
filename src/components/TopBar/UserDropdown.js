@@ -32,7 +32,6 @@ class UserDropdown extends PureComponent {
 
   render () {
     const { user } = this.props;
-    console.log('user is', user);
     return (
       <Wrapper>
         <Avatar src={user.avatar_url} />

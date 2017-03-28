@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import ArtWork from 'components/track/ArtWork';
+import ArtWork from 'components/Track/ArtWork';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

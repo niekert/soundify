@@ -1,16 +1,14 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { STATUS_INITIAL, STATUS_OK } from 'constants';
-import { fetchTimeline, TIMELINE_TYPE_LIKES } from 'actions/timelineActions';
-import { tracksByIds } from 'selectors/tracks';
+import { fetchTimeline } from 'actions/timelineActions';
 import { timelineById } from 'selectors/timeline';
-import { toggleTrack } from 'actions/playerActions';
 import withUser from 'containers/hocs/withUser';
 import Timeline from '../components/Timeline/Timeline';
 
 class TimelineContainer extends PureComponent {
   static propTypes = {
-    tracks: PropTypes.arrayOf(PropTypes.object),
+    trackIds: PropTypes.arrayOf(PropTypes.number),
     match: PropTypes.object.isRequired,
     isPlaying: PropTypes.bool.isRequired,
     activeTrackId: PropTypes.number,
@@ -21,7 +19,7 @@ class TimelineContainer extends PureComponent {
 
   static defaultProps = {
     activeTrackId: null,
-    tracks: [],
+    trackIds: [],
   };
 
   componentDidMount() {
@@ -44,7 +42,7 @@ class TimelineContainer extends PureComponent {
 
   render() {
     const {
-      tracks,
+      trackIds,
       status,
       match,
       activeTrackId,
@@ -53,8 +51,7 @@ class TimelineContainer extends PureComponent {
 
     return (
       <Timeline
-        trackClicked={this.props.toggleTrack}
-        tracks={tracks}
+        trackIds={trackIds}
         status={status}
         isPlaying={isPlaying}
         activeTrackId={activeTrackId}
@@ -70,13 +67,10 @@ function mapStateToProps(state, ownProps) {
 
   const timelineId = id || playlistType; // for /likes, need to think of better way
   const timeline = timelineById(state.entities.timelines, timelineId);
-  const tracks = timeline ?
-    tracksByIds(state.entities, timeline.tracks) :
-    [];
 
   return {
     timeline,
-    tracks,
+    trackIds: timeline && timeline.tracks,
     isPlaying: state.player.isPlaying,
     activeTrackId: state.player.activeTrackId,
     status: timeline ? STATUS_OK : STATUS_INITIAL,
@@ -84,6 +78,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default withUser(connect(mapStateToProps, {
-  toggleTrack,
   fetchTimeline,
 })(TimelineContainer));
