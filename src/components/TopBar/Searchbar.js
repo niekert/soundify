@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { trim } from 'lodash';
 import SearchIcon from 'components/icons/SearchIcon';
 import styled from 'styled-components';
 
@@ -36,6 +37,10 @@ const Searchbar = ({ query, history, match, onChange }) => (
   <Form
     onSubmit={(e) => {
       e.preventDefault();
+      if (!trim(query).length) {
+        return;
+      }
+
       history.push(`/search/${query}`);
     }}
   >
@@ -44,6 +49,7 @@ const Searchbar = ({ query, history, match, onChange }) => (
     </IconWrapper>
     <Input
       type="text"
+      placeholder="Search"
       value={decodeURIComponent(query)}
       onChange={ev => onChange(ev.target.value)}
     />

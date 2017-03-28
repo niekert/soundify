@@ -107,6 +107,7 @@ class Controls extends Component {
           </ChangeTrackButton>
         </PlayerButtons>
         <SeekBar
+          isPlaying={isPlaying}
           playedSeconds={playedSeconds}
           totalSeconds={totalSeconds}
         />

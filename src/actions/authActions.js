@@ -22,13 +22,13 @@ export function fetchAuthedUser() {
         payload: data,
       }))
       .catch((error) => {
-        debugger;
-        console.log('error is', error);
         dispatch({
           type: AUTH_USER,
           payload: null,
           error,
         });
+
+        throw error;
       });
   };
 }

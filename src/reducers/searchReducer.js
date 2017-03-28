@@ -1,12 +1,14 @@
 import {
   CHANGE_QUERY,
   START_SEARCH,
-  SEARCH_RESULT_SUCCESS
+  SEARCH_RESULT_SUCCESS,
 } from 'actions/searchActions';
+import { STATUS_INITIAL, STATUS_PENDING, STATUS_OK, STATUS_ERROR } from 'constants';
 
 const defaultState = {
   query: '',
-  results: {}
+  status: STATUS_INITIAL,
+  results: {},
 };
 
 export default function (state = defaultState, action) {
@@ -19,11 +21,13 @@ export default function (state = defaultState, action) {
     case START_SEARCH:
       return {
         ...state,
+        status: STATUS_PENDING,
         query: action.payload,
       };
     case SEARCH_RESULT_SUCCESS:
       return {
         ...state,
+        status: STATUS_OK,
         results: {
           ...state.results,
           [action.payload.query]: action.payload.tracks,

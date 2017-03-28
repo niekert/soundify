@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import { submitSearch } from 'actions/searchActions';
 import { trackIdsFromQuery } from 'selectors/search';
-import { connect } from 'react-redux';
+import SearchResults from 'components/SearchResults';
 
 class SearchResultContainer extends Component {
   static propTypes = {
@@ -22,14 +23,23 @@ class SearchResultContainer extends Component {
   }
 
   render() {
-    return <span>result</span>;
+    const params = this.props.match.params;
+    return (
+      <SearchResults
+        query={params.query}
+        {...this.props}
+      />
+    );
   }
 }
 
-function mapStateToProps(state) {
-  const { results, query } = state.search;
+function mapStateToProps(state, ownProps) {
+  const query = ownProps.match.params.query;
+  const { results, status } = state.search;
+
   return {
-    tracks: trackIdsFromQuery(results, query),
+    status,
+    trackIds: trackIdsFromQuery(results, query),
   };
 }
 

@@ -32,7 +32,7 @@ const CurrentTime = styled(Time)`
 const Active = styled.div`
   will-change: width;
   height: 100%;
-  width: ${props => props.percentage}%;
+  width: ${props => props.percentage || 0}%;
   background: ${props => props.theme.colors.primaryText};
 `;
 
@@ -48,15 +48,18 @@ class SeekBar extends PureComponent {
   static defaultProps = {
     totalSeconds: 0,
     playedSeconds: 0,
-    isPlaying: true,
+    isPlaying: false,
   };
 
   render() {
     const {
       totalSeconds,
       playedSeconds,
+      isPlaying,
     } = this.props;
-    const percentage = Number((playedSeconds / totalSeconds) * 100).toFixed(2);
+    const percentage = playedSeconds > 0
+       ? Number((playedSeconds / totalSeconds) * 100).toFixed(2) :
+       0;
 
     return (
       <Wrapper>

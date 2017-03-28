@@ -41,7 +41,7 @@ class TopBar extends PureComponent {
     user: null,
   };
 
-  render () {
+  render() {
     const { user } = this.props.auth;
 
     return (
@@ -49,10 +49,7 @@ class TopBar extends PureComponent {
         <Logo />
         <SearchbarContainer />
         <Right>
-          {user ?
-            <UserDropdown user={user} /> :
-            <LoginContainer />
-          }
+          {user && <UserDropdown user={user} />}
         </Right>
       </Wrapper>
     );
