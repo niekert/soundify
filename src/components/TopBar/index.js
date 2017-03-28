@@ -1,9 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 import LoginContainer from 'containers/LoginContainer';
-import Searchbar from './Searchbar';
+import SearchbarContainer from 'containers/SearchbarContainer';
 import UserDropdown from './UserDropdown';
-import NavLink from './NavLink';
 import SoundCloudLogo from './SoundCloudLogo';
 
 const Wrapper = styled.div`
@@ -35,7 +34,11 @@ const Right = styled.div`
 
 class TopBar extends PureComponent {
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+  };
+
+  static defaultProps = {
+    user: null,
   };
 
   render () {
@@ -44,7 +47,7 @@ class TopBar extends PureComponent {
     return (
       <Wrapper>
         <Logo />
-        <Searchbar type="text" />
+        <SearchbarContainer />
         <Right>
           {user ?
             <UserDropdown user={user} /> :

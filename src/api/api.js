@@ -1,9 +1,16 @@
 import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URL } from 'constants';
+import queryString from 'query-string';
 
 const localstorageKey = 'authToken';
-function fetchWithToken(path, token) {
-  return fetch(`https://api.soundcloud.com${path}?oauth_token=${token}`);
+function fetchWithToken(path, token, options = {}) {
+
+  const query = queryString.stringify({
+    oauth_token: token,
+    ...options.query,
+  });
+
+  return fetch(`https://api.soundcloud.com${path}?${query}`);
 }
 
 const api = {
@@ -55,6 +62,13 @@ const api = {
       .then(response => response.json()); // TODO: Error handling
   },
 
+  search(query) {
+    return fetchWithToken('/tracks', this.token, {
+      query: {
+        q: query,
+      },
+    }).then(resp => resp.json());
+  },
 };
 
 export default api;
