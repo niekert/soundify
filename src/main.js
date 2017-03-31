@@ -1,13 +1,16 @@
 const { app, BrowserWindow } = require('electron');
+const path = require('path');
+const server = require('../server');
 
 let mainWindow;
 
 function createWindow() {
+  server();
   const port = process.env.PORT || 3000; // Default to port 3000
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1440,
+    width: 1400,
     height: 900,
     experimentalFeatures: true,
     webPreferences: {
