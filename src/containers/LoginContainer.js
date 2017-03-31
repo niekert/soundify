@@ -1,6 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import withUser from 'containers/hocs/withUser';
 import LoginPage from 'components/Login';
 import { attemptAuth, authCallback } from '../actions/authActions';
 

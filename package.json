@@ -17,6 +17,7 @@
     "redux-logger": "^2.8.2",
     "redux-thunk": "^2.2.0",
     "soundcloud": "^3.1.2",
+    "electron-is-dev": "^0.1.2",
     "styled-components": "^1.4.4"
   },
   "devDependencies": {
@@ -43,7 +44,7 @@
     "react-build": "react-scripts build",
     "start": "PORT=3000 concurrently 'yarn react-start' 'wait-on http://localhost:3000 && yarn electron-start'",
     "test": "react-scripts test --env=jsdom",
-    "build": "yarn react-build && yarn electron-build",
+    "build": "BROWSER=none NODE_PATH=src/ yarn react-build && yarn electron-build",
     "eject": "react-scripts eject"
   }
 }

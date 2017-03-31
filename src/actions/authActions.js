@@ -9,7 +9,9 @@ export const AUTH_USER = 'AUTH_USER';
 export const AUTH_CALLBACK = 'SCConnect';
 
 export function authCallback(location) {
-  api.authCallback(location);
+  return () => {
+    api.authCallback(location);
+  };
 }
 
 export function fetchAuthedUser() {

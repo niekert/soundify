@@ -35,7 +35,7 @@ const api = {
       return Promise.reject();
     }
 
-    return fetch(`//api.soundcloud.com/me?oauth_token=${this.token}`)
+    return fetch(`https://api.soundcloud.com/me?oauth_token=${this.token}`)
       .then(resp => resp.json());
   },
 
