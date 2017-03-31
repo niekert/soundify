@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Callback</title>
+</head>
+<body onload="window.setTimeout(function() { opener.postMessage({ type: 'SCConnect', location: JSON.stringify(window.location) }, '*') }, 1);">
+</body>
+</html>
