@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const server = require('../server');
+const electronIsDev = require('electron-is-dev');
 
 let mainWindow;
 
@@ -18,17 +19,15 @@ function createWindow() {
     },
   });
 
-  const isDev = !!process.env.ELECTRON_DEV;
-
   // and load the index.html of the app.
   mainWindow.loadURL(
-    isDev
+    electronIsDev
       ? `http://localhost:${port}` // Dev server ran by react-scripts
-      : `file://${path.join(__dirname, '/build/index.html')}` // Bundled application
+      : `file://${path.join(__dirname, '../build', 'index.html')}` // Bundled application
   );
 
   // Do special things on development
-  if (isDev) {
+  if (electronIsDev) {
     mainWindow.webContents.openDevTools();
   }
 }
