@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
-import { STATUS_OK, STATUS_INITIAL } from 'constants';
+import { OK, INITIAL } from 'constants';
 import TracklistContainer from 'containers/TracklistContainer';
 import Loader from 'components/Loader';
 
@@ -22,7 +22,7 @@ class Timeline extends PureComponent {
 
   static defaultProps = {
     trackIds: [],
-    status: STATUS_INITIAL,
+    status: INITIAL,
   }
 
   _renderTrackList() {
@@ -32,7 +32,7 @@ class Timeline extends PureComponent {
     } = this.props;
 
     // Placeholder for when there are no tracks
-    if (status === STATUS_OK && !trackIds.length) {
+    if (status === OK && !trackIds.length) {
       return (
         <NoTracks>
           There are no tracks here (yet). add one.
@@ -52,7 +52,7 @@ class Timeline extends PureComponent {
     const { status } = this.props;
 
     const content =
-      status === STATUS_OK ?
+      status === OK ?
         this._renderTrackList() :
         <Loader />;
 

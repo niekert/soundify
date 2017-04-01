@@ -1,14 +1,14 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
-import LoginContainer from 'containers/LoginContainer';
 import SearchbarContainer from 'containers/SearchbarContainer';
 import UserDropdown from './UserDropdown';
+import { Link } from 'react-router-dom';
 import SoundCloudLogo from './SoundCloudLogo';
 
 const Wrapper = styled.div`
   position: fixed;
   top: 0;
-  left: 0;
+  left: 200px;
   z-index: 999;
   background: ${props => props.theme.colors.secondaryBackground}
   display: flex;
@@ -16,11 +16,12 @@ const Wrapper = styled.div`
   padding: 0 25px;
   justify-content: flex-start;
   width: 100%;
-  box-shadow: 0 2px 7px 7px rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, .1);
 `;
 
 const Logo = styled(SoundCloudLogo)`
   fill: #fff;
+  color: #fff;
   height: 100%;
   width: 50px;
   align-self: center;
@@ -42,11 +43,13 @@ class TopBar extends PureComponent {
   };
 
   render() {
-    const { user } = this.props.auth;
+    const { user } = this.props;
 
     return (
       <Wrapper>
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         <SearchbarContainer />
         <Right>
           {user && <UserDropdown user={user} />}

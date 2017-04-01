@@ -6,6 +6,7 @@ import PlayerContent from './PlayerContent';
 
 const Wrapper = styled.div`
   position: fixed;
+  z-index: 100;
   bottom: 0;
   width: 100%;
   border: 1px solid ${props => props.theme.colors.outline};
@@ -20,7 +21,6 @@ class Player extends PureComponent {
   static propTypes = {
     togglePlaying: PropTypes.func.isRequired,
     changeTrack: PropTypes.func.isRequired,
-    active: PropTypes.bool,
     track: PropTypes.object,
     isPlaying: PropTypes.bool,
   };
@@ -42,8 +42,7 @@ class Player extends PureComponent {
 
     this._audioElement.addEventListener('loadedmetadata', this._onMetadataLoaded);
     this._audioElement.addEventListener('timeupdate', this._onTimeUpdate);
-    // this._audioElement.addEventListener('play', this._onPlay);
-    // this._audioElement.addEventListener('pause', this._onPause);
+    this._audioElement.addEventListener('ended', this._onEnded);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -71,8 +70,7 @@ class Player extends PureComponent {
   componentWillUnmount() {
     this._audioElement.removeEventListener('timeupdate', this._onTimeUpdate);
     this._audioElement.removeEventListener('loadedmetadata', this._onMetadataLoaded);
-    // this._audioElement.removeEventListener('play', this._onPlay);
-    // this._audioElement.removeEventListener('pause', this._onPause);
+    this._audioElement.addEventListener('ended', this._onEnded);
   }
 
 
@@ -81,8 +79,11 @@ class Player extends PureComponent {
   };
 
   _onPrev = () => {
-    console.log('prev');
     this.props.changeTrack(PREV);
+  };
+
+  _onEnded = () => {
+    this.props.changeTrack(NEXT);
   };
 
   _onTogglePlay = () => {
@@ -110,7 +111,6 @@ class Player extends PureComponent {
     const {
       track,
       isPlaying,
-      active,
     } = this.props;
 
     return (

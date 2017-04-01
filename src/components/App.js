@@ -9,6 +9,7 @@ import theme from 'theme';
 import PlayerContainer from 'containers/PlayerContainer';
 import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';
+import HomeContainer from 'containers/HomeContainer';
 import LoginContainer from 'containers/LoginContainer';
 import SearchResultContainer from 'containers/SearchResultContainer';
 import TimelineContainer from 'containers/TimelineContainer';
@@ -23,7 +24,7 @@ const AppShell = styled.div`
   max-width: 100%;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   background: ${props => props.theme.colors.primaryBackground}
   color: ${props => props.theme.colors.primaryText}
 `;
@@ -31,7 +32,10 @@ const AppShell = styled.div`
 const Content = styled.section`
   flex: 1;
   display: flex;
-  margin-top: 50px;
+  flex-direction: column;
+  padding-top: 50px;
+  align-self: flex-start;
+  height: calc(100vh - 100px);
   margin-bottom: 100px;
   width: 100%;
 `;
@@ -44,11 +48,11 @@ const MainContent = styled.div`
 
 const AuthedShell = () => (
   <AppShell>
-    <TopBarContainer />
+    <Route path="/" component={SidebarContainer} />
     <Content>
-      <Route path="/" component={SidebarContainer} />
+      <TopBarContainer />
       <MainContent>
-        <Route exact path="/" component={Content} />
+        <Route exact path="/" component={HomeContainer} />
         <Route path="/search/:query" component={SearchResultContainer} />
         <Route path="/s/:playlistType/:id?" component={TimelineContainer} />
         <Route path="/callback" component={AuthCallback} />

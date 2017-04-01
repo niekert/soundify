@@ -74,7 +74,6 @@ class Controls extends Component {
     onPrev: PropTypes.func.isRequired,
     onTogglePlay: PropTypes.func.isRequired,
     isPlaying: PropTypes.bool.isRequired,
-    onShuffle: PropTypes.func.isRequired, //TODO: implement eventually
   };
 
   static defaultProps = {

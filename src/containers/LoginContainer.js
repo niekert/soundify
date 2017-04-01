@@ -5,6 +5,7 @@ import { attemptAuth, authCallback } from '../actions/authActions';
 
 class LoginContainer extends PureComponent {
   static propTypes = {
+    status: PropTypes.string.isRequired,
     attemptAuth: PropTypes.func.isRequired,
     authCallback: PropTypes.func.isRequired,
   };
@@ -29,13 +30,18 @@ class LoginContainer extends PureComponent {
   render() {
     return (
       <LoginPage
+        status={this.props.status}
         onLoginClicked={this._onLoginClicked}
       />
     );
   }
 }
 
-export default connect(null, {
+const mapStateToProps = ({ auth }) => ({
+  status: auth.status,
+});
+
+export default connect(mapStateToProps, {
   attemptAuth,
   authCallback,
 })(LoginContainer);

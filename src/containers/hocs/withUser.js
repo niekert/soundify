@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router-dom';
-import { STATUS_OK, STATUS_DONE } from 'constants';
+import { OK, DONE } from 'constants';
 import { connect } from 'react-redux';
 
 const withUser = (ComposedComponent, { redirect = true } = {}) => {
   const EnhanceUser = ({ user, status, ...props }) => {
-    if (user && status === STATUS_OK) {
+    if (user && status === OK) {
       return <ComposedComponent user={user} {...props} />;
     }
 
-    if (redirect && STATUS_DONE.includes(status)) {
+    if (redirect && DONE.includes(status)) {
       return <Redirect to="/" />;
     }
 

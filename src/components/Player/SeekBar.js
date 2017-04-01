@@ -1,6 +1,7 @@
 import React, { PropTypes, PureComponent } from 'react';
 import { formatSeconds } from 'helpers/format';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 
 const Wrapper = styled.div`
   flex: 1;
@@ -32,7 +33,8 @@ const CurrentTime = styled(Time)`
 const Active = styled.div`
   will-change: width;
   height: 100%;
-  width: ${props => props.percentage || 0}%;
+  transform: translateX()
+  width: ${prop('percentage', 0)}%;
   background: ${props => props.theme.colors.primaryText};
 `;
 
@@ -55,7 +57,7 @@ class SeekBar extends PureComponent {
     const {
       totalSeconds,
       playedSeconds,
-      isPlaying,
+      isPlaying
     } = this.props;
     const percentage = playedSeconds > 0
        ? Number((playedSeconds / totalSeconds) * 100).toFixed(2) :

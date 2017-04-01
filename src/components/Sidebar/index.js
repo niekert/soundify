@@ -4,12 +4,13 @@ import { NavLink } from 'react-router-dom';
 
 const SidebarWrapper = styled.div`
   min-width: 200px;
-  padding: 15px;
+  padding: 15px 15px 100px;
   display: flex;
+  height: 100vh;
   flex-direction: column;
   justify-content: space-around;
   background: ${props => props.theme.colors.secondaryBackground};
-  z-index: 999999;
+  z-index: 1;
 `;
 
 const Label = styled.label`
@@ -63,7 +64,7 @@ class Sidebar extends PureComponent {
     return (
       <SidebarWrapper>
         <Section>
-          <Label>My Music</Label>
+          <Label>Your Music</Label>
           <Link to="/s/likes">Likes</Link>
         </Section>
         <Section>

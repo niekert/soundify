@@ -1,4 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
+import { PENDING } from 'constants';
+import Loader from 'components/Loader';
 import styled from 'styled-components';
 import LoginButton from './LoginButton';
 
@@ -13,6 +15,9 @@ const Wrapper = styled.div`
   color: ${props => props.theme.colors.primaryText}
 `;
 
+const LoginContainer = styled.div`
+`
+
 const SubTitle = styled.h2`
   margin-top: 10px;
   font-size: 14px;
@@ -20,14 +25,21 @@ const SubTitle = styled.h2`
 
 class Login extends PureComponent {
   static propTypes = {
+    status: PropTypes.string.isRequired,
     onLoginClicked: PropTypes.func.isRequired,
   };
 
   render() {
+    const { status } = this.props;
     return (
       <Wrapper>
-        <LoginButton onLoginClicked={this.props.onLoginClicked} />
-        <SubTitle>Super safe and stuff</SubTitle>
+        {status === PENDING ?
+          <Loader /> :
+          <LoginContainer>
+            <LoginButton onLoginClicked={this.props.onLoginClicked} />
+            <SubTitle>Super safe and stuff</SubTitle>
+          </LoginContainer>
+        }
       </Wrapper>
     );
   }
