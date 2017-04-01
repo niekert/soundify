@@ -35,7 +35,7 @@
     "redux-devtools": "^3.3.2",
     "wait-on": "^2.0.2"
   },
-  "main": "src/main.js",
+  "main": "src/electronMain.js",
   "homepage": "./",
   "eslintConfig": {
     "extends": "react-app"

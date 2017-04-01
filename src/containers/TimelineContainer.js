@@ -8,16 +8,14 @@ import Timeline from '../components/Timeline/Timeline';
 
 class TimelineContainer extends PureComponent {
   static propTypes = {
-    trackIds: PropTypes.arrayOf(PropTypes.number),
+    timeline: PropTypes.object,
     match: PropTypes.object.isRequired,
-    isPlaying: PropTypes.bool.isRequired,
-    activeTrackId: PropTypes.number,
     status: PropTypes.string.isRequired,
     fetchTimeline: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    activeTrackId: null,
+    timeline: null,
     trackIds: [],
   };
 
@@ -41,19 +39,15 @@ class TimelineContainer extends PureComponent {
 
   render() {
     const {
-      trackIds,
+      timeline,
       status,
       match,
-      activeTrackId,
-      isPlaying,
      } = this.props;
 
     return (
       <Timeline
-        trackIds={trackIds}
+        timeline={timeline}
         status={status}
-        isPlaying={isPlaying}
-        activeTrackId={activeTrackId}
         type={match.params.id || match.params.playlistType}
       />
     );
@@ -69,9 +63,6 @@ function mapStateToProps(state, ownProps) {
 
   return {
     timeline,
-    trackIds: timeline && timeline.tracks,
-    isPlaying: state.player.isPlaying,
-    activeTrackId: state.player.activeTrackId,
     status: timeline ? OK : INITIAL,
   };
 }

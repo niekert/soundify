@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import ArtWork from 'components/Track/ArtWork';
 import PlayOverlay from './PlayOverlay';
 
-const Wrapper = styled.div`
+const Wrapper = styled.li`
   position: relative;
-  margin: 15px;
+  margin: 10px;
   cursor: pointer;
   display: flex;
   flex-direction: column;

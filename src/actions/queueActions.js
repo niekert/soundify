@@ -27,7 +27,7 @@ export function removeTrack(indexInQueue) {
   };
 }
 
-export function unqueue () {
+export function unqueue() {
   return {
     type: UNQUEUE,
   };

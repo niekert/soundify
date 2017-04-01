@@ -34,7 +34,7 @@ export function changeTrack(changeType) {
   };
 }
 
-export function togglePlaying (toggle) {
+export function togglePlaying(toggle) {
   return {
     type: TOGGLE_PLAYING,
     payload: toggle,

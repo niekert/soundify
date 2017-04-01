@@ -22,4 +22,3 @@ SoundcloudLogo.defaultProps = {
 };
 
 export default SoundcloudLogo;
-

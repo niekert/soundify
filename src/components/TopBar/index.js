@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 const Logo = styled(SoundCloudLogo)`
   fill: #fff;
   color: #fff;
+  cursor: pointer;
   height: 100%;
   width: 50px;
   align-self: center;
