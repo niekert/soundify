@@ -73,7 +73,6 @@ class Player extends PureComponent {
     this._audioElement.addEventListener('ended', this._onEnded);
   }
 
-
   _onNext = () => {
     this.props.changeTrack(NEXT);
   };
@@ -88,6 +87,10 @@ class Player extends PureComponent {
 
   _onTogglePlay = () => {
     this.props.togglePlaying(!this.props.isPlaying);
+  }
+
+  _onSeek = (nextSeconds) => {
+    this._audioElement.currentTime = nextSeconds; // Woo dihh;
   }
 
   _onTimeUpdate = () => {
@@ -126,6 +129,7 @@ class Player extends PureComponent {
           isPlaying={isPlaying}
           onNext={this._onNext}
           onPrev={this._onPrev}
+          onSeek={this._onSeek}
           onTogglePlay={this._onTogglePlay}
         />
       </Wrapper>

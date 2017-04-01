@@ -1,7 +1,8 @@
 import React, { PropTypes, PureComponent } from 'react';
+import { debounce } from 'lodash';
 import { formatSeconds } from 'helpers/format';
 import styled from 'styled-components';
-import { prop } from 'styled-tools';
+import { prop, ifProp } from 'styled-tools';
 
 const Wrapper = styled.div`
   flex: 1;
@@ -12,11 +13,13 @@ const Wrapper = styled.div`
 `;
 
 const Bar = styled.div`
+  position: relative;
   flex: 1;
   height: 8px;
   border-radius: 5px;
-  background: ${props => props.theme.colors.secondaryActive};
-  overflow: hidden;
+  background: ${prop('theme.colors.secondaryActive')};
+  overflow-y: visible;
+  overflow-x: hidden;
 `;
 
 const Time = styled.span`
@@ -32,12 +35,33 @@ const CurrentTime = styled(Time)`
 
 const Active = styled.div`
   will-change: width;
+  position: relative;
   height: 100%;
-  transform: translateX()
-  width: ${prop('percentage', 0)}%;
-  background: ${props => props.theme.colors.primaryText};
+  width: 100%;
+  right: 100%;
+  transform: translateX(${prop('percentage', 0)}%);
+  background: ${ifProp(
+    'highlight',
+    prop('theme.colors.active'),
+    prop('theme.colors.primaryText'),
+  )}
 `;
 
+const Seek = styled.input`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+`;
+
+const Scrubber = styled.div`
+  width: 15px;
+  position: absolute;
+  right: 0;
+  height: 15px;
+  border-radius: 50%;
+  background: ${prop('theme.colors.primaryText')};
+`;
 
 class SeekBar extends PureComponent {
   static propTypes = {
@@ -53,12 +77,27 @@ class SeekBar extends PureComponent {
     isPlaying: false,
   };
 
+  state = {
+    hoverActive: false,
+  }
+
+  _mouseEnter = () => this.setState({ hoverActive: true });
+  _mouseLeave = () => this.setState({ hoverActive: false });
+
+  _onSeekChange = (e) => {
+    const { totalSeconds, onSeek } = this.props;
+    const seekPercentage = e.target.value;
+    const nextSeconds = Math.round(totalSeconds * (seekPercentage / 100));
+
+    onSeek(nextSeconds);
+  }; // TODO: throttle with mouseup
+
   render() {
     const {
       totalSeconds,
       playedSeconds,
-      isPlaying
     } = this.props;
+
     const percentage = playedSeconds > 0
        ? Number((playedSeconds / totalSeconds) * 100).toFixed(2) :
        0;
@@ -66,8 +105,20 @@ class SeekBar extends PureComponent {
     return (
       <Wrapper>
         <CurrentTime>{formatSeconds(playedSeconds)}</CurrentTime>
-        <Bar>
-          <Active percentage={percentage} />
+        <Bar
+          onMouseEnter={this._mouseEnter}
+          onMouseLeave={this._mouseLeave}
+        >
+          <Active
+            percentage={percentage}
+            highlight={this.state.hoverActive}
+          >
+            {false && this.state.hoverActive && <Scrubber />}
+          </Active>
+          <Seek
+            type="range"
+            onChange={this._onSeekChange}
+          />
         </Bar>
         <Time>{formatSeconds(totalSeconds)}</Time>
       </Wrapper>

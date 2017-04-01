@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import TrackListContainer from 'containers/TracklistContainer';
-import { INITIAL, PENDING, OK } from 'constants';
+import { INITIAL, OK } from 'constants';
 import Loader from './Loader';
 
 const Wrapper = styled.div`
@@ -15,20 +15,18 @@ const Title = styled.h1`
   padding: 15px;
 `;
 
-const SearchResults = ({ trackIds, status, query }) => {
-  return (
-    <Wrapper>
-      <Title>Search results for {decodeURI(query)}</Title>
-      {status === OK ?
-        <TrackListContainer
-          trackIds={trackIds}
-          timelineId={`search::${query}`}
-        /> :
-        <Loader />
-      }
-    </Wrapper>
-  );
-};
+const SearchResults = ({ trackIds, status, query }) => (
+  <Wrapper>
+    <Title>Search results for {decodeURI(query)}</Title>
+    {status === OK ?
+      <TrackListContainer
+        trackIds={trackIds}
+        timelineId={`search::${query}`}
+      /> :
+      <Loader />
+    }
+  </Wrapper>
+);
 SearchResults.propTypes = {
   query: PropTypes.string,
   status: PropTypes.string,

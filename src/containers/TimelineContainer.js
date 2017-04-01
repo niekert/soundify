@@ -14,7 +14,6 @@ class TimelineContainer extends PureComponent {
     activeTrackId: PropTypes.number,
     status: PropTypes.string.isRequired,
     fetchTimeline: PropTypes.func.isRequired,
-    toggleTrack: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
