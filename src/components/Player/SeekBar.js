@@ -13,13 +13,11 @@ const Wrapper = styled.div`
 `;
 
 const Bar = styled.div`
-  position: relative;
   flex: 1;
   height: 8px;
+  position: relative;
   border-radius: 5px;
   background: ${prop('theme.colors.secondaryActive')};
-  overflow-y: visible;
-  overflow-x: hidden;
 `;
 
 const Time = styled.span`
@@ -37,9 +35,8 @@ const Active = styled.div`
   will-change: width;
   position: relative;
   height: 100%;
-  width: 100%;
-  right: 100%;
-  transform: translateX(${prop('percentage', 0)}%);
+  border-radius: 5px;
+  width: ${prop('percentage', 0)}%;
   background: ${ifProp(
     'highlight',
     prop('theme.colors.active'),
@@ -49,7 +46,8 @@ const Active = styled.div`
 
 const Seek = styled.input`
   position: absolute;
-  top: 0;
+  top: -10px;
+  height: 20px;
   width: 100%;
   opacity: 0;
 `;
@@ -57,7 +55,8 @@ const Seek = styled.input`
 const Scrubber = styled.div`
   width: 15px;
   position: absolute;
-  right: 0;
+  right: -5px;
+  bottom: -4px;
   height: 15px;
   border-radius: 50%;
   background: ${prop('theme.colors.primaryText')};
@@ -105,17 +104,16 @@ class SeekBar extends PureComponent {
     return (
       <Wrapper>
         <CurrentTime>{formatSeconds(playedSeconds)}</CurrentTime>
-        <Bar
-          onMouseEnter={this._mouseEnter}
-          onMouseLeave={this._mouseLeave}
-        >
+        <Bar>
           <Active
             percentage={percentage}
             highlight={this.state.hoverActive}
           >
-            {false && this.state.hoverActive && <Scrubber />}
+            {this.state.hoverActive && <Scrubber />}
           </Active>
           <Seek
+            onMouseEnter={this._mouseEnter}
+            onMouseLeave={this._mouseLeave}
             type="range"
             onChange={this._onSeekChange}
           />
