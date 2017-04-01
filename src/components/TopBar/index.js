@@ -1,12 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 import SearchbarContainer from 'containers/SearchbarContainer';
-import UserDropdown from './UserDropdown';
 import { Link } from 'react-router-dom';
+import UserDropdown from './UserDropdown';
 import SoundCloudLogo from './SoundCloudLogo';
 
 const Wrapper = styled.div`
-  position: fixed;
   top: 0;
   left: 200px;
   z-index: 999;
@@ -15,7 +14,6 @@ const Wrapper = styled.div`
   height: 50px;
   padding: 0 25px;
   justify-content: flex-start;
-  width: 100%;
   box-shadow: 0 2px 7px rgba(0, 0, 0, .1);
 `;
 

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ArrowIcon from 'components/icons/Arrow';
 import styled from 'styled-components';
 

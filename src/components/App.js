@@ -33,11 +33,9 @@ const Content = styled.section`
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 50px;
   align-self: flex-start;
   height: calc(100vh - 100px);
   margin-bottom: 100px;
-  width: 100%;
 `;
 
 const MainContent = styled.div`
