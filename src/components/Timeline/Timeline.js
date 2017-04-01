@@ -15,24 +15,24 @@ const NoTracks = styled.h1`
 
 class Timeline extends PureComponent {
   static propTypes = {
-    trackIds: PropTypes.arrayOf(PropTypes.number),
+    timeline: PropTypes.object,
     status: PropTypes.string,
     type: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
-    trackIds: [],
+    timeline: null,
     status: INITIAL,
   }
 
   _renderTrackList() {
     const {
-      trackIds,
+      timeline,
       status,
     } = this.props;
 
     // Placeholder for when there are no tracks
-    if (status === OK && !trackIds.length) {
+    if (status === OK && !timeline.tracks.length) {
       return (
         <NoTracks>
           There are no tracks here (yet). add one.
@@ -42,7 +42,7 @@ class Timeline extends PureComponent {
 
     return (
       <TracklistContainer
-        trackIds={trackIds}
+        trackIds={timeline.tracks}
         timelineId={this.props.type}
       />
     );

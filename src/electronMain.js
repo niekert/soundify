@@ -6,12 +6,13 @@ const electronIsDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
-  server();
+  server(); // Start a simple express server for the soundcloud API callback
+
   const port = process.env.PORT || 3000; // Default to port 3000
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1400,
+    width: 1300,
     height: 900,
     experimentalFeatures: true,
     titleBarStyle: 'hidden-inset',
