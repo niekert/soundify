@@ -1,9 +1,9 @@
+import { INITIAL, OK, PENDING } from 'constants';
 import { AUTH_USER, AUTH_START } from '../actions/authActions';
-import { STATUS_INITIAL, STATUS_OK, STATUS_PENDING } from 'constants';
 
 const defaultAuthState = {
   user: null,
-  status: STATUS_INITIAL,
+  status: INITIAL,
 };
 
 export default (state = defaultAuthState, action) => {
@@ -11,14 +11,14 @@ export default (state = defaultAuthState, action) => {
     case AUTH_START: {
       return {
         ...state,
-        status: STATUS_PENDING,
+        status: PENDING,
       };
     }
     case AUTH_USER:
       return {
         ...state,
         user: action.payload,
-        status: STATUS_OK,
+        status: OK,
       };
     default:
       return state;

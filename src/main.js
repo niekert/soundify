@@ -14,16 +14,16 @@ function createWindow() {
     width: 1400,
     height: 900,
     experimentalFeatures: true,
+    titleBarStyle: 'hidden-inset',
     webPreferences: {
       experimentalFeatures: true,
     },
   });
 
-  // and load the index.html of the app.
   mainWindow.loadURL(
     electronIsDev
       ? `http://localhost:${port}` // Dev server ran by react-scripts
-      : `file://${path.join(__dirname, '../build', 'index.html')}` // Bundled application
+      : `file://${path.join(__dirname, '../build', 'index.html')}` // eslint-disable-line Bundled application
   );
 
   // Do special things on development

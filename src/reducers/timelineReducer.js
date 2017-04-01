@@ -3,12 +3,12 @@ import {
   FETCH_TIMELINE_SUCCESS,
   FETCH_TIMELINE_ERROR,
 } from 'actions/timelineActions';
-import { STATUS_OK, STATUS_PENDING, STATUS_ERROR } from 'constants';
+import { OK, PENDING, ERROR } from 'constants';
 
 const emptyTimeline = {
   timelineId: null,
   error: null,
-  status: STATUS_PENDING,
+  status: PENDING,
 };
 
 export default (state = [], action) => {
@@ -23,14 +23,14 @@ export default (state = [], action) => {
         ...state,
         [action.payload.id]: {
           timelineId: action.payload.id,
-          status: STATUS_OK,
+          status: OK,
         },
       };
     case FETCH_TIMELINE_ERROR:
       return {
         [action.payload.id]: {
           error: action.payload.data,
-          status: STATUS_ERROR,
+          status: ERROR,
         },
       };
     default:

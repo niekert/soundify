@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import TrackListContainer from 'containers/TracklistContainer';
-import { STATUS_INITIAL, STATUS_PENDING, STATUS_OK } from 'constants';
+import { INITIAL, PENDING, OK } from 'constants';
 import Loader from './Loader';
 
 const Wrapper = styled.div`
@@ -19,7 +19,7 @@ const SearchResults = ({ trackIds, status, query }) => {
   return (
     <Wrapper>
       <Title>Search results for {decodeURI(query)}</Title>
-      {status === STATUS_OK ?
+      {status === OK ?
         <TrackListContainer
           trackIds={trackIds}
           timelineId={`search::${query}`}
@@ -36,7 +36,7 @@ SearchResults.propTypes = {
 };
 SearchResults.defaultProps = {
   query: '',
-  status: STATUS_INITIAL,
+  status: INITIAL,
   trackIds: [],
 };
 

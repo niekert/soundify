@@ -5,6 +5,7 @@ import * as schema from './schema';
 export const CHANGE_QUERY = 'CHANGE_QUERY';
 export const START_SEARCH = 'START_SEARCH';
 export const SEARCH_RESULT_SUCCESS = 'SEARCH_RESULT_SUCCESS';
+export const SEARCH_RESULT_ERROR = 'SEARCH_RESULT_ERROR';
 
 export function submitSearch(query) {
   return (dispatch) => {
@@ -24,7 +25,11 @@ export function submitSearch(query) {
           },
           entities: normalized.entities,
         });
-      });
+      })
+      .catch(err => dispatch({
+        type: SEARCH_RESULT_ERROR,
+        payload: err,
+      }));
   };
 }
 

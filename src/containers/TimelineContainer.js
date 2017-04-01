@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { STATUS_INITIAL, STATUS_OK } from 'constants';
+import { INITIAL, OK } from 'constants';
 import { fetchTimeline } from 'actions/timelineActions';
 import { timelineById } from 'selectors/timeline';
 import withUser from 'containers/hocs/withUser';
@@ -34,7 +34,7 @@ class TimelineContainer extends PureComponent {
     if (
       (playlistType !== currentType ||
       nextId !== currentId) &&
-      nextProps.status === STATUS_INITIAL
+      nextProps.status === INITIAL
     ) {
       this.props.fetchTimeline(playlistType, { id: nextId });
     }
@@ -73,7 +73,7 @@ function mapStateToProps(state, ownProps) {
     trackIds: timeline && timeline.tracks,
     isPlaying: state.player.isPlaying,
     activeTrackId: state.player.activeTrackId,
-    status: timeline ? STATUS_OK : STATUS_INITIAL,
+    status: timeline ? OK : INITIAL,
   };
 }
 
