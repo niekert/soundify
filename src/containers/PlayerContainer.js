@@ -7,10 +7,11 @@ import { connect } from 'react-redux';
 const PlayerContainer = props => <Player {...props} />;
 
 function mapStateToProps(state) {
-  const { isPlaying, activeTrackId } = state.player;
+  const { isPlaying, activeTrackId, active } = state.player;
 
   return {
     isPlaying,
+    isActive: active,
     track: trackById(state.entities, activeTrackId),
   };
 }

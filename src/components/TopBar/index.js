@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   padding: 0 25px;
   justify-content: flex-start;
   box-shadow: 0 2px 7px rgba(0, 0, 0, .1);
+  -webkit-app-region: drag;
 `;
 
 const Logo = styled(SoundCloudLogo)`

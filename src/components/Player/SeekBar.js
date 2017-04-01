@@ -1,5 +1,4 @@
 import React, { PropTypes, PureComponent } from 'react';
-import { debounce } from 'lodash';
 import { formatSeconds } from 'helpers/format';
 import styled from 'styled-components';
 import { prop, ifProp } from 'styled-tools';
@@ -67,6 +66,7 @@ class SeekBar extends PureComponent {
     totalSeconds: PropTypes.number,
     isPlaying: PropTypes.bool, // eslint-disable-line
     playedSeconds: PropTypes.number,
+    isActive: PropTypes.bool,
     onSeek: PropTypes.func.isRequired, // eslint-disable-line
   };
 
@@ -74,6 +74,7 @@ class SeekBar extends PureComponent {
     totalSeconds: 0,
     playedSeconds: 0,
     isPlaying: false,
+    isActive: false,
   };
 
   state = {
@@ -95,6 +96,7 @@ class SeekBar extends PureComponent {
     const {
       totalSeconds,
       playedSeconds,
+      isActive,
     } = this.props;
 
     const percentage = playedSeconds > 0
@@ -103,7 +105,9 @@ class SeekBar extends PureComponent {
 
     return (
       <Wrapper>
-        <CurrentTime>{formatSeconds(playedSeconds)}</CurrentTime>
+        {isActive &&
+          <CurrentTime>{formatSeconds(playedSeconds)}</CurrentTime>
+        }
         <Bar>
           <Active
             percentage={percentage}
@@ -118,7 +122,9 @@ class SeekBar extends PureComponent {
             onChange={this._onSeekChange}
           />
         </Bar>
-        <Time>{formatSeconds(totalSeconds)}</Time>
+        {isActive &&
+          <Time>-{formatSeconds(totalSeconds - playedSeconds)}</Time>
+        }
       </Wrapper>
     );
   }

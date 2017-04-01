@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { pure } from 'recompose';
 import ArtWork from 'components/Track/ArtWork';
 import styled from 'styled-components';
 
@@ -34,22 +35,20 @@ const Artist = styled.span`
   color: ${props => props.theme.colors.secondaryText}
 `;
 
-const CurrentTrack = ({ track }) => {
-  return (
-    <Wrapper>
-      {track && [
-        <PlayerArtwork artworkUrl={track.artwork_url} />,
-        <Meta>
-          <Title>{track.title}</Title>
-          <Artist>{track.user.username}</Artist>
-        </Meta>,
-      ]}
-    </Wrapper>
-  );
-};
+const CurrentTrack = ({ track = {} }) => (
+  <Wrapper>
+    {track && [
+      <PlayerArtwork artworkUrl={track.artwork_url} key="artwork" />,
+      <Meta key="meta">
+        <Title>{track.title}</Title>
+        <Artist>{track.user.username}</Artist>
+      </Meta>,
+    ]}
+  </Wrapper>
+);
 
-CurrentTrack.PropTypes = {
+CurrentTrack.propTypes = {
   track: PropTypes.object,
 };
 
-export default CurrentTrack;
+export default pure(CurrentTrack);

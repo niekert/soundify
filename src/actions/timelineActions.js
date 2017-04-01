@@ -31,7 +31,9 @@ export function fetchTimeline(type, { id = type }) {
   return (dispatch) => {
     dispatch({
       type: FETCH_TIMELINE,
-      payload: type,
+      payload: {
+        id,
+      },
     });
 
     const apiCall = fetchTypeMap[type];

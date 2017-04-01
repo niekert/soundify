@@ -73,6 +73,7 @@ class Controls extends Component {
     onNext: PropTypes.func.isRequired,
     onPrev: PropTypes.func.isRequired,
     onSeek: PropTypes.func.isRequired,
+    isActive: PropTypes.bool,
     onTogglePlay: PropTypes.func.isRequired,
     isPlaying: PropTypes.bool.isRequired,
   };
@@ -92,6 +93,7 @@ class Controls extends Component {
       playedSeconds,
       onSeek,
       totalSeconds,
+      isActive,
     } = this.props;
 
     return (
@@ -109,6 +111,7 @@ class Controls extends Component {
         </PlayerButtons>
         <SeekBar
           isPlaying={isPlaying}
+          isActive={isActive}
           onSeek={onSeek}
           playedSeconds={playedSeconds}
           totalSeconds={totalSeconds}
