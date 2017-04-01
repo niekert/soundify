@@ -12,6 +12,7 @@
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
     "no-underscore-dangle": 0,
-    "no-confusing-arrow": 0
+    "no-confusing-arrow": 0,
+    "react/require-default-props": 0 // Because of default param values :)
   }
 }

@@ -23,12 +23,14 @@ class Player extends PureComponent {
     changeTrack: PropTypes.func.isRequired,
     track: PropTypes.object,
     isPlaying: PropTypes.bool,
+    isActive: PropTypes.bool,
   };
 
   static defaultProps = {
     track: null,
     active: false,
     isPlaying: false,
+    isActive: false,
   }
 
   state = {
@@ -38,8 +40,6 @@ class Player extends PureComponent {
 
 
   componentDidMount() {
-    console.log(this._audioElement);
-
     this._audioElement.addEventListener('loadedmetadata', this._onMetadataLoaded);
     this._audioElement.addEventListener('timeupdate', this._onTimeUpdate);
     this._audioElement.addEventListener('ended', this._onEnded);
@@ -114,6 +114,7 @@ class Player extends PureComponent {
     const {
       track,
       isPlaying,
+      isActive,
     } = this.props;
 
     return (
@@ -127,6 +128,7 @@ class Player extends PureComponent {
           playedSeconds={this.state.playedSeconds}
           track={track}
           isPlaying={isPlaying}
+          isActive={isActive}
           onNext={this._onNext}
           onPrev={this._onPrev}
           onSeek={this._onSeek}

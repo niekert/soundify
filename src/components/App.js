@@ -13,7 +13,6 @@ import HomeContainer from 'containers/HomeContainer';
 import LoginContainer from 'containers/LoginContainer';
 import SearchResultContainer from 'containers/SearchResultContainer';
 import TimelineContainer from 'containers/TimelineContainer';
-import AuthCallback from './AuthCallback';
 import './App.css';
 
 const AppShell = styled.div`
@@ -53,7 +52,6 @@ const AuthedShell = () => (
         <Route exact path="/" component={HomeContainer} />
         <Route path="/search/:query" component={SearchResultContainer} />
         <Route path="/s/:playlistType/:id?" component={TimelineContainer} />
-        <Route path="/callback" component={AuthCallback} />
       </MainContent>
     </Content>
     <PlayerContainer />
