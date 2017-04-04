@@ -1,1 +1,3 @@
-export const trackIdsFromQuery = (searchResults, query) => searchResults[query].tracks || [];
+import { get } from 'lodash';
+
+export const trackIdsFromQuery = (searchResults, query) =>  get(searchResults, [query,'tracks']) || [];
