@@ -5,6 +5,7 @@ import timelineReducer from './timelineReducer';
 import searchReducer from './searchReducer';
 import entitiesReducer from './entitiesReducer';
 import playerReducer from './playerReducer';
+import settingsReducer from './settingsReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   player: playerReducer,
   entities: entitiesReducer,
   users: usersReducer,
+  settings: settingsReducer,
 });
 
 export default rootReducer;

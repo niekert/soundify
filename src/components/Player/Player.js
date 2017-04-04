@@ -1,5 +1,6 @@
 import React, { PropTypes, PureComponent } from 'react';
 import styled from 'styled-components';
+import SideControlsContainer from 'containers/SideControlsContainer';
 import { NEXT, PREV } from 'actions/playerActions';
 import { CLIENT_ID } from 'constants';
 import PlayerContent from './PlayerContent';
@@ -10,7 +11,7 @@ const Wrapper = styled.div`
   bottom: 0;
   width: 100%;
   border: 1px solid ${props => props.theme.colors.outline};
-  height: 100px;
+  height: 90px;
   background: ${props => props.theme.colors.secondaryBackground};
   display: flex;
   justify-content: center;
@@ -21,6 +22,7 @@ class Player extends PureComponent {
   static propTypes = {
     togglePlaying: PropTypes.func.isRequired,
     changeTrack: PropTypes.func.isRequired,
+    volume: PropTypes.number.isRequired,
     track: PropTypes.object,
     isPlaying: PropTypes.bool,
     isActive: PropTypes.bool,
@@ -38,7 +40,6 @@ class Player extends PureComponent {
     playedSeconds: 0,
   };
 
-
   componentDidMount() {
     this._audioElement.addEventListener('loadedmetadata', this._onMetadataLoaded);
     this._audioElement.addEventListener('timeupdate', this._onTimeUpdate);
@@ -46,7 +47,9 @@ class Player extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-
+    if (nextProps.volume !== this.props.volume) {
+      this._audioElement.volume = nextProps.volume / 100;
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -114,12 +117,14 @@ class Player extends PureComponent {
     const {
       track,
       isPlaying,
+      volume,
       isActive,
     } = this.props;
 
     return (
       <Wrapper>
         <audio
+          volume={volume / 100}
           ref={c => this._audioElement = c} // eslint-disable-line no-return-assign
           src={track && `${track.stream_url}?client_id=${CLIENT_ID}`}
         />
@@ -134,6 +139,7 @@ class Player extends PureComponent {
           onSeek={this._onSeek}
           onTogglePlay={this._onTogglePlay}
         />
+        <SideControlsContainer />
       </Wrapper>
     );
   }

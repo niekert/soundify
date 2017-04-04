@@ -1,8 +1,9 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
-import { OK, INITIAL } from 'constants';
+import { OK, INITIAL, PENDING } from 'constants';
 import TracklistContainer from 'containers/TracklistContainer';
 import Loader from 'components/Loader';
+import TimelineHeader from './TimelineHeader';
 
 const Wrapper = styled.div`
   flex: 1;
@@ -49,16 +50,29 @@ class Timeline extends PureComponent {
   }
 
   render() {
-    const { status } = this.props;
+    const {
+      status,
+      timeline,
+    } = this.props;
 
-    const content =
-      status === OK ?
-        this._renderTrackList() :
-        <Loader />;
+    if (!timeline) {
+      return <Loader />;
+    }
+
+    console.log('timeline', timeline);
+
+    const isLoading = status !== OK || timeline.status === PENDING;
 
     return (
       <Wrapper>
-        {content}
+        <TimelineHeader
+          timelineId={timeline.id}
+          title={timeline.title}
+          trackCount={timeline.tracks.length}
+          duration={timeline.duration}
+        />
+        {this._renderTrackList()}
+        {isLoading && <Loader />}
       </Wrapper>
     );
   }

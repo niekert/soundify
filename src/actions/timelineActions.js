@@ -23,6 +23,7 @@ export function fetchTimeline(type, { id = type }) {
     likes: () => api.fetchLikes()
       .then(json => ({
         id: 'likes',
+        title: 'My Likes',
         tracks: json,
       })),
     playlist: () => api.fetchPlaylist(id),

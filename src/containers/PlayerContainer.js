@@ -8,11 +8,13 @@ const PlayerContainer = props => <Player {...props} />;
 
 function mapStateToProps(state) {
   const { isPlaying, activeTrackId, active } = state.player;
+  const { volumePercentage } = state.settings;
 
   return {
     isPlaying,
     isActive: active,
     track: trackById(state.entities, activeTrackId),
+    volume: volumePercentage,
   };
 }
 
