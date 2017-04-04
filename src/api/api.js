@@ -66,6 +66,7 @@ const api = {
     return fetchWithToken('/tracks', this.token, {
       query: {
         q: query,
+        linked_partitioning: 1,
       },
     }).then(resp => resp.json());
   },

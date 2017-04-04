@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react';
 import VolumeIcon from 'components/icons/VolumeIcon';
+import PlayQueueIcon from 'components/icons/PlayQueue';
+import ChromecastIcon from 'components/icons/Chromecast';
 import Slider from 'components/Slider';
 import { onlyUpdateForKeys, compose, withHandlers } from 'recompose';
+import { Link } from 'react-router-dom';
 import { prop } from 'styled-tools';
 import styled from 'styled-components';
 
@@ -18,10 +21,20 @@ const VolumeControl = styled.div`
   align-items: center;
 `;
 
-const Volume = styled(VolumeIcon)`
-  color: ${prop('theme.colors.secondaryText')};
-  width: ${prop('theme.fontSize.icon')};
-  height: ${prop('theme.fontSize.icon')};
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 1em;
+
+  &:hover svg {
+    color: ${prop('theme.colors.primaryText')};
+  }
+
+  svg {
+    color: ${prop('theme.colors.secondaryText')};
+    width: ${prop('theme.fontSize.icon')};
+    height: ${prop('theme.fontSize.icon')};
+  }
 `;
 
 const VolumeBar = styled.div`
@@ -37,11 +50,23 @@ const enhance = compose(
   }),
 );
 
+function cast () {
+  alert('not implemented yet');
+}
+
 const SideControls = enhance(
   ({ volume, onChange, mute }) => (
     <Wrapper>
+      <Link to="/queue">
+        <IconWrapper>
+          <PlayQueueIcon />
+        </IconWrapper>
+      </Link>
+      <IconWrapper>
+        <ChromecastIcon onClick={cast} />
+      </IconWrapper>
       <VolumeControl>
-        <Volume onClick={mute} />
+        <IconWrapper><VolumeIcon onClick={mute} /></IconWrapper>
         <VolumeBar>
           <Slider percentage={volume} onChange={onChange} />
         </VolumeBar>

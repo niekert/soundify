@@ -16,17 +16,17 @@ export function submitSearch(query) {
 
     api.search(query)
       .then((json) => {
-        const normalized = normalize(json, schema.arrayOfTracks);
+        const normalized = normalize(json.collection, schema.arrayOfTracks);
         dispatch({
           type: SEARCH_RESULT_SUCCESS,
           payload: {
             query,
             tracks: normalized.result,
+            next: json.next_href,
           },
           entities: normalized.entities,
         });
-      })
-      .catch(err => dispatch({
+      }, err => dispatch({
         type: SEARCH_RESULT_ERROR,
         payload: err,
       }));
