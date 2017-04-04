@@ -37,7 +37,10 @@ export default function (state = defaultState, action) {
         status: OK,
         results: {
           ...state.results,
-          [action.payload.query]: action.payload.tracks,
+          [action.payload.query]: {
+            tracks: action.payload.tracks,
+            next: action.payload.next,
+          },
         },
       };
     default:

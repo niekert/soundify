@@ -44,6 +44,8 @@ class Player extends PureComponent {
     this._audioElement.addEventListener('loadedmetadata', this._onMetadataLoaded);
     this._audioElement.addEventListener('timeupdate', this._onTimeUpdate);
     this._audioElement.addEventListener('ended', this._onEnded);
+
+    this._audioElement.volume = this.props.volume / 100;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -117,14 +119,12 @@ class Player extends PureComponent {
     const {
       track,
       isPlaying,
-      volume,
       isActive,
     } = this.props;
 
     return (
       <Wrapper>
         <audio
-          volume={volume / 100}
           ref={c => this._audioElement = c} // eslint-disable-line no-return-assign
           src={track && `${track.stream_url}?client_id=${CLIENT_ID}`}
         />

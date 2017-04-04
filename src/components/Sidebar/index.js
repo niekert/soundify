@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { prop } from 'styled-tools';
 
 const SidebarWrapper = styled.div`
   min-width: 200px;
@@ -9,31 +10,35 @@ const SidebarWrapper = styled.div`
   height: 100vh;
   flex-direction: column;
   justify-content: space-around;
-  background: ${props => props.theme.colors.secondaryBackground};
+  background: ${prop('theme.colors.secondaryBackground')};
   z-index: 1;
 `;
 
 const Label = styled.label`
   display: block;
   font-weight: 300;
-  color: ${props => props.theme.colors.secondaryText};
+  color: ${prop('theme.colors.secondaryText')};
   margin-bottom: 10px;
   text-transform: uppercase;
 `;
 
 const Link = styled(NavLink)`
   display: block;
-  color: ${props => props.theme.colors.secondaryText};
+  color: ${prop('theme.colors.secondaryText')};
   text-decoration: none;
   outline: none;
   padding: 10px 0;
   font-weight: 300;
 
-  &.${props => props.activeClassName} {
-    color: ${props => props.theme.colors.primaryText}
+  &:hover {
+    color: ${prop('theme.colors.primaryText')};
   }
 
-  &.${props => props.activeClassName}:before {
+  &.${prop('activeClassName')} {
+    color: ${prop('theme.colors.primaryText')};
+  }
+
+  &.${prop('activeClassName')}:before {
     content: '';
     position: absolute;
     left: 0px;
