@@ -8,4 +8,9 @@ export default {
     secondaryActive: '#3e3e40',
     outline: '#222326',
   },
+  fontSize: { // TODO: use EMs eventually
+    h1: '40px',
+    subtitle: '14px',
+    icon: '16px',
+  },
 };

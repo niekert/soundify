@@ -1,6 +1,7 @@
 import React, { PropTypes, PureComponent } from 'react';
 import { formatSeconds } from 'helpers/format';
 import styled from 'styled-components';
+import Slider from 'components/Slider';
 import { prop, ifProp } from 'styled-tools';
 
 const Wrapper = styled.div`
@@ -9,14 +10,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 15px;
-`;
-
-const Bar = styled.div`
-  flex: 1;
-  height: 8px;
-  position: relative;
-  border-radius: 5px;
-  background: ${prop('theme.colors.secondaryActive')};
 `;
 
 const Time = styled.span`
@@ -28,37 +21,6 @@ const Time = styled.span`
 
 const CurrentTime = styled(Time)`
   text-align: right;
-`;
-
-const Active = styled.div`
-  will-change: width;
-  position: relative;
-  height: 100%;
-  border-radius: 5px;
-  width: ${prop('percentage', 0)}%;
-  background: ${ifProp(
-    'highlight',
-    prop('theme.colors.active'),
-    prop('theme.colors.primaryText'),
-  )}
-`;
-
-const Seek = styled.input`
-  position: absolute;
-  top: -10px;
-  height: 20px;
-  width: 100%;
-  opacity: 0;
-`;
-
-const Scrubber = styled.div`
-  width: 15px;
-  position: absolute;
-  right: -5px;
-  bottom: -4px;
-  height: 15px;
-  border-radius: 50%;
-  background: ${prop('theme.colors.primaryText')};
 `;
 
 class SeekBar extends PureComponent {
@@ -81,9 +43,6 @@ class SeekBar extends PureComponent {
     hoverActive: false,
   }
 
-  _mouseEnter = () => this.setState({ hoverActive: true });
-  _mouseLeave = () => this.setState({ hoverActive: false });
-
   _onSeekChange = (e) => {
     const { totalSeconds, onSeek } = this.props;
     const seekPercentage = e.target.value;
@@ -100,7 +59,7 @@ class SeekBar extends PureComponent {
     } = this.props;
 
     const percentage = playedSeconds > 0
-       ? Number((playedSeconds / totalSeconds) * 100).toFixed(2) :
+       ? Number(Number((playedSeconds / totalSeconds) * 100).toFixed(2)) : // todo: clarify lol
        0;
 
     return (
@@ -108,20 +67,7 @@ class SeekBar extends PureComponent {
         {isActive &&
           <CurrentTime>{formatSeconds(playedSeconds)}</CurrentTime>
         }
-        <Bar>
-          <Active
-            percentage={percentage}
-            highlight={this.state.hoverActive}
-          >
-            {this.state.hoverActive && <Scrubber />}
-          </Active>
-          <Seek
-            onMouseEnter={this._mouseEnter}
-            onMouseLeave={this._mouseLeave}
-            type="range"
-            onChange={this._onSeekChange}
-          />
-        </Bar>
+        <Slider percentage={percentage} onChange={this._onSeekChange} />
         {isActive &&
           <Time>-{formatSeconds(totalSeconds - playedSeconds)}</Time>
         }

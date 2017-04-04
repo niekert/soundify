@@ -47,7 +47,7 @@ class TopBar extends PureComponent {
 
     return (
       <Wrapper>
-        <Link to="/">
+        <Link to="/sds">
           <Logo />
         </Link>
         <SearchbarContainer />
