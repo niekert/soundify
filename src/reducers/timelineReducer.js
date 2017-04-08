@@ -6,32 +6,49 @@ import {
 import { OK, PENDING, ERROR } from 'constants';
 
 const emptyTimeline = {
-  timelineId: null,
   error: null,
   status: PENDING,
 };
 
-export default (state = [], action) => {
+const timeline = (state = emptyTimeline, action) => {
   switch (action.type) {
     case FETCH_TIMELINE:
       return {
+        timelineId: action.payload.id,
+        status: PENDING,
         ...state,
-        [action.payload.id]: emptyTimeline,
       };
     case FETCH_TIMELINE_SUCCESS:
       return {
         ...state,
-        [action.payload.id]: {
-          timelineId: action.payload.id,
-          status: OK,
-        },
+        status: OK,
       };
     case FETCH_TIMELINE_ERROR:
       return {
-        [action.payload.id]: {
-          error: action.payload.data,
-          status: ERROR,
-        },
+        ...state,
+        error: action.payload.data,
+      };
+    default:
+      return state;
+  }
+};
+
+export default (state = {}, action) => {
+  switch (action.type) {
+    case FETCH_TIMELINE:
+      return {
+        ...state,
+        [action.payload.id]: timeline(state[action.payload.id], action),
+      };
+    case FETCH_TIMELINE_SUCCESS:
+      return {
+        ...state,
+        [action.payload.id]: timeline(state[action.payload.id], action),
+      };
+    case FETCH_TIMELINE_ERROR:
+      return {
+        ...state,
+        [action.payload.id]: timeline(state[action.payload.id], action),
       };
     default:
       return state;
