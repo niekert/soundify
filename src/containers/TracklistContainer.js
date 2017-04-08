@@ -1,5 +1,6 @@
 import React from 'react';
 import { toggleTrack } from 'actions/playerActions';
+import { queueTrack } from 'actions/queueActions';
 import { tracksByIds } from 'selectors/tracks';
 import TrackList from 'components/TrackList';
 import { connect } from 'react-redux';
@@ -10,10 +11,11 @@ function mapStateToProps(state, ownProps) {
   return {
     activeTrackId: state.player.activeTrackId,
     isPlaying: state.player.isPlaying,
-    tracks: tracksByIds(state.entities, ownProps.trackIds)
+    tracks: tracksByIds(state.entities, ownProps.trackIds),
   };
 }
 
 export default connect(mapStateToProps, {
   toggleTrack,
+  queueTrack,
 })(TracklistContainer);

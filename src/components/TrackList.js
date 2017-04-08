@@ -16,6 +16,7 @@ const NoTracks = styled.h2`
 class TrackList extends PureComponent {
   static propTypes = {
     toggleTrack: PropTypes.func.isRequired,
+    queueTrack: PropTypes.func.isRequired,
     tracks: PropTypes.arrayOf(PropTypes.object),
     timelineId: PropTypes.string,
     isPlaying: PropTypes.bool,
@@ -42,6 +43,7 @@ class TrackList extends PureComponent {
       tracks,
       activeTrackId,
       isPlaying,
+      queueTrack,
     } = this.props;
 
 
@@ -53,6 +55,7 @@ class TrackList extends PureComponent {
             isPlaying={track.id === activeTrackId && isPlaying}
             track={track}
             onClick={this._trackClicked}
+            onQueue={queueTrack}
           />
         ))}
         {!tracks.length &&

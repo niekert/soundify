@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { trim } from 'lodash';
 import SearchIcon from 'components/icons/SearchIcon';
+import { compose, withState, withHandlers } from 'recompose';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -33,17 +35,28 @@ const Input = styled.input`
   border-radius: 3px;
 `;
 
-const Searchbar = ({ query, history, match, onChange }) => (
-  <Form
-    onSubmit={(e) => {
+const enhance = compose(
+  withState('query', 'setQuery', ''),
+  withHandlers({
+    onChange: ({ setQuery }) => e => setQuery(e.target.value),
+    onSubmit: ({ history, query }) => (e) => {
       e.preventDefault();
+
       if (!trim(query).length) {
         return;
       }
 
       history.push(`/search/${query}`);
-    }}
-  >
+    },
+  }),
+);
+
+const Searchbar = enhance(({
+  query,
+  onChange,
+  onSubmit,
+}) => (
+  <Form onSubmit={onSubmit}>
     <IconWrapper>
       <SearchIcon />
     </IconWrapper>
@@ -51,17 +64,17 @@ const Searchbar = ({ query, history, match, onChange }) => (
       type="text"
       placeholder="Search"
       value={decodeURIComponent(query)}
-      onChange={ev => onChange(ev.target.value)}
+      onChange={onChange}
     />
   </Form>
-);
+));
 Searchbar.propTypes = {
-  submitSearch: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
   query: PropTypes.string,
 };
 Searchbar.defaultProps = {
   query: '',
 };
 
-export default Searchbar;
+export default withRouter(Searchbar);

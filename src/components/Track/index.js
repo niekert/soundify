@@ -1,6 +1,8 @@
 import React, { PropTypes, PureComponent } from 'react';
 import styled from 'styled-components';
 import ArtWork from 'components/Track/ArtWork';
+import IconButton from 'components/buttons/IconButton';
+import QueueIcon from 'components/icons/PlayQueue';
 import PlayOverlay from './PlayOverlay';
 
 const Wrapper = styled.li`
@@ -9,7 +11,7 @@ const Wrapper = styled.li`
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 270px;
+  height: 275px;
   width: 200px;
   background: ${props => props.theme.colors.secondaryBackground}
 `;
@@ -31,7 +33,7 @@ const PlayerArtwork = styled(ArtWork)`
 `;
 
 const Meta = styled.div`
-  padding: 0 15px;
+  padding: 10px 15px 5px;
   overflow: hidden;
   flex: 1;
   display: flex;
@@ -54,11 +56,18 @@ const User = styled.span`
   color: ${props => props.theme.colors.secondaryText}
 `;
 
+const IconBar = styled.div`
+  width: 100%;
+  padding: 0 15px 5px;
+`;
+
 class Track extends PureComponent {
   static propTypes = {
     track: PropTypes.object.isRequired,
     isPlaying: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
+    onQueue: PropTypes.func.isRequired,
+    onLike: PropTypes.func, // TODO: implement
   };
 
   static defaultProps = {
@@ -69,8 +78,14 @@ class Track extends PureComponent {
     this.props.onClick(this.props.track.id, !this.props.isPlaying);
   }
 
-  render () {
-    const { track } = this.props;
+  _onQueueClicked = () => {
+    this.props.onQueue(this.props.track.id);
+  }
+
+  render() {
+    const {
+      track,
+    } = this.props;
 
     return (
       <Wrapper>
@@ -87,6 +102,11 @@ class Track extends PureComponent {
           <Title>{track.title}</Title>
           <User>{track.user.username}</User>
         </Meta>
+        <IconBar>
+          <IconButton onClick={this._onQueueClicked}>
+            <QueueIcon />
+          </IconButton>
+        </IconBar>
       </Wrapper>
     );
   }

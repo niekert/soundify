@@ -70,12 +70,12 @@ class Sidebar extends PureComponent {
       <SidebarWrapper>
         <Section>
           <Label>Your Music</Label>
-          <Link to="/s/likes">Likes</Link>
+          <Link to="/likes">Likes</Link>
         </Section>
         <Section>
           <Label>Playlists</Label>
           {playlists.map(({ title, id }) => (
-            <Link key={`playlist-${id}`} to={`/s/playlist/${id}`}>{title}</Link>
+            <Link key={`playlist-${id}`} to={`/playlist/${id}`}>{title}</Link>
           ))}
         </Section>
       </SidebarWrapper>

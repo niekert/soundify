@@ -58,8 +58,12 @@ const api = {
   },
 
   fetchLikes() {
-    return fetch(`https://api.soundcloud.com/me/favorites?oauth_token=${this.token}`)
-      .then(response => response.json()); // TODO: Error handling
+    return fetchWithToken('/me/favorites', this.token, {
+      query: {
+        linked_partitioning: 1,
+      },
+    })
+      .then(resp => resp.json());
   },
 
   search(query) {
