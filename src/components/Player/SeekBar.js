@@ -2,7 +2,7 @@ import React, { PropTypes, PureComponent } from 'react';
 import { formatSeconds } from 'helpers/format';
 import styled from 'styled-components';
 import Slider from 'components/Slider';
-import { prop, ifProp } from 'styled-tools';
+import { prop } from 'styled-tools';
 
 const Wrapper = styled.div`
   flex: 1;
@@ -13,9 +13,9 @@ const Wrapper = styled.div`
 `;
 
 const Time = styled.span`
-  font-size: 12px;
-  color: ${props => props.theme.colors.secondaryText};
-  padding: 0 5px;
+  font-size: 10px;
+  color: ${prop('theme.colors.secondaryText')};
+  padding: 0 10px;
   width: 50px;
 `;
 

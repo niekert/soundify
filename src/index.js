@@ -7,7 +7,6 @@ import './index.css';
 
 const store = createStore();
 
-// TODO: move store to own file
 ReactDOM.render(
   <Provider store={store}>
     <AppContainer />
