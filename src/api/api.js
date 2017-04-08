@@ -3,18 +3,20 @@ import { CLIENT_ID, REDIRECT_URL } from 'constants';
 import queryString from 'query-string';
 
 const localstorageKey = 'authToken';
-function fetchWithToken(path, token, options = {}) {
 
-  const query = queryString.stringify({
-    oauth_token: token,
-    ...options.query,
-  });
-
-  return fetch(`https://api.soundcloud.com${path}?${query}`);
-}
-
-const api = {
+export default {
   token: window.localStorage.getItem(localstorageKey),
+
+  fetchWithToken(path, options = {}) {
+    const { query, ...fetchOptions } = options;
+
+    const searchQuery = queryString.stringify({
+      oauth_token: this.token,
+      ...options.query,
+    });
+
+    return fetch(`https://api.soundcloud.com${path}?${searchQuery}`, fetchOptions);
+  },
 
   attemptAuth() {
     SC.initialize({
@@ -48,17 +50,17 @@ const api = {
   },
 
   fetchPlaylists(userId = 'me') {
-    return fetchWithToken(`/users/${userId}/playlists`, this.token)
+    return this.fetchWithToken(`/users/${userId}/playlists`)
       .then(resp => resp.json()); // TODO: error handling
   },
 
   fetchPlaylist(playlistId) {
-    return fetchWithToken(`/playlists/${playlistId}`, this.token)
+    return this.fetchWithToken(`/playlists/${playlistId}`)
       .then(resp => resp.json()); // TODO: error handling
   },
 
   fetchLikes() {
-    return fetchWithToken('/me/favorites', this.token, {
+    return this.fetchWithToken('/me/favorites', {
       query: {
         linked_partitioning: 1,
       },
@@ -67,13 +69,23 @@ const api = {
   },
 
   search(query) {
-    return fetchWithToken('/tracks', this.token, {
+    return this.fetchWithToken('/tracks', {
       query: {
         q: query,
         linked_partitioning: 1,
       },
     }).then(resp => resp.json());
   },
-};
 
-export default api;
+  fetchTrack(trackId) {
+    return this.fetchWithToken(`/tracks/${trackId}`)
+      .then(resp => resp.json());
+  },
+
+  toggleLike(trackId, toggle) {
+    return this.fetchWithToken(`/me/favorites/${trackId}`, {
+      method: toggle ? 'PUT' : 'DELETE',
+    })
+    .then(resp => resp.json());
+  },
+};

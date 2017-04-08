@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { pure } from 'recompose';
+import LikeButtonContainer from 'containers/LikeButtonContainer';
 import ArtWork from 'components/Track/ArtWork';
 import styled from 'styled-components';
 
@@ -36,12 +37,19 @@ const Artist = styled.span`
   color: ${props => props.theme.colors.secondaryText}
 `;
 
+const Row = styled.div`
+  display: flex;
+`
+
 const CurrentTrack = ({ track = {} }) => (
   <Wrapper>
     {track && [
       <PlayerArtwork artworkUrl={track.artwork_url} key="artwork" />,
       <Meta key="meta">
-        <Title>{track.title}</Title>
+        <Row>
+          <Title>{track.title}</Title>
+          <LikeButtonContainer key="like" trackId={track.id} />
+        </Row>
         <Artist>{track.user.username}</Artist>
       </Meta>,
     ]}
