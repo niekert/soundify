@@ -105,7 +105,7 @@ class Track extends PureComponent {
         </Meta>
         <IconBar>
           <IconButton
-            tooltip="Add track to queue"
+            tooltip="Add to queue"
             onClick={this._onQueueClicked}
           >
             <QueueIcon />
