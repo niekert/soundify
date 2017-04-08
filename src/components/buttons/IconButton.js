@@ -1,7 +1,9 @@
+import React from 'react';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
+import ReactTooltip from 'react-tooltip'
 
-export default styled.button`
+const Button = styled.button`
   background: none;
   padding: 0;
   cursor: pointer;
@@ -16,3 +18,10 @@ export default styled.button`
     height: 14px;
   }
 `;
+
+export default ({ children, tooltip, ...props }) => (
+  <Button data-tip={tooltip} {...props}>
+    {children}
+    <ReactTooltip />
+  </Button>
+);

@@ -104,7 +104,10 @@ class Track extends PureComponent {
           <User>{track.user.username}</User>
         </Meta>
         <IconBar>
-          <IconButton onClick={this._onQueueClicked}>
+          <IconButton
+            tooltip="Add track to queue"
+            onClick={this._onQueueClicked}
+          >
             <QueueIcon />
           </IconButton>
           <LikeButtonContainer trackId={track.id} />
