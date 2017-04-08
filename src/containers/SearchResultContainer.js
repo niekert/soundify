@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { submitSearch } from 'actions/searchActions';
-import { trackIdsFromQuery } from 'selectors/search';
+import { submitSearch } from 'actions/timelineActions';
+import { timelineById } from 'selectors/timeline';
+import { OK, INITIAL } from 'constants';
 import SearchResults from 'components/SearchResults';
 
 class SearchResultContainer extends Component {
@@ -23,7 +24,8 @@ class SearchResultContainer extends Component {
   }
 
   render() {
-    const params = this.props.match.params;
+    const { params } = this.props.match;
+
     return (
       <SearchResults
         query={params.query}
@@ -35,11 +37,13 @@ class SearchResultContainer extends Component {
 
 function mapStateToProps(state, ownProps) {
   const query = ownProps.match.params.query;
-  const { results, status } = state.search;
+  const id = `search::${query}`;
+
+  const searchResults = timelineById(state, id);
 
   return {
-    status,
-    trackIds: trackIdsFromQuery(results, query),
+    status: searchResults ? searchResults.status : INITIAL,
+    trackIds: searchResults ? searchResults.tracks : [],
   };
 }
 

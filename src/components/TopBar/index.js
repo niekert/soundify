@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
-import SearchbarContainer from 'containers/SearchbarContainer';
+import Searchbar from 'components/TopBar/Searchbar';
 import { Link } from 'react-router-dom';
 import UserDropdown from './UserDropdown';
 import SoundCloudLogo from './SoundCloudLogo';
@@ -50,7 +50,7 @@ class TopBar extends PureComponent {
         <Link to="/sds">
           <Logo />
         </Link>
-        <SearchbarContainer />
+        <Searchbar />
         <Right>
           {user && <UserDropdown user={user} />}
         </Right>

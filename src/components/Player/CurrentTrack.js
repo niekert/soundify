@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-basis: 33%;
+  overflow: hidden;
 `;
 
 const PlayerArtwork = styled(ArtWork)`

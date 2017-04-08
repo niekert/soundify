@@ -39,6 +39,4 @@ TimelineHeader.propTypes = {
 };
 
 
-export default onlyUpdateForKeys(
-  ['timelineId'],
-)(TimelineHeader);
+export default TimelineHeader;

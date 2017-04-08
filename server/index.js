@@ -3,7 +3,6 @@ const path = require('path');
 const express = require('express');
 
 module.exports = function (port) {
-  debugger;
   const app = express();
 
   app.get('/callback', function (req, res) {

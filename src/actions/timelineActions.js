@@ -3,31 +3,86 @@ import { normalize } from 'normalizr';
 import * as schema from './schema';
 
 export const FETCH_TIMELINE = 'FETCH_TIMELINE';
-export const FETCH_TIMELINES_SUCCESS = 'FETCH_TIMELINES_SUCCESS';
 export const FETCH_TIMELINE_SUCCESS = 'FETCH_TIMELINE_SUCCESS';
+export const FETCH_TIMELINE_ERROR = 'FETCH_TIMELINE_ERROR';
 
-function fetchTimelineSuccess({ type, id, json}) {
-  const normalized = normalize(json, schema.timeline);
+function fetchTimelineSuccess({ id, timeline }) {
+  // We need this for normalizr :(
+  // eslint-disable-next-line
+  timeline.timelineId = id;
+
+  const normalized = normalize(timeline, schema.timeline);
+
   return {
     type: FETCH_TIMELINE_SUCCESS,
     payload: {
-      type,
       id,
+      timeline: normalized.result,
     },
     entities: normalized.entities,
   };
 }
 
-export function fetchTimeline(type, { id = type }) {
-  const fetchTypeMap = {
-    likes: () => api.fetchLikes()
+export function submitSearch(query) {
+  const id = `search::${query}`;
+  return (dispatch) => {
+    dispatch({
+      type: FETCH_TIMELINE,
+      payload: {
+        id,
+      },
+    });
+
+    api.search(query)
       .then(json => ({
-        id: 'likes',
-        title: 'My Likes',
-        tracks: json,
-      })),
-    playlist: () => api.fetchPlaylist(id),
+        id,
+        tracks: json.collection,
+        next: json.next_href,
+      }))
+      .then(timeline => dispatch(
+        fetchTimelineSuccess({
+          id,
+          timeline,
+        }),
+      ))
+      .catch(err => dispatch({
+        type: FETCH_TIMELINE_ERROR,
+        payload: err.message,
+      }));
   };
+}
+
+export function fetchLikes() {
+  const id = 'likes';
+  return (dispatch) => {
+    dispatch({
+      type: FETCH_TIMELINE,
+      payload: {
+        id,
+      },
+    });
+
+    api.fetchLikes()
+      .then(json => ({
+        id,
+        next: json.next_href,
+        tracks: json.collection,
+      }))
+      .then(timeline => dispatch(
+        fetchTimelineSuccess({
+          id,
+          timeline,
+        }),
+      ))
+      .catch(err => dispatch({
+        type: FETCH_TIMELINE_ERROR,
+        payload: err.message,
+      }));
+  };
+}
+
+export function fetchPlaylist(playlistId) {
+  const id = `playlist::${playlistId}`;
 
   return (dispatch) => {
     dispatch({
@@ -37,18 +92,12 @@ export function fetchTimeline(type, { id = type }) {
       },
     });
 
-    const apiCall = fetchTypeMap[type];
-    if (!apiCall) {
-      console.error(`${type} is not a known type`);
-    }
-
-    apiCall(id)
-      .then((json) => {
-        dispatch(fetchTimelineSuccess({
-          type,
+    api.fetchPlaylist(playlistId)
+      .then(json => dispatch(
+        fetchTimelineSuccess({
           id,
-          json,
-        }));
-      });
+          timeline: json,
+        }),
+      ));
   };
 }

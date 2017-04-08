@@ -1,28 +1,27 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { INITIAL, OK } from 'constants';
-import { fetchTimeline } from 'actions/timelineActions';
+import { fetchPlaylist } from 'actions/timelineActions';
 import { timelineById } from 'selectors/timeline';
 import withUser from 'containers/hocs/withUser';
-import Timeline from '../components/Timeline/Timeline';
+import Playlist from '../components/Playlist/Playlist';
 
-class TimelineContainer extends PureComponent {
+class PlaylistContainer extends PureComponent {
   static propTypes = {
-    timeline: PropTypes.object,
+    playlist: PropTypes.object,
     match: PropTypes.object.isRequired,
     status: PropTypes.string.isRequired,
-    fetchTimeline: PropTypes.func.isRequired,
+    fetchPlaylist: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    timeline: null,
-    trackIds: [],
+    playlist: null,
   };
 
   componentDidMount() {
     const { match } = this.props;
-    const { playlistType, id } = match.params;
-    this.props.fetchTimeline(playlistType, { id });
+    const { id } = match.params;
+    this.props.fetchPlaylist(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,21 +32,22 @@ class TimelineContainer extends PureComponent {
       nextId !== currentId) &&
       nextProps.status === INITIAL
     ) {
-      this.props.fetchTimeline(playlistType, { id: nextId });
+      this.props.fetchPlaylist(nextId);
     }
   }
 
   render() {
     const {
-      timeline,
+      playlist,
       status,
       match,
      } = this.props;
 
     return (
-      <Timeline
-        timeline={timeline}
+      <Playlist
+        playlist={playlist}
         status={status}
+        timelineId={`playlist::${match.params.id}`}
         type={match.params.id || match.params.playlistType}
       />
     );
@@ -56,17 +56,16 @@ class TimelineContainer extends PureComponent {
 
 function mapStateToProps(state, ownProps) {
   const { match } = ownProps;
-  const { id, playlistType } = match.params;
+  const { id } = match.params;
 
-  const timelineId = id || playlistType; // for /likes, need to think of better way
-  const timeline = timelineById(state.entities.timelines, timelineId);
+  const playlist = timelineById(state, `playlist::${id}`);
 
   return {
-    timeline,
-    status: timeline ? OK : INITIAL,
+    playlist,
+    status: playlist ? playlist.status : INITIAL,
   };
 }
 
 export default withUser(connect(mapStateToProps, {
-  fetchTimeline,
-})(TimelineContainer));
+  fetchPlaylist,
+})(PlaylistContainer));

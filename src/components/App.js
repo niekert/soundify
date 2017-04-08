@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  // etc.
 } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from 'theme';
@@ -12,8 +11,8 @@ import SidebarContainer from 'containers/SidebarContainer';
 import HomeContainer from 'containers/HomeContainer';
 import LoginContainer from 'containers/LoginContainer';
 import SearchResultContainer from 'containers/SearchResultContainer';
-import TimelineContainer from 'containers/TimelineContainer';
-import './App.css';
+import PlaylistContainer from 'containers/PlaylistContainer';
+import LikesContainer from 'containers/LikesContainer';
 
 const AppShell = styled.div`
   min-height: 100vh;
@@ -51,7 +50,8 @@ const AuthedShell = () => (
       <MainContent>
         <Route exact path="/" component={HomeContainer} />
         <Route path="/search/:query" component={SearchResultContainer} />
-        <Route path="/s/:playlistType/:id?" component={TimelineContainer} />
+        <Route path="/likes" component={LikesContainer} />
+        <Route path="/playlist/:id" component={PlaylistContainer} />
       </MainContent>
     </Content>
     <PlayerContainer />
