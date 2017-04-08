@@ -23,6 +23,7 @@ class Player extends PureComponent {
   static propTypes = {
     togglePlaying: PropTypes.func.isRequired,
     changeTrack: PropTypes.func.isRequired,
+    toggleLike: PropTypes.func.isRequired,
     volume: PropTypes.number.isRequired,
     track: PropTypes.object,
     isPlaying: PropTypes.bool,
@@ -121,6 +122,7 @@ class Player extends PureComponent {
       track,
       isPlaying,
       isActive,
+      toggleLike,
     } = this.props;
 
     return (
@@ -132,6 +134,7 @@ class Player extends PureComponent {
         <PlayerContent
           totalSeconds={this.state.totalSeconds}
           playedSeconds={this.state.playedSeconds}
+          toggleLike={toggleLike}
           track={track}
           isPlaying={isPlaying}
           isActive={isActive}

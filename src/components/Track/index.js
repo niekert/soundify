@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ArtWork from 'components/Track/ArtWork';
 import IconButton from 'components/buttons/IconButton';
 import QueueIcon from 'components/icons/PlayQueue';
-import LikeButtonContainer from 'containers/LikeButtonContainer';
+import LikeButton from 'components/buttons/LikeButton';
 import PlayOverlay from './PlayOverlay';
 
 const Wrapper = styled.li`
@@ -68,7 +68,7 @@ class Track extends PureComponent {
     isPlaying: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     onQueue: PropTypes.func.isRequired,
-    onLike: PropTypes.func, // TODO: implement
+    toggleLike: PropTypes.func.isRequired, // TODO: implement
   };
 
   static defaultProps = {
@@ -81,6 +81,11 @@ class Track extends PureComponent {
 
   _onQueueClicked = () => {
     this.props.onQueue(this.props.track.id);
+  }
+
+  _onToggleLike = () => {
+    const { track, toggleLike } = this.props;
+    toggleLike(track.id, !track.user_favorite);
   }
 
   render() {
@@ -110,7 +115,10 @@ class Track extends PureComponent {
           >
             <QueueIcon />
           </IconButton>
-          <LikeButtonContainer trackId={track.id} />
+          <LikeButton
+            onClick={this._onToggleLike}
+            active={track.user_favorite}
+            trackId={track.id} />
         </IconBar>
       </Wrapper>
     );

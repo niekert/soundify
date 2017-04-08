@@ -1,6 +1,7 @@
 import React from 'react';
 import { toggleTrack } from 'actions/playerActions';
 import { queueTrack } from 'actions/queueActions';
+import { toggleLike } from 'actions/trackActions';
 import { tracksByIds } from 'selectors/tracks';
 import TrackList from 'components/TrackList';
 import { connect } from 'react-redux';
@@ -18,4 +19,5 @@ function mapStateToProps(state, ownProps) {
 export default connect(mapStateToProps, {
   toggleTrack,
   queueTrack,
+  toggleLike,
 })(TracklistContainer);

@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { pure } from 'recompose';
-import LikeButtonContainer from 'containers/LikeButtonContainer';
+import LikeButton from 'components/buttons/LikeButton';
 import ArtWork from 'components/Track/ArtWork';
+import { compose, withHandlers } from 'recompose';
 import styled, { keyframes } from 'styled-components';
 
 const Wrapper = styled.div`
@@ -45,20 +46,32 @@ const Row = styled.div`
   display: flex;
 `
 
-const CurrentTrack = ({ track = {} }) => (
+const enhance = compose(
+  withHandlers({
+    onClickLike: ({ toggleLike, track }) => () => toggleLike(track.id, !track.user_favorite),
+  })
+)
+
+const CurrentTrack = enhance(({
+  track,
+  onClickLike
+}) => (
   <Wrapper>
     {track && [
       <PlayerArtwork artworkUrl={track.artwork_url} key="artwork" />,
       <Meta key="meta">
         <Row>
           <Title>{track.title}</Title>
-          <LikeButtonContainer key="like" trackId={track.id} />
+          <LikeButton
+            onClick={onClickLike}
+            active={track.user_favorite}
+            trackId={track.id} />
         </Row>
         <Artist>{track.user.username}</Artist>
       </Meta>,
     ]}
   </Wrapper>
-);
+));
 
 CurrentTrack.propTypes = {
   track: PropTypes.object,
