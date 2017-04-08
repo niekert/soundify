@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ArtWork from 'components/Track/ArtWork';
 import IconButton from 'components/buttons/IconButton';
 import QueueIcon from 'components/icons/PlayQueue';
+import LikeButtonContainer from 'containers/LikeButtonContainer';
 import PlayOverlay from './PlayOverlay';
 
 const Wrapper = styled.li`
@@ -106,6 +107,7 @@ class Track extends PureComponent {
           <IconButton onClick={this._onQueueClicked}>
             <QueueIcon />
           </IconButton>
+          <LikeButtonContainer trackId={track.id} />
         </IconBar>
       </Wrapper>
     );
