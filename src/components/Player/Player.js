@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   width: 100%;
   border: 1px solid ${props => props.theme.colors.outline};
   height: 90px;
+  user-selectable: none;
   background: ${props => props.theme.colors.secondaryBackground};
   display: flex;
   justify-content: center;

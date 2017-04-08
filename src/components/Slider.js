@@ -21,7 +21,7 @@ const Active = styled.div`
     'highlight',
     prop('theme.colors.active'),
     prop('theme.colors.secondaryText'),
-  )}
+  )};
 `;
 
 const Seek = styled.input`
