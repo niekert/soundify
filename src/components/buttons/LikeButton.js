@@ -6,7 +6,7 @@ import IconButton from './IconButton';
 
 const Button = styled(IconButton)`
   margin-left: 10px;
-  
+
   svg path {
     ${ifProp(
       'active',
