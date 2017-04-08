@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { pure } from 'recompose';
 import LikeButtonContainer from 'containers/LikeButtonContainer';
 import ArtWork from 'components/Track/ArtWork';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,11 +24,15 @@ const Meta = styled.div`
   margin-left: 10px;
   flex-direction: column;
   justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const Title = styled.span`
   line-height: 1.2;
   font-size: .8em;
+  max-width: calc(100% - 20px);
+  overflow: hidden;
 `;
 
 const Artist = styled.span`
