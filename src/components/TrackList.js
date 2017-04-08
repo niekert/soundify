@@ -17,6 +17,7 @@ class TrackList extends PureComponent {
   static propTypes = {
     toggleTrack: PropTypes.func.isRequired,
     queueTrack: PropTypes.func.isRequired,
+    toggleLike: PropTypes.func.isRequired,
     tracks: PropTypes.arrayOf(PropTypes.object),
     timelineId: PropTypes.string,
     isPlaying: PropTypes.bool,
@@ -44,8 +45,8 @@ class TrackList extends PureComponent {
       activeTrackId,
       isPlaying,
       queueTrack,
+      toggleLike,
     } = this.props;
-
 
     return (
       <Wrapper>
@@ -54,6 +55,7 @@ class TrackList extends PureComponent {
             key={track.id}
             isPlaying={track.id === activeTrackId && isPlaying}
             track={track}
+            toggleLike={toggleLike}
             onClick={this._trackClicked}
             onQueue={queueTrack}
           />

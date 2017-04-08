@@ -1,6 +1,7 @@
 import React from 'react';
 import Player from 'components/Player/Player';
 import { togglePlaying, changeTrack } from 'actions/playerActions';
+import { toggleLike } from 'actions/trackActions';
 import { trackById } from 'selectors/tracks';
 import { connect } from 'react-redux';
 
@@ -21,4 +22,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   togglePlaying,
   changeTrack,
+  toggleLike,
 })(PlayerContainer);

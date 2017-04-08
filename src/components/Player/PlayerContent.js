@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 class PlayerContent extends PureComponent {
   static propTypes = {
     track: PropTypes.object,
+    toggleLike: PropTypes.func.isRequired,
     ...Controls.propTypes,
   };
 
@@ -21,11 +22,14 @@ class PlayerContent extends PureComponent {
   };
 
   render() {
-    const { track } = this.props;
+    const {
+      track,
+      toggleLike,
+    } = this.props;
 
     return (
       <Wrapper>
-        <CurrentTrack track={track} />
+        <CurrentTrack track={track} toggleLike={toggleLike} />
         <Controls {...this.props} />
       </Wrapper>
     );
