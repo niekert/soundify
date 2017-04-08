@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 // TODO: Don't redirect here
 const HomeContainer = () => (
-  <Redirect to="/s/likes" />
+  <Redirect to="/likes" />
 );
 
 export default HomeContainer;
