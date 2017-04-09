@@ -6,22 +6,7 @@ import { makeTracksByIds } from 'selectors/tracks';
 import TrackList from 'components/TrackList';
 import { connect } from 'react-redux';
 
-// const TracklistContainer = props => <TrackList {...props} />;
-
-class TracklistContainer extends React.Component {
-  componentDidMount() {
-    console.log('hell');
-  }
-
-  shouldComponentUpdate(nextProps) {
-    console.log('same', nextProps.trackIds === this.props.trackIds);
-    return true;
-  }
-
-  render () {
-    return <TrackList {...this.props} />
-  }
-}
+const TracklistContainer = props => <TrackList {...props} />;
 
 function mapStateToProps(state, ownProps) {
   const tracks = makeTracksByIds(ownProps.trackIds);

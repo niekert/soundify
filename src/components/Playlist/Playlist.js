@@ -6,8 +6,9 @@ import Loader from 'components/Loader';
 import PlaylistHeader from './PlaylistHeader';
 
 const Wrapper = styled.div`
-  flex: 1;
-  width: 100%;
+  display: grid;
+  grid-template: auto 1fr / 1fr;
+  max-height: 0; // Fixes an overflowing bug...
 `;
 
 class Playlist extends PureComponent {

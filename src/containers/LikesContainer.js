@@ -18,11 +18,9 @@ class LikesContainer extends PureComponent {
   };
 
   componentDidMount() {
-    console.time('idle');
-    window.requestIdleCallback(() => {
-      console.timeEnd('idle');
+    // window.requestIdleCallback(() => {
       this.props.fetchLikes();
-    });
+    // });
   }
 
   render() {
