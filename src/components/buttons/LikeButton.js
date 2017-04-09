@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import HeartIcon from 'components/icons/Heart';
-import { ifProp, prop } from 'styled-tools';
+import { ifProp } from 'styled-tools';
 import IconButton from './IconButton';
 
 const Button = styled(IconButton)`
@@ -11,7 +11,7 @@ const Button = styled(IconButton)`
     ${ifProp(
       'active',
       '',
-      'fill: none'
+      'fill: none',
     )};
   }
 `;
