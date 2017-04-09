@@ -19,7 +19,9 @@ class QueueButton extends Component {
 
   _onClick = () => {
     this.setState({ addedActive: true });
-    this._activeTimeout = setTimeout(() => this.setState({ addedActive: false }), 5000);
+    this._activeTimeout = setTimeout(() => this.setState({ addedActive: false }), 3000);
+
+    this.props.onClick(this.props.trackId);
   };
 
   render() {

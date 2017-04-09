@@ -2861,7 +2861,7 @@ hoek@4.x.x:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.1.0.tgz#4a4557460f69842ed463aa00628cc26d2683afa7"
 
-hoist-non-react-statics@^1.0.0, hoist-non-react-statics@^1.0.3:
+hoist-non-react-statics@^1.0.0, hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
@@ -4919,6 +4919,12 @@ rc@^1.1.2, rc@~1.1.6:
 rcedit@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/rcedit/-/rcedit-0.7.0.tgz#560b2920165034a135316e6a111f8274b9cec521"
+
+react-click-outside@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-click-outside/-/react-click-outside-2.2.0.tgz#fb815517cb6144bb5e670f69e1a61d6165338a59"
+  dependencies:
+    hoist-non-react-statics "^1.2.0"
 
 react-dev-utils@^0.5.1:
   version "0.5.1"

@@ -1,9 +1,7 @@
 import React, { PropTypes, PureComponent } from 'react';
 import styled from 'styled-components';
 import ArtWork from 'components/Track/ArtWork';
-import IconButton from 'components/buttons/IconButton';
 import QueueButton from 'components/buttons/QueueButton';
-import QueueIcon from 'components/icons/PlayQueue';
 import LikeButton from 'components/buttons/LikeButton';
 import PlayOverlay from './PlayOverlay';
 
@@ -102,6 +100,8 @@ class Track extends PureComponent {
         >
           <PlayOverlay
             className="playOverlay"
+            onQueue={this._onQueueClicked}
+            onToggleLike={this._onToggleLike}
             isPlaying={this.props.isPlaying}
           />
         </PlayerArtwork>
