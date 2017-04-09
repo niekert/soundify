@@ -2,6 +2,9 @@ import React, { PropTypes } from 'react';
 import VolumeIcon from 'components/icons/VolumeIcon';
 import PlayQueueIcon from 'components/icons/PlayQueue';
 import ChromecastIcon from 'components/icons/Chromecast';
+import PopOver from 'components/helpers/Popover';
+import IconButtonComponent from 'components/buttons/IconButton';
+import PlayQueue from 'components/Player/PlayQueue';
 import Slider from 'components/Slider';
 import { onlyUpdateForKeys, compose, withHandlers } from 'recompose';
 import { Link } from 'react-router-dom';
@@ -21,19 +24,14 @@ const VolumeControl = styled.div`
   align-items: center;
 `;
 
-const IconWrapper = styled.div`
+const IconButton = styled(IconButtonComponent)`
   display: flex;
   align-items: center;
-  margin-left: 1em;
-
-  &:hover svg {
-    color: ${prop('theme.colors.primaryText')};
-  }
+  margin-left: 1.5em;
 
   svg {
-    color: ${prop('theme.colors.secondaryText')};
-    width: ${prop('theme.fontSize.icon')};
-    height: ${prop('theme.fontSize.icon')};
+    width: 16px;
+    height: 16px;
   }
 `;
 
@@ -50,23 +48,33 @@ const enhance = compose(
   }),
 );
 
-function cast () {
+function cast() {
   alert('not implemented yet');
 }
+
+const PlayQueueButton = () => (
+  <IconButton>
+    <PlayQueueIcon />
+  </IconButton>
+);
 
 const SideControls = enhance(
   ({ volume, onChange, mute }) => (
     <Wrapper>
-      <Link to="/queue">
-        <IconWrapper>
-          <PlayQueueIcon />
-        </IconWrapper>
-      </Link>
-      <IconWrapper>
+      <PopOver
+        triggerButton={PlayQueueButton}
+        width="600"
+        align="center"
+      >
+        <PlayQueue />
+      </PopOver>
+      <IconButton onClick={cast}>
         <ChromecastIcon onClick={cast} />
-      </IconWrapper>
+      </IconButton>
       <VolumeControl>
-        <IconWrapper><VolumeIcon onClick={mute} /></IconWrapper>
+        <IconButton onClick={mute} >
+          <VolumeIcon />
+        </IconButton>
         <VolumeBar>
           <Slider percentage={volume} onChange={onChange} />
         </VolumeBar>
