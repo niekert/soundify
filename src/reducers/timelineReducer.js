@@ -21,6 +21,7 @@ const timeline = (state = emptyTimeline, action) => {
     case FETCH_TIMELINE_SUCCESS:
       return {
         ...state,
+        ...action.payload.timeline,
         status: OK,
       };
     case FETCH_TIMELINE_ERROR:
