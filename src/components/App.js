@@ -15,28 +15,17 @@ import PlaylistContainer from 'containers/PlaylistContainer';
 import LikesContainer from 'containers/LikesContainer';
 
 const AppShell = styled.div`
-  min-height: 100vh;
-  max-height: 100vh;
-  width: 100%;
-  max-width: 1300px;
-  max-width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template: 50px 1fr 90px / 200px 1fr;
   background: ${props => props.theme.colors.primaryBackground}
   color: ${props => props.theme.colors.primaryText}
 `;
 
-const Content = styled.section`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  height: calc(100vh - 100px);
-  margin-bottom: 100px;
-`;
-
 const MainContent = styled.div`
+  grid-row: 2;
+  grid-column: 2;
   flex: 1;
   display: flex;
   overflow: scroll;
@@ -45,15 +34,13 @@ const MainContent = styled.div`
 const AuthedShell = () => (
   <AppShell>
     <Route path="/" component={SidebarContainer} />
-    <Content>
-      <TopBarContainer />
-      <MainContent>
-        <Route exact path="/" component={HomeContainer} />
-        <Route path="/search/:query" component={SearchResultContainer} />
-        <Route path="/likes" component={LikesContainer} />
-        <Route path="/playlist/:id" component={PlaylistContainer} />
-      </MainContent>
-    </Content>
+    <TopBarContainer />
+    <MainContent>
+      <Route exact path="/" component={HomeContainer} />
+      <Route path="/search/:query" component={SearchResultContainer} />
+      <Route path="/likes" component={LikesContainer} />
+      <Route path="/playlist/:id" component={PlaylistContainer} />
+    </MainContent>
     <PlayerContainer />
   </AppShell>
 );

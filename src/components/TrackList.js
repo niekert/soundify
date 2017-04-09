@@ -6,6 +6,7 @@ const Wrapper = styled.ul`
   padding-top: 15px;
   display: flex;
   width: 100%;
+  height: auto;
   flex-wrap: wrap;
   justify-content: flex-start;
 `;

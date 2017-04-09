@@ -6,7 +6,8 @@ import { CLIENT_ID } from 'constants';
 import PlayerContent from './PlayerContent';
 
 const Wrapper = styled.div`
-  position: fixed;
+  grid-row: 3;
+  grid-column: 1 / 3;
   z-index: 100;
   bottom: 0;
   width: 100%;

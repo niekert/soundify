@@ -6,8 +6,8 @@ import UserDropdown from './UserDropdown';
 import SoundCloudLogo from './SoundCloudLogo';
 
 const Wrapper = styled.div`
-  top: 0;
-  left: 200px;
+  grid-column: 2;
+  grid-row: 1;
   z-index: 999;
   background: ${props => props.theme.colors.secondaryBackground}
   display: flex;
@@ -47,7 +47,7 @@ class TopBar extends PureComponent {
 
     return (
       <Wrapper>
-        <Link to="/sds">
+        <Link to="/">
           <Logo />
         </Link>
         <Searchbar />

@@ -4,10 +4,10 @@ import { NavLink } from 'react-router-dom';
 import { prop } from 'styled-tools';
 
 const SidebarWrapper = styled.div`
-  min-width: 200px;
-  padding: 15px 15px 100px;
+  width: 200px;
+  grid-row: 1 / 3;
+  padding-left: 15px;
   display: flex;
-  height: 100vh;
   flex-direction: column;
   justify-content: space-around;
   background: ${prop('theme.colors.secondaryBackground')};
