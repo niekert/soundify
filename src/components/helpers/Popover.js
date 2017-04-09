@@ -1,29 +1,15 @@
 import React, { PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
 import styled from 'styled-components';
 import enhanceClickOutside from 'react-click-outside';
-import { ifProp, prop } from 'styled-tools';
 
 const Wrapper = styled.div`
   position: relative;
 `;
 
-const Popover = styled.div`
-  position: absolute;
-  z-index: 100;
-  background: black;
-  width: ${prop('width', 0)}px;
-
-  left: ${prop('pos.left', -999)}px;
-`;
-
-class Dropdown extends React.Component {
+class Popover extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool,
     triggerButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    width: PropTypes.number, // TODO: calculate this instead
-    align: PropTypes.oneOf(['left', 'center', 'right']),
-    verticalAlign: PropTypes.oneOf(['top', 'bottom', 'auto']),
     children: PropTypes.node,
     onToggle: PropTypes.func,
   };
@@ -89,4 +75,4 @@ class Dropdown extends React.Component {
   }
 }
 
-export default enhanceClickOutside(Dropdown);
+export default enhanceClickOutside(Popover);

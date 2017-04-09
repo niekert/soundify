@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-function getArtworkUrl (artworkUrl, size) {
+function getArtworkUrl(artworkUrl, size) {
   if (!artworkUrl) {
     return null; // TODO: default artwork
   }
@@ -18,17 +18,18 @@ const Wrapper = styled.div`
   width: 100%;
   height: 200px;
   background-image: url(${props => props.url});
-`
+`;
 
 const ArtWork = ({ artworkUrl, size, ...props }) => (
   <Wrapper url={getArtworkUrl(artworkUrl, size)} {...props} />
-)
+);
+
 ArtWork.propTypes = {
   artworkUrl: PropTypes.string,
-  size: PropTypes.string
+  size: PropTypes.string,
 };
 ArtWork.defaultProps = {
-  size: `500x500`
-}
+  size: '500x500',
+};
 
 export default ArtWork;
