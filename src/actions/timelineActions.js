@@ -7,10 +7,6 @@ export const FETCH_TIMELINE_SUCCESS = 'FETCH_TIMELINE_SUCCESS';
 export const FETCH_TIMELINE_ERROR = 'FETCH_TIMELINE_ERROR';
 
 function fetchTimelineSuccess({ id, timeline }) {
-  // We need this for normalizr :(
-  // eslint-disable-next-line
-  timeline.timelineId = id;
-
   const normalized = normalize(timeline, schema.timeline);
 
   return {

@@ -1,12 +1,3 @@
-export const timelineById = (state, id) => {
-  const timeline = state.timelines[id];
-  if (!timeline) {
-    return null;
-  }
+export const timelineById = (state, id) => state.timelines[id];
 
-  return {
-    ...timeline,
-    ...state.entities.timelines[timeline.timelineId],
-  };
-};
 export const trackIndex = (timeline, trackId) => timeline.tracks.findIndex(id => id === trackId);
