@@ -2,6 +2,7 @@ import React, { PropTypes, PureComponent } from 'react';
 import styled from 'styled-components';
 import ArtWork from 'components/Track/ArtWork';
 import IconButton from 'components/buttons/IconButton';
+import QueueButton from 'components/buttons/QueueButton';
 import QueueIcon from 'components/icons/PlayQueue';
 import LikeButton from 'components/buttons/LikeButton';
 import PlayOverlay from './PlayOverlay';
@@ -109,16 +110,15 @@ class Track extends PureComponent {
           <User>{track.user.username}</User>
         </Meta>
         <IconBar>
-          <IconButton
-            tooltip="Add to queue"
+          <QueueButton
+            trackId={track.id}
             onClick={this._onQueueClicked}
-          >
-            <QueueIcon />
-          </IconButton>
+          />
           <LikeButton
             onClick={this._onToggleLike}
             active={track.user_favorite}
-            trackId={track.id} />
+            trackId={track.id}
+          />
         </IconBar>
       </Wrapper>
     );
