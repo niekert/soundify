@@ -4,11 +4,9 @@ import PlayQueueIcon from 'components/icons/PlayQueue';
 import ChromecastIcon from 'components/icons/Chromecast';
 import PopOver from 'components/helpers/Popover';
 import IconButtonComponent from 'components/buttons/IconButton';
-import PlayQueue from 'components/Player/PlayQueue';
+import PlayQueueContainer from 'containers/PlayQueueContainer';
 import Slider from 'components/Slider';
 import { onlyUpdateForKeys, compose, withHandlers } from 'recompose';
-import { Link } from 'react-router-dom';
-import { prop } from 'styled-tools';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -66,7 +64,7 @@ const SideControls = enhance(
         width="600"
         align="center"
       >
-        <PlayQueue />
+        <PlayQueueContainer />
       </PopOver>
       <IconButton onClick={cast}>
         <ChromecastIcon onClick={cast} />

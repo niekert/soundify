@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import styled, { css } from 'styled-components';
+import { H3 } from 'components/styles/Headings';
 import { prop } from 'styled-tools';
+import Track from './Track';
+import QueueEmpty from './QueueEmpty';
 
 const backstyles = css`
   background: ${prop('theme.colors.primaryBackground')};
@@ -10,14 +13,18 @@ const backstyles = css`
 `;
 
 const Wrapper = styled.div`
+  text-algin: center;
+  user-select: none;
+  padding: 15px 0;
   position: absolute;
+  display: flex;
+  flex-direction: column;
   ${backstyles}
   border-radius: 2px;
   z-index: 100;
   bottom: 30px;
   left: -140px;
   width: 300px;
-  min-height: 250px;
   height: auto;
 
   &:before {
@@ -42,14 +49,39 @@ const Wrapper = styled.div`
   }
 `;
 
-const Content = styled.div`
+const TrackList = styled.ul`
+  max-height: 300px;
+  overflow: auto;
+  padding: 0 15px;
+`;
 
-`
+const Title = styled(H3)`
+  padding: 0 15px;
+`;
 
-const PlayQueue = () => (
+const PlayQueue = ({ tracks, timeline = null }) => (
   <Wrapper>
-    Hello
+    {!tracks.length ?
+      <QueueEmpty /> :
+    [
+      <Title key="title">Play queue</Title>,
+      <TrackList key="tracklist">
+        {tracks.map((track, index) => (
+          <Track
+            key={`${track.id}-${index}`}
+            artworkUrl={track.artwork_url}
+            title={track.title}
+            artist={track.user.username}
+          />
+        ))}
+      </TrackList>,
+    ]
+    }
   </Wrapper>
 );
+PlayQueue.propTypes = {
+  tracks: PropTypes.array.isRequired,
+  timeline: PropTypes.object,
+};
 
 export default PlayQueue;

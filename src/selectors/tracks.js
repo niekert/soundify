@@ -4,9 +4,7 @@ export const tracksSelector = state => state.entities.tracks;
 
 export const makeTracksByIds = trackIds => createSelector(
   tracksSelector,
-  (tracks, props) => {
-    return trackIds.map(trackId => tracks[trackId]);
-  },
+  tracks => trackIds.map(trackId => tracks[trackId]),
 );
 
 export const tracksByIds = (entities, trackIds) => {
