@@ -37,7 +37,6 @@ class Login extends PureComponent {
           <Loader /> :
           <LoginContainer>
             <LoginButton onLoginClicked={this.props.onLoginClicked} />
-            <SubTitle>Super safe and stuff</SubTitle>
           </LoginContainer>
         }
       </Wrapper>

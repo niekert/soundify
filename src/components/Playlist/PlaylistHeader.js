@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import PlayButton from 'components/buttons/PlayButton';
-import { onlyUpdateForKeys } from 'recompose';
 import styled from 'styled-components';
+import { pure } from 'recompose';
 import { prop } from 'styled-tools';
 
 const Wrapper = styled.div`
@@ -13,7 +13,7 @@ const Subtitle = styled.span`
   font-size: ${prop('theme.fontSize.subtitle')};
   color: ${prop('theme.colors.secondaryText')};
   font-weight: 300;
-  margin-bottom: 0.5em;
+  margin-bottom: 10px;
 `;
 
 const Title = styled.h1`
@@ -22,21 +22,23 @@ const Title = styled.h1`
   font-weight: 600;
 `;
 
-const TimelineHeader = ({
-  timelineId,
-  title,
-  trackCount,
-  duration,
+const PlaylistHeader = ({
+  playlist,
 }) => (
   <Wrapper>
     <Subtitle>Playlist</Subtitle>
-    <Title>{title}</Title>
+    <Title>{playlist.title}</Title>
+    {playlist.kind === 'playlist' &&
+      <Subtitle>
+        Created by {playlist.user.username} ● {playlist.tracks.length}, {playlist.duration} minutes
+      </Subtitle>
+    }
     <PlayButton />
   </Wrapper>
 );
-TimelineHeader.propTypes = {
-
+PlaylistHeader.propTypes = {
+  playlist: PropTypes.object.isRequired,
 };
 
 
-export default TimelineHeader;
+export default pure(PlaylistHeader);

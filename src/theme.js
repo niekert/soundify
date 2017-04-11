@@ -4,9 +4,10 @@ export default {
     secondaryBackground: '#1c1c1f',
     primaryText: '#dfe0e6',
     secondaryText: '#88898c',
-    active: '#84bd00',
+    active: '#6AE368',
     secondaryActive: '#3e3e40',
     outline: '#222326',
+    cta: '#6AE368',
   },
   fontSize: { // TODO: use EMs eventually
     h1: '40px',

@@ -23,6 +23,7 @@ const PlayerArtwork = styled(ArtWork)`
 const Meta = styled.div`
   display: flex;
   margin-left: 10px;
+  font-weight: 200;
   flex-direction: column;
   justify-content: center;
   white-space: nowrap;
@@ -32,6 +33,7 @@ const Meta = styled.div`
 const Title = styled.span`
   line-height: 1.2;
   font-size: .8em;
+  font-weight: 200;
   max-width: calc(100% - 20px);
   overflow: hidden;
 `;
@@ -44,7 +46,7 @@ const Artist = styled.span`
 
 const Row = styled.div`
   display: flex;
-`
+`;
 
 const enhance = compose(
   withHandlers({
