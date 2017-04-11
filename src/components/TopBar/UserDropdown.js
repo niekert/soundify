@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
-import DropdownButton from 'components/DropdownButton';
+import ArrowIcon from 'components/icons/Arrow';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,8 +22,19 @@ const Avatar = styled.img`
   align-self: center;
 `;
 
-const Button = styled(DropdownButton)`
-  margin-left: 15px;
+const Button = styled.button`
+  cursor: pointer;
+  background: none;
+`;
+
+const Arrow = styled(ArrowIcon)`
+  margin-left: 1em;
+  position: relative;
+  top: 1px;
+  width: 10px;
+  height: 10px;
+  transform: rotate(90deg);
+  color: ${prop('theme.colors.primaryText')};
 `;
 
 class UserDropdown extends PureComponent {
@@ -30,13 +42,19 @@ class UserDropdown extends PureComponent {
     user: PropTypes.object.isRequired,
   };
 
+  state = {
+    isOpen: false,
+  }
+
   render () {
     const { user } = this.props;
     return (
       <Wrapper>
         <Avatar src={user.avatar_url} />
-        <Username>{user.username}</Username>
-        <Button />
+        <Button>
+          <Username>{user.username}</Username>
+          <Arrow open={this.state.isOpen} />
+        </Button>
       </Wrapper>
     );
   }

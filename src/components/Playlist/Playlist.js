@@ -42,10 +42,7 @@ class Playlist extends PureComponent {
           [
             <PlaylistHeader
               key="header"
-              playlistId={playlist.id}
-              title={playlist.title}
-              trackCount={playlist.tracks.length}
-              duration={playlist.duration}
+              playlist={playlist}
             />,
             <TracklistContainer
               key="tracklist"

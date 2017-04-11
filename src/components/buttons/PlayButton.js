@@ -1,9 +1,26 @@
 import React, { PropTypes } from 'react';
 import { pure } from 'recompose';
 import withPlayerContext from 'containers/hocs/withPlayerContext';
-import PlayIcon from 'components/icons/Play';
-import PauseIcon from 'components/icons/Pause';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
+
+const Button = styled.button`
+  width: 100px;
+  height: 30px;
+  border-radius: 50px;
+  background: #1DB954;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #FFF;
+  cursor: pointer;
+  font-weight: 200;
+  transition: transform 50ms ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+    background: #1CD85E;
+  }
+`;
 
 const PlayButton = ({
   isPlaying,
@@ -11,7 +28,9 @@ const PlayButton = ({
   activeTimelineId,
   toggleTrack
 }) => (
-  <div>Player button</div>
+  <Button onClick={toggleTrack}>
+    {isPlaying ? 'Pause' : 'Play'}
+  </Button>
 );
 PlayButton.propTypes = {
   toggleTrack: PropTypes.func.isRequired,
