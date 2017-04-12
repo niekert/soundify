@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 class SidebarContainer extends PureComponent {
   static propTypes = {
-    activeContextId: PropTypes.string,
     fetchPlaylists: PropTypes.func.isRequired,
   };
 
@@ -25,7 +24,7 @@ class SidebarContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     playlists: playlists(state.users, 'me'),
-    activeContextId: state.player.activeTimelineId, // TODO: make UI context
+    activeTimelineId: state.player.isPlaying && state.player.activeTimelineId,
   };
 }
 

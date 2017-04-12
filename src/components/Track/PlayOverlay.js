@@ -7,7 +7,7 @@ const PlayerIcon = styled.div`
   border-radius: 50%;
   height: 25%;
   width: 25%;
-  background: ${props => props.theme.colors.active};
+  background: ${props => props.theme.colors.cta};
   display: flex;
   justify-content: center;
   align-items: center;
