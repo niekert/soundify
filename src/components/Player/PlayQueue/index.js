@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { H3 } from 'components/styles/Headings';
 import { prop } from 'styled-tools';

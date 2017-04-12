@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Sidebar from 'components/Sidebar';
 import { fetchPlaylists } from 'actions/userActions';
 import { playlists } from 'selectors/users';
