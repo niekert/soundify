@@ -2,6 +2,7 @@ import {
   FETCH_TIMELINE,
   FETCH_TIMELINE_SUCCESS,
   FETCH_TIMELINE_ERROR,
+  SET_ACTIVE_TIMELINE,
 } from 'actions/timelineActions';
 import { OK, PENDING, ERROR } from 'constants';
 
@@ -34,22 +35,27 @@ const timeline = (state = emptyTimeline, action) => {
   }
 };
 
-export default (state = {}, action) => {
+const defaultState = {
+  timelines: {},
+  active: null,
+};
+
+export default (state = defaultState, action) => {
   switch (action.type) {
     case FETCH_TIMELINE:
-      return {
-        ...state,
-        [action.payload.id]: timeline(state[action.payload.id], action),
-      };
     case FETCH_TIMELINE_SUCCESS:
-      return {
-        ...state,
-        [action.payload.id]: timeline(state[action.payload.id], action),
-      };
     case FETCH_TIMELINE_ERROR:
       return {
         ...state,
-        [action.payload.id]: timeline(state[action.payload.id], action),
+        timelines: {
+          ...state.timelines,
+          [action.payload.id]: timeline(state.timelines[action.payload.id], action),
+        },
+      };
+    case SET_ACTIVE_TIMELINE:
+      return {
+        ...state,
+        active: action.payload,
       };
     default:
       return state;

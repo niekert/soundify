@@ -5,8 +5,10 @@ import styled from 'styled-components';
 import { formatPlaytime } from 'helpers/format';
 import { pure } from 'recompose';
 import { prop } from 'styled-tools';
+import ArtworkGrid from './ArtworkGrid';
 
 const Wrapper = styled.div`
+  display: flex;
   padding: 15px 10px;
 `;
 
@@ -28,14 +30,17 @@ const PlaylistHeader = ({
   playlist,
 }) => (
   <Wrapper>
-    <Subtitle>Playlist</Subtitle>
-    <Title>{playlist.title}</Title>
-    {playlist.kind === 'playlist' &&
-      <Subtitle>
-        Created by {playlist.user.username} ● {playlist.tracks.length} tracks, {formatPlaytime(playlist.duration)}
-      </Subtitle>
-    }
-    <PlayButton />
+    <ArtworkGrid tracks={playlist.tracks} />
+    <div>
+      <Subtitle>Playlist</Subtitle>
+      <Title>{playlist.title}</Title>
+      {playlist.kind === 'playlist' &&
+        <Subtitle>
+          Created by {playlist.user.username} ● {playlist.tracks.length} tracks, {formatPlaytime(playlist.duration)}
+        </Subtitle>
+      }
+      <PlayButton />
+    </div>
   </Wrapper>
 );
 PlaylistHeader.propTypes = {
