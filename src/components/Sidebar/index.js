@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 import { prop } from 'styled-tools';
+import SidebarLink from './SidebarLink';
 
 const SidebarWrapper = styled.div`
   width: 200px;
@@ -22,35 +22,6 @@ const Label = styled.label`
   text-transform: uppercase;
 `;
 
-const Link = styled(NavLink)`
-  display: block;
-  color: ${prop('theme.colors.secondaryText')};
-  text-decoration: none;
-  outline: none;
-  padding: 10px 0;
-  font-weight: 300;
-
-  &:hover {
-    color: ${prop('theme.colors.primaryText')};
-  }
-
-  &.${prop('activeClassName')} {
-    color: ${prop('theme.colors.primaryText')};
-  }
-
-  &.${prop('activeClassName')}:before {
-    content: '';
-    position: absolute;
-    left: 0px;
-    height: 15px;
-    background: ${props => props.theme.colors.active};
-    width: 5px;
-  }
-`;
-Link.defaultProps = {
-  activeClassName: 'active',
-};
-
 const Section = styled.div`
   flex-basis: 33%;
 `;
@@ -58,6 +29,7 @@ const Section = styled.div`
 class Sidebar extends PureComponent {
   static propTypes = {
     playlists: PropTypes.arrayOf(PropTypes.object),
+    activeTimelineId: PropTypes.string,
   };
 
   static defaultProps = {
@@ -65,17 +37,32 @@ class Sidebar extends PureComponent {
   }
 
   render() {
-    const { playlists } = this.props;
+    const {
+      playlists,
+      activeTimelineId,
+    } = this.props;
+
     return (
       <SidebarWrapper>
         <Section>
           <Label>Your Music</Label>
-          <Link to="/likes">Likes</Link>
+          <SidebarLink
+            to="/likes"
+            isPlaying={activeTimelineId === 'likes'}
+          >
+            Likes
+          </SidebarLink>
         </Section>
         <Section>
           <Label>Playlists</Label>
           {playlists.map(({ title, id }) => (
-            <Link key={`playlist-${id}`} to={`/playlist/${id}`}>{title}</Link>
+            <SidebarLink
+              key={`playlist-${id}`}
+              isPlaying={activeTimelineId === `playlist::${id}`}
+              to={`/playlist/${id}`}
+            >
+              {title}
+            </SidebarLink>
           ))}
         </Section>
       </SidebarWrapper>

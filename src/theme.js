@@ -7,7 +7,7 @@ export default {
     active: '#6AE368',
     secondaryActive: '#3e3e40',
     outline: '#222326',
-    cta: '#6AE368',
+    cta: '#1DB954',
   },
   fontSize: { // TODO: use EMs eventually
     h1: '40px',
