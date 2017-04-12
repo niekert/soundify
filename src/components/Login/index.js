@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { PENDING } from 'constants';
 import Loader from 'components/Loader';
+import { prop } from 'styled-tools';
 import styled from 'styled-components';
 import LoginButton from './LoginButton';
 
@@ -12,16 +13,8 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: ${props => props.theme.colors.primaryBackground}
-  color: ${props => props.theme.colors.primaryText}
-`;
-
-const LoginContainer = styled.div`
-`
-
-const SubTitle = styled.h2`
-  margin-top: 10px;
-  font-size: 14px;
+  background: ${prop('theme.colors.primaryBackground')};
+  color: ${prop('theme.colors.primaryText')};
 `;
 
 class Login extends PureComponent {
@@ -36,9 +29,9 @@ class Login extends PureComponent {
       <Wrapper>
         {status === PENDING ?
           <Loader /> :
-          <LoginContainer>
+          <div>
             <LoginButton onLoginClicked={this.props.onLoginClicked} />
-          </LoginContainer>
+          </div>
         }
       </Wrapper>
     );
