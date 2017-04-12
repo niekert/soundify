@@ -13,8 +13,7 @@ import SidebarContainer from 'containers/SidebarContainer';
 import HomeContainer from 'containers/HomeContainer';
 import LoginContainer from 'containers/LoginContainer';
 import SearchResultContainer from 'containers/SearchResultContainer';
-import PlaylistContainer from 'containers/PlaylistContainer';
-import LikesContainer from 'containers/LikesContainer';
+import TimelineContainer from 'containers/TimelineContainer';
 
 const AppShell = styled.div`
   height: 100vh;
@@ -42,8 +41,7 @@ const AuthedShell = () => (
     <MainContent>
       <Route exact path="/" component={HomeContainer} />
       <Route path="/search/:query" component={SearchResultContainer} />
-      <Route path="/likes" component={LikesContainer} />
-      <Route path="/playlist/:id" component={PlaylistContainer} />
+      <Route path="/:type/:id?" component={TimelineContainer} />
     </MainContent>
     <PlayerContainer />
   </AppShell>

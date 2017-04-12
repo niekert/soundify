@@ -33,6 +33,7 @@ class Playlist extends PureComponent {
 
     const isReady = !!playlist && playlist.tracks;
     if (!isReady) {
+      console.log('is not READY');
       return <Loader />;
     }
     const isLoading = status !== OK || playlist.status === PENDING;

@@ -1,17 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { INITIAL, OK } from 'constants';
-import { fetchLikes } from 'actions/timelineActions';
-import { timelineById } from 'selectors/timeline';
-import withUser from 'containers/hocs/withUser';
-import Playlist from '../components/Playlist/Playlist';
+import { fetchLikes, setActiveTimeline } from 'actions/timelineActions';
 
 class LikesContainer extends PureComponent {
   static propTypes = {
-    likes: PropTypes.object,
-    status: PropTypes.string.isRequired,
     fetchLikes: PropTypes.func.isRequired,
+    setActiveTimeline: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -19,36 +14,18 @@ class LikesContainer extends PureComponent {
   };
 
   componentDidMount() {
-    // window.requestIdleCallback(() => {
+    this.props.setActiveTimeline('likes');
+    window.requestIdleCallback(() => {
       this.props.fetchLikes();
-    // });
+    });
   }
 
   render() {
-    const {
-      likes,
-      status,
-     } = this.props;
-
-    return (
-      <Playlist
-        playlist={likes}
-        status={status}
-        timelineId="likes" // TODO: don't use Playlist component here
-      />
-    );
+    return null;
   }
 }
 
-function mapStateToProps(state) {
-  const likes = timelineById(state, 'likes');
-
-  return {
-    likes,
-    status: likes ? OK : INITIAL,
-  };
-}
-
-export default withUser(connect(mapStateToProps, {
+export default connect(null, {
   fetchLikes,
-})(LikesContainer));
+  setActiveTimeline,
+})(LikesContainer);

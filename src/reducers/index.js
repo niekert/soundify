@@ -9,7 +9,7 @@ import queueReducer from './queueReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  timelines: timelineReducer,
+  timeline: timelineReducer,
   player: playerReducer,
   entities: entitiesReducer,
   users: usersReducer,

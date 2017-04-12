@@ -3,6 +3,7 @@ import { normalize } from 'normalizr';
 import * as schema from './schema';
 
 export const FETCH_TIMELINE = 'FETCH_TIMELINE';
+export const SET_ACTIVE_TIMELINE = 'SET_ACTIVE_TIMELINE';
 export const FETCH_TIMELINE_SUCCESS = 'FETCH_TIMELINE_SUCCESS';
 export const FETCH_TIMELINE_ERROR = 'FETCH_TIMELINE_ERROR';
 
@@ -61,6 +62,7 @@ export function fetchLikes() {
     api.fetchLikes()
       .then(json => ({
         id,
+        title: 'My Likes',
         next: json.next_href,
         tracks: json.collection,
       }))
@@ -97,3 +99,8 @@ export function fetchPlaylist(playlistId) {
       ));
   };
 }
+
+export const setActiveTimeline = id => ({
+  type: SET_ACTIVE_TIMELINE,
+  payload: id,
+});
