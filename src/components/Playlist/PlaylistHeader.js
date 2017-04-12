@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import PlayButton from 'components/buttons/PlayButton';
 import styled from 'styled-components';
+import { formatPlaytime } from 'helpers/format';
 import { pure } from 'recompose';
 import { prop } from 'styled-tools';
 
@@ -30,7 +31,7 @@ const PlaylistHeader = ({
     <Title>{playlist.title}</Title>
     {playlist.kind === 'playlist' &&
       <Subtitle>
-        Created by {playlist.user.username} ● {playlist.tracks.length}, {playlist.duration} minutes
+        Created by {playlist.user.username} ● {playlist.tracks.length} tracks, {formatPlaytime(playlist.duration)}
       </Subtitle>
     }
     <PlayButton />
