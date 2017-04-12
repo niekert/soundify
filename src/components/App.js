@@ -4,6 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
+import { prop } from 'styled-tools';
 import theme from 'theme';
 import PlayerContainer from 'containers/PlayerContainer';
 import TopBarContainer from 'containers/TopBarContainer';
@@ -19,8 +20,8 @@ const AppShell = styled.div`
   width: 100vw;
   display: grid;
   grid-template: 50px 1fr 90px / 200px 1fr;
-  background: ${props => props.theme.colors.primaryBackground}
-  color: ${props => props.theme.colors.primaryText}
+  background: ${prop('theme.colors.primaryBackground')};
+  color: ${prop('theme.colors.primaryText')};
 `;
 
 const MainContent = styled.div`
@@ -28,6 +29,8 @@ const MainContent = styled.div`
   grid-column: 2;
   flex: 1;
   display: flex;
+  background: ${prop('theme.colors.primaryBackground')};
+  color: ${prop('theme.colors.primaryText')};
   overflow: scroll;
 `;
 

@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1;
   z-index: 999;
-  background: ${props => props.theme.colors.secondaryBackground}
+  background: ${props => props.theme.colors.secondaryBackground};
   display: flex;
   height: 50px;
   padding: 0 25px;
