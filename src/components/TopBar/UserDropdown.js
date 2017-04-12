@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import ArrowIcon from 'components/icons/Arrow';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';

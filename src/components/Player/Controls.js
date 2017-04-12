@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import PlayIcon from 'components/icons/Play';
 import NextTrackIcon from 'components/icons/NextTrack';

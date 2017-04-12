@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import VolumeIcon from 'components/icons/VolumeIcon';
 import PlayQueueIcon from 'components/icons/PlayQueue';
 import ChromecastIcon from 'components/icons/Chromecast';

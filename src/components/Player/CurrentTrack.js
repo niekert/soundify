@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
-import { pure } from 'recompose';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { compose, withHandlers, pure } from 'recompose';
 import LikeButton from 'components/buttons/LikeButton';
 import ArtWork from 'components/Track/ArtWork';
-import { compose, withHandlers } from 'recompose';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,12 +51,12 @@ const Row = styled.div`
 const enhance = compose(
   withHandlers({
     onClickLike: ({ toggleLike, track }) => () => toggleLike(track.id, !track.user_favorite),
-  })
-)
+  }),
+);
 
 const CurrentTrack = enhance(({
   track,
-  onClickLike
+  onClickLike,
 }) => (
   <Wrapper>
     {track && [
@@ -67,7 +67,8 @@ const CurrentTrack = enhance(({
           <LikeButton
             onClick={onClickLike}
             active={track.user_favorite}
-            trackId={track.id} />
+            trackId={track.id}
+          />
         </Row>
         <Artist>{track.user.username}</Artist>
       </Meta>,
@@ -77,6 +78,7 @@ const CurrentTrack = enhance(({
 
 CurrentTrack.propTypes = {
   track: PropTypes.object,
+  onClickLike: PropTypes.func.isRequired,
 };
 
 export default pure(CurrentTrack);

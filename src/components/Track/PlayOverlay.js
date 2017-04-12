@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Play from 'components/icons/Play';
 import Pause from 'components/icons/Pause';
 import styled from 'styled-components';

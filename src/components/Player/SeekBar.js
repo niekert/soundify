@@ -1,4 +1,5 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { formatSeconds } from 'helpers/format';
 import styled from 'styled-components';
 import Slider from 'components/Slider';

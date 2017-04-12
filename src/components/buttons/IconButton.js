@@ -1,4 +1,5 @@
 import React from 'react';
+import { node, string } from 'prop-types';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import ReactTooltip from 'react-tooltip';
@@ -19,9 +20,15 @@ const Button = styled.button`
   }
 `;
 
-export default ({ children, tooltip, ...props }) => (
+const IconButton = ({ children, tooltip, ...props }) => (
   <Button data-tip={tooltip} {...props}>
     {children}
     <ReactTooltip />
   </Button>
 );
+IconButton.propTypes = {
+  children: node,
+  tooltip: string,
+};
+
+export default IconButton;

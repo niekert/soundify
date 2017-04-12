@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import QueueIcon from 'components/icons/PlayQueue';
 import CheckIcon from 'components/icons/CheckIcon';
 import IconButton from './IconButton';
