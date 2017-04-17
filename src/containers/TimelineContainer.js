@@ -2,18 +2,25 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LikesContainer from 'containers/LikesContainer';
+import styled from 'styled-components';
 import { INITIAL, OK } from 'constants';
 import { fetchPlaylist, setActiveTimeline } from 'actions/timelineActions';
 import { Route } from 'react-router-dom';
-import { activeTimeline } from 'selectors/timeline';
+import { activeTimeline, activeTimelineTracks } from 'selectors/timeline';
 import withUser from 'containers/hocs/withUser';
 import Playlist from '../components/Playlist/Playlist';
 import PlaylistContainer from './PlaylistContainer';
 
+const Wrapper = styled.div`
+  flex: 1;
+  display: flex;
+`;
+
 class TimelineContainer extends PureComponent {
   static propTypes = {
     playlist: PropTypes.object,
-    match: PropTypes.object.isRequired,
+    timelineId: PropTypes.string,
+    tracks: PropTypes.arrayOf(PropTypes.object).isRequired,
     status: PropTypes.string.isRequired,
   };
 
@@ -25,19 +32,21 @@ class TimelineContainer extends PureComponent {
     const {
       playlist,
       status,
-      match,
+      tracks,
+      timelineId,
      } = this.props;
 
     return (
-      <div>
+      <Wrapper>
         <Route path="/likes" component={LikesContainer} />
         <Route path="/playlist/:id" component={PlaylistContainer} />
         <Playlist
           playlist={playlist}
+          tracks={tracks}
           status={status}
-          timelineId={`playlist::${match.params.id}`}
+          timelineId={timelineId}
         />
-      </div>
+      </Wrapper>
     );
   }
 }
@@ -46,8 +55,10 @@ function mapStateToProps(state) {
   const playlist = activeTimeline(state);
 
   return {
-    playlist,
+    playlist: activeTimeline(state),
+    tracks: activeTimelineTracks(state),
     status: playlist ? playlist.status : INITIAL,
+    timelineId: state.timeline.active,
   };
 }
 

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { OK, INITIAL, PENDING } from 'constants';
-import TracklistContainer from 'containers/TracklistContainer';
+import Tracklist from 'components/TrackList';
 import Loader from 'components/Loader';
 import PlaylistHeader from './PlaylistHeader';
 
@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 class Playlist extends PureComponent {
   static propTypes = {
     playlist: PropTypes.object,
+    tracks: PropTypes.arrayOf(PropTypes.object),
     status: PropTypes.string,
     timelineId: PropTypes.string.isRequired,
   };
@@ -28,12 +29,12 @@ class Playlist extends PureComponent {
     const {
       status,
       playlist,
+      tracks,
       timelineId,
     } = this.props;
 
     const isReady = !!playlist && playlist.tracks;
     if (!isReady) {
-      console.log('is not READY');
       return <Loader />;
     }
     const isLoading = status !== OK || playlist.status === PENDING;
@@ -44,12 +45,13 @@ class Playlist extends PureComponent {
           [
             <PlaylistHeader
               key="header"
+              tracks={tracks}
               playlist={playlist}
             />,
-            <TracklistContainer
-              key="tracklist"
-              trackIds={playlist.tracks}
+            <Tracklist
+              tracks={tracks}
               timelineId={timelineId}
+              key="tracklist"
             />,
           ]
         }
