@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { queueTrack } from 'actions/queueActions';
+import { toggleLike } from 'actions/trackActions';
 import { toggleTrack } from 'actions/playerActions';
 
 const withPlayerContext = (ComposedComponent) => {
@@ -19,6 +21,8 @@ const withPlayerContext = (ComposedComponent) => {
 
   return connect(mapStateToProps, {
     toggleTrack,
+    toggleLike,
+    queueTrack,
   })(EnhancePlayercontext);
 };
 

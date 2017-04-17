@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchPlaylist, setActiveTimeline } from 'actions/timelineActions';
 
-class LikesContainer extends PureComponent {
+class PlaylistContainer extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired,
     fetchPlaylist: PropTypes.func.isRequired,
@@ -40,4 +40,4 @@ class LikesContainer extends PureComponent {
 export default connect(null, {
   fetchPlaylist,
   setActiveTimeline,
-})(LikesContainer);
+})(PlaylistContainer);

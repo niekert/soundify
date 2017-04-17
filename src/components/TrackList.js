@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import withPlayerContext from 'containers/hocs/withPlayerContext';
 import Track from './Track';
 
 const Wrapper = styled.ul`
@@ -72,4 +73,4 @@ class TrackList extends PureComponent {
   }
 }
 
-export default TrackList;
+export default withPlayerContext(TrackList);
