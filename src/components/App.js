@@ -28,6 +28,8 @@ const MainContent = styled.div`
   grid-row: 2;
   grid-column: 2;
   flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   background: ${prop('theme.colors.reverse.background')};
   color: ${prop('theme.colors.reverse.primaryText')};
