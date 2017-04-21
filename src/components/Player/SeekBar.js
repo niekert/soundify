@@ -6,11 +6,9 @@ import Slider from 'components/Slider';
 import { prop } from 'styled-tools';
 
 const Wrapper = styled.div`
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 15px;
 `;
 
 const Time = styled.span`

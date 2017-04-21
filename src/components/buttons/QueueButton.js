@@ -18,7 +18,8 @@ class QueueButton extends Component {
     clearTimeout(this._activeTimeout);
   }
 
-  _onClick = () => {
+  _onClick = (e) => {
+    e.stopPropagation();
     this.setState({ addedActive: true });
     this._activeTimeout = setTimeout(() => this.setState({ addedActive: false }), 3000);
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 import Artwork from 'components/Track/ArtWork';
 
 const Wrapper = styled.div`
@@ -9,6 +10,8 @@ const Wrapper = styled.div`
   position: relative;
   height: 200px;
   width: 200px;
+  margin-right: 30px;
+  box-shadow: ${prop('theme.shadows.depth2')}
 `;
 
 const ArtworkWrapper = styled(Artwork)`
@@ -18,18 +21,22 @@ const ArtworkWrapper = styled(Artwork)`
 
 const ArtworkGrid = ({
   tracks,
-}) => (
-  <Wrapper>
-    {tracks.slice(0, 4).map(track => {
-    })}
-     {/*(
-      <ArtworkWrapper
-        artworkUrl={track.artwork_url}
-        size="100x100"
-      />
-    ))}*/}
-  </Wrapper>
-);
+}) => {
+  if (tracks.length < 4) { // TODO: don't do this
+    return null;
+  }
+  return (
+    <Wrapper>
+      {tracks.slice(0, 4).map(track => (
+        <ArtworkWrapper
+          artworkUrl={track.artwork_url}
+          size="200x200"
+        />
+      ))}
+    </Wrapper>
+  );
+};
+
 ArtworkGrid.propTypes = {
   tracks: PropTypes.arrayOf(PropTypes.object.isRequired),
 };

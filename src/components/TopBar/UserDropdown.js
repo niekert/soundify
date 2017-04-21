@@ -12,7 +12,6 @@ const Wrapper = styled.div`
 
 const Username = styled.span`
   margin-left: 10px;
-  color: ${props => props.theme.colors.primaryText};
   font-weight: 300;
   font-size: 12px;
 `;
@@ -35,7 +34,6 @@ const Arrow = styled(ArrowIcon)`
   width: 10px;
   height: 10px;
   transform: rotate(90deg);
-  color: ${prop('theme.colors.primaryText')};
 `;
 
 class UserDropdown extends PureComponent {

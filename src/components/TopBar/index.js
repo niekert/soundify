@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 import Searchbar from 'components/TopBar/Searchbar';
 import { Link } from 'react-router-dom';
 import UserDropdown from './UserDropdown';
@@ -10,7 +11,8 @@ const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1;
   z-index: 999;
-  background: ${props => props.theme.colors.secondaryBackground};
+  background: ${prop('theme.colors.reverse.background')};
+  color: ${prop('theme.colors.reverse.primaryText')};
   display: flex;
   height: 50px;
   padding: 0 25px;
@@ -20,8 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const Logo = styled(SoundCloudLogo)`
-  fill: #fff;
-  color: #fff;
+  color: ${prop('theme.colors.reverse.primaryText')};
   cursor: pointer;
   height: 100%;
   width: 50px;

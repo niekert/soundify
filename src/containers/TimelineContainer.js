@@ -14,6 +14,8 @@ import PlaylistContainer from './PlaylistContainer';
 const Wrapper = styled.div`
   flex: 1;
   display: flex;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 class TimelineContainer extends PureComponent {

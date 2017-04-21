@@ -1,16 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-function getArtworkUrl(artworkUrl, size) {
-  if (!artworkUrl) {
-    return null; // TODO: default artwork
-  }
-
-  // TODO: Artwork type
-  return artworkUrl.replace('large.jpg', `t${size}.jpg`);
-}
-
+import { getArtworkUrl } from 'helpers/track';
 
 const Wrapper = styled.div`
   position: relative;

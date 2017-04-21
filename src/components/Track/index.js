@@ -1,25 +1,25 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 import ArtWork from 'components/Track/ArtWork';
-import QueueButton from 'components/buttons/QueueButton';
-import LikeButton from 'components/buttons/LikeButton';
 import PlayOverlay from './PlayOverlay';
 
 const Wrapper = styled.li`
   position: relative;
-  margin: 10px;
+  margin-right: 30px;
+  margin-bottom: 15px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 275px;
+  height: 250px;
   width: 200px;
-  background: ${props => props.theme.colors.secondaryBackground}
 `;
 
 const PlayerArtwork = styled(ArtWork)`
   position: relative;
   background-repeat: none;
+  box-shadow: ${prop('theme.shadows.depth2')};
   background-size: cover;
   width: 100%;
   height: 200px;
@@ -34,7 +34,6 @@ const PlayerArtwork = styled(ArtWork)`
 `;
 
 const Meta = styled.div`
-  padding: 10px 15px 5px;
   overflow: hidden;
   flex: 1;
   display: flex;
@@ -48,18 +47,12 @@ const Title = styled.span`
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: ${props => props.theme.colors.primaryText}
 `;
 
 const User = styled.span`
   font-size: .7em;
   margin-top: 5px;
   color: ${props => props.theme.colors.secondaryText}
-`;
-
-const IconBar = styled.div`
-  width: 100%;
-  padding: 0 15px 5px;
 `;
 
 class Track extends PureComponent {
@@ -75,7 +68,8 @@ class Track extends PureComponent {
     isPlaying: false,
   };
 
-  _onTrackClicked = () => {
+  _onTrackClicked = (e) => {
+    e.preventDefault();
     this.props.onClick(this.props.track.id, !this.props.isPlaying);
   }
 
@@ -83,7 +77,8 @@ class Track extends PureComponent {
     this.props.onQueue(this.props.track.id);
   }
 
-  _onToggleLike = () => {
+  _onToggleLike = (e) => {
+    e.preventDefault();
     const { track, toggleLike } = this.props;
     toggleLike(track.id, !track.user_favorite);
   }
@@ -102,6 +97,7 @@ class Track extends PureComponent {
           <PlayOverlay
             className="playOverlay"
             onQueue={this._onQueueClicked}
+            likeActive={track.user_favorite}
             onToggleLike={this._onToggleLike}
             isPlaying={this.props.isPlaying}
           />
@@ -110,17 +106,6 @@ class Track extends PureComponent {
           <Title>{track.title}</Title>
           <User>{track.user.username}</User>
         </Meta>
-        <IconBar>
-          <QueueButton
-            trackId={track.id}
-            onClick={this._onQueueClicked}
-          />
-          <LikeButton
-            onClick={this._onToggleLike}
-            active={track.user_favorite}
-            trackId={track.id}
-          />
-        </IconBar>
       </Wrapper>
     );
   }

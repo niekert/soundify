@@ -1,14 +1,31 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import CurrentTrack from './CurrentTrack';
+import ArtWork from 'components/Track/ArtWork';
+import SideControlsContainer from 'containers/SideControlsContainer';
+import TrackControls from './TrackControls';
 import Controls from './Controls';
 
 const Wrapper = styled.div`
   padding: 0 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+  z-index: 10;
   display: flex;
   flex: 1;
   align-items: center;
+`;
+
+const LeftWrapper = styled.div`
+  display: flex;
+`;
+
+const ActiveTrackArtwork = styled(ArtWork)`
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
 `;
 
 class PlayerContent extends PureComponent {
@@ -25,13 +42,18 @@ class PlayerContent extends PureComponent {
   render() {
     const {
       track,
-      toggleLike,
     } = this.props;
 
     return (
       <Wrapper>
-        <CurrentTrack track={track} toggleLike={toggleLike} />
+        <LeftWrapper>
+          {track && [
+            <ActiveTrackArtwork artworkUrl={track.artwork_url} key="artwork" />,
+            <TrackControls {...this.props} />,
+          ]}
+        </LeftWrapper>
         <Controls {...this.props} />
+        <SideControlsContainer />
       </Wrapper>
     );
   }

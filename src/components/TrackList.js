@@ -6,6 +6,7 @@ import Track from './Track';
 
 const Wrapper = styled.ul`
   padding-top: 15px;
+  margin-left: 10px;
   display: flex;
   width: 100%;
   height: auto;

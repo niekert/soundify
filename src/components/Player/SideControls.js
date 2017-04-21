@@ -11,8 +11,6 @@ import { onlyUpdateForKeys, compose, withHandlers } from 'recompose';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  flex-basis: 20%;
-  padding-right: 15px;
   display: flex;
   align-items: center;
   justify-content: flex-end;

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "color": "^1.0.3",
     "electron": "^1.6.1",
     "electron-is-dev": "^0.1.2",
     "express": "^4.15.2",

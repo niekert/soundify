@@ -1,24 +1,41 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import SideControlsContainer from 'containers/SideControlsContainer';
 import { NEXT, PREV } from 'actions/playerActions';
+import { alpha } from 'utils/color';
 import { CLIENT_ID } from 'constants';
+import { getArtworkUrl } from 'helpers/track';
+import { ifProp, prop } from 'styled-tools';
 import PlayerContent from './PlayerContent';
 
 const Wrapper = styled.div`
+  position: relative;
   grid-row: 3;
   grid-column: 1 / 3;
   z-index: 100;
   bottom: 0;
   width: 100%;
-  border: 1px solid ${props => props.theme.colors.outline};
-  height: 90px;
+  border: 1px solid ${prop('theme.colors.outline')};
+  height: 75px;
   user-selectable: none;
-  background: ${props => props.theme.colors.secondaryBackground};
+  background-size: cover !important;
+  background: ${props => props.artwork ?
+    `url(${getArtworkUrl(props.artwork, '500x500')}) 50% 50% no-repeat` :
+    props.theme.colors.secondaryBackground
+  };
   display: flex;
   justify-content: center;
   transition: transform .2s ease-out;
+
+  &:before {
+    ${ifProp('artwork', 'content: \'\'')};
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: ${props => alpha(props.theme.colors.secondaryBackground, 0.9)};
+  }
 `;
 
 class Player extends PureComponent {
@@ -128,7 +145,7 @@ class Player extends PureComponent {
     } = this.props;
 
     return (
-      <Wrapper>
+      <Wrapper artwork={!!track && track.artwork_url}>
         <audio
           ref={c => this._audioElement = c} // eslint-disable-line no-return-assign
           src={track && `${track.stream_url}?client_id=${CLIENT_ID}`}
@@ -145,7 +162,6 @@ class Player extends PureComponent {
           onSeek={this._onSeek}
           onTogglePlay={this._onTogglePlay}
         />
-        <SideControlsContainer />
       </Wrapper>
     );
   }

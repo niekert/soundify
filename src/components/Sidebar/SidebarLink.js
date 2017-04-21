@@ -2,35 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { lighten } from 'utils/color';
 import { prop } from 'styled-tools';
 import VolumeIcon from 'components/icons/VolumeIcon';
 
 const Link = styled(NavLink)`
   display: flex;
   align-items: center;
+  position: relative;
   color: ${prop('theme.colors.secondaryText')};
   text-decoration: none;
   outline: none;
-  padding: 10px 0;
+  padding: 10px 15px;
   font-weight: 300;
 
+  &.${prop('activeClassName')},
   &:hover {
     color: ${prop('theme.colors.primaryText')};
-  }
-
-  &.${prop('activeClassName')} {
-    color: ${prop('theme.colors.primaryText')};
+    background: ${props => lighten(props.theme.colors.primaryBackground, 0.8)};
   }
 
   &.${prop('activeClassName')}:before {
     content: '';
     position: absolute;
-    left: 0px;
-    height: 15px;
+    top: 0;
+    left: 0;
+    height: 100%;
     background: ${prop('theme.colors.active')};
     width: 5px;
   }
 `;
+
 Link.defaultProps = {
   activeClassName: 'active',
 };

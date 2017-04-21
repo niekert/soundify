@@ -10,12 +10,13 @@ import ArtworkGrid from './ArtworkGrid';
 const Wrapper = styled.div`
   display: flex;
   padding: 15px 10px;
+  margin-bottom: 20px;
 `;
 
 const Subtitle = styled.span`
   display: block;
   font-size: ${prop('theme.fontSize.subtitle')};
-  color: ${prop('theme.colors.secondaryText')};
+  color: ${prop('theme.colors.reverse.primaryText')};
   font-weight: 300;
   margin-bottom: 10px;
 `;
@@ -28,9 +29,10 @@ const Title = styled.h1`
 
 const PlaylistHeader = ({
   playlist,
+  tracks,
 }) => (
   <Wrapper>
-    <ArtworkGrid tracks={playlist.tracks} />
+    <ArtworkGrid tracks={tracks} />
     <div>
       <Subtitle>Playlist</Subtitle>
       <Title>{playlist.title}</Title>
@@ -45,6 +47,7 @@ const PlaylistHeader = ({
 );
 PlaylistHeader.propTypes = {
   playlist: PropTypes.object.isRequired,
+  tracks: PropTypes.arrayOf(PropTypes.object),
 };
 
 
