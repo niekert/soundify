@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { lighten } from 'utils/color';
 import { compose, withState, withHandlers } from 'recompose';
 import { prop, ifProp } from 'styled-tools';
 
@@ -9,7 +10,7 @@ const Bar = styled.div`
   height: 5px;
   position: relative;
   border-radius: 5px;
-  background: ${prop('theme.colors.secondaryActive')};
+  background: ${props => lighten(props.theme.colors.secondaryActive, 0.3)};
 `;
 
 const Active = styled.div`

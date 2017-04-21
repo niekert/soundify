@@ -6,6 +6,7 @@ import { alpha } from 'utils/color';
 import { CLIENT_ID } from 'constants';
 import { getArtworkUrl } from 'helpers/track';
 import { ifProp, prop } from 'styled-tools';
+import TrackContextOverlay from './TrackContextOverlay';
 import PlayerContent from './PlayerContent';
 
 const Wrapper = styled.div`
@@ -34,7 +35,7 @@ const Wrapper = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: ${props => alpha(props.theme.colors.secondaryBackground, 0.9)};
+    background: ${props => alpha(props.theme.colors.secondaryBackground, 0.8)};
   }
 `;
 
@@ -145,11 +146,15 @@ class Player extends PureComponent {
     } = this.props;
 
     return (
-      <Wrapper artwork={!!track && track.artwork_url}>
+      <Wrapper>
+        {track && !!track.artwork_url && (
+          <TrackContextOverlay artworkUrl={track.artwork_url} />
+        )}
         <audio
           ref={c => this._audioElement = c} // eslint-disable-line no-return-assign
           src={track && `${track.stream_url}?client_id=${CLIENT_ID}`}
         />
+
         <PlayerContent
           totalSeconds={this.state.totalSeconds}
           playedSeconds={this.state.playedSeconds}
