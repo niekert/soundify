@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submitSearch, setActiveTimeline } from 'actions/timelineActions';
-import { timelineById } from 'selectors/timeline';
-import { OK, INITIAL } from 'constants';
-import SearchResults from 'components/SearchResults';
 
 class SearchResultContainer extends Component {
   static propTypes = {
@@ -29,30 +26,11 @@ class SearchResultContainer extends Component {
   }
 
   render() {
-    const { params } = this.props.match;
-
-    return (
-      <SearchResults
-        query={params.query}
-        {...this.props}
-      />
-    );
+    return null;
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const query = ownProps.match.params.query;
-  const id = `search::${query}`;
-
-  const searchResults = timelineById(state, id);
-
-  return {
-    status: searchResults ? searchResults.status : INITIAL,
-    trackIds: searchResults ? searchResults.tracks : [],
-  };
-}
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   submitSearch,
   setActiveTimeline,
 })(SearchResultContainer);

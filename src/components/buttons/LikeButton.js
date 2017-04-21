@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import HeartIcon from 'components/icons/Heart';
-import { ifProp } from 'styled-tools';
+import { ifProp, prop } from 'styled-tools';
 import { withHandlers } from 'recompose';
 import IconButton from './IconButton';
 
 const Button = styled(IconButton)`
+  color: ${prop('theme.colors.primaryText')};
+
   svg path {
     ${ifProp(
       'active',

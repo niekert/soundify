@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LikesContainer from 'containers/LikesContainer';
+import SearchResultContainer from 'containers/SearchResultContainer';
 import styled from 'styled-components';
 import { INITIAL, OK } from 'constants';
 import { fetchPlaylist, setActiveTimeline } from 'actions/timelineActions';
@@ -42,6 +43,7 @@ class TimelineContainer extends PureComponent {
       <Wrapper>
         <Route path="/likes" component={LikesContainer} />
         <Route path="/playlist/:id" component={PlaylistContainer} />
+        <Route path="/search/:query" component={SearchResultContainer} />
         <Playlist
           playlist={playlist}
           tracks={tracks}

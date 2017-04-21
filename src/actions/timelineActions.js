@@ -33,6 +33,8 @@ export function submitSearch(query) {
     api.search(query)
       .then(json => ({
         id,
+        type: 'Search',
+        title: `Search results for ${decodeURIComponent(query)}`,
         tracks: json.collection,
         next: json.next_href,
       }))

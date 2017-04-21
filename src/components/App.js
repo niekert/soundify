@@ -41,8 +41,7 @@ const AuthedShell = () => (
     <TopBarContainer />
     <MainContent>
       <Route exact path="/" component={HomeContainer} />
-      <Route path="/search/:query" component={SearchResultContainer} />
-      <Route path="/(playlist|likes)/:id?" component={TimelineContainer} />
+      <Route path="/(playlist|likes|search)/:id?" component={TimelineContainer} />
     </MainContent>
     <PlayerContainer />
   </AppShell>
