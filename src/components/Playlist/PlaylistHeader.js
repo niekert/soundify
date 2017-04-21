@@ -34,7 +34,7 @@ const PlaylistHeader = ({
   <Wrapper>
     <ArtworkGrid tracks={tracks} />
     <div>
-      <Subtitle>Playlist</Subtitle>
+      <Subtitle>{playlist.type || 'Playlist'}</Subtitle>
       <Title>{playlist.title}</Title>
       {playlist.kind === 'playlist' &&
         <Subtitle>
