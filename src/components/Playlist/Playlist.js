@@ -9,6 +9,8 @@ import PlaylistHeader from './PlaylistHeader';
 const Wrapper = styled.div`
   display: grid;
   grid-template: auto 1fr / 1fr;
+  padding-top: 20px;
+  padding-left: 20px;
   max-height: 0; // Fixes an overflowing bug...
 `;
 

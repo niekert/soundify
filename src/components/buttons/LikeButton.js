@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import HeartIcon from 'components/icons/Heart';
 import { ifProp } from 'styled-tools';
+import { withHandlers } from 'recompose';
 import IconButton from './IconButton';
 
 const Button = styled(IconButton)`
-  margin-left: 10px;
-
   svg path {
     ${ifProp(
       'active',
@@ -17,7 +16,11 @@ const Button = styled(IconButton)`
   }
 `;
 
-const LikeButton = ({
+const enhance = withHandlers({
+  onClick: ({ onToggle, trackId, active }) => () => onToggle(trackId, !active),
+});
+
+const LikeButton = enhance(({
   onClick,
   active,
 }) => (
@@ -27,10 +30,11 @@ const LikeButton = ({
   >
     <HeartIcon />
   </Button>
-);
+));
 LikeButton.propTypes = {
   active: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  toggleLike: PropTypes.func.isRequired,
+  trackId: PropTypes.string.isRequired,
 };
 
 export default LikeButton;

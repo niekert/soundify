@@ -65,7 +65,7 @@ const CurrentTrack = enhance(({
         <Row>
           <Title>{track.title}</Title>
           <LikeButton
-            onClick={onClickLike}
+            toggleLike={onClickLike}
             active={track.user_favorite}
             trackId={track.id}
           />

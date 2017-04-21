@@ -25,7 +25,7 @@ class SidebarContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     playlists: playlists(state.users, 'me'),
-    activeTimelineId: state.player.isPlaying && state.player.activeTimelineId,
+    activeTimelineId: state.player.isPlaying ? state.player.activeTimelineId : undefined,
   };
 }
 

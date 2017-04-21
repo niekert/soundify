@@ -7,7 +7,6 @@ import SidebarLink from './SidebarLink';
 const SidebarWrapper = styled.div`
   width: 200px;
   grid-row: 1 / 3;
-  padding-left: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -17,6 +16,7 @@ const SidebarWrapper = styled.div`
 
 const Label = styled.label`
   display: block;
+  padding-left: 15px;
   font-weight: 300;
   color: ${prop('theme.colors.secondaryText')};
   margin-bottom: 10px;

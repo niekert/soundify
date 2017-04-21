@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { ifProp, prop } from 'styled-tools';
 
 const Wrapper = styled.div`
   margin: 50px auto 0;
   width: 90px;
   text-align: center;
-  color: ${props => props.theme.colors.primaryText}
 `;
 
 const animation = keyframes`
@@ -21,7 +21,11 @@ const animation = keyframes`
 const Dot = styled.div`
   width: 16px;
   height: 16px;
-  background-color: ${props => props.theme.colors.primaryText};
+  background-color: ${ifProp(
+    'light',
+    prop('theme.colors.primaryText'),
+    prop('theme.colors.reverse.primaryText'),
+  )};
   opacity: .8;
   margin: 0 5px;
   border-radius: 100%;
