@@ -77,8 +77,15 @@ export default {
     }).then(resp => resp.json());
   },
 
-  fetchNext (url) {
-    return fetch(url)
+  fetchNext(fullUrl) {
+    const [url, search] = fullUrl.split('?'); // TODO: this is probably not reliable
+    const params = queryString.parse(search);
+    const searchParams = {
+      ...params,
+      oauth_token: this.token,
+    };
+
+    return fetch(`${url}?${queryString.stringify(searchParams)}`)
       .then(resp => resp.json());
   },
 
