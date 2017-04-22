@@ -77,15 +77,10 @@ class Track extends PureComponent {
     this.props.onQueue(this.props.track.id);
   }
 
-  _onToggleLike = (e) => {
-    e.preventDefault();
-    const { track, toggleLike } = this.props;
-    toggleLike(track.id, !track.user_favorite);
-  }
-
   render() {
     const {
       track,
+      toggleLike,
     } = this.props;
 
     return (
@@ -96,9 +91,10 @@ class Track extends PureComponent {
         >
           <PlayOverlay
             className="playOverlay"
+            trackId={track.id}
             onQueue={this._onQueueClicked}
             likeActive={track.user_favorite}
-            onToggleLike={this._onToggleLike}
+            onToggleLike={toggleLike}
             isPlaying={this.props.isPlaying}
           />
         </PlayerArtwork>
