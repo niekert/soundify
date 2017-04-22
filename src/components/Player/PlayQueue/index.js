@@ -7,7 +7,7 @@ import Track from './Track';
 import QueueEmpty from './QueueEmpty';
 
 const backstyles = css`
-  background: ${prop('theme.colors.primaryBackground')};
+  background: ${prop('theme.colors.secondaryBackground')};
   border: 1px solid ${prop('theme.colors.outline')};
   border-radius: 2px;
   box-shadow: 0px 1px 2px 3px rgba(0, 0, 0, 0.2);
@@ -46,7 +46,7 @@ const Wrapper = styled.div`
     left: 0;
     width: 100%;
     height: 10px;
-    background: ${prop('theme.colors.primaryBackground')};
+    background: ${prop('theme.colors.secondaryBackground')};
   }
 `;
 
