@@ -6,6 +6,8 @@ export const FETCH_TIMELINE = 'FETCH_TIMELINE';
 export const SET_ACTIVE_TIMELINE = 'SET_ACTIVE_TIMELINE';
 export const FETCH_TIMELINE_SUCCESS = 'FETCH_TIMELINE_SUCCESS';
 export const FETCH_TIMELINE_ERROR = 'FETCH_TIMELINE_ERROR';
+export const FETCH_NEXT = 'FETCH_NEXT';
+export const FETCH_NEXT_SUCCESS = 'FETCH_NEXT_SUCCESS';
 
 function fetchTimelineSuccess({ id, timeline }) {
   const normalized = normalize(timeline, schema.timeline);
@@ -78,6 +80,31 @@ export function fetchLikes() {
         type: FETCH_TIMELINE_ERROR,
         payload: err.message,
       }));
+  };
+}
+
+export function fetchNext(timelineId, nextUrl) {
+  return (dispatch) => {
+    api.fetchNext(nextUrl)
+      .then((resp) => {
+        const normalized = normalize(resp.collection, schema.arrayOfTracks);
+        dispatch({
+          type: FETCH_NEXT_SUCCESS,
+          payload: {
+            id: timelineId,
+            next: resp.next_href,
+            tracks: normalized.result,
+          },
+          entities: normalized.entities,
+        });
+      });
+
+    dispatch({
+      type: FETCH_NEXT,
+      payload: {
+        id: timelineId,
+      },
+    });
   };
 }
 

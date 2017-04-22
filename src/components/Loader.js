@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { ifProp, prop } from 'styled-tools';
 
 const Wrapper = styled.div`
-  margin: 50px auto 0;
+  margin: 50px auto 50px;
   width: 90px;
   text-align: center;
 `;

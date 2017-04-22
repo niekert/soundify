@@ -3,6 +3,8 @@ import {
   FETCH_TIMELINE_SUCCESS,
   FETCH_TIMELINE_ERROR,
   SET_ACTIVE_TIMELINE,
+  FETCH_NEXT,
+  FETCH_NEXT_SUCCESS,
 } from 'actions/timelineActions';
 import { OK, PENDING, ERROR } from 'constants';
 
@@ -30,6 +32,21 @@ const timeline = (state = emptyTimeline, action) => {
         ...state,
         error: action.payload.data,
       };
+    case FETCH_NEXT: {
+      return {
+        ...state,
+        status: PENDING,
+        next: '',
+      };
+    }
+    case FETCH_NEXT_SUCCESS: {
+      return {
+        ...state,
+        next: action.payload.next,
+        status: OK,
+        tracks: [...state.tracks, ...action.payload.tracks],
+      };
+    }
     default:
       return state;
   }
@@ -45,6 +62,8 @@ export default (state = defaultState, action) => {
     case FETCH_TIMELINE:
     case FETCH_TIMELINE_SUCCESS:
     case FETCH_TIMELINE_ERROR:
+    case FETCH_NEXT:
+    case FETCH_NEXT_SUCCESS:
       return {
         ...state,
         timelines: {

@@ -20,6 +20,7 @@ class Playlist extends PureComponent {
     tracks: PropTypes.arrayOf(PropTypes.object),
     status: PropTypes.string,
     timelineId: PropTypes.string.isRequired,
+    fetchNext: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -32,6 +33,7 @@ class Playlist extends PureComponent {
       status,
       playlist,
       tracks,
+      fetchNext,
       timelineId,
     } = this.props;
 
@@ -52,6 +54,8 @@ class Playlist extends PureComponent {
             />,
             <Tracklist
               tracks={tracks}
+              hasNext={!!playlist.next}
+              fetchNext={fetchNext}
               timelineId={timelineId}
               key="tracklist"
             />,
