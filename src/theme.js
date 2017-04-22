@@ -1,7 +1,7 @@
 export default {
   colors: {
     primaryBackground: '#121314',
-    secondaryBackground: '#1c1c1f',
+    secondaryBackground: '#242429',
     primaryText: '#dfe0e6',
     secondaryText: '#88898c',
     active: '#6AE368',
@@ -9,7 +9,7 @@ export default {
     outline: '#222326',
     cta: '#1DB954',
     reverse: {
-      background: '#fff',
+      background: '#f5f5f5',
       primaryText: '#333',
     },
   },

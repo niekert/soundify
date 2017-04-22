@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { lighten } from 'utils/color';
+import { darken } from 'utils/color';
 import { prop } from 'styled-tools';
 import VolumeIcon from 'components/icons/VolumeIcon';
 
@@ -19,7 +19,7 @@ const Link = styled(NavLink)`
   &.${prop('activeClassName')},
   &:hover {
     color: ${prop('theme.colors.primaryText')};
-    background: ${props => lighten(props.theme.colors.primaryBackground, 0.8)};
+    background: ${props => darken(props.theme.colors.secondaryBackground, 0.1)};
   }
 
   &.${prop('activeClassName')}:before {
