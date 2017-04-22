@@ -17,5 +17,10 @@ export const activeTimelineTracks = createSelector(
   (tracks, timeline) => get(timeline, 'tracks', []).map(trackId => tracks[trackId]),
 );
 
+export const activeTimelineHasNext = createSelector(
+  activeTimeline,
+  timeline => get(timeline, 'next', false),
+);
+
 export const timelineById = (state, id) => timelinesSelector(state)[id];
 export const trackIndex = (timeline, trackId) => timeline.tracks.findIndex(id => id === trackId);

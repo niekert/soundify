@@ -77,6 +77,11 @@ export default {
     }).then(resp => resp.json());
   },
 
+  fetchNext (url) {
+    return fetch(url)
+      .then(resp => resp.json());
+  },
+
   fetchTrack(trackId) {
     return this.fetchWithToken(`/tracks/${trackId}`)
       .then(resp => resp.json());

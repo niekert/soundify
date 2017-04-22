@@ -5,7 +5,7 @@ import LikesContainer from 'containers/LikesContainer';
 import SearchResultContainer from 'containers/SearchResultContainer';
 import styled from 'styled-components';
 import { INITIAL, OK } from 'constants';
-import { fetchPlaylist, setActiveTimeline } from 'actions/timelineActions';
+import { fetchPlaylist, setActiveTimeline, fetchNext } from 'actions/timelineActions';
 import { Route } from 'react-router-dom';
 import { activeTimeline, activeTimelineTracks } from 'selectors/timeline';
 import withUser from 'containers/hocs/withUser';
@@ -25,11 +25,17 @@ class TimelineContainer extends PureComponent {
     timelineId: PropTypes.string,
     tracks: PropTypes.arrayOf(PropTypes.object).isRequired,
     status: PropTypes.string.isRequired,
+    fetchNext: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     playlist: null,
   };
+
+  _onNearEnd = () => {
+    const { playlist } = this.props;
+    this.props.fetchNext(playlist.id, playlist.next);
+  }
 
   render() {
     const {
@@ -48,6 +54,7 @@ class TimelineContainer extends PureComponent {
           playlist={playlist}
           tracks={tracks}
           status={status}
+          fetchNext={this._onNearEnd}
           timelineId={timelineId}
         />
       </Wrapper>
@@ -68,5 +75,6 @@ function mapStateToProps(state) {
 
 export default withUser(connect(mapStateToProps, {
   fetchPlaylist,
+  fetchNext,
   setActiveTimeline,
 })(TimelineContainer));
