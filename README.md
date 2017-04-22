@@ -22,4 +22,6 @@ Feedback, [issues](https://github.com/niekert/soundify/issues), PRs, etc. are ve
 - [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
 - [And more](https://github.com/niekert/soundify/blob/master/package.json)
 
+## Screenshot
 
+![Screenshot](http://i.imgur.com/U0WKYLT.jpg)
