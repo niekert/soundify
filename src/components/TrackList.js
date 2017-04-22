@@ -6,6 +6,7 @@ import withPlayerContext from 'containers/hocs/withPlayerContext';
 import Track from './Track';
 
 const Wrapper = styled.ul`
+  position: relative;
   padding-top: 15px;
   margin-left: 10px;
   display: flex;
