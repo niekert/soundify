@@ -38,6 +38,7 @@ PlayButton.propTypes = {
   isPlaying: PropTypes.bool,
   activeTrackId: PropTypes.number,
   activeTimelineId: PropTypes.number,
+  activetimeline: PropTypes.string,
 };
 
 export default withPlayerContext(PlayButton);
