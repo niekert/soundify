@@ -60,8 +60,8 @@ const ChangeTrackButton = styled.button`
 `;
 
 const LikeButtonWrapper = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 15px;
+  height: 15px;
   display: flex;
   align-items: center;
   justify-content: center;

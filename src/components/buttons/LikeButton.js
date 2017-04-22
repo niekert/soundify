@@ -4,9 +4,13 @@ import styled from 'styled-components';
 import HeartIcon from 'components/icons/Heart';
 import { ifProp, prop } from 'styled-tools';
 import { withHandlers } from 'recompose';
-import IconButton from './IconButton';
 
-const Button = styled(IconButton)`
+const Button = styled.button`
+  background: none;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
   color: ${prop('theme.colors.primaryText')};
 
   svg path {
@@ -19,7 +23,10 @@ const Button = styled(IconButton)`
 `;
 
 const enhance = withHandlers({
-  onClick: ({ onToggle, trackId, active }) => () => onToggle(trackId, !active),
+  onClick: ({ onToggle, trackId, active }) => (e) => {
+    e.stopPropagation();
+    onToggle(trackId, !active);
+  },
 });
 
 const LikeButton = enhance(({

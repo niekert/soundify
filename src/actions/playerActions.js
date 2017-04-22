@@ -39,7 +39,8 @@ export function changeTrack(changeType) {
     const timeline = timelineById(state, activeTimelineId);
     const currentTrackIndex = trackIndex(timeline, previousTrackId || activeTrackId);
     const nextTrackIndexModifier = changeType === PREV ? -1 : 1;
-    const nextTrackId = timeline.tracks[currentTrackIndex + nextTrackIndexModifier];
+    const nextTrackId = timeline.tracks[currentTrackIndex + nextTrackIndexModifier] ||
+      timeline.tracks[0]; // start over if there's no tracks
 
     dispatch(toggleTrack({
       trackId: nextTrackId,

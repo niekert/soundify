@@ -45,6 +45,9 @@ const SecondaryIcon = styled.div`
   }
 
   svg {
+    width: 50%;
+    height: 50%;
+    left: 1px;
     position: relative;
     color: ${prop('theme.colors.primaryText')};
   }
@@ -79,7 +82,8 @@ const PlayOverlay = ({
   <Wrapper className={className}>
     <SecondaryIcon>
       <LikeButton
-        onClick={onToggleLike}
+        onToggle={onToggleLike}
+        trackId={trackId}
         active={likeActive}
       />
     </SecondaryIcon>
@@ -94,6 +98,8 @@ const PlayOverlay = ({
 PlayOverlay.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   trackId: PropTypes.number.isRequired,
+  onToggleLike: PropTypes.func.isRequired,
+  onQueue: PropTypes.func.isRequired,
   likeActive: PropTypes.bool,
   className: PropTypes.string, // TODO: fix this ugly hack
 };

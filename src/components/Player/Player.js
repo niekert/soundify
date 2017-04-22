@@ -11,6 +11,7 @@ import PlayerContent from './PlayerContent';
 
 const Wrapper = styled.div`
   position: relative;
+  max-width: 100vw;
   grid-row: 3;
   grid-column: 1 / 3;
   z-index: 100;
