@@ -66,7 +66,7 @@ const SideControls = enhance(
         <PlayQueueContainer />
       </PopOver>
       <IconButton onClick={cast}>
-        <ChromecastIcon onClick={cast} />
+        <ChromecastIcon />
       </IconButton>
       <VolumeControl>
         <IconButton onClick={mute} >
