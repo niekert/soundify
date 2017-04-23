@@ -32,7 +32,6 @@ const Logo = styled(SoundCloudLogo)`
 const Right = styled.div`
   margin-left: auto;
   display: flex;
-  align-items: flex-end;
 `;
 
 class TopBar extends PureComponent {
