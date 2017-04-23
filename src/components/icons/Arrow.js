@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const ArrowIcon = ({ fill, ...props }) => (
+const ArrowIcon = ({ fill, isOpen, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 477.175 477.175"

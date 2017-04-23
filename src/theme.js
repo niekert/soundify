@@ -11,6 +11,7 @@ export default {
     reverse: {
       background: '#f5f5f5',
       primaryText: '#333',
+      secondaryText: '#948784',
     },
   },
   fontSize: {

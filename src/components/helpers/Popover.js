@@ -11,6 +11,7 @@ class Popover extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool,
     triggerButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    triggerProps: PropTypes.object,
     children: PropTypes.node,
     onToggle: PropTypes.func,
   };
@@ -49,7 +50,7 @@ class Popover extends React.Component {
   _renderTriggerButton() {
     let triggerButton = this.props.triggerButton;
     if (typeof triggerButton === 'function') {
-      triggerButton = triggerButton(this.state.isOpen);
+      triggerButton = triggerButton();
     }
 
     const buttonProps = {
@@ -57,6 +58,8 @@ class Popover extends React.Component {
         this._togglePopover();
         e.preventDefault();
       },
+      isOpen: this.state.isOpen,
+      ...this.props.triggerProps,
     };
 
     return React.cloneElement(triggerButton, buttonProps);

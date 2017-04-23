@@ -1,62 +1,69 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import PopOver from 'components/helpers/Popover';
 import PropTypes from 'prop-types';
-import ArrowIcon from 'components/icons/Arrow';
-import styled from 'styled-components';
-// import { prop } from 'styled-tools';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { prop } from 'styled-tools';
+import UserInfo from './UserInfo';
 
-const Wrapper = styled.div`
-  display: flex;
-  height: 100%;
-  align-items: center;
+const DropdownWrapper = styled.div`
+  position: absolute;
+  top: 100%;
+  right: -25px;
+  box-shadow: ${prop('theme.shadows.depth2')};
+  background: ${prop('theme.colors.reverse.background')};
+  width: 150px;
+  padding: 5px 0;
 `;
 
-const Username = styled.span`
-  margin-left: 10px;
+const linkStyles = css`
+  display: block;
+  width: 100%;
+  padding: 15px 10px;
+  text-decoration: none;
   font-weight: 300;
-  font-size: 12px;
-`;
+  font-size: 14px;
+  color: ${prop('theme.colors.reverse.primaryText')};
 
-const Avatar = styled.img`
-  border-radius: 50%;
-  height: 32px;
-  align-self: center;
-`;
-
-const Button = styled.button`
-  cursor: pointer;
-  background: none;
-`;
-
-const Arrow = styled(ArrowIcon)`
-  margin-left: 1em;
-  position: relative;
-  top: 1px;
-  width: 10px;
-  height: 10px;
-  transform: rotate(90deg);
-`;
-
-class UserDropdown extends PureComponent {
-  static propTypes = {
-    user: PropTypes.object.isRequired,
-  };
-
-  state = {
-    isOpen: false,
+  &:hover {
+    opacity: .6;
   }
+`;
 
-  render () {
-    const { user } = this.props;
-    return (
-      <Wrapper>
-        <Avatar src={user.avatar_url} />
-        <Button>
-          <Username>{user.username}</Username>
-          <Arrow open={this.state.isOpen} />
-        </Button>
-      </Wrapper>
-    );
-  }
-}
+const DropdownLink = styled(Link)`
+  ${linkStyles}
+`;
+
+const Href = styled.a`
+  ${linkStyles}
+`;
+
+const UserDropdown = ({
+  user,
+}) => (
+  <PopOver
+    triggerButton={
+      <UserInfo
+        avatarUrl={user.avatar_url}
+        username={user.username}
+      />
+    }
+  >
+    <DropdownWrapper>
+      <DropdownLink to="/logout">
+        Sign out
+      </DropdownLink>
+      <Href href="https://soundcloud.com" target="_blank">
+        Soundcloud.com
+      </Href>
+      <Href href="mailto:niekkruse70@gmail.com?SUBJECT=Soundify%20Feedback">
+        Leave feedback
+      </Href>
+    </DropdownWrapper>
+  </PopOver>
+);
+UserDropdown.propTypes = {
+  user: PropTypes.object.isRequired,
+};
 
 export default UserDropdown;
