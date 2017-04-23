@@ -10,6 +10,7 @@ import theme from 'theme';
 import PlayerContainer from 'containers/PlayerContainer';
 import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';
+import LogoutContainer from 'containers/LogoutContainer';
 import HomeContainer from 'containers/HomeContainer';
 import LoginContainer from 'containers/LoginContainer';
 import TimelineContainer from 'containers/TimelineContainer';
@@ -39,6 +40,7 @@ const AuthedShell = () => (
     <Route path="/" component={SidebarContainer} />
     <TopBarContainer />
     <MainContent>
+      <Route path="/logout" component={LogoutContainer} />
       <Route exact path="/" component={HomeContainer} />
       <Route path="/(playlist|likes|search)/:id?" component={TimelineContainer} />
     </MainContent>

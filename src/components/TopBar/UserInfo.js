@@ -50,7 +50,7 @@ const UserInfo = ({
   </Wrapper>
 );
 UserInfo.propTypes = {
-  onClick: func.isRequired,
+  onClick: func,
   username: string.isRequired,
   avatarUrl: string.isRequired,
   isOpen: bool,

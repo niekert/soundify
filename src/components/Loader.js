@@ -1,4 +1,5 @@
 import React from 'react';
+import { bool } from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import { ifProp, prop } from 'styled-tools';
 
@@ -32,12 +33,15 @@ const Dot = styled.div`
   animation: ${animation} 1.4s ${props => props.delay} infinite ease-in-out both;
 `;
 
-const Loader = props => (
+const Loader = ({ light, ...props }) => (
   <Wrapper {...props}>
-    <Dot delay="-0.32s" />
-    <Dot delay="-0.16s" />
-    <Dot />
+    <Dot light={light} delay="-0.32s" />
+    <Dot light={light} delay="-0.16s" />
+    <Dot light={light} />
   </Wrapper>
 );
+Loader.propTypes = {
+  light: bool,
+};
 
 export default Loader;

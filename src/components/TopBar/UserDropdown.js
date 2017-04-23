@@ -50,15 +50,15 @@ const UserDropdown = ({
     }
   >
     <DropdownWrapper>
-      <DropdownLink to="/logout">
-        Sign out
-      </DropdownLink>
       <Href href="https://soundcloud.com" target="_blank">
         Soundcloud.com
       </Href>
       <Href href="mailto:niekkruse70@gmail.com?SUBJECT=Soundify%20Feedback">
         Leave feedback
       </Href>
+      <DropdownLink to="/logout">
+        Sign out
+      </DropdownLink>
     </DropdownWrapper>
   </PopOver>
 );

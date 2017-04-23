@@ -4,6 +4,7 @@ import api from 'api/api';
 
 export const AUTH_TOKEN = 'AUTH_TOKEN';
 export const AUTH_START = 'AUTH_START';
+export const LOGOUT = 'LOGOUT';
 export const NO_AUTH = 'NO_AUTH';
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_CALLBACK = 'SCConnect';
@@ -55,5 +56,12 @@ export function attemptAuth() {
       payload: null,
       error,
     }));
+  };
+}
+
+export function logout() {
+  api.logout();
+  return {
+    type: LOGOUT,
   };
 }

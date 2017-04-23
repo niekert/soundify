@@ -1,5 +1,5 @@
 import { INITIAL, OK, PENDING } from 'constants';
-import { AUTH_USER, AUTH_START } from '../actions/authActions';
+import { AUTH_USER, AUTH_START, LOGOUT } from '../actions/authActions';
 
 const defaultAuthState = {
   user: null,
@@ -19,6 +19,11 @@ export default (state = defaultAuthState, action) => {
         ...state,
         user: action.payload,
         status: OK,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        user: undefined,
       };
     default:
       return state;
