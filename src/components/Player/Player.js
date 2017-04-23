@@ -17,7 +17,6 @@ const Wrapper = styled.div`
   z-index: 100;
   bottom: 0;
   width: 100%;
-  border: 1px solid ${prop('theme.colors.outline')};
   height: 75px;
   user-selectable: none;
   background-size: cover !important;
@@ -153,7 +152,7 @@ class Player extends PureComponent {
         )}
         <audio
           ref={c => this._audioElement = c} // eslint-disable-line no-return-assign
-          src={'' && track && `${track.stream_url}?client_id=${CLIENT_ID}`}
+          src={track && `${track.stream_url}?client_id=${CLIENT_ID}`}
         />
 
         <PlayerContent
