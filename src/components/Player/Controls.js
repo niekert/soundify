@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
+import { Link } from 'react-router-dom';
 import SeekBar from './SeekBar';
 
 const Wrapper = styled.div`
@@ -14,16 +15,26 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const CurrentTrack = styled.label`
+const CurrentTrackContainer = styled.div`
   align-self: center;
-  color: ${prop('theme.colors.primaryText')};
   display: flex;
-  white-space: nowrap;
   padding: 0 30px 10px;
   font-weight: 300;
-  font-size: 12px;
   align-items: flex-end;
 `;
+
+const CurrentTrackLink = styled(Link)`
+  color: ${prop('theme.colors.primaryText')};
+  white-space: nowrap;
+  font-weight: 300;
+  text-decoration: none;
+  font-size: 12px;
+
+  &:hover {
+    opacity: .7;
+  }
+`;
+
 
 class Controls extends Component {
   static propTypes = {
@@ -53,9 +64,11 @@ class Controls extends Component {
 
     return (
       <Wrapper>
-        <CurrentTrack>
-          {!!track && `${track.title}`}
-        </CurrentTrack>
+        <CurrentTrackContainer>
+          {!!track && (
+            <CurrentTrackLink to={`/track/${track.id}`}>{track.title}</CurrentTrackLink>
+          )}
+        </CurrentTrackContainer>
         <SeekBar
           isPlaying={isPlaying}
           isActive={isActive}
