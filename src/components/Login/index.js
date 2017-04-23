@@ -17,6 +17,16 @@ const Wrapper = styled.div`
   color: ${prop('theme.colors.primaryText')};
 `;
 
+const Subtitle = styled.span`
+  margin-top: 10px;
+  display: block;
+  line-height: 1.3;
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+  font-weight: 300;
+`;
+
 class Login extends PureComponent {
   static propTypes = {
     status: PropTypes.string.isRequired,
@@ -28,9 +38,13 @@ class Login extends PureComponent {
     return (
       <Wrapper>
         {status === PENDING ?
-          <Loader /> :
+          <Loader light /> :
           <div>
             <LoginButton onLoginClicked={this.props.onLoginClicked} />
+            <Subtitle>
+              You are required to connect your SoundCloud account  <br />
+              for the best Soundify experience (for now)
+            </Subtitle>
           </div>
         }
       </Wrapper>

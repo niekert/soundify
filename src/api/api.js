@@ -100,4 +100,9 @@ export default {
     })
     .then(resp => resp.json());
   },
+
+  logout() {
+    this.token = undefined;
+    window.localStorage.removeItem(localstorageKey);
+  },
 };
