@@ -16,6 +16,10 @@ export default function (state = [], action) {
     case UNQUEUE: {
       return state.slice(1);
     }
+    case MOVE_TRACK: {
+    // TODO: implement
+      return state;
+    }
     default: {
       return state;
     }

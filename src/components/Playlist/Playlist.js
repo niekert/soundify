@@ -19,7 +19,7 @@ class Playlist extends PureComponent {
     playlist: PropTypes.object,
     tracks: PropTypes.arrayOf(PropTypes.object),
     status: PropTypes.string,
-    timelineId: PropTypes.string.isRequired,
+    timelineId: PropTypes.string,
     fetchNext: PropTypes.func.isRequired,
   };
 

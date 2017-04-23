@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { pure } from 'recompose';
 import withPlayerContext from 'containers/hocs/withPlayerContext';
 import styled from 'styled-components';
-import { prop } from 'styled-tools';
+// import { prop } from 'styled-tools';
 
 const Button = styled.button`
   width: 100px;
@@ -37,9 +37,8 @@ PlayButton.propTypes = {
   toggleTrack: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool,
   activeTrackId: PropTypes.number,
-  activeTimelineId: PropTypes.number,
-  activetimeline: PropTypes.string,
+  activeTimelineId: PropTypes.string,
 };
 
-export default withPlayerContext(PlayButton);
+export default withPlayerContext(pure(PlayButton));
 

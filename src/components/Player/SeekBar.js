@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 
 const Time = styled.span`
   font-size: 10px;
-  color: ${prop('theme.colors.secondaryText')};
+  color: ${prop('theme.colors.primaryText')};
   padding: 0 10px;
   width: 50px;
 `;
