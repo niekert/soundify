@@ -12,7 +12,7 @@ export default {
 
     const searchQuery = queryString.stringify({
       oauth_token: this.token,
-      ...options.query,
+      ...query,
     });
 
     return fetch(`https://api.soundcloud.com${path}?${searchQuery}`, fetchOptions);

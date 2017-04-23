@@ -29,6 +29,7 @@ const ArtworkGrid = ({
     <Wrapper>
       {tracks.slice(0, 4).map(track => (
         <ArtworkWrapper
+          key={track.id}
           artworkUrl={track.artwork_url}
           size="200x200"
         />

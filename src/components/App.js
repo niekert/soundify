@@ -12,7 +12,6 @@ import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';
 import HomeContainer from 'containers/HomeContainer';
 import LoginContainer from 'containers/LoginContainer';
-import SearchResultContainer from 'containers/SearchResultContainer';
 import TimelineContainer from 'containers/TimelineContainer';
 
 const AppShell = styled.div`

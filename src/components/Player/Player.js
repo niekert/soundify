@@ -153,7 +153,7 @@ class Player extends PureComponent {
         )}
         <audio
           ref={c => this._audioElement = c} // eslint-disable-line no-return-assign
-          src={track && `${track.stream_url}?client_id=${CLIENT_ID}`}
+          src={'' && track && `${track.stream_url}?client_id=${CLIENT_ID}`}
         />
 
         <PlayerContent

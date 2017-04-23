@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import LikesContainer from 'containers/LikesContainer';
 import SearchResultContainer from 'containers/SearchResultContainer';
 import styled from 'styled-components';
-import { INITIAL, OK } from 'constants';
+import { INITIAL } from 'constants';
 import { fetchPlaylist, setActiveTimeline, fetchNext } from 'actions/timelineActions';
 import { Route } from 'react-router-dom';
 import { activeTimeline, activeTimelineTracks } from 'selectors/timeline';

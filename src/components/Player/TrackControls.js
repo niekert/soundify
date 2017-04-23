@@ -100,7 +100,7 @@ TrackControls.propTypes = {
   onPrev: PropTypes.func.isRequired,
   onTogglePlay: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
-  isPlaying: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
 };
 
 export default TrackControls;

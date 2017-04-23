@@ -8,10 +8,12 @@ const Button = styled.button`
   background: none;
   padding: 0;
   cursor: pointer;
-  color: ${prop('theme.colors.secondaryText')};
+  color: ${prop('theme.colors.primaryText')};
+  transition: transform 100ms ease-out;
 
   &:hover {
-    color: ${prop('theme.colors.primaryText')};
+    transform: scale(1.05);
+    // color: ${prop('theme.colors.primaryText')};
   }
 
   svg {

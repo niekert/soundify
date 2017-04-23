@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArtWork from 'components/Track/ArtWork';
-import { withHandlers, compose } from 'recompose';
+// import { withHandlers, compose } from 'recompose';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 
@@ -44,7 +44,7 @@ const Track = ({
   artworkUrl,
   title,
   artist,
-  onRemove,
+  onRemove, // eslint-disable-line
 }) => (
   <Wrapper>
     <TrackArtwork artworkUrl={artworkUrl} size="200x200" />

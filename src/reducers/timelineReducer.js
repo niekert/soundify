@@ -6,7 +6,7 @@ import {
   FETCH_NEXT,
   FETCH_NEXT_SUCCESS,
 } from 'actions/timelineActions';
-import { OK, PENDING, ERROR } from 'constants';
+import { OK, PENDING } from 'constants';
 
 const emptyTimeline = {
   error: null,

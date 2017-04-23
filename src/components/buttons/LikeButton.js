@@ -13,7 +13,7 @@ const Button = styled.button`
   cursor: pointer;
   color: ${prop('theme.colors.primaryText')};
 
-  svg path {
+svg path {
     ${ifProp(
       'active',
       '',
@@ -42,8 +42,8 @@ const LikeButton = enhance(({
 ));
 LikeButton.propTypes = {
   active: PropTypes.bool,
-  toggleLike: PropTypes.func.isRequired,
-  trackId: PropTypes.string.isRequired,
+  onToggle: PropTypes.func.isRequired,
+  trackId: PropTypes.number.isRequired,
 };
 
 export default LikeButton;

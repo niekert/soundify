@@ -60,7 +60,10 @@ const Title = styled(H3)`
   padding: 0 15px;
 `;
 
-const PlayQueue = ({ tracks, timeline = null }) => (
+const PlayQueue = ({
+  tracks,
+  timeline, // eslint-disable-line
+}) => (
   <Wrapper>
     {!tracks.length ?
       <QueueEmpty /> :

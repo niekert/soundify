@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ArrowIcon from 'components/icons/Arrow';
 import styled from 'styled-components';
-import { prop } from 'styled-tools';
+// import { prop } from 'styled-tools';
 
 const Wrapper = styled.div`
   display: flex;
