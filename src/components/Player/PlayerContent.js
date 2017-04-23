@@ -47,10 +47,8 @@ class PlayerContent extends PureComponent {
     return (
       <Wrapper>
         <LeftWrapper>
-          {track && [
-            <ActiveTrackArtwork artworkUrl={track.artwork_url} key="artwork" />,
-            <TrackControls {...this.props} />,
-          ]}
+          {!!track && <ActiveTrackArtwork artworkUrl={track.artwork_url} key="artwork" /> }
+          <TrackControls {...this.props} />
         </LeftWrapper>
         <Controls {...this.props} />
         <SideControlsContainer />

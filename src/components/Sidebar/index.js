@@ -10,7 +10,7 @@ const SidebarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background: ${prop('theme.colors.secondaryBackground')};
+  background: ${prop('theme.colors.primaryBackground')};
   z-index: 1;
 `;
 
