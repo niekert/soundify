@@ -1,13 +1,12 @@
 export default {
   colors: {
-    primaryBackground: '#121314',
-    secondaryBackground: '#242429',
+    primaryBackground: '#242429',
     primaryText: '#dfe0e6',
     secondaryText: '#88898c',
-    active: '#6AE368',
+    active: '#0095ff',
     secondaryActive: '#3e3e40',
     outline: '#222326',
-    cta: '#1DB954',
+    cta: '#0095ff',
     reverse: {
       background: '#f5f5f5',
       primaryText: '#333',

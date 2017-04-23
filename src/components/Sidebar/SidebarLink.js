@@ -19,7 +19,7 @@ const Link = styled(NavLink)`
   &.${prop('activeClassName')},
   &:hover {
     color: ${prop('theme.colors.primaryText')};
-    background: ${props => darken(props.theme.colors.secondaryBackground, 0.1)};
+    background: ${props => darken(props.theme.colors.primaryBackground, 0.1)};
   }
 
   &.${prop('activeClassName')}:before {

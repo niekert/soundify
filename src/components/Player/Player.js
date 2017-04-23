@@ -20,9 +20,10 @@ const Wrapper = styled.div`
   height: 75px;
   user-selectable: none;
   background-size: cover !important;
+  box-shadow: ${prop('theme.shadows.depth2')};
   background: ${props => props.artwork ?
     `url(${getArtworkUrl(props.artwork, '500x500')}) 50% 50% no-repeat` :
-    props.theme.colors.secondaryBackground
+    props.theme.colors.primaryBackground
   };
   display: flex;
   justify-content: center;
@@ -35,7 +36,7 @@ const Wrapper = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: ${props => alpha(props.theme.colors.secondaryBackground, 0.8)};
+    background: ${props => alpha(props.theme.colors.primaryBackground, 0.8)};
   }
 `;
 

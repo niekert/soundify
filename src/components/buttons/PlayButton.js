@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { pure } from 'recompose';
 import withPlayerContext from 'containers/hocs/withPlayerContext';
 import styled from 'styled-components';
-// import { prop } from 'styled-tools';
+import { prop } from 'styled-tools';
 
 const Button = styled.button`
   width: 100px;
   height: 30px;
   border-radius: 50px;
-  background: #1DB954;
+  background: ${prop('theme.colors.cta')};
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #FFF;
@@ -19,7 +19,7 @@ const Button = styled.button`
 
   &:hover {
     transform: scale(1.05);
-    background: #1CD85E;
+    background: ${prop('theme.colors.cta')};
   }
 `;
 

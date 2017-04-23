@@ -85,17 +85,19 @@ const TrackControls = ({
     <ChangeTrackButton onClick={onNext}>
       <NextTrackIcon />
     </ChangeTrackButton>
-    <LikeButtonWrapper>
-      <LikeButton
-        onToggle={toggleLike}
-        active={track.user_favorite}
-        trackId={track.id}
-      />
-    </LikeButtonWrapper>
+    {track && (
+      <LikeButtonWrapper>
+        <LikeButton
+          onToggle={toggleLike}
+          active={track.user_favorite}
+          trackId={track.id}
+        />
+      </LikeButtonWrapper>
+    )}
   </PlayerButtons>
 );
 TrackControls.propTypes = {
-  track: PropTypes.object.isRequired,
+  track: PropTypes.object,
   toggleLike: PropTypes.func.isRequired,
   onPrev: PropTypes.func.isRequired,
   onTogglePlay: PropTypes.func.isRequired,
