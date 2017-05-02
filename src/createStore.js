@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import promiseMiddleware from 'redux-promise';
 import { isDev } from 'helpers/env';
 import rootReducer from './reducers';
 
@@ -8,6 +9,7 @@ export default () => {
 
   const middleware = applyMiddleware(
     thunkMiddleware,
+    promiseMiddleware,
   );
 
   return createStore(

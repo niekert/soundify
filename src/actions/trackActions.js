@@ -1,8 +1,9 @@
-import api from 'api/api';
+import api from 'api';
 import { normalize } from 'normalizr';
 import { track as trackSchema } from './schema';
 
 export const FETCH_TRACK_SUCCESS = 'FETCH_TRACK_SUCCESS';
+export const FETCH_TRACK = 'FETCH_TRACK';
 
 export function fetchTrack(trackId) {
   return (dispatch) => {
@@ -15,6 +16,11 @@ export function fetchTrack(trackId) {
           entities: normalized.entities,
         });
       });
+
+    dispatch({
+      type: FETCH_TRACK,
+      payload: trackId,
+    });
   };
 }
 

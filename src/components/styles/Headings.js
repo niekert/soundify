@@ -1,12 +1,14 @@
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 
-// TODO: implement this properly
 export const H1 = styled.h1`
-  font-size: 40px;
+  font-size: ${prop('theme.fontSize.displayLarge')};
+  line-height: ${prop('theme.lineHeights.displayMedium')};
 `;
 
 export const H2 = styled.h2`
-  font-size: 26px;
+  font-size: ${prop('theme.fontSize.heading')};
+  line-height: ${prop('theme.lineHeights.heading')};
 `;
 
 export const H3 = styled.h3`

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { pure } from 'recompose';
+import { pure, withHandlers, compose, setDisplayName } from 'recompose';
 import withPlayerContext from 'containers/hocs/withPlayerContext';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
@@ -23,22 +23,44 @@ const Button = styled.button`
   }
 `;
 
+const enhance = compose(
+  withPlayerContext,
+  withHandlers({
+    onClick: ({ toggleTrack, isPlaying, timelineId, activeTimelineId, trackId }) => (e) => {
+      e.preventDefault();
+
+
+      const toggle = !(timelineId === activeTimelineId && isPlaying);
+
+      toggleTrack({
+        trackId,
+        timelineId,
+        isPlaying: toggle,
+      });
+    },
+  }),
+  pure,
+  setDisplayName('PlayButton'),
+);
+
 const PlayButton = ({
   isPlaying,
-  activeTrackId,
+  timelineId,
   activeTimelineId,
-  toggleTrack
+  onClick,
 }) => (
-  <Button onClick={toggleTrack}>
-    {isPlaying ? 'Pause' : 'Play'}
+  <Button
+    onClick={onClick}
+  >
+    {isPlaying && timelineId === activeTimelineId ? 'Pause' : 'Play'}
   </Button>
 );
 PlayButton.propTypes = {
-  toggleTrack: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  timelineId: PropTypes.string.isRequired,
   isPlaying: PropTypes.bool,
-  activeTrackId: PropTypes.number,
   activeTimelineId: PropTypes.string,
 };
 
-export default withPlayerContext(pure(PlayButton));
+export default enhance(PlayButton);
 

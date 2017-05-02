@@ -23,7 +23,9 @@ class TrackContextOverlay extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    this._updateColor(nextProps.artworkUrl);
+    if (nextProps.artworkUrl !== this.props.artworkUrl) {
+      this._updateColor(nextProps.artworkUrl);
+    }
   }
 
   _updateColor(artworkUrl) {
