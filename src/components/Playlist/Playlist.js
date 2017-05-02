@@ -51,6 +51,7 @@ class Playlist extends PureComponent {
               key="header"
               tracks={tracks}
               playlist={playlist}
+              timelineId={timelineId}
             />,
             <Tracklist
               tracks={tracks}

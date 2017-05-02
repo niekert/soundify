@@ -18,7 +18,7 @@ const Wrapper = styled.li`
 
 const PlayerArtwork = styled(ArtWork)`
   position: relative;
-  background-repeat: none;
+  background-repeat: no-repeat;
   box-shadow: ${prop('theme.shadows.depth2')};
   background-size: cover;
   width: 100%;

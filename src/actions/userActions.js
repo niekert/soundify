@@ -1,4 +1,4 @@
-import api from 'api/api';
+import api from 'api';
 
 export const FETCH_PLAYLISTS = 'FETCH_PLAYLISTS';
 export const FETCH_PLAYLISTS_SUCCESS = 'FETCH_PLAYLISTS_SUCCESS';

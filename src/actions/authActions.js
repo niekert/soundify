@@ -1,6 +1,6 @@
 import SC from 'soundcloud';
 import queryString from 'query-string';
-import api from 'api/api';
+import api from 'api';
 
 export const AUTH_TOKEN = 'AUTH_TOKEN';
 export const AUTH_START = 'AUTH_START';
