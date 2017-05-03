@@ -9,6 +9,7 @@ export const H1 = styled.h1`
 export const H2 = styled.h2`
   font-size: ${prop('theme.fontSize.heading')};
   line-height: ${prop('theme.lineHeights.heading')};
+  margin-bottom: .5em;
 `;
 
 export const H3 = styled.h3`
