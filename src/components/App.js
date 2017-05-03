@@ -11,7 +11,7 @@ import PlayerContainer from 'containers/PlayerContainer';
 import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';
 import LogoutContainer from 'containers/LogoutContainer';
-import TrackContainer from 'containers/TrackContainer';
+import TrackContainer from 'scenes/Track';
 import HomeContainer from 'containers/HomeContainer';
 import LoginContainer from 'containers/LoginContainer';
 import TimelineContainer from 'containers/TimelineContainer';
