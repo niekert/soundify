@@ -4,28 +4,41 @@ import Artwork from 'components/Track/ArtWork';
 import { H1, H2 } from 'components/styles/Headings';
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
   padding: 60px;
   padding: 5em;
-  justify-content: flex-start;
-  margin:0 auto;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
   max-width: 100%;
   padding: 15px;
 `;
 
 const ArtworkImage = styled(Artwork)`
   width: 100%;
+  flex: 1;
   margin-right: 20px;
 `;
 
-const Title = styled.h1`
+const TrackInfo = styled.div`
+  flex: 2;
+  margin-left: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const Artist = styled(H2)`
+  font-weight: 300;
+`;
+
+const Title = styled(H1)`
+  font-weight: 600;
 `;
 
 const TrackDetails = ({
   artworkUrl,
   title,
-  artistName,
+  username,
   artistUrl,
   playCount,
   likeCount,
@@ -34,10 +47,10 @@ const TrackDetails = ({
 }) => (
   <Wrapper>
     <ArtworkImage artworkUrl={artworkUrl} useImg />
-    <div>
-      <H2>{artistName}</H2>
-      <H1>{title}</H1>
-    </div>
+    <TrackInfo>
+      <Artist>{username}</Artist>
+      <Title>{title}</Title>
+    </TrackInfo>
   </Wrapper>
 );
 
