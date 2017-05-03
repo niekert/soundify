@@ -53,6 +53,12 @@ class Sidebar extends PureComponent {
           >
             Likes
           </SidebarLink>
+          <SidebarLink
+            to="/stream"
+            isPlaying={activeTimelineId === 'stream'}
+          >
+            Stream
+          </SidebarLink>
         </Section>
         <Section>
           <Label>Playlists</Label>

@@ -81,9 +81,9 @@ class TrackList extends PureComponent {
 
     return (
       <Wrapper>
-        {tracks.map(track => (
+        {tracks.map((track, index) => (
           <Track
-            key={track.id}
+            key={`${track.id}-${index}`} // eslint-disable-line
             isPlaying={track.id === activeTrackId && isPlaying}
             track={track}
             toggleLike={toggleLike}

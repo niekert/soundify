@@ -77,6 +77,14 @@ export default {
     }).then(resp => resp.json());
   },
 
+  fetchStream() {
+    return this.fetchWithToken('/me/activities', {
+      query: {
+        linked_partitioning: 1,
+      },
+    }).then(resp => resp.json());
+  },
+
   fetchNext(fullUrl) {
     const [url, search] = fullUrl.split('?'); // TODO: this is probably not reliable
     const params = queryString.parse(search);
