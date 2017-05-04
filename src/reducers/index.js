@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import modalReducer from 'scenes/modals';
 import authReducer from './authReducer';
 import usersReducer from './usersReducer';
 import timelineReducer from './timelineReducer';
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   settings: settingsReducer,
   queue: queueReducer,
+  modal: modalReducer,
 });
 
 export default rootReducer;

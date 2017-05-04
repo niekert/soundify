@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { alpha } from 'utils/color';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import SidebarLink from './SidebarLink';
 
 const SidebarWrapper = styled.div`
+  position: relative;
   width: 200px;
   grid-row: 1 / 3;
   display: flex;
@@ -23,12 +25,28 @@ const Label = styled.label`
   text-transform: uppercase;
 `;
 
+const NewPlaylist = styled.button`
+  background: none;
+  border-top: 1px solid ${props => alpha(props.theme.colors.secondaryText, 0.5)};
+  color: ${prop('theme.colors.secondaryText')};
+  font-size: ${prop('theme.fontSize.caption')};
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 0;
+
+  &:hover {
+    color: ${prop('theme.colors.primaryText')};
+  }
+`;
+
 const Section = styled.div`
   flex-basis: 33%;
 `;
 
 class Sidebar extends PureComponent {
   static propTypes = {
+    addPlaylist: PropTypes.func.isRequired,
     playlists: PropTypes.arrayOf(PropTypes.object),
     activeTimelineId: PropTypes.string,
   };
@@ -40,6 +58,7 @@ class Sidebar extends PureComponent {
   render() {
     const {
       playlists,
+      addPlaylist,
       activeTimelineId,
     } = this.props;
 
@@ -72,6 +91,11 @@ class Sidebar extends PureComponent {
             </SidebarLink>
           ))}
         </Section>
+        <NewPlaylist
+          onClick={addPlaylist}
+        >
+          Add Playlist
+        </NewPlaylist>
       </SidebarWrapper>
     );
   }

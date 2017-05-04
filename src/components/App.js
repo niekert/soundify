@@ -7,6 +7,7 @@ import {
 import styled, { ThemeProvider } from 'styled-components';
 import { prop } from 'styled-tools';
 import theme from 'theme';
+import ModalContainer from 'scenes/modals/container';
 import PlayerContainer from 'containers/PlayerContainer';
 import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';
@@ -38,13 +39,14 @@ const MainContent = styled.div`
 
 const AuthedShell = () => (
   <AppShell>
-    <Route path="/" component={SidebarContainer} />
+  <Route path="/" component={SidebarContainer} />
     <TopBarContainer />
     <MainContent>
       <Route path="/logout" component={LogoutContainer} />
       <Route exact path="/" component={HomeContainer} />
       <Route path="/(playlist|stream|likes|search)/:id?" component={TimelineContainer} />
       <Route path="/track/:trackId" component={TrackContainer} />
+      <ModalContainer />
     </MainContent>
     <PlayerContainer />
   </AppShell>

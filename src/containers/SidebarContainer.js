@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from 'components/Sidebar';
+import { showModal, ADD_PLAYLIST_MODAL } from 'scenes/modals';
 import { fetchPlaylists } from 'actions/userActions';
 import { playlists } from 'selectors/users';
 import withUser from 'containers/hocs/withUser';
@@ -31,6 +32,7 @@ function mapStateToProps(state) {
 
 const container = connect(mapStateToProps, {
   fetchPlaylists,
+  addPlaylist: () => showModal(ADD_PLAYLIST_MODAL),
 })(SidebarContainer);
 
 export default withUser(container, {
