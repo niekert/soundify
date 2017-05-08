@@ -2,7 +2,7 @@ import {
   FETCH_TRACK_SUCCESS,
   FETCH_TRACK,
 } from 'actions/trackActions';
-import { PENDING, OK, ERROR } from 'constants';
+import { PENDING, OK, ERROR } from 'app-constants';
 
 
 // Keeps track of the status of track.

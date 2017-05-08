@@ -42,10 +42,12 @@ const PlaylistHeader = ({
           Created by {playlist.user.username} ● {playlist.tracks.length} tracks, {formatPlaytime(playlist.duration)}
         </Subtitle>
       }
-      <PlayButton
-        trackId={tracks[0].id}
-        timelineId={timelineId}
-      />
+      {tracks.length > 0 && (
+        <PlayButton
+          trackId={tracks[0].id}
+          timelineId={timelineId}
+        />
+      )}
     </div>
   </Wrapper>
 );

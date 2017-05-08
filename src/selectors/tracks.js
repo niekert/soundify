@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { INITIAL } from 'constants';
+import { INITIAL } from 'app-constants';
 import { createSelector } from 'reselect';
 
 export const tracksSelector = state => state.entities.tracks;

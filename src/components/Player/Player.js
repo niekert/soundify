@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NEXT, PREV } from 'actions/playerActions';
 import { alpha } from 'utils/color';
-import { CLIENT_ID } from 'constants';
+import { CLIENT_ID } from 'app-constants';
 import { getArtworkUrl } from 'helpers/track';
 import { ifProp, prop } from 'styled-tools';
 import TrackContextOverlay from './TrackContextOverlay';

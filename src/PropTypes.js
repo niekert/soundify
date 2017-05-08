@@ -5,7 +5,7 @@ import {
   PENDING,
   OK,
   ERROR
-} from 'constants';
+} from 'app-constants';
 
 export const status = PropTypes.oneOf([
   STATUS_INITIAl,

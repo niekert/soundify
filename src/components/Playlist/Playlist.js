@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { OK, INITIAL, PENDING } from 'constants';
+import { OK, INITIAL, PENDING } from 'app-constants';
 import Tracklist from 'components/TrackList';
 import Loader from 'components/Loader';
 import PlaylistHeader from './PlaylistHeader';

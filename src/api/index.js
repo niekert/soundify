@@ -1,5 +1,5 @@
 import SC from 'soundcloud';
-import { CLIENT_ID, REDIRECT_URL } from 'constants';
+import { CLIENT_ID, REDIRECT_URL } from 'app-constants';
 import queryString from 'query-string';
 
 const localstorageKey = 'authToken';
@@ -112,5 +112,23 @@ export default {
   logout() {
     this.token = undefined;
     window.localStorage.removeItem(localstorageKey);
+  },
+
+  addPlaylist(title) {
+    return this.fetchWithToken('/users/me/playlists.json', {
+      method: 'POST',
+      headers: {
+        Authorization: this.token,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        playlist: {
+          title,
+          tracks: [],
+        },
+      }),
+    })
+    .then(resp => resp.json());
   },
 };

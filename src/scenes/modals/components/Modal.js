@@ -23,7 +23,7 @@ const dialogIn = keyframes`
 const StyledModal = styled(ReactModal).attrs({
   style: {
     overlay: {
-      background: 'rgba(150, 202, 239, 0.6)',
+      background: 'rgba(154, 194, 222, 0.5)',
       zIndex: 9999,
       display: 'flex',
       justifyContent: 'center',

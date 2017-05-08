@@ -1,4 +1,4 @@
-import { INITIAL, OK, PENDING } from 'constants';
+import { INITIAL, OK, PENDING } from 'app-constants';
 import { AUTH_USER, AUTH_START, LOGOUT } from '../actions/authActions';
 
 const defaultAuthState = {

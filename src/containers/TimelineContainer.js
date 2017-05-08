@@ -5,7 +5,7 @@ import LikesContainer from 'containers/LikesContainer';
 import SearchResultContainer from 'containers/SearchResultContainer';
 import StreamContainer from 'containers/StreamContainer';
 import styled from 'styled-components';
-import { INITIAL } from 'constants';
+import { INITIAL } from 'app-constants';
 import { fetchPlaylist, setActiveTimeline, fetchNext } from 'actions/timelineActions';
 import { Route } from 'react-router-dom';
 import { activeTimeline, activeTimelineTracks } from 'selectors/timeline';

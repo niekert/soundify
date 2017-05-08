@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { PENDING } from 'constants';
+import { PENDING } from 'app-constants';
 import Loader from 'components/Loader';
 import { prop } from 'styled-tools';
 import styled from 'styled-components';

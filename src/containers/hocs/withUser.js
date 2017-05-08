@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { OK, DONE } from 'constants';
+import { OK, DONE } from 'app-constants';
 import { connect } from 'react-redux';
 
 const withUser = (ComposedComponent, { redirect = true } = {}) => {

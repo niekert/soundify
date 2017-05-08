@@ -3,7 +3,7 @@ import { fetchTrack } from 'actions/trackActions';
 import { string, object, func } from 'prop-types';
 import { trackById, trackStatus } from 'selectors/tracks';
 import { connect } from 'react-redux';
-import { INITIAL } from 'constants';
+import { INITIAL } from 'app-constants';
 import Track from './components/Track';
 
 class TrackContainer extends React.Component {

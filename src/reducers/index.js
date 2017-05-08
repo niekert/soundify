@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import modalReducer from 'scenes/modals';
 import authReducer from './authReducer';
-import usersReducer from './usersReducer';
+import playlistsReducer from './playlistsReducer';
 import timelineReducer from './timelineReducer';
 import entitiesReducer from './entitiesReducer';
 import playerReducer from './playerReducer';
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   tracks: tracksReducer,
   player: playerReducer,
   entities: entitiesReducer,
-  users: usersReducer,
+  playlists: playlistsReducer,
   settings: settingsReducer,
   queue: queueReducer,
   modal: modalReducer,

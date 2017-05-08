@@ -7,8 +7,10 @@ import { prop } from 'styled-tools';
 import VolumeIcon from 'components/icons/VolumeIcon';
 
 const Link = styled(NavLink)`
-  display: flex;
-  align-items: center;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   position: relative;
   color: ${prop('theme.colors.secondaryText')};
   text-decoration: none;
