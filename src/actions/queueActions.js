@@ -25,7 +25,7 @@ export function changeQueue(queueItemId, nextIndex) {
   };
 }
 
-export function removeTrack(queueItemId) {
+export function removeFromQueue(queueItemId) {
   return {
     type: REMOVE_TRACK,
     payload: queueItemId,

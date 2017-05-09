@@ -14,8 +14,7 @@ export default function (state = [], action) {
     }
     case REMOVE_TRACK: {
       return state
-        .slice(0, action.payload)
-        .concat(state.slice(action.payload + 1));
+        .filter(item => item.id !== action.payload);
     }
     case UNQUEUE: {
       return state.slice(1);

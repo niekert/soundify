@@ -47,24 +47,25 @@ const Wrapper = styled.div`
     left: 0;
     width: 100%;
     height: 10px;
-    background: ${prop('theme.colors.primaryBackground')};
+      background: ${prop('theme.colors.primaryBackground')};
   }
 `;
 
 const TrackList = styled.ul`
   max-height: 300px;
   overflow: auto;
-  padding: 0 15px;
+  padding: 0 10px;
 `;
 
 const Title = styled(H3)`
-  padding: 0 15px;
+  padding: 0 10px;
 `;
 
 const PlayQueue = ({
   queue,
   changeQueue,
   findIndex,
+  removeFromQueue,
   timeline, // eslint-disable-line
 }) => (
   <Wrapper>
@@ -79,11 +80,12 @@ const PlayQueue = ({
             id={queueItem.id}
             findIndex={findIndex}
             changeQueue={changeQueue}
+            removeFromQueue={removeFromQueue}
             artworkUrl={queueItem.track.artwork_url}
             title={queueItem.track.title}
             artist={queueItem.track.user.username}
           />
-        ))}
+      ))}
       </TrackList>,
     ]
     }
@@ -93,6 +95,7 @@ PlayQueue.propTypes = {
   queue: array.isRequired,
   findIndex: func.isRequired,
   changeQueue: func.isRequired,
+  removeFromQueue: func.isRequired,
   timeline: object,
 };
 

@@ -133,7 +133,7 @@ const trackSource = {
       ab: 'bosscher',
       id: props.track.id,
     };
-  }
+  },
 };
 
 function collect(connect, monitor) {
@@ -144,4 +144,8 @@ function collect(connect, monitor) {
   };
 }
 
-export default DragSource(DRAGGABLE_TYPES.TRACK, trackSource, collect)(Track);
+export default DragSource(
+  DRAGGABLE_TYPES.TRACK,
+  trackSource,
+  collect
+)(Track);

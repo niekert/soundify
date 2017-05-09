@@ -1,8 +1,10 @@
 import React from 'react';
 import { string, func, bool } from 'prop-types';
+import DragHandle from 'components/icons/DragHandle';
 import ArtWork from 'components/Track/ArtWork';
+import CloseIcon from 'components/icons/CloseIcon';
 import { DragSource, DropTarget } from 'react-dnd';
-import { compose } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import { DRAGGABLE_TYPES } from 'app-constants';
 import styled from 'styled-components';
 import { prop, ifProp } from 'styled-tools';
@@ -13,7 +15,13 @@ const Wrapper = styled.li`
   display: flex;
   align-items: center;
   overflow: hidden;
+  color: ${prop('theme.colors.primaryText')};
   opacity: ${ifProp('isDragging', 0, 1)};
+  position: relative;
+
+  &:hover .closeButton {
+    display: block !important;
+  }
 `;
 
 const TrackArtwork = styled(ArtWork)`
@@ -43,6 +51,26 @@ const Artist = styled.span`
   color: ${prop('theme.colors.secondaryText')};
 `;
 
+const Handle = styled(DragHandle)`
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-right: 10px;
+`;
+
+const CloseButton = styled.button.attrs({
+  className: 'closeButton',
+})`
+  position: absolute;
+  right: 0;
+  height: 100%;
+  background: inherit;
+  background: ${prop('theme.colors.primaryBackground')};
+  color: ${prop('theme.colors.primaryText')};
+  padding: 0;
+  cursor: pointer;
+  display: none;
+`;
+
 const Track = ({
   connectDropTarget,
   connectDragSource,
@@ -50,15 +78,21 @@ const Track = ({
   artworkUrl,
   title,
   artist,
-  onRemove, // eslint-disable-line
+  onClickRemove, // eslint-disable-line
 }) => connectDragSource(connectDropTarget(
   <div>
     <Wrapper isDragging={isDragging}>
+      <Handle />
       <TrackArtwork artworkUrl={artworkUrl} size="200x200" />
       <Meta>
         <Title>{title}</Title>
         <Artist>{artist}</Artist>
       </Meta>
+      <CloseButton
+        onClick={onClickRemove}
+      >
+        <CloseIcon />
+      </CloseButton>
     </Wrapper>
   </div>,
 ));
@@ -69,7 +103,8 @@ Track.propTypes = {
   artworkUrl: string.isRequired,
   title: string.isRequired,
   artist: string.isRequired,
-  onRemove: func, // TODO: Implement
+  onClickRemove: func.isRequired,
+  changeQueue: func.isRequired,
 };
 
 const trackSource = {
@@ -78,10 +113,6 @@ const trackSource = {
       id,
       originalIndex: findIndex(id),
     };
-  },
-
-  endDrag(props, monitor) {
-
   },
 };
 
@@ -109,6 +140,9 @@ const enhance = compose(
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging(),
   })),
+  withHandlers({
+    onClickRemove: ({ removeFromQueue, id }) => () => removeFromQueue(id),
+  }),
 );
 
 export default enhance(Track);

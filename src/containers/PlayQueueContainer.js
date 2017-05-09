@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeQueue } from 'actions/queueActions';
+import { changeQueue, removeFromQueue } from 'actions/queueActions';
 import { playQueue } from 'selectors/queue';
 import { activeTimeline } from 'selectors/player';
 import { connect } from 'react-redux';
@@ -14,4 +14,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   changeQueue,
+  removeFromQueue,
 })(PlayQueueContainer);
