@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { prop } from 'styled-tools';
+import { DragSource } from 'react-dnd';
+import { DRAGGABLE_TYPES } from 'app-constants';
+import { prop, ifProp } from 'styled-tools';
 import ArtWork from 'components/Track/ArtWork';
 import PlayOverlay from './PlayOverlay';
 
@@ -14,6 +16,7 @@ const Wrapper = styled.li`
   flex-direction: column;
   height: 250px;
   width: 200px;
+  opacity: ${ifProp('isDragging', 0.8, 1)};
 `;
 
 const PlayerArtwork = styled(ArtWork)`
@@ -58,6 +61,9 @@ const User = styled.span`
 class Track extends PureComponent {
   static propTypes = {
     track: PropTypes.object.isRequired,
+    connectDragSource: PropTypes.func.isRequired,
+    connectDragPreview: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool,
     isPlaying: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     onQueue: PropTypes.func.isRequired,
@@ -80,11 +86,17 @@ class Track extends PureComponent {
   render() {
     const {
       track,
+      connectDragSource,
+      connectDragPreview,
+      isDragging,
       toggleLike,
     } = this.props;
 
     return (
-      <Wrapper>
+      <Wrapper
+        isDragging={isDragging}
+        innerRef={el => connectDragSource(el)}
+      >
         <PlayerArtwork
           onClick={this._onTrackClicked}
           artworkUrl={track.artwork_url}
@@ -98,8 +110,10 @@ class Track extends PureComponent {
             isPlaying={this.props.isPlaying}
           />
         </PlayerArtwork>
-        <Meta>
-          <Title>{track.title}</Title>
+        <Meta innerRef={el => connectDragPreview(el)}>
+          <Title>
+            {track.title}
+          </Title>
           <User>{track.user.username}</User>
         </Meta>
       </Wrapper>
@@ -107,5 +121,27 @@ class Track extends PureComponent {
   }
 }
 
-export default Track;
+const trackSource = {
+  beginDrag(props) {
+    return {
+      id: props.track.id,
+    };
+  },
 
+  endDrag(props) {
+    return {
+      ab: 'bosscher',
+      id: props.track.id,
+    };
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+    connectDragPreview: connect.dragPreview(),
+  };
+}
+
+export default DragSource(DRAGGABLE_TYPES.TRACK, trackSource, collect)(Track);

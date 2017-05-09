@@ -1,4 +1,5 @@
 import React from 'react';
+import { changeQueue } from 'actions/queueActions';
 import { queuedTracks } from 'selectors/queue';
 import { activeTimeline } from 'selectors/player';
 import { connect } from 'react-redux';
@@ -11,4 +12,6 @@ const mapStateToProps = state => ({
   tracks: queuedTracks(state),
 });
 
-export default connect(mapStateToProps)(PlayQueueContainer);
+export default connect(mapStateToProps, {
+  changeQueue,
+})(PlayQueueContainer);

@@ -1,4 +1,5 @@
 import { QUEUE_TRACK, MOVE_TRACK, REMOVE_TRACK, UNQUEUE } from 'actions/queueActions';
+import update from 'immutability-helper';
 
 export default function (state = [], action) {
   switch (action.type) {
@@ -17,8 +18,14 @@ export default function (state = [], action) {
       return state.slice(1);
     }
     case MOVE_TRACK: {
-    // TODO: implement
-      return state;
+      const { currentIndex, nextIndex } = action.payload;
+      const currentTrackId = state[currentIndex];
+      return update(state, {
+        $splice: [
+          [currentIndex, 1],
+          [nextIndex, 0, currentTrackId],
+        ],
+      });
     }
     default: {
       return state;

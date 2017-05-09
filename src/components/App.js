@@ -5,6 +5,8 @@ import {
   Route,
 } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import { prop } from 'styled-tools';
 import theme from 'theme';
 import ModalContainer from 'scenes/modals/container';
@@ -75,4 +77,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default DragDropContext(HTML5Backend)(App);

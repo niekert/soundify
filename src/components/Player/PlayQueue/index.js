@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { array, object, func } from 'prop-types';
 import styled, { css } from 'styled-components';
 import { H3 } from 'components/styles/Headings';
 import { prop } from 'styled-tools';
@@ -62,6 +62,7 @@ const Title = styled(H3)`
 
 const PlayQueue = ({
   tracks,
+  changeQueue,
   timeline, // eslint-disable-line
 }) => (
   <Wrapper>
@@ -73,6 +74,8 @@ const PlayQueue = ({
         {tracks.map((track, index) => (
           <Track
             key={`${track.id}-${index}`}
+            changeQueue={changeQueue}
+            index={index}
             artworkUrl={track.artwork_url}
             title={track.title}
             artist={track.user.username}
@@ -84,8 +87,9 @@ const PlayQueue = ({
   </Wrapper>
 );
 PlayQueue.propTypes = {
-  tracks: PropTypes.array.isRequired,
-  timeline: PropTypes.object,
+  tracks: array.isRequired,
+  changeQueue: func.isRequired,
+  timeline: object,
 };
 
 export default PlayQueue;

@@ -10,7 +10,7 @@ export function queueTrack(trackId) {
   };
 }
 
-export function changeTrack(currentIndex, nextIndex) {
+export function changeQueue(currentIndex, nextIndex) {
   return {
     type: MOVE_TRACK,
     payload: {

@@ -1,9 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, func, bool } from 'prop-types';
 import ArtWork from 'components/Track/ArtWork';
-// import { withHandlers, compose } from 'recompose';
+import { DragSource, DropTarget } from 'react-dnd';
+import { compose } from 'recompose';
+import { DRAGGABLE_TYPES } from 'app-constants';
 import styled from 'styled-components';
-import { prop } from 'styled-tools';
+import { prop, ifProp } from 'styled-tools';
 
 const Wrapper = styled.li`
   height: 75px;
@@ -11,6 +13,7 @@ const Wrapper = styled.li`
   display: flex;
   align-items: center;
   overflow: hidden;
+  opacity: ${ifProp('isDragging', 0, 1)};
 `;
 
 const TrackArtwork = styled(ArtWork)`
@@ -41,24 +44,68 @@ const Artist = styled.span`
 `;
 
 const Track = ({
+  connectDropTarget,
+  connectDragSource,
+  isDragging,
   artworkUrl,
   title,
   artist,
   onRemove, // eslint-disable-line
-}) => (
-  <Wrapper>
-    <TrackArtwork artworkUrl={artworkUrl} size="200x200" />
-    <Meta>
-      <Title>{title}</Title>
-      <Artist>{artist}</Artist>
-    </Meta>
-  </Wrapper>
-);
+}) => connectDragSource(connectDropTarget(
+  <div>
+    <Wrapper isDragging={isDragging}>
+      <TrackArtwork artworkUrl={artworkUrl} size="200x200" />
+      <Meta>
+        <Title>{title}</Title>
+        <Artist>{artist}</Artist>
+      </Meta>
+    </Wrapper>
+  </div>,
+));
 Track.propTypes = {
-  artworkUrl: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  artist: PropTypes.string.isRequired,
-  onRemove: PropTypes.func, // TODO: Implement
+  connectDropTarget: func.isRequired,
+  connectDragSource: func.isRequired,
+  isDragging: bool,
+  artworkUrl: string.isRequired,
+  title: string.isRequired,
+  artist: string.isRequired,
+  onRemove: func, // TODO: Implement
 };
 
-export default Track;
+const trackSource = {
+  beginDrag({ index }) {
+    return { originalIndex: index };
+  },
+
+  endDrag(props, monitor) {
+
+  },
+};
+
+const trackTarget = {
+  canDrop() {
+    return false;
+  },
+
+  hover(props, monitor) {
+    const { originalIndex } = monitor.getItem();
+    const index = props.index;
+
+    // DO not move positions if at same index
+    if (originalIndex !== index) {
+      props.changeQueue(originalIndex, index);
+    }
+  },
+};
+
+const enhance = compose(
+  DropTarget(DRAGGABLE_TYPES.TRACK, trackTarget, connect => ({
+    connectDropTarget: connect.dropTarget(),
+  })),
+  DragSource(DRAGGABLE_TYPES.TRACK, trackSource, (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  })),
+);
+
+export default enhance(Track);

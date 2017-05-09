@@ -18,7 +18,6 @@ const Active = styled.div`
   position: relative;
   height: 100%;
   border-radius: 5px;
-  width: ${prop('percentage', 0)}%;
   background: ${ifProp(
     'highlight',
     prop('theme.colors.active'),
@@ -61,6 +60,9 @@ const Slider = enhance(({
 }) => (
   <Bar>
     <Active
+      style={{
+        width: `${percentage}%`,
+      }}
       percentage={percentage}
       highlight={hoverActive}
     >
