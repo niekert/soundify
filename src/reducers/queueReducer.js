@@ -6,7 +6,10 @@ export default function (state = [], action) {
     case QUEUE_TRACK: {
       return [
         ...state,
-        action.payload,
+        {
+          id: action.payload.id,
+          trackId: action.payload.trackId,
+        },
       ];
     }
     case REMOVE_TRACK: {
@@ -18,12 +21,14 @@ export default function (state = [], action) {
       return state.slice(1);
     }
     case MOVE_TRACK: {
-      const { currentIndex, nextIndex } = action.payload;
-      const currentTrackId = state[currentIndex];
+      const { queueItemId, nextIndex } = action.payload;
+      const queueItem = state.find(item => item.id === queueItemId);
+      const currentIndex = state.indexOf(queueItem);
+
       return update(state, {
         $splice: [
           [currentIndex, 1],
-          [nextIndex, 0, currentTrackId],
+          [nextIndex, 0, queueItem],
         ],
       });
     }

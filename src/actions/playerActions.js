@@ -26,7 +26,7 @@ export function changeTrack(changeType) {
     const { activeTimelineId, activeTrackId, previousTrackId } = player;
 
     if (queue.length) {
-      const nextTrackId = queue[0];
+      const nextTrackId = queue[0].trackId;
       dispatch(unqueue()); // Remove the track from queue
       dispatch(toggleTrack({
         trackId: nextTrackId,

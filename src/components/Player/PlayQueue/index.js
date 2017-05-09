@@ -2,6 +2,7 @@ import React from 'react';
 import { array, object, func } from 'prop-types';
 import styled, { css } from 'styled-components';
 import { H3 } from 'components/styles/Headings';
+import { withHandlers, compose } from 'recompose';
 import { prop } from 'styled-tools';
 import Track from './Track';
 import QueueEmpty from './QueueEmpty';
@@ -61,24 +62,26 @@ const Title = styled(H3)`
 `;
 
 const PlayQueue = ({
-  tracks,
+  queue,
   changeQueue,
+  findIndex,
   timeline, // eslint-disable-line
 }) => (
   <Wrapper>
-    {!tracks.length ?
+    {!queue.length ?
       <QueueEmpty /> :
     [
       <Title key="title">Play queue</Title>,
       <TrackList key="tracklist">
-        {tracks.map((track, index) => (
+        {queue.map(queueItem => (
           <Track
-            key={`${track.id}-${index}`}
+            key={`${queueItem.id}`}
+            id={queueItem.id}
+            findIndex={findIndex}
             changeQueue={changeQueue}
-            index={index}
-            artworkUrl={track.artwork_url}
-            title={track.title}
-            artist={track.user.username}
+            artworkUrl={queueItem.track.artwork_url}
+            title={queueItem.track.title}
+            artist={queueItem.track.user.username}
           />
         ))}
       </TrackList>,
@@ -87,9 +90,18 @@ const PlayQueue = ({
   </Wrapper>
 );
 PlayQueue.propTypes = {
-  tracks: array.isRequired,
+  queue: array.isRequired,
+  findIndex: func.isRequired,
   changeQueue: func.isRequired,
   timeline: object,
 };
 
-export default PlayQueue;
+const enhance = compose(
+  withHandlers({
+    findIndex: ({ queue }) => queueItemId => (
+      queue.findIndex(item => item.id === queueItemId)
+    ),
+  }),
+);
+
+export default enhance(PlayQueue);

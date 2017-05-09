@@ -73,8 +73,11 @@ Track.propTypes = {
 };
 
 const trackSource = {
-  beginDrag({ index }) {
-    return { originalIndex: index };
+  beginDrag({ findIndex, id }) {
+    return {
+      id,
+      originalIndex: findIndex(id),
+    };
   },
 
   endDrag(props, monitor) {
@@ -88,12 +91,12 @@ const trackTarget = {
   },
 
   hover(props, monitor) {
-    const { originalIndex } = monitor.getItem();
-    const index = props.index;
+    const { id: draggedId } = monitor.getItem();
+    const { id: overId, findIndex } = props;
 
-    // DO not move positions if at same index
-    if (originalIndex !== index) {
-      props.changeQueue(originalIndex, index);
+    if (overId !== draggedId) {
+      const overIndex = findIndex(overId);
+      props.changeQueue(draggedId, overIndex);
     }
   },
 };
