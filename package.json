@@ -99,7 +99,7 @@
   "scripts": {
     "react-start": "BROWSER=none NODE_PATH=src/ node scripts/start.js",
     "electron-start": "ELECTRON_DEV=1 electron .",
-    "electron-build": "electron-packager --platform=win32 ./ --overwrite",
+    "electron-build": "electron-packager ./ --overwrite",
     "react-build": "node scripts/build.js",
     "start": "PORT=3000 concurrently 'yarn react-start' 'wait-on http://localhost:3000 && yarn electron-start'",
     "test": "node scripts/test.js --env=jsdom",
