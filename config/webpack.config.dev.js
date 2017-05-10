@@ -67,38 +67,29 @@ module.exports = {
     // We use `fallback` instead of `root` because we want `node_modules` to "win"
     // if there any conflicts. This matches Node resolution mechanism.
     // https://github.com/facebookincubator/create-react-app/issues/253
-    fallback: paths.nodePaths,
+    modules: ['node_modules'].concat(paths.nodePaths),
     // These are the reasonable defaults supported by the Node ecosystem.
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
     // https://github.com/facebookincubator/create-react-app/issues/290
-    extensions: ['.js', '.json', '.jsx', ''],
+    extensions: ['.js', '.json', '.jsx'],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'
     }
   },
-  
+
   module: {
-    // First, run the linter.
-    // It's important to do this before Babel processes the JS.
-    preLoaders: [
+    rules: [
+      // First, run the linter.
+      // It's important to do this before Babel processes the JS.
       {
         test: /\.(js|jsx)$/,
-        loader: 'eslint',
-        include: paths.appSrc,
-      }
-    ],
-    loaders: [
-      // ** ADDING/UPDATING LOADERS **
-      // The "url" loader handles all assets unless explicitly excluded.
-      // The `exclude` list *must* be updated with every change to loader extensions.
-      // When adding a new loader, you must add its `test`
-      // as a new entry in the `exclude` list for "url" loader.
-
-      // "url" loader embeds assets smaller than specified size as data URLs to avoid requests.
-      // Otherwise, it acts like the "file" loader.
+        enforce: 'pre',
+        loader: 'eslint-loader',
+        include: paths.appSrc
+      },
       {
         exclude: [
           /\.html$/,
@@ -107,24 +98,23 @@ module.exports = {
           /\.json$/,
           /\.svg$/
         ],
-        loader: 'url',
-        query: {
+        loader: 'url-loader',
+        options: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
       },
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
-        loader: 'babel',
-        query: {
-          
+        loader: 'babel-loader',
+        options: {
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
           cacheDirectory: true
-        }
+        },
       },
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -133,39 +123,39 @@ module.exports = {
       // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
-        loader: 'style!css?importLoaders=1!postcss'
-      },
-      // JSON is not enabled by default in Webpack but both Node and Browserify
-      // allow it implicitly so we also enable it.
-      {
-        test: /\.json$/,
-        loader: 'json'
+        use: ['style-loader', {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+          },
+        }, {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            plugins: () => [
+              autoprefixer({
+                browsers: [
+                  '>1%',
+                  'last 4 versions',
+                  'Firefox ESR',
+                  'not ie < 9', // React doesn't support IE8 anyway
+                ]
+              }),
+            ]
+          }
+        }]
       },
       // "file" loader for svg
+      // ** STOP ** Are you adding a new loader?
+      // Remember to add the new extension(s) to the "url" loader exclusion list.
       {
         test: /\.svg$/,
-        loader: 'file',
-        query: {
+        loader: 'file-loader',
+        options: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
       }
-      // ** STOP ** Are you adding a new loader?
-      // Remember to add the new extension(s) to the "url" loader exclusion list.
     ]
-  },
-  
-  // We use PostCSS for autoprefixing only.
-  postcss: function() {
-    return [
-      autoprefixer({
-        browsers: [
-          '>1%',
-          'last 4 versions',
-          'Firefox ESR',
-          'not ie < 9', // React doesn't support IE8 anyway
-        ]
-      }),
-    ];
   },
   plugins: [
     // Makes some environment variables available in index.html.

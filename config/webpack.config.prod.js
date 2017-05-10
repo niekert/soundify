@@ -39,7 +39,7 @@ const cssFilename = 'static/css/[name].[contenthash:8].css';
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
   // Making sure that the publicPath goes back to to build folder.
   ? { publicPath: Array(cssFilename.split('/').length).join('../') }
-  : undefined;
+  : {};
 
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
@@ -72,36 +72,27 @@ module.exports = {
     // We use `fallback` instead of `root` because we want `node_modules` to "win"
     // if there any conflicts. This matches Node resolution mechanism.
     // https://github.com/facebookincubator/create-react-app/issues/253
-    fallback: paths.nodePaths,
+    modules: ['node_modules'].concat(paths.nodePaths),
     // These are the reasonable defaults supported by the Node ecosystem.
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
     // https://github.com/facebookincubator/create-react-app/issues/290
-    extensions: ['.js', '.json', '.jsx', ''],
+    extensions: ['.js', '.json', '.jsx'],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'
     }
   },
-  
+
   module: {
-    // First, run the linter.
-    // It's important to do this before Babel processes the JS.
-    preLoaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'eslint',
-        include: paths.appSrc
-      }
-    ],
-    loaders: [
-      // ** ADDING/UPDATING LOADERS **
-      // The "url" loader handles all assets unless explicitly excluded.
-      // The `exclude` list *must* be updated with every change to loader extensions.
-      // When adding a new loader, you must add its `test`
-      // as a new entry in the `exclude` list in the "url" loader.
-
+        use: 'eslint-loader',
+        include: paths.appSrc,
+        'enforce': 'pre'
+      },
       // "url" loader embeds assets smaller than specified size as data URLs to avoid requests.
       // Otherwise, it acts like the "file" loader.
       {
@@ -112,8 +103,8 @@ module.exports = {
           /\.json$/,
           /\.svg$/
         ],
-        loader: 'url',
-        query: {
+        loader: 'url-loader',
+        options: {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
         }
@@ -122,8 +113,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
-        loader: 'babel',
-        
+        loader: 'babel-loader',
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -139,53 +129,50 @@ module.exports = {
       // in the main CSS file.
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          'style',
-          'css?importLoaders=1!postcss',
-          extractTextPluginOptions
-        )
+        loader: ExtractTextPlugin.extract(Object.assign({
+          fallback: 'style-loader',
+          use: [{
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          }, {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => ([
+                autoprefixer({
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9', // React doesn't support IE8 anyway
+                  ]
+                })
+              ])
+            }
+          }]
+        }, extractTextPluginOptions))
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
-      // JSON is not enabled by default in Webpack but both Node and Browserify
-      // allow it implicitly so we also enable it.
-      {
-        test: /\.json$/,
-        loader: 'json'
-      },
       // "file" loader for svg
+      // ** STOP ** Are you adding a new loader?
+      // Remember to add the new extension(s) to the "url" loader exclusion list.
       {
         test: /\.svg$/,
-        loader: 'file',
-        query: {
+        loader: 'file-loader',
+        options: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
       }
-      // ** STOP ** Are you adding a new loader?
-      // Remember to add the new extension(s) to the "url" loader exclusion list.
     ]
   },
-  
-  // We use PostCSS for autoprefixing only.
-  postcss: function() {
-    return [
-      autoprefixer({
-        browsers: [
-          '>1%',
-          'last 4 versions',
-          'Firefox ESR',
-          'not ie < 9', // React doesn't support IE8 anyway
-        ]
-      }),
-    ];
-  },
-  plugins: [
-    // Makes some environment variables available in index.html.
+  plugins: [// Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In production, it will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
-    new InterpolateHtmlPlugin(env.raw),
-    // Generates an `index.html` file with the <script> injected.
+    new InterpolateHtmlPlugin(env.raw), // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
@@ -201,41 +188,39 @@ module.exports = {
         minifyCSS: true,
         minifyURLs: true
       }
-    }),
-    // Makes some environment variables available to the JS code, for example:
+    }), // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
     // Otherwise React will be compiled in the very slow development mode.
-    new webpack.DefinePlugin(env.stringified),
-    // This helps ensure the builds are consistent if source hasn't changed:
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    // Try to dedupe duplicated modules, if any:
-    new webpack.optimize.DedupePlugin(),
-    // Minify the code.
+    new webpack.DefinePlugin(env.stringified), // Minify the code.
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         screw_ie8: true, // React doesn't support IE8
         warnings: false
       },
+
       mangle: {
         screw_ie8: true
       },
+
       output: {
         comments: false,
         screw_ie8: true
-      }
-    }),
-    // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin(cssFilename),
-    // Generate a manifest file which contains a mapping of all asset filenames
+      },
+
+      sourceMap: true
+    }), // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
+    new ExtractTextPlugin({
+      filename: cssFilename,
+    }), // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
-    })
+    }),
   ],
-  // Some libraries import Node modules but don't use them in the browser.
-  // Tell Webpack to provide empty mocks for them so importing them works.
+    // Some libraries import Node modules but don't use them in the browser.
+    // Tell Webpack to provide empty mocks for them so importing them works.
   node: {
     fs: 'empty',
     net: 'empty',
