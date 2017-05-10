@@ -14,6 +14,7 @@ const activeCss = css`
 const Link = styled(NavLink)`
   display: block;
   white-space: nowrap;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;

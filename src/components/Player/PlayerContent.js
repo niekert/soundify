@@ -9,11 +9,10 @@ import Controls from './Controls';
 const Wrapper = styled.div`
   padding: 0 15px;
   display: grid;
-  grid-template-rows: 1fr 2fr 1fr;
+  grid-template-columns: auto 1fr auto;
   z-index: 10;
-  display: flex;
-  flex: 1;
   align-items: center;
+  width: 100%;
 `;
 
 const LeftWrapper = styled.div`

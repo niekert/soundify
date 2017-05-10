@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   display: flex;
   flex: 1;
   max-width: 1000px;
-  margin: 0 auto;
+  min-width: 0;
   flex-direction: column;
   height: 100%;
   justify-content: center;
@@ -18,6 +18,9 @@ const Wrapper = styled.div`
 const CurrentTrackContainer = styled.div`
   align-self: center;
   display: flex;
+  justify-content: center;tr
+  width: 100%;
+  overflow: hidden;
   padding: 0 30px 10px;
   font-weight: 300;
   align-items: flex-end;
@@ -26,6 +29,8 @@ const CurrentTrackContainer = styled.div`
 const CurrentTrackLink = styled(Link)`
   color: ${prop('theme.colors.primaryText')};
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-weight: 300;
   text-decoration: none;
   font-size: 12px;

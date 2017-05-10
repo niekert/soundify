@@ -9,6 +9,8 @@ import SidebarLink from './SidebarLink';
 const SidebarWrapper = styled.div`
   position: relative;
   width: 200px;
+  overflow: hidden;
+  position: relative;
   grid-row: 1 / 3;
   display: grid;
   grid-template-rows: 1fr 1fr 50px;
@@ -42,6 +44,7 @@ const NewPlaylist = styled.button`
 
 const SectionWrapper = styled.div`
   display: flex;
+  width: 200px;
   flex-direction: column;
   justify-content: center;
 `;
