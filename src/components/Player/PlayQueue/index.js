@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { array, object, func } from 'prop-types';
 import styled, { css } from 'styled-components';
 import { H3 } from 'components/styles/Headings';
+import { withHandlers, compose } from 'recompose';
 import { prop } from 'styled-tools';
 import Track from './Track';
 import QueueEmpty from './QueueEmpty';
@@ -46,46 +47,64 @@ const Wrapper = styled.div`
     left: 0;
     width: 100%;
     height: 10px;
-    background: ${prop('theme.colors.primaryBackground')};
+      background: ${prop('theme.colors.primaryBackground')};
   }
 `;
 
 const TrackList = styled.ul`
   max-height: 300px;
   overflow: auto;
-  padding: 0 15px;
+  padding: 0 10px;
 `;
 
 const Title = styled(H3)`
-  padding: 0 15px;
+  padding: 0 10px;
 `;
 
 const PlayQueue = ({
-  tracks,
+  queue,
+  changeQueue,
+  findIndex,
+  removeFromQueue,
   timeline, // eslint-disable-line
 }) => (
   <Wrapper>
-    {!tracks.length ?
+    {!queue.length ?
       <QueueEmpty /> :
     [
       <Title key="title">Play queue</Title>,
       <TrackList key="tracklist">
-        {tracks.map((track, index) => (
+        {queue.map(queueItem => (
           <Track
-            key={`${track.id}-${index}`}
-            artworkUrl={track.artwork_url}
-            title={track.title}
-            artist={track.user.username}
+            key={`${queueItem.id}`}
+            id={queueItem.id}
+            findIndex={findIndex}
+            changeQueue={changeQueue}
+            removeFromQueue={removeFromQueue}
+            artworkUrl={queueItem.track.artwork_url}
+            title={queueItem.track.title}
+            artist={queueItem.track.user.username}
           />
-        ))}
+      ))}
       </TrackList>,
     ]
     }
   </Wrapper>
 );
 PlayQueue.propTypes = {
-  tracks: PropTypes.array.isRequired,
-  timeline: PropTypes.object,
+  queue: array.isRequired,
+  findIndex: func.isRequired,
+  changeQueue: func.isRequired,
+  removeFromQueue: func.isRequired,
+  timeline: object,
 };
 
-export default PlayQueue;
+const enhance = compose(
+  withHandlers({
+    findIndex: ({ queue }) => queueItemId => (
+      queue.findIndex(item => item.id === queueItemId)
+    ),
+  }),
+);
+
+export default enhance(PlayQueue);

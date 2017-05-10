@@ -14,6 +14,7 @@ const Wrapper = styled.ul`
   height: auto;
   flex-wrap: wrap;
   justify-content: flex-start;
+  user-select: none;
 `;
 
 const FetchNextTrigger = styled.div`

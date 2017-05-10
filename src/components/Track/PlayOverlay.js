@@ -70,7 +70,6 @@ const Wrapper = styled.div`
   background: rgba(0, 0, 0, .3);
 `;
 
-
 const PlayOverlay = ({
   isPlaying,
   trackId,

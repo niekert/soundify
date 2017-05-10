@@ -3,16 +3,19 @@ import PropTypes from 'prop-types';
 import { alpha } from 'utils/color';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
+import PlaylistDropTarget from './PlaylistDropTarget';
 import SidebarLink from './SidebarLink';
 
 const SidebarWrapper = styled.div`
   position: relative;
   width: 200px;
+  overflow: hidden;
+  position: relative;
   grid-row: 1 / 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: grid;
+  grid-template-rows: 1fr 1fr 50px;
   background: ${prop('theme.colors.primaryBackground')};
+  user-select: none;
   z-index: 1;
 `;
 
@@ -27,12 +30,11 @@ const Label = styled.label`
 
 const NewPlaylist = styled.button`
   background: none;
+  margin: auto 0;
+  z-index: 10;
   border-top: 1px solid ${props => alpha(props.theme.colors.secondaryText, 0.5)};
   color: ${prop('theme.colors.secondaryText')};
   font-size: ${prop('theme.fontSize.caption')};
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   padding: 15px 0;
 
   &:hover {
@@ -40,8 +42,16 @@ const NewPlaylist = styled.button`
   }
 `;
 
+const SectionWrapper = styled.div`
+  display: flex;
+  width: 200px;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 const Section = styled.div`
-  flex-basis: 33%;
+  max-height: 400px;
+  overflow: auto;
 `;
 
 class Sidebar extends PureComponent {
@@ -64,33 +74,40 @@ class Sidebar extends PureComponent {
 
     return (
       <SidebarWrapper>
-        <Section>
+        <SectionWrapper>
           <Label>Your Music</Label>
-          <SidebarLink
-            to="/likes"
-            isPlaying={activeTimelineId === 'likes'}
-          >
-            Likes
-          </SidebarLink>
-          <SidebarLink
-            to="/stream"
-            isPlaying={activeTimelineId === 'stream'}
-          >
-            Stream
-          </SidebarLink>
-        </Section>
-        <Section>
-          <Label>Playlists</Label>
-          {playlists.map(({ title, id }) => (
+          <Section>
             <SidebarLink
-              key={`playlist-${id}`}
-              isPlaying={activeTimelineId === `playlist::${id}`}
-              to={`/playlist/${id}`}
+              to="/likes"
+              isPlaying={activeTimelineId === 'likes'}
             >
-              {title}
+              Likes
             </SidebarLink>
-          ))}
-        </Section>
+            <SidebarLink
+              to="/stream"
+              isPlaying={activeTimelineId === 'stream'}
+            >
+              Stream
+            </SidebarLink>
+          </Section>
+        </SectionWrapper>
+        <SectionWrapper>
+          <Label>Playlists</Label>
+          <Section>
+            {playlists.map(({ title, id }) => (
+              <PlaylistDropTarget
+                key={`playlist-${id}`}
+              >
+                <SidebarLink
+                  isPlaying={activeTimelineId === `playlist::${id}`}
+                  to={`/playlist/${id}`}
+                >
+                  {title}
+                </SidebarLink>
+              </PlaylistDropTarget>
+            ))}
+          </Section>
+        </SectionWrapper>
         <NewPlaylist
           onClick={addPlaylist}
         >

@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { darken } from 'utils/color';
-import { prop } from 'styled-tools';
+import { prop, ifProp } from 'styled-tools';
 import VolumeIcon from 'components/icons/VolumeIcon';
+
+const activeCss = css`
+  color: ${prop('theme.colors.primaryText')};
+  background: ${props => darken(props.theme.colors.primaryBackground, 0.1)};
+`;
 
 const Link = styled(NavLink)`
   display: block;
   white-space: nowrap;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
@@ -19,10 +25,13 @@ const Link = styled(NavLink)`
   font-weight: 300;
 
   &.${prop('activeClassName')},
+  &.dropActive,
   &:hover {
-    color: ${prop('theme.colors.primaryText')};
-    background: ${props => darken(props.theme.colors.primaryBackground, 0.1)};
+    ${activeCss}
   }
+
+  ${ifProp('isLinkActive', activeCss)};
+
 
   &.${prop('activeClassName')}:before {
     content: '';
@@ -40,8 +49,8 @@ Link.defaultProps = {
 };
 
 const PlayingIcon = styled(VolumeIcon)`
-  margin-left: auto;
-  margin-right: 10px;
+  position: absolute;
+  right: 15px;
   width: 16px;
   height: 16px;
   color: ${prop('theme.colors.primaryText')}
@@ -49,16 +58,18 @@ const PlayingIcon = styled(VolumeIcon)`
 
 const SidebarLink = ({
   isPlaying = true,
+  isActive,
   children,
   ...props
 }) => (
-  <Link {...props}>
+  <Link className={isActive && 'dropActive'} {...props}>
     {children}
     {isPlaying && <PlayingIcon />}
   </Link>
 );
 SidebarLink.propTypes = {
   isPlaying: PropTypes.bool,
+  isActive: PropTypes.bool,
   children: PropTypes.node,
 };
 

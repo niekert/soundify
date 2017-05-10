@@ -14,7 +14,10 @@ export const activeTimeline = createSelector(
 export const activeTimelineTracks = createSelector(
   tracksSelector,
   activeTimeline,
-  (tracks, timeline) => get(timeline, 'tracks', []).map(trackId => tracks[trackId]),
+  (tracks, timeline) =>
+    get(timeline, 'tracks', [])
+      .map(trackId => tracks[trackId])
+      .filter(track => track.streamable && track.kind === 'track'),
 );
 
 export const activeTimelineHasNext = createSelector(

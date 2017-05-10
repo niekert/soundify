@@ -1,10 +1,13 @@
 import { createSelector } from 'reselect';
 import { tracksSelector } from './tracks';
 
-const queuedTrackIds = state => state.queue;
+const queuedItems = state => state.queue;
 
-export const queuedTracks = createSelector(
+export const playQueue = createSelector(
   tracksSelector,
-  queuedTrackIds,
-  (tracks, trackIds) => trackIds.map(id => tracks[id]),
+  queuedItems,
+  (tracks, queueItems) => queueItems.map(queuedItem => ({
+    id: queuedItem.id,
+    track: tracks[queuedItem.trackId],
+  })),
 );
