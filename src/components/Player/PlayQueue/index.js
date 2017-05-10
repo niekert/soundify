@@ -1,6 +1,6 @@
 import React from 'react';
 import { array, object, func } from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'; // ES6
 import { H3 } from 'components/styles/Headings';
 import { withHandlers, compose } from 'recompose';
@@ -52,6 +52,22 @@ const Wrapper = styled.div`
   }
 `;
 
+const trackLeaveAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(0.95);
+    opacity: .8;
+  }
+
+  100% {
+    transform: scale(0.95) translateX(105%);
+    opacity: 0;
+  }
+`;
+
 const TrackList = styled(CSSTransitionGroup)`
   max-height: 300px;
   overflow: auto;
@@ -59,13 +75,7 @@ const TrackList = styled(CSSTransitionGroup)`
 
   & .queue-leave {
     position: relative;
-    transform: scale(0.98);
-    transition: transform 200ms ease-out, opacity 200ms ease-out;
-  }
-
-  & .queue-leave-active {
-    transform: translateX(110%) scale(0.98);
-    opacity: 0;
+    animation: ${trackLeaveAnimation} 300ms ease-out;
   }
 `;
 
@@ -91,7 +101,7 @@ const PlayQueue = ({
         transitionName="queue"
         transitionEnter={false}
         transitionLeave
-        transitionLeaveTimeout={200}
+        transitionLeaveTimeout={300}
       >
         {queue.map(queueItem => (
           <Track
