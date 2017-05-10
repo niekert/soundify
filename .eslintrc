@@ -17,6 +17,7 @@
     "react/no-array-index-key": 1,
     "react/prop-types": 1,
     "no-unused-vars": 1,
+    "no-debugger": 1,
     "react/require-default-props": 0 // Because of default param values :)
   }
 }

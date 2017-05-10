@@ -4,8 +4,8 @@ import { unqueue } from 'actions/queueActions';
 export const TOGGLE_TRACK = 'TOGGLE_TRACK';
 export const TOGGLE_PLAYING = 'TOGGLE_PLAYING';
 
-export const NEXT = 'NEXT';
-export const PREV = 'PREV';
+export const NEXT = 'next';
+export const PREV = 'prev';
 
 export function toggleTrack({ trackId, isPlaying = true, timelineId, ...props }) {
   return {
