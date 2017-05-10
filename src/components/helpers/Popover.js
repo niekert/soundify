@@ -70,7 +70,7 @@ class Popover extends React.Component {
 
     return (
       <Wrapper
-        innerRef={c => this._element = c}
+        innerRef={c => this._element = c} // eslint-disable-line
       >
         {this._renderTriggerButton()}
         {this.state.isOpen && children}

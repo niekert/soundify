@@ -28,7 +28,7 @@ const withUser = (ComposedComponent, { redirect = true } = {}) => {
   const mapStateToProps = state => ({
     user: state.auth.user,
     status: state.auth.status,
-   }); // TODO: Selector
+  }); // TODO: Selector
   return connect(mapStateToProps)(EnhanceUser);
 };
 

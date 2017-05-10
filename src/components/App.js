@@ -39,7 +39,7 @@ const MainContent = styled.div`
 
 const AuthedShell = () => (
   <AppShell>
-  <Route path="/" component={SidebarContainer} />
+    <Route path="/" component={SidebarContainer} />
     <TopBarContainer />
     <MainContent>
       <Route path="/logout" component={LogoutContainer} />

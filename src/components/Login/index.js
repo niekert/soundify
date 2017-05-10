@@ -42,7 +42,7 @@ class Login extends PureComponent {
           <div>
             <LoginButton onLoginClicked={this.props.onLoginClicked} />
             <Subtitle>
-              You are required to connect your SoundCloud account  <br />
+              You are required to connect your SoundCloud account <br />
               for the best Soundify experience (for now)
             </Subtitle>
           </div>

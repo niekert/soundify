@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Heart = (props) => (
+const Heart = props => (
   <svg
     viewBox="0 0 18 18"
     xmlns="http://www.w3.org/2000/svg"

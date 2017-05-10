@@ -53,7 +53,8 @@ const AddPlaylistModal = ({
         fullWidth
       />
       <Subtitle>
-        Pro tip: enter the URL of a SoundCloud playlist here and Soundify will save it as one of your own!
+        Pro tip: enter the URL of a SoundCloud playlist here
+        and Soundify will save it as one of your own!
       </Subtitle>
       <Buttons horizontal>
         <Button

@@ -1,7 +1,7 @@
 import leftPad from 'left-pad';
 import moment from 'moment';
 
-export function formatSeconds (time) {
+export function formatSeconds(time) {
   const mins = leftPad(Math.floor(time / 60), 2, '0');
   const seconds = leftPad(Math.floor(time % 60), 2, '0');
 

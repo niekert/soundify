@@ -33,16 +33,52 @@
     "styled-tools": "^0.1.4"
   },
   "devDependencies": {
+    "autoprefixer": "6.7.2",
+    "babel-core": "6.22.1",
+    "babel-eslint": "7.1.1",
+    "babel-jest": "18.0.0",
+    "babel-loader": "6.2.10",
+    "babel-preset-react-app": "^2.1.1",
+    "babel-runtime": "^6.20.0",
+    "case-sensitive-paths-webpack-plugin": "1.1.4",
+    "chalk": "1.1.3",
     "concurrently": "^3.4.0",
+    "connect-history-api-fallback": "1.3.0",
+    "cross-spawn": "4.0.2",
+    "css-loader": "0.26.1",
+    "detect-port": "1.0.1",
+    "dotenv": "2.0.0",
     "electron-packager": "^8.5.2",
-    "eslint": "^3.17.1",
+    "eslint": "3.19.0",
     "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-loader": "1.6.0",
+    "eslint-plugin-flowtype": "2.21.0",
+    "eslint-plugin-import": "^2.0.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.0",
-    "react-scripts": "0.9.3",
+    "eslint-plugin-react": "6.9.0",
+    "extract-text-webpack-plugin": "1.0.1",
+    "file-loader": "0.10.0",
+    "filesize": "3.3.0",
+    "fs-extra": "0.30.0",
+    "gzip-size": "3.0.0",
+    "html-webpack-plugin": "2.24.0",
+    "http-proxy-middleware": "0.17.3",
+    "jest": "18.1.0",
+    "json-loader": "0.5.4",
+    "object-assign": "4.1.1",
+    "postcss-loader": "1.2.2",
+    "promise": "7.1.1",
+    "react-dev-utils": "^0.5.1",
+    "recursive-readdir": "2.1.1",
     "redux-devtools": "^3.3.2",
-    "wait-on": "^2.0.2"
+    "strip-ansi": "3.0.1",
+    "style-loader": "0.13.1",
+    "url-loader": "0.5.7",
+    "wait-on": "^2.0.2",
+    "webpack": "1.14.0",
+    "webpack-dev-server": "1.16.2",
+    "webpack-manifest-plugin": "1.1.0",
+    "whatwg-fetch": "2.0.2"
   },
   "main": "src/electronMain.js",
   "homepage": "./",
@@ -50,13 +86,41 @@
     "extends": "react-app"
   },
   "scripts": {
-    "react-start": "BROWSER=none NODE_PATH=src/ react-scripts start",
+    "react-start": "BROWSER=none NODE_PATH=src/ node scripts/start.js",
     "electron-start": "ELECTRON_DEV=1 electron .",
     "electron-build": "electron-packager --platform=win32 ./ --overwrite",
-    "react-build": "react-scripts build",
+    "react-build": "node scripts/build.js",
     "start": "PORT=3000 concurrently 'yarn react-start' 'wait-on http://localhost:3000 && yarn electron-start'",
-    "test": "react-scripts test --env=jsdom",
-    "build": "BROWSER=none NODE_PATH=src/ yarn react-build && yarn electron-build",
-    "eject": "react-scripts eject"
+    "test": "node scripts/test.js --env=jsdom",
+    "build": "BROWSER=none NODE_PATH=src/ yarn react-build && yarn electron-build"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    }
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
   }
 }

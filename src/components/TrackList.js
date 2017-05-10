@@ -97,7 +97,7 @@ class TrackList extends PureComponent {
         />
         {!tracks.length &&
           <NoTracks>
-            There's nothing here brah
+            There&apos;s nothing here brah
           </NoTracks>
         }
       </Wrapper>
