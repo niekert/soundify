@@ -1,9 +1,4 @@
 const { app, BrowserWindow, globalShortcut } = require('electron');
-const {
-  default: installExtension,
-  REACT_DEVELOPER_TOOLS,
-  REDUX_DEVTOOLS,
-} = require('electron-devtools-installer');
 const path = require('path');
 const server = require('../server');
 const electronIsDev = require('electron-is-dev');
@@ -51,11 +46,17 @@ function createWindow() {
   mainWindow.loadURL(
     electronIsDev
       ? `http://localhost:${port}` // Dev server ran by react-scripts
-      : `file://${path.join(__dirname, '../build', 'index.html')}` // eslint-disable-line
+      : `file://${path.join(__dirname, '../index.html')}` // eslint-disable-line
   );
 
   // Do special things on development
   if (electronIsDev) {
+    const {
+      default: installExtension,
+      REACT_DEVELOPER_TOOLS,
+      REDUX_DEVTOOLS,
+    } = require('electron-devtools-installer');
+
     installExtension(REACT_DEVELOPER_TOOLS);
     installExtension(REDUX_DEVTOOLS);
     mainWindow.webContents.openDevTools();
