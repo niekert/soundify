@@ -12,7 +12,7 @@ function createWindow() {
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1300,
+    width: 1120,
     height: 900,
     experimentalFeatures: true,
     titleBarStyle: 'hidden-inset',

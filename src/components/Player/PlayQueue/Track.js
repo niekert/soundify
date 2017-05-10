@@ -78,10 +78,11 @@ const Track = ({
   artworkUrl,
   title,
   artist,
+  className,
   onClickRemove, // eslint-disable-line
 }) => connectDragSource(connectDropTarget(
   <div>
-    <Wrapper isDragging={isDragging}>
+    <Wrapper className={className} isDragging={isDragging}>
       <Handle />
       <TrackArtwork artworkUrl={artworkUrl} size="200x200" />
       <Meta>

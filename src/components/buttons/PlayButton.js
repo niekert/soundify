@@ -26,14 +26,21 @@ const Button = styled.button`
 const enhance = compose(
   withPlayerContext,
   withHandlers({
-    onClick: ({ toggleTrack, isPlaying, timelineId, activeTimelineId, trackId }) => (e) => {
+    onClick: ({
+      toggleTrack,
+      isPlaying,
+      timelineId,
+      activeTrackId,
+      activeTimelineId,
+      trackId,
+    }) => (e) => {
       e.preventDefault();
 
 
       const toggle = !(timelineId === activeTimelineId && isPlaying);
 
       toggleTrack({
-        trackId,
+        trackId: toggle ? trackId : activeTrackId,
         timelineId,
         isPlaying: toggle,
       });
