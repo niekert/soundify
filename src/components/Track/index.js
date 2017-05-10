@@ -9,13 +9,10 @@ import PlayOverlay from './PlayOverlay';
 
 const Wrapper = styled.li`
   position: relative;
-  margin-right: 30px;
-  margin-bottom: 15px;
   cursor: pointer;
   display: flex;
+  min-height: 250px;
   flex-direction: column;
-  height: 250px;
-  width: 200px;
   opacity: ${ifProp('isDragging', 0.8, 1)};
 `;
 
@@ -98,6 +95,7 @@ class Track extends PureComponent {
         innerRef={el => connectDragSource(el)}
       >
         <PlayerArtwork
+          useImg
           onClick={this._onTrackClicked}
           artworkUrl={track.artwork_url}
         >
@@ -147,5 +145,5 @@ function collect(connect, monitor) {
 export default DragSource(
   DRAGGABLE_TYPES.TRACK,
   trackSource,
-  collect
+  collect,
 )(Track);

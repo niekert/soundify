@@ -9,11 +9,13 @@ const Wrapper = styled.ul`
   position: relative;
   padding-top: 15px;
   margin-left: 10px;
-  display: flex;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 250px);
+  grid-template-columns: repeat(auto-fit, 200px);
+  grid-column-gap: 20px;
+  grid-row-gap: 10px;
   width: 100%;
   height: auto;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   user-select: none;
 `;
 
