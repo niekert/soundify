@@ -10,7 +10,8 @@ const Wrapper = styled.div`
 class Popover extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool,
-    triggerButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    triggerButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     triggerProps: PropTypes.object,
     children: PropTypes.node,
     onToggle: PropTypes.func,
@@ -26,14 +27,18 @@ class Popover extends React.Component {
     isOpen: this.props.isOpen,
   };
 
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps.isOpen !== this.props.isOpen && nextProps.isOpen !== this.state.isOpen) {
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.isOpen !== this.props.isOpen &&
+      nextProps.isOpen !== this.state.isOpen
+    ) {
       this.setSate({ isOpen: nextProps.isOpen }); // TODO: fix this :)
     }
-  }
+  };
 
   // Function called by `enhanceClickOutside` hoc
-  handleClickOutside () { // eslint-disable-line
+  handleClickOutside() {
+    // eslint-disable-line
     if (this.state.isOpen) {
       this.setState({ isOpen: false });
     }
@@ -54,7 +59,7 @@ class Popover extends React.Component {
     }
 
     const buttonProps = {
-      onClick: (e) => {
+      onClick: e => {
         this._togglePopover();
         e.preventDefault();
       },
@@ -70,7 +75,7 @@ class Popover extends React.Component {
 
     return (
       <Wrapper
-        innerRef={c => this._element = c} // eslint-disable-line
+        innerRef={c => (this._element = c)} // eslint-disable-line
       >
         {this._renderTriggerButton()}
         {this.state.isOpen && children}

@@ -12,7 +12,7 @@ const initialState = {
   data: [],
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_PLAYLISTS_SUCCESS: {
       const { playlists } = action.payload;

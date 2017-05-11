@@ -91,33 +91,32 @@ const PlayQueue = ({
   timeline, // eslint-disable-line
 }) => (
   <Wrapper>
-    {!queue.length ?
-      <QueueEmpty /> :
-    [
-      <Title key="title">Play queue</Title>,
-      <TrackList
-        key="tracklist"
-        component="ul"
-        transitionName="queue"
-        transitionEnter={false}
-        transitionLeave
-        transitionLeaveTimeout={300}
-      >
-        {queue.map(queueItem => (
-          <Track
-            key={`${queueItem.id}`}
-            id={queueItem.id}
-            findIndex={findIndex}
-            changeQueue={changeQueue}
-            removeFromQueue={removeFromQueue}
-            artworkUrl={queueItem.track.artwork_url}
-            title={queueItem.track.title}
-            artist={queueItem.track.user.username}
-          />
-      ))}
-      </TrackList>,
-    ]
-    }
+    {!queue.length
+      ? <QueueEmpty />
+      : [
+          <Title key="title">Play queue</Title>,
+          <TrackList
+            key="tracklist"
+            component="ul"
+            transitionName="queue"
+            transitionEnter={false}
+            transitionLeave
+            transitionLeaveTimeout={300}
+          >
+            {queue.map(queueItem => (
+              <Track
+                key={`${queueItem.id}`}
+                id={queueItem.id}
+                findIndex={findIndex}
+                changeQueue={changeQueue}
+                removeFromQueue={removeFromQueue}
+                artworkUrl={queueItem.track.artwork_url}
+                title={queueItem.track.title}
+                artist={queueItem.track.user.username}
+              />
+            ))}
+          </TrackList>,
+        ]}
   </Wrapper>
 );
 PlayQueue.propTypes = {
@@ -130,9 +129,8 @@ PlayQueue.propTypes = {
 
 const enhance = compose(
   withHandlers({
-    findIndex: ({ queue }) => queueItemId => (
-      queue.findIndex(item => item.id === queueItemId)
-    ),
+    findIndex: ({ queue }) => queueItemId =>
+      queue.findIndex(item => item.id === queueItemId),
   }),
 );
 

@@ -35,9 +35,9 @@ class PlayerContainer extends React.Component {
         this.props.togglePlaying(!this.props.isPlaying);
         break;
       default:
-        // DO Nothing. Maybe log?
+      // DO Nothing. Maybe log?
     }
-  }
+  };
 
   render() {
     return <Player {...this.props} />;

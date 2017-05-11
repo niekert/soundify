@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 const wrapper = styled.div`
   
-`
+`;
 
 const img = `
-`
+`;
 
 const UserAvatar = ({ src }) => (
   <wrapper>
@@ -17,7 +17,7 @@ const UserAvatar = ({ src }) => (
 
 UserAvatar.propTypes = {
   src: PropTypes.string.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default UserAvatar;

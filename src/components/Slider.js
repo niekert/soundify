@@ -18,11 +18,7 @@ const Active = styled.div`
   position: relative;
   height: 100%;
   border-radius: 5px;
-  background: ${ifProp(
-    'highlight',
-    prop('theme.colors.active'),
-    prop('theme.colors.secondaryText'),
-  )};
+  background: ${ifProp('highlight', prop('theme.colors.active'), prop('theme.colors.secondaryText'))};
 `;
 
 const Seek = styled.input`
@@ -51,31 +47,27 @@ const enhance = compose(
   }),
 );
 
-const Slider = enhance(({
-  onChange,
-  percentage = 0,
-  hoverActive,
-  mouseEnter,
-  mouseLeave,
-}) => (
-  <Bar>
-    <Active
-      style={{
-        width: `${percentage}%`,
-      }}
-      percentage={percentage}
-      highlight={hoverActive}
-    >
-      {hoverActive && <Scrubber />}
-    </Active>
-    <Seek
-      onMouseEnter={mouseEnter}
-      onMouseLeave={mouseLeave}
-      type="range"
-      onChange={onChange}
-    />
-  </Bar>
-));
+const Slider = enhance(
+  ({ onChange, percentage = 0, hoverActive, mouseEnter, mouseLeave }) => (
+    <Bar>
+      <Active
+        style={{
+          width: `${percentage}%`,
+        }}
+        percentage={percentage}
+        highlight={hoverActive}
+      >
+        {hoverActive && <Scrubber />}
+      </Active>
+      <Seek
+        onMouseEnter={mouseEnter}
+        onMouseLeave={mouseLeave}
+        type="range"
+        onChange={onChange}
+      />
+    </Bar>
+  ),
+);
 Slider.propTypes = {
   onChange: PropTypes.func.isRequired,
   percentage: PropTypes.number,

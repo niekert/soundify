@@ -23,7 +23,8 @@ function createWindow() {
   server(); // Start a simple express server for the soundcloud API callback
 
   const port = process.env.PORT || 3000; // Default to port 3000
-  const windowSize = { // TODO: Save this
+  const windowSize = {
+    // TODO: Save this
     width: 1100,
     height: 900,
   };
@@ -43,6 +44,7 @@ function createWindow() {
     },
   });
 
+  // prettier-ignore
   mainWindow.loadURL(
     electronIsDev
       ? `http://localhost:${port}` // Dev server ran by react-scripts

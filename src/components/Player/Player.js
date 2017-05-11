@@ -21,16 +21,13 @@ const Wrapper = styled.div`
   user-selectable: none;
   background-size: cover !important;
   box-shadow: ${prop('theme.shadows.depth2')};
-  background: ${props => props.artwork ?
-    `url(${getArtworkUrl(props.artwork, '500x500')}) 50% 50% no-repeat` :
-    props.theme.colors.primaryBackground
-  };
+  background: ${props => (props.artwork ? `url(${getArtworkUrl(props.artwork, '500x500')}) 50% 50% no-repeat` : props.theme.colors.primaryBackground)};
   display: flex;
   justify-content: center;
   transition: transform .2s ease-out;
 
   &:before {
-    ${ifProp('artwork', 'content: \'\'')};
+    ${ifProp('artwork', "content: ''")};
     position: absolute;
     top: 0;
     left: 0;
@@ -56,7 +53,7 @@ class Player extends PureComponent {
     active: false,
     isPlaying: false,
     isActive: false,
-  }
+  };
 
   state = {
     totalSeconds: 0,
@@ -64,7 +61,10 @@ class Player extends PureComponent {
   };
 
   componentDidMount() {
-    this._audioElement.addEventListener('loadedmetadata', this._onMetadataLoaded);
+    this._audioElement.addEventListener(
+      'loadedmetadata',
+      this._onMetadataLoaded,
+    );
     this._audioElement.addEventListener('timeupdate', this._onTimeUpdate);
     this._audioElement.addEventListener('ended', this._onEnded);
 
@@ -97,7 +97,10 @@ class Player extends PureComponent {
 
   componentWillUnmount() {
     this._audioElement.removeEventListener('timeupdate', this._onTimeUpdate);
-    this._audioElement.removeEventListener('loadedmetadata', this._onMetadataLoaded);
+    this._audioElement.removeEventListener(
+      'loadedmetadata',
+      this._onMetadataLoaded,
+    );
     this._audioElement.addEventListener('ended', this._onEnded);
   }
 
@@ -115,11 +118,11 @@ class Player extends PureComponent {
 
   _onTogglePlay = () => {
     this.props.togglePlaying(!this.props.isPlaying);
-  }
+  };
 
-  _onSeek = (nextSeconds) => {
+  _onSeek = nextSeconds => {
     this._audioElement.currentTime = nextSeconds; // Woo dihh;
-  }
+  };
 
   _onTimeUpdate = () => {
     const playedSeconds = Math.floor(this._audioElement.currentTime);
@@ -136,23 +139,18 @@ class Player extends PureComponent {
     this.setState({
       totalSeconds,
     });
-  }
+  };
 
   render() {
-    const {
-      track,
-      isPlaying,
-      isActive,
-      toggleLike,
-    } = this.props;
+    const { track, isPlaying, isActive, toggleLike } = this.props;
 
     return (
       <Wrapper>
-        {track && !!track.artwork_url && (
-          <TrackContextOverlay artworkUrl={track.artwork_url} />
-        )}
+        {track &&
+          !!track.artwork_url &&
+          <TrackContextOverlay artworkUrl={track.artwork_url} />}
         <audio
-          ref={c => this._audioElement = c} // eslint-disable-line no-return-assign
+          ref={c => (this._audioElement = c)} // eslint-disable-line no-return-assign
           src={track && `${track.stream_url}?client_id=${CLIENT_ID}`}
         />
 

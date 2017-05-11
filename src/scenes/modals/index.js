@@ -19,14 +19,13 @@ export function hideModal() {
   };
 }
 
-
 const defaultState = {
   activeModal: null,
   props: null,
 };
 
 // Reducer
-export default function (state = defaultState, action) {
+export default function(state = defaultState, action) {
   switch (action.type) {
     case SHOW_MODAL:
       return {

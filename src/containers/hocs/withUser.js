@@ -33,4 +33,3 @@ const withUser = (ComposedComponent, { redirect = true } = {}) => {
 };
 
 export default withUser;
-

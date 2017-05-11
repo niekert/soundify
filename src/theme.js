@@ -1,7 +1,7 @@
 const spaceFactor = 8;
 
 function computeGoldenRatio(spacingFactor, exp) {
-  return Math.round(spacingFactor * (1.618 ** exp));
+  return Math.round(spacingFactor * 1.618 ** exp);
 }
 
 export default {
@@ -26,12 +26,12 @@ export default {
     light: 200,
   },
   spacing: {
-    space0: `${computeGoldenRatio(spaceFactor, 0)}px`,  // 8
-    space1: `${computeGoldenRatio(spaceFactor, 1)}px`,  // 13
-    space2: `${computeGoldenRatio(spaceFactor, 2)}px`,  // 21
-    space3: `${computeGoldenRatio(spaceFactor, 3)}px`,  // 34
-    space4: `${computeGoldenRatio(spaceFactor, 4)}px`,  // 55
-    space5: `${computeGoldenRatio(spaceFactor, 5)}px`,  // 89
+    space0: `${computeGoldenRatio(spaceFactor, 0)}px`, // 8
+    space1: `${computeGoldenRatio(spaceFactor, 1)}px`, // 13
+    space2: `${computeGoldenRatio(spaceFactor, 2)}px`, // 21
+    space3: `${computeGoldenRatio(spaceFactor, 3)}px`, // 34
+    space4: `${computeGoldenRatio(spaceFactor, 4)}px`, // 55
+    space5: `${computeGoldenRatio(spaceFactor, 5)}px`, // 89
   },
   fontSize: {
     // heading
@@ -65,4 +65,3 @@ export default {
     depth5: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)',
   },
 };
-

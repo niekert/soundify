@@ -37,16 +37,15 @@ class Login extends PureComponent {
     const { status } = this.props;
     return (
       <Wrapper>
-        {status === PENDING ?
-          <Loader light /> :
-          <div>
-            <LoginButton onLoginClicked={this.props.onLoginClicked} />
-            <Subtitle>
-              You are required to connect your SoundCloud account <br />
-              for the best Soundify experience (for now)
-            </Subtitle>
-          </div>
-        }
+        {status === PENDING
+          ? <Loader light />
+          : <div>
+              <LoginButton onLoginClicked={this.props.onLoginClicked} />
+              <Subtitle>
+                You are required to connect your SoundCloud account <br />
+                for the best Soundify experience (for now)
+              </Subtitle>
+            </div>}
       </Wrapper>
     );
   }

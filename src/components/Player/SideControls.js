@@ -55,30 +55,24 @@ const PlayQueueButton = () => (
   </IconButton>
 );
 
-const SideControls = enhance(
-  ({ volume, onChange, mute }) => (
-    <Wrapper>
-      <PopOver
-        triggerButton={PlayQueueButton}
-        width="600"
-        align="center"
-      >
-        <PlayQueueContainer />
-      </PopOver>
-      <IconButton onClick={cast}>
-        <ChromecastIcon />
+const SideControls = enhance(({ volume, onChange, mute }) => (
+  <Wrapper>
+    <PopOver triggerButton={PlayQueueButton} width="600" align="center">
+      <PlayQueueContainer />
+    </PopOver>
+    <IconButton onClick={cast}>
+      <ChromecastIcon />
+    </IconButton>
+    <VolumeControl>
+      <IconButton onClick={mute}>
+        <VolumeIcon />
       </IconButton>
-      <VolumeControl>
-        <IconButton onClick={mute} >
-          <VolumeIcon />
-        </IconButton>
-        <VolumeBar>
-          <Slider percentage={volume} onChange={onChange} />
-        </VolumeBar>
-      </VolumeControl>
-    </Wrapper>
-  ),
-);
+      <VolumeBar>
+        <Slider percentage={volume} onChange={onChange} />
+      </VolumeBar>
+    </VolumeControl>
+  </Wrapper>
+));
 SideControls.propTypes = {
   volume: PropTypes.number,
   setVolume: PropTypes.func.isRequired,

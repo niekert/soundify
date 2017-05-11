@@ -20,10 +20,10 @@ const Buttons = styled(ButtonGroup)`
 const enhance = compose(
   withState('title', 'setPlaylistTitle', ''),
   withHandlers({
-    onChange: ({ setPlaylistTitle }) => (e) => {
+    onChange: ({ setPlaylistTitle }) => e => {
       setPlaylistTitle(e.target.value);
     },
-    onSubmit: ({ addPlaylist, title }) => (e) => {
+    onSubmit: ({ addPlaylist, title }) => e => {
       e.preventDefault();
 
       addPlaylist(title);
@@ -32,16 +32,8 @@ const enhance = compose(
   setDisplayName('AddPlaylistModal'),
 );
 
-const AddPlaylistModal = ({
-  onRequestClose,
-  name,
-  onSubmit,
-  onChange,
-}) => (
-  <Modal
-    onRequestClose={onRequestClose}
-    contentLabel="Add playlist"
-  >
+const AddPlaylistModal = ({ onRequestClose, name, onSubmit, onChange }) => (
+  <Modal onRequestClose={onRequestClose} contentLabel="Add playlist">
     <ModalHeader>Add playlist</ModalHeader>
     <form onSubmit={onSubmit}>
       <Label>Playlist title or URL</Label>
@@ -57,16 +49,10 @@ const AddPlaylistModal = ({
         and Soundify will save it as one of your own!
       </Subtitle>
       <Buttons horizontal>
-        <Button
-          cta
-          type="submit"
-        >
+        <Button cta type="submit">
           Add
         </Button>
-        <Button
-          cancel
-          onClick={onRequestClose}
-        >
+        <Button cancel onClick={onRequestClose}>
           Cancel
         </Button>
       </Buttons>

@@ -50,14 +50,12 @@ const Row = styled.div`
 
 const enhance = compose(
   withHandlers({
-    onClickLike: ({ toggleLike, track }) => () => toggleLike(track.id, !track.user_favorite),
+    onClickLike: ({ toggleLike, track }) => () =>
+      toggleLike(track.id, !track.user_favorite),
   }),
 );
 
-const CurrentTrack = enhance(({
-  track,
-  onClickLike,
-}) => (
+const CurrentTrack = enhance(({ track, onClickLike }) => (
   <Wrapper>
     {track && [
       <PlayerArtwork artworkUrl={track.artwork_url} key="artwork" />,

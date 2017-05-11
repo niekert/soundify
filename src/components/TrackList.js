@@ -47,10 +47,10 @@ class TrackList extends PureComponent {
     hasNext: false,
     isPlaying: false,
     timelineId: '',
-  }
+  };
 
   componentDidMount() {
-    this.intersectionObserver = new window.IntersectionObserver((entries) => {
+    this.intersectionObserver = new window.IntersectionObserver(entries => {
       const [sentinel] = entries; // Always on first index
       if (sentinel.intersectionRatio > 0 && this.props.hasNext) {
         this.props.fetchNext();
@@ -60,9 +60,9 @@ class TrackList extends PureComponent {
     this.intersectionObserver.observe(this._nextObserver);
   }
 
-  _nextObserverRef = (c) => {
+  _nextObserverRef = c => {
     this._nextObserver = c;
-  }
+  };
 
   _trackClicked = (trackId, toggle) => {
     this.props.toggleTrack({
@@ -94,15 +94,11 @@ class TrackList extends PureComponent {
             onQueue={queueTrack}
           />
         ))}
-        <FetchNextTrigger
-          innerRef={this._nextObserverRef}
-          active={hasNext}
-        />
+        <FetchNextTrigger innerRef={this._nextObserverRef} active={hasNext} />
         {!tracks.length &&
           <NoTracks>
-            There&apos;s nothing here brah
-          </NoTracks>
-        }
+            There's nothing here brah
+          </NoTracks>}
       </Wrapper>
     );
   }

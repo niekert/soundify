@@ -18,12 +18,7 @@ const ModalContainer = ({
     return null;
   }
 
-  return (
-    <ModalComponent
-      onRequestClose={onRequestClose}
-      {...modalProps}
-    />
-  );
+  return <ModalComponent onRequestClose={onRequestClose} {...modalProps} />;
 };
 ModalContainer.propTypes = {
   hideModal: func.isRequired,

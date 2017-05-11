@@ -16,7 +16,6 @@ const fetchTimeline = id => ({
   },
 });
 
-
 function fetchTimelineSuccess({ id, timeline }) {
   const normalized = normalize(timeline, schema.timeline);
 
@@ -32,10 +31,11 @@ function fetchTimelineSuccess({ id, timeline }) {
 
 export function submitSearch(query) {
   const id = `search::${query}`;
-  return (dispatch) => {
+  return dispatch => {
     dispatch(fetchTimeline(id));
 
-    api.search(query)
+    api
+      .search(query)
       .then(json => ({
         id,
         type: 'Search',
@@ -43,22 +43,26 @@ export function submitSearch(query) {
         tracks: json.collection,
         next: json.next_href,
       }))
-      .then(timeline => dispatch(
-        fetchTimelineSuccess({
-          id,
-          timeline,
+      .then(timeline =>
+        dispatch(
+          fetchTimelineSuccess({
+            id,
+            timeline,
+          }),
+        ),
+      )
+      .catch(err =>
+        dispatch({
+          type: FETCH_TIMELINE_ERROR,
+          payload: err.message,
         }),
-      ))
-      .catch(err => dispatch({
-        type: FETCH_TIMELINE_ERROR,
-        payload: err.message,
-      }));
+      );
   };
 }
 
 export function fetchLikes() {
   const id = 'likes';
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: FETCH_TIMELINE,
       payload: {
@@ -66,47 +70,51 @@ export function fetchLikes() {
       },
     });
 
-    api.fetchLikes()
+    api
+      .fetchLikes()
       .then(json => ({
         id,
         title: 'My Likes',
         next: json.next_href,
         tracks: json.collection,
       }))
-      .then(timeline => dispatch(
-        fetchTimelineSuccess({
-          id,
-          timeline,
+      .then(timeline =>
+        dispatch(
+          fetchTimelineSuccess({
+            id,
+            timeline,
+          }),
+        ),
+      )
+      .catch(err =>
+        dispatch({
+          type: FETCH_TIMELINE_ERROR,
+          payload: err.message,
         }),
-      ))
-      .catch(err => dispatch({
-        type: FETCH_TIMELINE_ERROR,
-        payload: err.message,
-      }));
+      );
   };
 }
 
 export function fetchNext(timelineId, nextUrl) {
-  return (dispatch) => {
-    api.fetchNext(nextUrl)
-      .then((resp) => {
-        let tracks = resp.collection;
-        if (timelineId === 'stream') {
-          // TODO: solve better
-          tracks = resp.collection.map(item => item.origin);
-        }
+  return dispatch => {
+    api.fetchNext(nextUrl).then(resp => {
+      let tracks = resp.collection;
+      if (timelineId === 'stream') {
+        // TODO: solve better
+        tracks = resp.collection.map(item => item.origin);
+      }
 
-        const normalized = normalize(tracks, schema.arrayOfTracks);
-        dispatch({
-          type: FETCH_NEXT_SUCCESS,
-          payload: {
-            id: timelineId,
-            next: resp.next_href,
-            tracks: normalized.result,
-          },
-          entities: normalized.entities,
-        });
+      const normalized = normalize(tracks, schema.arrayOfTracks);
+      dispatch({
+        type: FETCH_NEXT_SUCCESS,
+        payload: {
+          id: timelineId,
+          next: resp.next_href,
+          tracks: normalized.result,
+        },
+        entities: normalized.entities,
       });
+    });
 
     dispatch({
       type: FETCH_NEXT,
@@ -120,26 +128,28 @@ export function fetchNext(timelineId, nextUrl) {
 export function fetchPlaylist(playlistId) {
   const id = `playlist::${playlistId}`;
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(fetchTimeline(id));
 
-    api.fetchPlaylist(playlistId)
-      .then(json => dispatch(
+    api.fetchPlaylist(playlistId).then(json =>
+      dispatch(
         fetchTimelineSuccess({
           id,
           timeline: json,
         }),
-      ));
+      ),
+    );
   };
 }
 
 export function fetchStream() {
   const id = 'stream';
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(fetchTimeline(id));
 
-    api.fetchStream()
+    api
+      .fetchStream()
       .then(json => ({
         id,
         title: 'Stream',
@@ -147,12 +157,14 @@ export function fetchStream() {
         future: json.next_future,
         tracks: json.collection.map(item => item.origin),
       }))
-      .then(json => dispatch(
-        fetchTimelineSuccess({
-          id,
-          timeline: json,
-        }),
-      ));
+      .then(json =>
+        dispatch(
+          fetchTimelineSuccess({
+            id,
+            timeline: json,
+          }),
+        ),
+      );
   };
 }
 

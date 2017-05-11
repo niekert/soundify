@@ -71,14 +71,14 @@ class Track extends PureComponent {
     isPlaying: false,
   };
 
-  _onTrackClicked = (e) => {
+  _onTrackClicked = e => {
     e.preventDefault();
     this.props.onClick(this.props.track.id, !this.props.isPlaying);
-  }
+  };
 
   _onQueueClicked = () => {
     this.props.onQueue(this.props.track.id);
-  }
+  };
 
   render() {
     const {
@@ -90,10 +90,7 @@ class Track extends PureComponent {
     } = this.props;
 
     return (
-      <Wrapper
-        isDragging={isDragging}
-        innerRef={el => connectDragSource(el)}
-      >
+      <Wrapper isDragging={isDragging} innerRef={el => connectDragSource(el)}>
         <PlayerArtwork
           useImg
           onClick={this._onTrackClicked}
@@ -142,8 +139,4 @@ function collect(connect, monitor) {
   };
 }
 
-export default DragSource(
-  DRAGGABLE_TYPES.TRACK,
-  trackSource,
-  collect,
-)(Track);
+export default DragSource(DRAGGABLE_TYPES.TRACK, trackSource, collect)(Track);

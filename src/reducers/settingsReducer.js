@@ -4,7 +4,7 @@ const defaultState = {
   volumePercentage: 100, // TODO: use redux-localstorage
 };
 
-export default function (state = defaultState, action) {
+export default function(state = defaultState, action) {
   switch (action.type) {
     case SET_VOLUME:
       return {

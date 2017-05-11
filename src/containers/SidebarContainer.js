@@ -16,16 +16,16 @@ class SidebarContainer extends PureComponent {
   }
 
   render() {
-    return (
-      <Sidebar {...this.props} />
-    );
+    return <Sidebar {...this.props} />;
   }
 }
 
 function mapStateToProps(state) {
   return {
     playlists: state.playlists.data,
-    activeTimelineId: state.player.isPlaying ? state.player.activeTimelineId : undefined,
+    activeTimelineId: state.player.isPlaying
+      ? state.player.activeTimelineId
+      : undefined,
   };
 }
 
@@ -37,4 +37,3 @@ const container = connect(mapStateToProps, {
 export default withUser(container, {
   redirect: false,
 });
-

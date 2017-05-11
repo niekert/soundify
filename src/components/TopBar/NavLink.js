@@ -5,10 +5,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled(Link)`
   padding: 0 15px;
-  color: ${props => props.active ?
-    props.theme.colors.primaryText :
-    props.theme.colors.secondaryText
-  };
+  color: ${props => (props.active ? props.theme.colors.primaryText : props.theme.colors.secondaryText)};
   text-decoration: none;
   outline: none;
 
@@ -49,11 +46,7 @@ class NavLink extends PureComponent {
     const active = match && match.url === to;
 
     return (
-      <Wrapper
-        active={active}
-        to={to}
-        {...props}
-      >
+      <Wrapper active={active} to={to} {...props}>
         {children}
       </Wrapper>
     );

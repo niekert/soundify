@@ -12,7 +12,7 @@ class AppContainer extends Component {
 
   static defaultProps = {
     user: null,
-  }
+  };
 
   componentDidMount() {
     this.props.fetchAuthedUser();

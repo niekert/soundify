@@ -29,9 +29,7 @@ class LoginButton extends Component {
 
   render() {
     return (
-      <Button
-        onClick={this.props.onLoginClicked}
-      >
+      <Button onClick={this.props.onLoginClicked}>
         <SoundcloudLogo />
         Connect to SoundCloud
       </Button>

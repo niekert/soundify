@@ -18,10 +18,13 @@ class QueueButton extends Component {
     clearTimeout(this._activeTimeout);
   }
 
-  _onClick = (e) => {
+  _onClick = e => {
     e.stopPropagation();
     this.setState({ addedActive: true });
-    this._activeTimeout = setTimeout(() => this.setState({ addedActive: false }), 3000);
+    this._activeTimeout = setTimeout(
+      () => this.setState({ addedActive: false }),
+      3000,
+    );
 
     this.props.onClick(this.props.trackId);
   };
@@ -30,11 +33,8 @@ class QueueButton extends Component {
     const { addedActive } = this.state;
 
     return (
-      <IconButton
-        disabled={addedActive}
-        onClick={this._onClick}
-      >
-        { addedActive ? <CheckIcon /> : <QueueIcon /> }
+      <IconButton disabled={addedActive} onClick={this._onClick}>
+        {addedActive ? <CheckIcon /> : <QueueIcon />}
       </IconButton>
     );
   }

@@ -33,9 +33,8 @@ const enhance = compose(
       activeTrackId,
       activeTimelineId,
       trackId,
-    }) => (e) => {
+    }) => e => {
       e.preventDefault();
-
 
       const toggle = !(timelineId === activeTimelineId && isPlaying);
 
@@ -50,15 +49,8 @@ const enhance = compose(
   setDisplayName('PlayButton'),
 );
 
-const PlayButton = ({
-  isPlaying,
-  timelineId,
-  activeTimelineId,
-  onClick,
-}) => (
-  <Button
-    onClick={onClick}
-  >
+const PlayButton = ({ isPlaying, timelineId, activeTimelineId, onClick }) => (
+  <Button onClick={onClick}>
     {isPlaying && timelineId === activeTimelineId ? 'Pause' : 'Play'}
   </Button>
 );
@@ -70,4 +62,3 @@ PlayButton.propTypes = {
 };
 
 export default enhance(PlayButton);
-

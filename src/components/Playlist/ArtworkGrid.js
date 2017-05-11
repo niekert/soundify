@@ -19,21 +19,22 @@ const ArtworkWrapper = styled(Artwork)`
   height: 100%;
 `;
 
-const ArtworkGrid = ({
-  tracks,
-}) => {
-  if (tracks.length < 4) { // TODO: don't do this
+const ArtworkGrid = ({ tracks }) => {
+  if (tracks.length < 4) {
+    // TODO: don't do this
     return null;
   }
   return (
     <Wrapper>
-      {tracks.slice(0, 4).map(track => (
-        <ArtworkWrapper
-          key={track.id}
-          artworkUrl={track.artwork_url}
-          size="200x200"
-        />
-      ))}
+      {tracks
+        .slice(0, 4)
+        .map(track => (
+          <ArtworkWrapper
+            key={track.id}
+            artworkUrl={track.artwork_url}
+            size="200x200"
+          />
+        ))}
     </Wrapper>
   );
 };

@@ -8,5 +8,4 @@ export function formatSeconds(time) {
   return `${mins}:${seconds}`;
 }
 
-export const formatPlaytime = duration =>
- moment.duration(duration).humanize();
+export const formatPlaytime = duration => moment.duration(duration).humanize();

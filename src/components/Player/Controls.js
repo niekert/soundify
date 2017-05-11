@@ -40,7 +40,6 @@ const CurrentTrackLink = styled(Link)`
   }
 `;
 
-
 class Controls extends Component {
   static propTypes = {
     playedSeconds: PropTypes.number,
@@ -70,9 +69,10 @@ class Controls extends Component {
     return (
       <Wrapper>
         <CurrentTrackContainer>
-          {!!track && (
-            <CurrentTrackLink to={`/track/${track.id}`}>{track.title}</CurrentTrackLink>
-          )}
+          {!!track &&
+            <CurrentTrackLink to={`/track/${track.id}`}>
+              {track.title}
+            </CurrentTrackLink>}
         </CurrentTrackContainer>
         <SeekBar
           isPlaying={isPlaying}

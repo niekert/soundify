@@ -1,10 +1,7 @@
 import React from 'react';
 import { string } from 'prop-types';
 
-const DragHandle = ({
-  fill,
-  ...props
-}) => (
+const DragHandle = ({ fill, ...props }) => (
   <svg
     fill={fill}
     height="24"

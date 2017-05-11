@@ -15,7 +15,10 @@ export default {
       ...query,
     });
 
-    return fetch(`https://api.soundcloud.com${path}?${searchQuery}`, fetchOptions);
+    return fetch(
+      `https://api.soundcloud.com${path}?${searchQuery}`,
+      fetchOptions,
+    );
   },
 
   attemptAuth() {
@@ -24,12 +27,11 @@ export default {
       redirect_uri: REDIRECT_URL,
     });
 
-    return SC.connect()
-      .then(({ oauth_token: token }) => {
-        this.token = token;
-        window.localStorage.setItem(localstorageKey, token);
-        return token;
-      });
+    return SC.connect().then(({ oauth_token: token }) => {
+      this.token = token;
+      window.localStorage.setItem(localstorageKey, token);
+      return token;
+    });
   },
 
   fetchUser() {
@@ -37,8 +39,9 @@ export default {
       return Promise.reject();
     }
 
-    return fetch(`https://api.soundcloud.com/me?oauth_token=${this.token}`)
-      .then(resp => resp.json());
+    return fetch(
+      `https://api.soundcloud.com/me?oauth_token=${this.token}`,
+    ).then(resp => resp.json());
   },
 
   authCallback(location) {
@@ -50,13 +53,15 @@ export default {
   },
 
   fetchPlaylists(userId = 'me') {
-    return this.fetchWithToken(`/users/${userId}/playlists`)
-      .then(resp => resp.json()); // TODO: error handling
+    return this.fetchWithToken(`/users/${userId}/playlists`).then(resp =>
+      resp.json(),
+    ); // TODO: error handling
   },
 
   fetchPlaylist(playlistId) {
-    return this.fetchWithToken(`/playlists/${playlistId}`)
-      .then(resp => resp.json()); // TODO: error handling
+    return this.fetchWithToken(`/playlists/${playlistId}`).then(resp =>
+      resp.json(),
+    ); // TODO: error handling
   },
 
   fetchLikes() {
@@ -64,8 +69,7 @@ export default {
       query: {
         linked_partitioning: 1,
       },
-    })
-      .then(resp => resp.json());
+    }).then(resp => resp.json());
   },
 
   search(query) {
@@ -93,20 +97,19 @@ export default {
       oauth_token: this.token,
     };
 
-    return fetch(`${url}?${queryString.stringify(searchParams)}`)
-      .then(resp => resp.json());
+    return fetch(`${url}?${queryString.stringify(searchParams)}`).then(resp =>
+      resp.json(),
+    );
   },
 
   fetchTrack(trackId) {
-    return this.fetchWithToken(`/tracks/${trackId}`)
-      .then(resp => resp.json());
+    return this.fetchWithToken(`/tracks/${trackId}`).then(resp => resp.json());
   },
 
   toggleLike(trackId, toggle) {
     return this.fetchWithToken(`/me/favorites/${trackId}`, {
       method: toggle ? 'PUT' : 'DELETE',
-    })
-    .then(resp => resp.json());
+    }).then(resp => resp.json());
   },
 
   logout() {
@@ -128,7 +131,6 @@ export default {
           tracks: [],
         },
       }),
-    })
-    .then(resp => resp.json());
+    }).then(resp => resp.json());
   },
 };

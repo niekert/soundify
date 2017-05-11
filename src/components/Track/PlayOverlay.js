@@ -90,10 +90,7 @@ const PlayOverlay = ({
       {isPlaying ? <Pause /> : <PlayIcon />}
     </PlayerIcon>
     <SecondaryIcon>
-      <QueueButton
-        onClick={onQueue}
-        trackId={trackId}
-      />
+      <QueueButton onClick={onQueue} trackId={trackId} />
     </SecondaryIcon>
   </Wrapper>
 );

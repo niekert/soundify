@@ -6,16 +6,15 @@ export const FETCH_TRACK_SUCCESS = 'FETCH_TRACK_SUCCESS';
 export const FETCH_TRACK = 'FETCH_TRACK';
 
 export function fetchTrack(trackId) {
-  return (dispatch) => {
-    api.fetchTrack(trackId)
-      .then((json) => {
-        const normalized = normalize(json, trackSchema);
-        dispatch({
-          type: FETCH_TRACK_SUCCESS,
-          payload: normalized.result,
-          entities: normalized.entities,
-        });
+  return dispatch => {
+    api.fetchTrack(trackId).then(json => {
+      const normalized = normalize(json, trackSchema);
+      dispatch({
+        type: FETCH_TRACK_SUCCESS,
+        payload: normalized.result,
+        entities: normalized.entities,
       });
+    });
 
     dispatch({
       type: FETCH_TRACK,
@@ -25,8 +24,7 @@ export function fetchTrack(trackId) {
 }
 
 export function toggleLike(trackId, toggle) {
-  return (dispatch) => {
-    api.toggleLike(trackId, toggle)
-      .then(() => dispatch(fetchTrack(trackId)));
+  return dispatch => {
+    api.toggleLike(trackId, toggle).then(() => dispatch(fetchTrack(trackId)));
   };
 }

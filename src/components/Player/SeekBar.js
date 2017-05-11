@@ -40,9 +40,9 @@ class SeekBar extends PureComponent {
 
   state = {
     hoverActive: false,
-  }
+  };
 
-  _onSeekChange = (e) => {
+  _onSeekChange = e => {
     const { totalSeconds, onSeek } = this.props;
     const seekPercentage = e.target.value;
     const nextSeconds = Math.round(totalSeconds * (seekPercentage / 100));
@@ -51,25 +51,18 @@ class SeekBar extends PureComponent {
   }; // TODO: throttle with mouseup
 
   render() {
-    const {
-      totalSeconds,
-      playedSeconds,
-      isActive,
-    } = this.props;
+    const { totalSeconds, playedSeconds, isActive } = this.props;
 
     const percentage = playedSeconds > 0
-       ? Number(Number((playedSeconds / totalSeconds) * 100).toFixed(2)) : // todo: clarify lol
-       0;
+      ? Number(Number(playedSeconds / totalSeconds * 100).toFixed(2)) // todo: clarify lol
+      : 0;
 
     return (
       <Wrapper>
-        {isActive &&
-          <CurrentTime>{formatSeconds(playedSeconds)}</CurrentTime>
-        }
+        {isActive && <CurrentTime>{formatSeconds(playedSeconds)}</CurrentTime>}
         <Slider percentage={percentage} onChange={this._onSeekChange} />
         {isActive &&
-          <Time>-{formatSeconds(totalSeconds - playedSeconds)}</Time>
-        }
+          <Time>-{formatSeconds(totalSeconds - playedSeconds)}</Time>}
       </Wrapper>
     );
   }

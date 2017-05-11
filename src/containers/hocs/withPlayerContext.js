@@ -4,12 +4,10 @@ import { queueTrack } from 'actions/queueActions';
 import { toggleLike } from 'actions/trackActions';
 import { toggleTrack } from 'actions/playerActions';
 
-const withPlayerContext = (ComposedComponent) => {
-  const EnhancePlayercontext = props => (
-    <ComposedComponent {...props} />
-  );
+const withPlayerContext = ComposedComponent => {
+  const EnhancePlayercontext = props => <ComposedComponent {...props} />;
 
-  const mapStateToProps = (state) => {
+  const mapStateToProps = state => {
     const { isPlaying, activeTrackId, activeTimelineId } = state.player;
 
     return {

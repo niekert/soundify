@@ -11,7 +11,7 @@ class TrackContainer extends React.Component {
     status: string,
     match: object.isRequired,
     fetchTrack: func.isRequired,
-  }
+  };
 
   componentDidMount() {
     const { match, status } = this.props;
@@ -21,9 +21,7 @@ class TrackContainer extends React.Component {
   }
 
   render() {
-    return (
-      <Track {...this.props} />
-    );
+    return <Track {...this.props} />;
   }
 }
 

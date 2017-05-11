@@ -68,7 +68,10 @@ export default (state = defaultState, action) => {
         ...state,
         timelines: {
           ...state.timelines,
-          [action.payload.id]: timeline(state.timelines[action.payload.id], action),
+          [action.payload.id]: timeline(
+            state.timelines[action.payload.id],
+            action,
+          ),
         },
       };
     case SET_ACTIVE_TIMELINE:

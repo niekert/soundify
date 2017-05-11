@@ -6,7 +6,11 @@ import SearchResultContainer from 'containers/SearchResultContainer';
 import StreamContainer from 'containers/StreamContainer';
 import styled from 'styled-components';
 import { INITIAL } from 'app-constants';
-import { fetchPlaylist, setActiveTimeline, fetchNext } from 'actions/timelineActions';
+import {
+  fetchPlaylist,
+  setActiveTimeline,
+  fetchNext,
+} from 'actions/timelineActions';
 import { Route } from 'react-router-dom';
 import { activeTimeline, activeTimelineTracks } from 'selectors/timeline';
 import withUser from 'containers/hocs/withUser';
@@ -36,15 +40,10 @@ class TimelineContainer extends PureComponent {
   _onNearEnd = () => {
     const { playlist } = this.props;
     this.props.fetchNext(playlist.id, playlist.next);
-  }
+  };
 
   render() {
-    const {
-      playlist,
-      status,
-      tracks,
-      timelineId,
-     } = this.props;
+    const { playlist, status, tracks, timelineId } = this.props;
 
     return (
       <Wrapper>
@@ -75,8 +74,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default withUser(connect(mapStateToProps, {
-  fetchPlaylist,
-  fetchNext,
-  setActiveTimeline,
-})(TimelineContainer));
+export default withUser(
+  connect(mapStateToProps, {
+    fetchPlaylist,
+    fetchNext,
+    setActiveTimeline,
+  })(TimelineContainer),
+);

@@ -38,15 +38,10 @@ const Href = styled.a`
   ${linkStyles}
 `;
 
-const UserDropdown = ({
-  user,
-}) => (
+const UserDropdown = ({ user }) => (
   <PopOver
     triggerButton={
-      <UserInfo
-        avatarUrl={user.avatar_url}
-        username={user.username}
-      />
+      <UserInfo avatarUrl={user.avatar_url} username={user.username} />
     }
   >
     <DropdownWrapper>

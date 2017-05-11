@@ -22,4 +22,3 @@ ArrowIcon.defaultProps = {
 };
 
 export default ArrowIcon;
-

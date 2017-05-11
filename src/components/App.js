@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  BrowserRouter as Router,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -46,7 +43,10 @@ const AuthedShell = () => (
     <MainContent>
       <Route path="/logout" component={LogoutContainer} />
       <Route exact path="/" component={HomeContainer} />
-      <Route path="/(playlist|stream|likes|search)/:id?" component={TimelineContainer} />
+      <Route
+        path="/(playlist|stream|likes|search)/:id?"
+        component={TimelineContainer}
+      />
       <Route path="/track/:trackId" component={TrackContainer} />
       <ModalContainer />
     </MainContent>
@@ -67,10 +67,7 @@ class App extends Component {
     return (
       <Router>
         <ThemeProvider theme={theme}>
-          {this.props.user ?
-            <AuthedShell /> :
-            <LoginContainer />
-          }
+          {this.props.user ? <AuthedShell /> : <LoginContainer />}
         </ThemeProvider>
       </Router>
     );

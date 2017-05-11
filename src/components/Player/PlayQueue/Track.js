@@ -80,23 +80,24 @@ const Track = ({
   artist,
   className,
   onClickRemove, // eslint-disable-line
-}) => connectDragSource(connectDropTarget(
-  <div>
-    <Wrapper className={className} isDragging={isDragging}>
-      <Handle />
-      <TrackArtwork artworkUrl={artworkUrl} size="200x200" />
-      <Meta>
-        <Title>{title}</Title>
-        <Artist>{artist}</Artist>
-      </Meta>
-      <CloseButton
-        onClick={onClickRemove}
-      >
-        <CloseIcon />
-      </CloseButton>
-    </Wrapper>
-  </div>,
-));
+}) =>
+  connectDragSource(
+    connectDropTarget(
+      <div>
+        <Wrapper className={className} isDragging={isDragging}>
+          <Handle />
+          <TrackArtwork artworkUrl={artworkUrl} size="200x200" />
+          <Meta>
+            <Title>{title}</Title>
+            <Artist>{artist}</Artist>
+          </Meta>
+          <CloseButton onClick={onClickRemove}>
+            <CloseIcon />
+          </CloseButton>
+        </Wrapper>
+      </div>,
+    ),
+  );
 Track.propTypes = {
   connectDropTarget: func.isRequired,
   connectDragSource: func.isRequired,

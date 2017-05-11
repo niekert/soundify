@@ -63,30 +63,20 @@ class Sidebar extends PureComponent {
 
   static defaultProps = {
     playlists: [],
-  }
+  };
 
   render() {
-    const {
-      playlists,
-      addPlaylist,
-      activeTimelineId,
-    } = this.props;
+    const { playlists, addPlaylist, activeTimelineId } = this.props;
 
     return (
       <SidebarWrapper>
         <SectionWrapper>
           <Label>Your Music</Label>
           <Section>
-            <SidebarLink
-              to="/likes"
-              isPlaying={activeTimelineId === 'likes'}
-            >
+            <SidebarLink to="/likes" isPlaying={activeTimelineId === 'likes'}>
               Likes
             </SidebarLink>
-            <SidebarLink
-              to="/stream"
-              isPlaying={activeTimelineId === 'stream'}
-            >
+            <SidebarLink to="/stream" isPlaying={activeTimelineId === 'stream'}>
               Stream
             </SidebarLink>
           </Section>
@@ -95,9 +85,7 @@ class Sidebar extends PureComponent {
           <Label>Playlists</Label>
           <Section>
             {playlists.map(({ title, id }) => (
-              <PlaylistDropTarget
-                key={`playlist-${id}`}
-              >
+              <PlaylistDropTarget key={`playlist-${id}`}>
                 <SidebarLink
                   isPlaying={activeTimelineId === `playlist::${id}`}
                   to={`/playlist/${id}`}
@@ -108,9 +96,7 @@ class Sidebar extends PureComponent {
             ))}
           </Section>
         </SectionWrapper>
-        <NewPlaylist
-          onClick={addPlaylist}
-        >
+        <NewPlaylist onClick={addPlaylist}>
           Add Playlist
         </NewPlaylist>
       </SidebarWrapper>
@@ -118,4 +104,4 @@ class Sidebar extends PureComponent {
   }
 }
 
-export default (Sidebar);
+export default Sidebar;

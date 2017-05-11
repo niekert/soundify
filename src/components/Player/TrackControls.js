@@ -85,15 +85,14 @@ const TrackControls = ({
     <ChangeTrackButton onClick={onNext}>
       <NextTrackIcon />
     </ChangeTrackButton>
-    {track && (
+    {track &&
       <LikeButtonWrapper>
         <LikeButton
           onToggle={toggleLike}
           active={track.user_favorite}
           trackId={track.id}
         />
-      </LikeButtonWrapper>
-    )}
+      </LikeButtonWrapper>}
   </PlayerButtons>
 );
 TrackControls.propTypes = {

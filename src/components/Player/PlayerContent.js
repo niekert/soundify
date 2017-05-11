@@ -39,14 +39,13 @@ class PlayerContent extends PureComponent {
   };
 
   render() {
-    const {
-      track,
-    } = this.props;
+    const { track } = this.props;
 
     return (
       <Wrapper>
         <LeftWrapper>
-          {!!track && <ActiveTrackArtwork artworkUrl={track.artwork_url} key="artwork" /> }
+          {!!track &&
+            <ActiveTrackArtwork artworkUrl={track.artwork_url} key="artwork" />}
           <TrackControls {...this.props} />
         </LeftWrapper>
         <Controls {...this.props} />

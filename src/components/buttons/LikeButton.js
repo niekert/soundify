@@ -14,29 +14,19 @@ const Button = styled.button`
   color: ${prop('theme.colors.primaryText')};
 
 svg path {
-    ${ifProp(
-      'active',
-      '',
-      'fill: none',
-    )};
+    ${ifProp('active', '', 'fill: none')};
   }
 `;
 
 const enhance = withHandlers({
-  onClick: ({ onToggle, trackId, active }) => (e) => {
+  onClick: ({ onToggle, trackId, active }) => e => {
     e.stopPropagation();
     onToggle(trackId, !active);
   },
 });
 
-const LikeButton = enhance(({
-  onClick,
-  active,
-}) => (
-  <Button
-    active={active}
-    onClick={onClick}
-  >
+const LikeButton = enhance(({ onClick, active }) => (
+  <Button active={active} onClick={onClick}>
     <HeartIcon />
   </Button>
 ));

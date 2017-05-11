@@ -13,4 +13,4 @@ export default styled.button`
     line-height:43px;
     border-bottom: 1px solid ${props => props.theme.colors.active};
   }
-`
+`;

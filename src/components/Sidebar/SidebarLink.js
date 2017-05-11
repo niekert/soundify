@@ -56,12 +56,7 @@ const PlayingIcon = styled(VolumeIcon)`
   color: ${prop('theme.colors.primaryText')}
 `;
 
-const SidebarLink = ({
-  isPlaying = true,
-  isActive,
-  children,
-  ...props
-}) => (
+const SidebarLink = ({ isPlaying = true, isActive, children, ...props }) => (
   <Link className={isActive && 'dropActive'} {...props}>
     {children}
     {isPlaying && <PlayingIcon />}

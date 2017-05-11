@@ -16,15 +16,18 @@ export function authCallback(location) {
 }
 
 export function fetchAuthedUser() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({ type: AUTH_START });
 
-    api.fetchUser()
-      .then(data => dispatch({
-        type: AUTH_USER,
-        payload: data,
-      }))
-      .catch((error) => {
+    api
+      .fetchUser()
+      .then(data =>
+        dispatch({
+          type: AUTH_USER,
+          payload: data,
+        }),
+      )
+      .catch(error => {
         dispatch({
           type: AUTH_USER,
           payload: null,
@@ -47,15 +50,17 @@ export function onAuthCallback(location) {
 }
 
 export function attemptAuth() {
-  return (dispatch) => {
-    api.attemptAuth().then(() => {
-      dispatch(fetchAuthedUser());
-    })
-    .catch(error => ({
-      type: AUTH_USER,
-      payload: null,
-      error,
-    }));
+  return dispatch => {
+    api
+      .attemptAuth()
+      .then(() => {
+        dispatch(fetchAuthedUser());
+      })
+      .catch(error => ({
+        type: AUTH_USER,
+        payload: null,
+        error,
+      }));
   };
 }
 

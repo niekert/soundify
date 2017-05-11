@@ -10,21 +10,22 @@ export const ADD_PLAYLIST_ERROR = 'ADD_PLAYLIST_ERROR';
 export const ADD_PLAYLIST_SUCCESS = 'ADD_PLAYLIST_SUCCESS';
 
 export function fetchPlaylists(userId) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({ type: FETCH_PLAYLISTS, payload: { userId } });
 
-    return api.fetchPlaylists()
-      .then(playlists => dispatch({
+    return api.fetchPlaylists().then(playlists =>
+      dispatch({
         type: FETCH_PLAYLISTS_SUCCESS,
         payload: {
           playlists: playlists.reverse(), // old to new
         },
-      }));
+      }),
+    );
   };
 }
 
 export function addPlaylist(title) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({ type: ADD_PLAYLIST, payload: { title } });
 
     if (!title || !title.length) {
@@ -37,11 +38,14 @@ export function addPlaylist(title) {
       return;
     }
 
-    api.addPlaylist(title)
-      .then(playlist => dispatch({
-        type: ADD_PLAYLIST_SUCCESS,
-        payload: playlist,
-      }))
+    api
+      .addPlaylist(title)
+      .then(playlist =>
+        dispatch({
+          type: ADD_PLAYLIST_SUCCESS,
+          payload: playlist,
+        }),
+      )
       .then(() => dispatch(hideModal()));
   };
 }

@@ -20,10 +20,10 @@ export const activeTimelineTracks = createSelector(
       .filter(track => track.streamable && track.kind === 'track'),
 );
 
-export const activeTimelineHasNext = createSelector(
-  activeTimeline,
-  timeline => get(timeline, 'next', false),
+export const activeTimelineHasNext = createSelector(activeTimeline, timeline =>
+  get(timeline, 'next', false),
 );
 
 export const timelineById = (state, id) => timelinesSelector(state)[id];
-export const trackIndex = (timeline, trackId) => timeline.tracks.findIndex(id => id === trackId);
+export const trackIndex = (timeline, trackId) =>
+  timeline.tracks.findIndex(id => id === trackId);

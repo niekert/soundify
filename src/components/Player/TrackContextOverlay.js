@@ -29,13 +29,12 @@ class TrackContextOverlay extends PureComponent {
   }
 
   _updateColor(artworkUrl) {
-    Vibrant.from(artworkUrl).getPalette()
-      .then((palette) => {
-        const [r, g, b] = palette.LightVibrant.getRgb();
-        this.setState({
-          activeColor: `rgba(${r}, ${g}, ${b}, 0.15)`,
-        });
+    Vibrant.from(artworkUrl).getPalette().then(palette => {
+      const [r, g, b] = palette.LightVibrant.getRgb();
+      this.setState({
+        activeColor: `rgba(${r}, ${g}, ${b}, 0.15)`,
       });
+    });
   }
 
   render() {

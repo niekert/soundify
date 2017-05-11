@@ -26,16 +26,10 @@ class Playlist extends PureComponent {
   static defaultProps = {
     playlist: null,
     status: INITIAL,
-  }
+  };
 
   render() {
-    const {
-      status,
-      playlist,
-      tracks,
-      fetchNext,
-      timelineId,
-    } = this.props;
+    const { status, playlist, tracks, fetchNext, timelineId } = this.props;
 
     const isReady = !!playlist && playlist.tracks;
     if (!isReady) {
@@ -45,23 +39,21 @@ class Playlist extends PureComponent {
 
     return (
       <Wrapper>
-        {isReady &&
-          [
-            <PlaylistHeader
-              key="header"
-              tracks={tracks}
-              playlist={playlist}
-              timelineId={timelineId}
-            />,
-            <Tracklist
-              tracks={tracks}
-              hasNext={!!playlist.next}
-              fetchNext={fetchNext}
-              timelineId={timelineId}
-              key="tracklist"
-            />,
-          ]
-        }
+        {isReady && [
+          <PlaylistHeader
+            key="header"
+            tracks={tracks}
+            playlist={playlist}
+            timelineId={timelineId}
+          />,
+          <Tracklist
+            tracks={tracks}
+            hasNext={!!playlist.next}
+            fetchNext={fetchNext}
+            timelineId={timelineId}
+            key="tracklist"
+          />,
+        ]}
         {isLoading && <Loader />}
       </Wrapper>
     );

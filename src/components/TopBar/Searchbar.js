@@ -40,7 +40,7 @@ const enhance = compose(
   withState('query', 'setQuery', ''),
   withHandlers({
     onChange: ({ setQuery }) => e => setQuery(e.target.value),
-    onSubmit: ({ history, query }) => (e) => {
+    onSubmit: ({ history, query }) => e => {
       e.preventDefault();
 
       if (!trim(query).length) {
@@ -52,11 +52,7 @@ const enhance = compose(
   }),
 );
 
-const Searchbar = enhance(({
-  query,
-  onChange,
-  onSubmit,
-}) => (
+const Searchbar = enhance(({ query, onChange, onSubmit }) => (
   <Form onSubmit={onSubmit}>
     <IconWrapper>
       <SearchIcon />

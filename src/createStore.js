@@ -7,14 +7,7 @@ import rootReducer from './reducers';
 export default () => {
   const devTool = window.__REDUX_DEVTOOLS_EXTENSION__;
 
-  const middleware = applyMiddleware(
-    thunkMiddleware,
-    promiseMiddleware,
-  );
+  const middleware = applyMiddleware(thunkMiddleware, promiseMiddleware);
 
-  return createStore(
-    rootReducer,
-    isDev && devTool && devTool(),
-    middleware,
-  );
+  return createStore(rootReducer, isDev && devTool && devTool(), middleware);
 };

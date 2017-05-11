@@ -6,8 +6,9 @@ const queuedItems = state => state.queue;
 export const playQueue = createSelector(
   tracksSelector,
   queuedItems,
-  (tracks, queueItems) => queueItems.map(queuedItem => ({
-    id: queuedItem.id,
-    track: tracks[queuedItem.trackId],
-  })),
+  (tracks, queueItems) =>
+    queueItems.map(queuedItem => ({
+      id: queuedItem.id,
+      track: tracks[queuedItem.trackId],
+    })),
 );

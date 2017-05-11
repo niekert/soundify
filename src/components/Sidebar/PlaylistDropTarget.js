@@ -10,13 +10,14 @@ const PlaylistDropTarget = ({
   canDrop,
   isOver,
   children,
-}) => connectDropTarget(
-  <div>
-    {React.cloneElement(React.Children.only(children), {
-      isActive: canDrop && isOver,
-    })}
-  </div>,
-);
+}) =>
+  connectDropTarget(
+    <div>
+      {React.cloneElement(React.Children.only(children), {
+        isActive: canDrop && isOver,
+      })}
+    </div>,
+  );
 
 PlaylistDropTarget.propTypes = {
   playlistId: number.isRequired,
@@ -45,5 +46,6 @@ function collect(connect, monitor) {
   };
 }
 
-
-export default DropTarget(DRAGGABLE_TYPES.TRACK, playlistTarget, collect)(PlaylistDropTarget);
+export default DropTarget(DRAGGABLE_TYPES.TRACK, playlistTarget, collect)(
+  PlaylistDropTarget,
+);
