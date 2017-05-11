@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { lighten } from 'utils/color';
+import { lighten, alpha } from 'utils/color';
 import { compose, withState, withHandlers } from 'recompose';
 import { prop, ifProp } from 'styled-tools';
 
@@ -18,7 +18,7 @@ const Active = styled.div`
   position: relative;
   height: 100%;
   border-radius: 5px;
-  background: ${ifProp('highlight', prop('theme.colors.active'), prop('theme.colors.secondaryText'))};
+  background: ${props => (props.highlight ? props.theme.colors.active : alpha(props.theme.colors.primaryText, 0.7))};
 `;
 
 const Seek = styled.input`
