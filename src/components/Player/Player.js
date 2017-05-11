@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NEXT, PREV } from 'actions/playerActions';
+import { ipcRenderer } from 'electron';
 import { alpha } from 'utils/color';
 import { CLIENT_ID } from 'app-constants';
 import { getArtworkUrl } from 'helpers/track';
@@ -37,6 +38,9 @@ const Wrapper = styled.div`
   }
 `;
 
+const IPC_CHANNEL = 'mediaKeys';
+const PLAY_PAUSE = 'play_pause';
+
 class Player extends PureComponent {
   static propTypes = {
     togglePlaying: PropTypes.func.isRequired,
@@ -65,10 +69,16 @@ class Player extends PureComponent {
       'loadedmetadata',
       this._onMetadataLoaded,
     );
+
     this._audioElement.addEventListener('timeupdate', this._onTimeUpdate);
     this._audioElement.addEventListener('ended', this._onEnded);
+    this._audioElement.addEventListener('canplay', this._onCanPlay);
 
     this._audioElement.volume = this.props.volume / 100;
+
+    ipcRenderer.on(IPC_CHANNEL, this._onMediaKeyReceived);
+
+    document.addEventListener('keydown', this._onKeyDown);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,7 +92,7 @@ class Player extends PureComponent {
       (!prevProps.track || prevProps.track.id !== this.props.track.id) &&
       this.props.isPlaying
     ) {
-      this._audioElement.play();
+      // this._audioElement.play();
       return;
     }
 
@@ -102,14 +112,52 @@ class Player extends PureComponent {
       this._onMetadataLoaded,
     );
     this._audioElement.addEventListener('ended', this._onEnded);
+
+    ipcRenderer.removeListener(IPC_CHANNEL, this._onMediaKeyReceived);
+    document.removeEventListener('keydown', this._onKeyDown);
   }
+
+  _onMediaKeyReceived = (event, message) => {
+    switch (message) {
+      case NEXT:
+        this._onNext();
+        break;
+      case PREV:
+        this._onPrev();
+        break;
+      case PLAY_PAUSE:
+        this.props.togglePlaying(!this.props.isPlaying);
+        break;
+      default:
+      // DO Nothing. Maybe log?
+    }
+  };
+
+  _onKeyDown = e => {
+    if (e.code === 'Space' && this.props.track) {
+      e.preventDefault();
+      this.props.togglePlaying(!this.props.isPlaying);
+    }
+  };
+
+  _onCanPlay = () => {
+    if (this.props.isPlaying && this._audioElement) {
+      this._audioElement.play();
+    }
+  };
 
   _onNext = () => {
     this.props.changeTrack(NEXT);
   };
 
   _onPrev = () => {
-    this.props.changeTrack(PREV);
+    if (this.state.playedSeconds > 2) {
+      this._audioElement.pause();
+      this._audioElement.currentTime = 0;
+      this._audioElement.play();
+    } else {
+      this.props.changeTrack(PREV);
+    }
   };
 
   _onEnded = () => {

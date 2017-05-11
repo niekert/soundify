@@ -37,7 +37,7 @@ export function changeTrack(changeType) {
         toggleTrack({
           trackId: nextTrackId,
           previousTrackId: previousTrackId || activeTrackId, // Never replace the prev track on queue
-          isPlaying: true,
+          isPlaying: player.isPlaying,
         }),
       );
       return;
@@ -56,7 +56,7 @@ export function changeTrack(changeType) {
     dispatch(
       toggleTrack({
         trackId: nextTrackId,
-        isPlaying: true,
+        isPlaying: player.isPlaying,
       }),
     );
   };
