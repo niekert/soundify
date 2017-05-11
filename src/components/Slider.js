@@ -33,7 +33,8 @@ const Scrubber = styled.div`
   width: 10px;
   height: 10px;
   position: absolute;
-  right: -2px;
+  pointer-events: none;
+  transform: translateX(-50%);
   bottom: -2px;
   border-radius: 50%;
   background: ${prop('theme.colors.primaryText')};
@@ -54,11 +55,9 @@ const Slider = enhance(
         style={{
           width: `${percentage}%`,
         }}
-        percentage={percentage}
         highlight={hoverActive}
-      >
-        {hoverActive && <Scrubber />}
-      </Active>
+      />
+      {hoverActive && <Scrubber style={{ left: `${percentage}%` }} />}
       <Seek
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
