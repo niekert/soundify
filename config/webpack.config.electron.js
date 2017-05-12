@@ -6,9 +6,7 @@ module.exports = {
   bail: true,
   target: 'electron-main',
   devtool: 'source-map',
-  entry: [
-    paths.appElectronMain
-  ],
+  entry: [paths.appElectronMain],
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -24,20 +22,30 @@ module.exports = {
     __dirname: false,
     __filename: false,
   },
+  module: {
+    rules: [
+      // Process JS with Babel.
+      {
+        test: /\.(js|jsx)$/,
+        include: paths.appSrc,
+        loader: 'babel-loader',
+      },
+    ],
+  },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         screw_ie8: true, // React doesn't support IE8
-        warnings: false
+        warnings: false,
       },
 
       mangle: {
-        screw_ie8: true
+        screw_ie8: true,
       },
 
       output: {
         comments: false,
-        screw_ie8: true
+        screw_ie8: true,
       },
 
       sourceMap: true,

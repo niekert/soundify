@@ -1,6 +1,7 @@
-const { app, BrowserWindow, globalShortcut } = require('electron');
+const { app, BrowserWindow, globalShortcut, Menu } = require('electron');
 const path = require('path');
 const server = require('../server');
+const menuTemplate = require('./electron/menuTemplate');
 const electronIsDev = require('electron-is-dev');
 
 let mainWindow;
@@ -65,6 +66,10 @@ function createWindow() {
   }
 
   registerShortcuts(mainWindow);
+
+  // Build the menu
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
 }
 
 app.on('ready', createWindow);

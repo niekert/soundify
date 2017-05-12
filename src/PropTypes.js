@@ -1,4 +1,5 @@
 import 'react';
-import { STATUS_INITIAl, PENDING, OK, ERROR } from 'app-constants';
+import PropTypes from 'prop-types';
+import { STATUS_INITIAL, PENDING, OK, ERROR } from 'app-constants';
 
-export const status = PropTypes.oneOf([STATUS_INITIAl, PENDING, OK, ERROR]);
+export const status = PropTypes.oneOf([STATUS_INITIAL, PENDING, OK, ERROR]);
