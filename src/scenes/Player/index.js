@@ -9,7 +9,7 @@ import Player from './components';
 
 function mapStateToProps(state) {
   const { isPlaying, activeTrackId, active } = state.data.player;
-  const { volumePercentage } = state.settings;
+  const { volumePercentage } = state.data.settings;
 
   return {
     isPlaying,

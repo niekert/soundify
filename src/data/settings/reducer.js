@@ -1,4 +1,4 @@
-import { SET_VOLUME } from 'actions/settingsActions';
+import { SET_VOLUME } from './actions';
 
 const defaultState = {
   volumePercentage: 100, // TODO: use redux-localstorage

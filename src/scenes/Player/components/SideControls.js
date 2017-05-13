@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import VolumeIcon from 'components/icons/VolumeIcon';
 import PlayQueueIcon from 'components/icons/PlayQueue';
 import ChromecastIcon from 'components/icons/Chromecast';
-import PopOver from 'components/helpers/Popover';
 import IconButtonComponent from 'components/buttons/IconButton';
-import PlayQueueContainer from 'containers/PlayQueueContainer';
+import PopOver from 'components/helpers/Popover';
 import Slider from 'components/Slider';
 import { onlyUpdateForKeys, compose, withHandlers } from 'recompose';
 import styled from 'styled-components';
+import PlayQueueContainer from '../containers/PlayQueueContainer';
 
 const Wrapper = styled.div`
   display: flex;

@@ -1,3 +1,4 @@
+import { OK, PENDING } from 'app-constants';
 import {
   FETCH_TIMELINE,
   FETCH_TIMELINE_SUCCESS,
@@ -5,8 +6,7 @@ import {
   SET_ACTIVE_TIMELINE,
   FETCH_NEXT,
   FETCH_NEXT_SUCCESS,
-} from 'actions/timelineActions';
-import { OK, PENDING } from 'app-constants';
+} from './actions';
 
 const emptyTimeline = {
   error: null,

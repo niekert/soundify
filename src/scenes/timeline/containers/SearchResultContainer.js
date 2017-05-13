@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { submitSearch, setActiveTimeline } from 'actions/timelineActions';
+import { submitSearch, setActiveTimeline } from '../actions';
 
 class SearchResultContainer extends Component {
   static propTypes = {

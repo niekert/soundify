@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ArtWork from 'components/Track/ArtWork';
-import SideControlsContainer from 'containers/SideControlsContainer';
+import SideControlsContainer from '../containers/SideControlsContainer';
 import TrackControls from './TrackControls';
 import Controls from './Controls';
 

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { OK, INITIAL, PENDING } from 'app-constants';
 import Tracklist from 'components/TrackList';
 import Loader from 'components/Loader';
-import PlaylistHeader from './PlaylistHeader';
+import TimelineHeader from './TimelineHeader';
 
 const Wrapper = styled.div`
   display: grid;
@@ -14,9 +14,9 @@ const Wrapper = styled.div`
   max-height: 0; // Fixes an overflowing bug...
 `;
 
-class Playlist extends PureComponent {
+class Timeline extends PureComponent {
   static propTypes = {
-    playlist: PropTypes.object,
+    timeline: PropTypes.object,
     tracks: PropTypes.arrayOf(PropTypes.object),
     status: PropTypes.string,
     timelineId: PropTypes.string,
@@ -24,31 +24,31 @@ class Playlist extends PureComponent {
   };
 
   static defaultProps = {
-    playlist: null,
+    timeline: null,
     status: INITIAL,
   };
 
   render() {
-    const { status, playlist, tracks, fetchNext, timelineId } = this.props;
+    const { status, timeline, tracks, fetchNext, timelineId } = this.props;
 
-    const isReady = !!playlist && playlist.tracks;
+    const isReady = !!timeline && timeline.tracks;
     if (!isReady) {
       return <Loader />;
     }
-    const isLoading = status !== OK || playlist.status === PENDING;
+    const isLoading = status !== OK || timeline.status === PENDING;
 
     return (
       <Wrapper>
         {isReady && [
-          <PlaylistHeader
+          <TimelineHeader
             key="header"
             tracks={tracks}
-            playlist={playlist}
+            timeline={timeline}
             timelineId={timelineId}
           />,
           <Tracklist
             tracks={tracks}
-            hasNext={!!playlist.next}
+            hasNext={!!timeline.next}
             fetchNext={fetchNext}
             timelineId={timelineId}
             key="tracklist"
@@ -60,4 +60,4 @@ class Playlist extends PureComponent {
   }
 }
 
-export default Playlist;
+export default Timeline;

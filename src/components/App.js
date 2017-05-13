@@ -7,14 +7,14 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { prop } from 'styled-tools';
 import theme from 'theme';
 import ModalContainer from 'scenes/modals/container';
-import PlayerContainer from 'scenes/Player';
+import PlayerContainer from 'scenes/player';
 import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';
 import LogoutContainer from 'containers/LogoutContainer';
-import TrackContainer from 'scenes/track';
 import HomeContainer from 'containers/HomeContainer';
 import LoginContainer from 'containers/LoginContainer';
-import TimelineContainer from 'containers/TimelineContainer';
+import TrackContainer from 'scenes/track';
+import TimelineContainer from 'scenes/timeline';
 
 const AppShell = styled.div`
   height: 100vh;

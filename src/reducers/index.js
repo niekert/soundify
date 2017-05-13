@@ -1,23 +1,19 @@
 import { combineReducers } from 'redux';
 import dataReducer from 'data/reducer';
 import modalReducer from 'scenes/modals';
+import timelineReducer from 'scenes/timeline/reducer';
 import authReducer from './authReducer';
 import playlistsReducer from './playlistsReducer';
-import timelineReducer from './timelineReducer';
 import entitiesReducer from './entitiesReducer';
 import tracksReducer from './tracksReducer';
-import settingsReducer from './settingsReducer';
-import queueReducer from './queueReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  timeline: timelineReducer,
   tracks: tracksReducer,
   entities: entitiesReducer,
   playlists: playlistsReducer,
-  settings: settingsReducer,
-  queue: queueReducer,
   modal: modalReducer,
+  timeline: timelineReducer,
   data: dataReducer,
 });
 

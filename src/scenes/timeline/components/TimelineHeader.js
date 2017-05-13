@@ -27,26 +27,26 @@ const Title = styled(H1)`
   font-weight: 600;
 `;
 
-const PlaylistHeader = ({ playlist, tracks, timelineId }) => (
+const TimelineHeader = ({ timeline, tracks, timelineId }) => (
   <Wrapper>
     <ArtworkGrid tracks={tracks} />
     <div>
-      <Subtitle>{playlist.type || 'Playlist'}</Subtitle>
-      <Title>{playlist.title}</Title>
-      {playlist.kind === 'playlist' &&
+      <Subtitle>{timeline.type || 'timeline'}</Subtitle>
+      <Title>{timeline.title}</Title>
+      {timeline.kind === 'timeline' &&
         <Subtitle>
-          Created by {playlist.user.username} ● {playlist.tracks.length} tracks,
-          {formatPlaytime(playlist.duration)}
+          Created by {timeline.user.username} ● {timeline.tracks.length} tracks,
+          {formatPlaytime(timeline.duration)}
         </Subtitle>}
       {tracks.length > 0 &&
         <PlayButton trackId={tracks[0].id} timelineId={timelineId} />}
     </div>
   </Wrapper>
 );
-PlaylistHeader.propTypes = {
-  playlist: PropTypes.object.isRequired,
+TimelineHeader.propTypes = {
+  timeline: PropTypes.object.isRequired,
   timelineId: PropTypes.string.isRequired,
   tracks: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default pure(PlaylistHeader);
+export default pure(TimelineHeader);

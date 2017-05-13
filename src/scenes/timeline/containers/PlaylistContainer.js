@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPlaylist, setActiveTimeline } from 'actions/timelineActions';
+import { fetchPlaylist, setActiveTimeline } from '../actions';
 
 class PlaylistContainer extends PureComponent {
   static propTypes = {

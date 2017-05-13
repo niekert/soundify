@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchLikes, setActiveTimeline } from 'actions/timelineActions';
+import { fetchLikes, setActiveTimeline } from '../actions';
 
 class LikesContainer extends PureComponent {
   static propTypes = {

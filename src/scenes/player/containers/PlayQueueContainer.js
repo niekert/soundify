@@ -1,9 +1,9 @@
 import React from 'react';
-import { changeQueue, removeFromQueue } from 'actions/queueActions';
+import { changeQueue, removeFromQueue } from 'data/queue/actions';
 import { playQueue } from 'selectors/queue';
 import { activeTimeline } from 'selectors/player';
 import { connect } from 'react-redux';
-import PlayQueue from 'components/Player/PlayQueue';
+import PlayQueue from '../components/PlayQueue';
 
 const PlayQueueContainer = props => <PlayQueue {...props} />;
 

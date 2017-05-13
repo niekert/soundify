@@ -1,5 +1,5 @@
 import { timelineById, trackIndex } from 'selectors/timeline';
-import { unqueue } from 'actions/queueActions';
+import { unqueue } from 'data/queue/actions';
 
 export const TOGGLE_TRACK = 'TOGGLE_TRACK';
 export const TOGGLE_PLAYING = 'TOGGLE_PLAYING';

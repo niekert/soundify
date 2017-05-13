@@ -1,10 +1,5 @@
-import {
-  QUEUE_TRACK,
-  MOVE_TRACK,
-  REMOVE_TRACK,
-  UNQUEUE,
-} from 'actions/queueActions';
 import update from 'immutability-helper';
+import { QUEUE_TRACK, MOVE_TRACK, REMOVE_TRACK, UNQUEUE } from './actions';
 
 export default function(state = [], action) {
   switch (action.type) {
