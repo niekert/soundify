@@ -3,6 +3,6 @@ import { timelinesSelector } from './timeline';
 
 export const activeTimeline = createSelector(
   timelinesSelector,
-  state => state.player.activeTimelineId,
+  state => state.data.player.activeTimelineId,
   (timelines, activeTimelineId) => timelines[activeTimelineId],
 );

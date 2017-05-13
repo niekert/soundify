@@ -1,14 +1,14 @@
 import React from 'react';
 import { func, bool } from 'prop-types';
 import { compose, lifecycle } from 'recompose';
-import Player from 'components/Player/Player';
-import { togglePlaying, changeTrack, NEXT, PREV } from 'actions/playerActions';
-import { toggleLike, fetchTrack } from 'actions/trackActions';
+import { togglePlaying, changeTrack, NEXT, PREV } from 'data/player/actions';
+import { toggleLike, fetchTrack } from 'data/tracks/actions';
 import { trackById } from 'selectors/tracks';
 import { connect } from 'react-redux';
+import Player from './components';
 
 function mapStateToProps(state) {
-  const { isPlaying, activeTrackId, active } = state.player;
+  const { isPlaying, activeTrackId, active } = state.data.player;
   const { volumePercentage } = state.settings;
 
   return {

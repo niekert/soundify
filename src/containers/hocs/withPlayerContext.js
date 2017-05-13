@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { queueTrack } from 'actions/queueActions';
 import { toggleLike } from 'actions/trackActions';
-import { toggleTrack } from 'actions/playerActions';
+import { toggleTrack } from 'data/player/actions';
 
 const withPlayerContext = ComposedComponent => {
   const EnhancePlayercontext = props => <ComposedComponent {...props} />;
 
   const mapStateToProps = state => {
-    const { isPlaying, activeTrackId, activeTimelineId } = state.player;
+    const { isPlaying, activeTrackId, activeTimelineId } = state.data.player;
 
     return {
       isPlaying,

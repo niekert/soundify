@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
+import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { NEXT, PREV } from 'actions/playerActions';
-import { ipcRenderer } from 'electron';
+import { NEXT, PREV } from 'data/player/actions';
 import { alpha } from 'utils/color';
 import { CLIENT_ID } from 'app-constants';
 import { getArtworkUrl } from 'helpers/track';

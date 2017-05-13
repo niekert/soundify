@@ -7,7 +7,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { prop } from 'styled-tools';
 import theme from 'theme';
 import ModalContainer from 'scenes/modals/container';
-import PlayerContainer from 'containers/PlayerContainer';
+import PlayerContainer from 'scenes/Player';
 import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';
 import LogoutContainer from 'containers/LogoutContainer';
