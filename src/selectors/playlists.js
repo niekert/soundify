@@ -1,1 +1,1 @@
-export const playlistStatus = state => state.playlists.status;
+export const playlistStatus = state => state.data.playlists.status;

@@ -1,4 +1,4 @@
-import { addPlaylist } from 'actions/playlistActions';
+import { addPlaylist } from 'data/playlists/actions';
 import { connect } from 'react-redux';
 import { playlistStatus } from 'selectors/playlists';
 import AddPlayListModal from '../components/AddPlaylistModal';

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from 'components/Sidebar';
 import { showModal, ADD_PLAYLIST_MODAL } from 'scenes/modals';
-import { fetchPlaylists } from 'actions/playlistActions';
+import { fetchPlaylists } from 'data/playlists/actions';
 import withUser from 'containers/hocs/withUser';
 import { connect } from 'react-redux';
 
@@ -22,7 +22,7 @@ class SidebarContainer extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    playlists: state.playlists.data,
+    playlists: state.data.playlists.data,
     activeTimelineId: state.data.player.isPlaying
       ? state.data.player.activeTimelineId
       : undefined,

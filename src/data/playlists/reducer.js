@@ -1,10 +1,10 @@
+import { INITIAL, PENDING, OK, ERROR } from 'app-constants';
 import {
   FETCH_PLAYLISTS_SUCCESS,
   ADD_PLAYLIST,
   ADD_PLAYLIST_SUCCESS,
   ADD_PLAYLIST_ERROR,
-} from 'actions/playlistActions';
-import { INITIAL, PENDING, OK, ERROR } from 'app-constants';
+} from './actions';
 
 const initialState = {
   status: INITIAL,
