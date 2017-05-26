@@ -31,7 +31,7 @@ const TimelineHeader = ({ timeline, tracks, timelineId }) => (
   <Wrapper>
     <ArtworkGrid tracks={tracks} />
     <div>
-      <Subtitle>{timeline.type || 'timeline'}</Subtitle>
+      <Subtitle>{timeline.type || 'playlist'}</Subtitle>
       <Title>{timeline.title}</Title>
       {timeline.kind === 'timeline' &&
         <Subtitle>
