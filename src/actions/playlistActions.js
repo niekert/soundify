@@ -1,5 +1,5 @@
 import api from 'api';
-import { hideModal } from 'scenes/modals';
+import { hideModal } from 'data/modals/actions';
 
 export const FETCH_PLAYLISTS = 'FETCH_PLAYLISTS';
 export const FETCH_PLAYLISTS_SUCCESS = 'FETCH_PLAYLISTS_SUCCESS';

@@ -1,40 +1,36 @@
-const SHOW_MODAL = 'SHOW_MODAL';
-const HIDE_MODAL = 'HIDE_MODAL';
+import React from 'react';
+import { func, string, object } from 'prop-types';
+import { connect } from 'react-redux';
+import { ADD_PLAYLIST_MODAL, hideModal } from 'data/modals/actions';
+import AddPlaylistModalContainer from './containers/AddPlaylistContainer';
 
-export const ADD_PLAYLIST_MODAL = 'ADD_PLAYLIST_MODAL';
-
-export function showModal(modalType, props) {
-  return {
-    type: SHOW_MODAL,
-    payload: {
-      type: modalType,
-      props,
-    },
-  };
-}
-
-export function hideModal() {
-  return {
-    type: HIDE_MODAL,
-  };
-}
-
-const defaultState = {
-  activeModal: null,
-  props: null,
+const modalTypeMap = {
+  [ADD_PLAYLIST_MODAL]: AddPlaylistModalContainer,
 };
 
-// Reducer
-export default function(state = defaultState, action) {
-  switch (action.type) {
-    case SHOW_MODAL:
-      return {
-        activeModal: action.payload.type,
-        props: action.payload.props,
-      };
-    case HIDE_MODAL:
-      return defaultState;
-    default:
-      return state;
+const ModalContainer = ({
+  activeModal,
+  modalProps,
+  hideModal: onRequestClose,
+}) => {
+  const ModalComponent = modalTypeMap[activeModal];
+  if (!ModalComponent) {
+    return null;
   }
-}
+
+  return <ModalComponent onRequestClose={onRequestClose} {...modalProps} />;
+};
+ModalContainer.propTypes = {
+  hideModal: func.isRequired,
+  activeModal: string,
+  modalProps: object,
+};
+
+const mapStateToProps = ({ data }) => ({
+  activeModal: data.modal.activeModal,
+  modalProps: data.modal.props,
+});
+
+export default connect(mapStateToProps, {
+  hideModal,
+})(ModalContainer);

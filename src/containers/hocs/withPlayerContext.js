@@ -13,7 +13,6 @@ const withPlayerContext = ComposedComponent => {
     return {
       isPlaying,
       activeTrackId,
-      activeTimeline: state.timeline.active,
       activeTimelineId, // TODO: rename this
     };
   };

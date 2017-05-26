@@ -6,7 +6,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { prop } from 'styled-tools';
 import theme from 'theme';
-import ModalContainer from 'scenes/modals/container';
+import ModalContainer from 'scenes/modals';
 import PlayerContainer from 'scenes/player';
 import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';

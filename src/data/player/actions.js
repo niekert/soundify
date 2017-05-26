@@ -27,7 +27,7 @@ export function toggleTrack({
 export function changeTrack(changeType) {
   return (dispatch, getState) => {
     const state = getState();
-    const { player, queue } = state;
+    const { player, queue } = state.data;
     const { activeTimelineId, activeTrackId, previousTrackId } = player;
 
     if (queue.length) {
