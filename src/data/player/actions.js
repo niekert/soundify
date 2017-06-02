@@ -30,6 +30,23 @@ export function changeTrack(changeType) {
     const { player, queue } = state.data;
     const { activeTimelineId, activeTrackId, previousTrackId } = player;
 
+    const timeline = timelineById(state, activeTimelineId);
+    const currentTrackIndex = trackIndex(
+      timeline,
+      previousTrackId || activeTrackId,
+    );
+    if (changeType === PREV) {
+      const nextTrackId =
+        timeline.tracks[currentTrackIndex - 1] || timeline.tracks[0]; // start over if there's no tracks
+      dispatch(
+        toggleTrack({
+          trackId: nextTrackId,
+          isPlaying: player.isPlaying,
+        }),
+      );
+      return;
+    }
+
     if (queue.length) {
       const nextTrackId = queue[0].trackId;
       dispatch(unqueue()); // Remove the track from queue
@@ -43,15 +60,8 @@ export function changeTrack(changeType) {
       return;
     }
 
-    const timeline = timelineById(state, activeTimelineId);
-    const currentTrackIndex = trackIndex(
-      timeline,
-      previousTrackId || activeTrackId,
-    );
-    const nextTrackIndexModifier = changeType === PREV ? -1 : 1;
     const nextTrackId =
-      timeline.tracks[currentTrackIndex + nextTrackIndexModifier] ||
-      timeline.tracks[0]; // start over if there's no tracks
+      timeline.tracks[currentTrackIndex + 1] || timeline.tracks[0]; // start over if there's no tracks
 
     dispatch(
       toggleTrack({
