@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   min-width: 0;
   flex-direction: column;
   height: 100%;
+  margin: 0 auto;
   justify-content: center;
 `;
 
@@ -67,21 +68,23 @@ class Controls extends Component {
     } = this.props;
 
     return (
-      <Wrapper>
-        <CurrentTrackContainer>
-          {!!track &&
-            <CurrentTrackLink to={`/track/${track.id}`}>
-              {track.title}
-            </CurrentTrackLink>}
-        </CurrentTrackContainer>
-        <SeekBar
-          isPlaying={isPlaying}
-          isActive={isActive}
-          onSeek={onSeek}
-          playedSeconds={playedSeconds}
-          totalSeconds={totalSeconds}
-        />
-      </Wrapper>
+      <div>
+        <Wrapper>
+          <CurrentTrackContainer>
+            {!!track &&
+              <CurrentTrackLink to={`/track/${track.id}`}>
+                {track.title}
+              </CurrentTrackLink>}
+          </CurrentTrackContainer>
+          <SeekBar
+            isPlaying={isPlaying}
+            isActive={isActive}
+            onSeek={onSeek}
+            playedSeconds={playedSeconds}
+            totalSeconds={totalSeconds}
+          />
+        </Wrapper>
+      </div>
     );
   }
 }
