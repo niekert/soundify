@@ -47,7 +47,6 @@ const SecondaryIcon = styled.div`
   svg {
     width: 50%;
     height: 50%;
-    left: 1px;
     position: relative;
     color: ${prop('theme.colors.primaryText')};
   }

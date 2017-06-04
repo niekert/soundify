@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import VolumeIcon from 'components/icons/VolumeIcon';
-import PlayQueueIcon from 'components/icons/PlayQueue';
+import PlayQueueIcon from 'components/icons/TracksQueue';
 import ChromecastIcon from 'components/icons/Chromecast';
 import IconButtonComponent from 'components/buttons/IconButton';
 import PopOver from 'components/helpers/Popover';
 import Slider from 'components/Slider';
 import { onlyUpdateForKeys, compose, withHandlers } from 'recompose';
 import styled from 'styled-components';
+import { ifProp } from 'styled-tools';
 import PlayQueueContainer from '../containers/PlayQueueContainer';
 
 const Wrapper = styled.div`
@@ -27,8 +28,8 @@ const IconButton = styled(IconButtonComponent)`
   margin-left: 1.5em;
 
   svg {
-    width: 16px;
-    height: 16px;
+    width: ${ifProp('large', '18px', '16px')};
+    height: ${ifProp('large', '18px', '16px')};
   }
 `;
 
@@ -50,7 +51,7 @@ function cast() {
 }
 
 const PlayQueueButton = () => (
-  <IconButton>
+  <IconButton large>
     <PlayQueueIcon />
   </IconButton>
 );

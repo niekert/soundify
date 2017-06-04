@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import QueueIcon from 'components/icons/PlayQueue';
+import QueueIcon from 'components/icons/QueueAdd';
 
 const Wrapper = styled.div`
   flex: 1;
@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   align-items: center;
   font-weight: 300;
   font-size: 12px;
+  padding: 0 15px;
   text-align: center;
   height: 200px;
 `;
@@ -23,7 +24,7 @@ const Icon = styled(QueueIcon)`
 const QueueEmpty = () => (
   <Wrapper>
     <Icon />
-    Queue tracks by pressing the queue icon.
+    Queue tracks by pressing the add to queue icon.
   </Wrapper>
 );
 
