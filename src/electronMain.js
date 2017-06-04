@@ -1,10 +1,19 @@
 const { app, BrowserWindow, globalShortcut, Menu } = require('electron');
+const Store = require('electron-store');
 const path = require('path');
 const server = require('../server');
 const menuTemplate = require('./electron/menuTemplate');
 const electronIsDev = require('electron-is-dev');
 
-let mainWindow;
+// TODO: maybe move to own file
+const defaultStoreState = {
+  bounds: {
+    width: 1100,
+    height: 900,
+  },
+};
+
+const store = new Store({ default: defaultStoreState });
 
 function registerShortcuts(window) {
   globalShortcut.register('medianexttrack', () => {
@@ -24,20 +33,12 @@ function createWindow() {
   server(); // Start a simple express server for the soundcloud API callback
 
   const port = process.env.PORT || 3000; // Default to port 3000
-  const windowSize = {
-    // TODO: Save this
-    width: 1100,
-    height: 900,
-  };
 
-  if (electronIsDev) {
-    windowSize.width = 1900;
-  }
-
+  const bounds = store.get('bounds');
   // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: windowSize.width,
-    height: windowSize.height,
+  const mainWindow = new BrowserWindow({
+    width: bounds.width,
+    height: bounds.height,
     experimentalFeatures: true,
     titleBarStyle: 'hidden-inset',
     webPreferences: {
@@ -70,6 +71,10 @@ function createWindow() {
   // Build the menu
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
+
+  mainWindow.on('close', () => {
+    store.set('bounds', mainWindow.getBounds());
+  });
 }
 
 app.on('ready', createWindow);
