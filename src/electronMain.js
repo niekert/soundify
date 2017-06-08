@@ -13,7 +13,7 @@ const defaultStoreState = {
   },
 };
 
-const store = new Store({ default: defaultStoreState });
+const store = new Store({ defaults: defaultStoreState });
 
 function registerShortcuts(window) {
   globalShortcut.register('medianexttrack', () => {
