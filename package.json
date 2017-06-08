@@ -106,7 +106,7 @@
     "extends": "react-app"
   },
   "lint-staged": {
-    "*.js": [
+    "src/*.js": [
       "prettier --write --single-quote --trailing-comma all",
       "git add"
     ]
