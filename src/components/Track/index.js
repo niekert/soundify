@@ -11,9 +11,10 @@ const Wrapper = styled.li`
   position: relative;
   cursor: pointer;
   display: flex;
-  min-height: 250px;
-  flex-direction: column;
+  min-height: 100px;
+  flex-direction: row;
   opacity: ${ifProp('isDragging', 0.8, 1)};
+  margin-top: 50px;
 `;
 
 const PlayerArtwork = styled(ArtWork)`
@@ -21,8 +22,8 @@ const PlayerArtwork = styled(ArtWork)`
   background-repeat: no-repeat;
   box-shadow: ${prop('theme.shadows.depth2')};
   background-size: cover;
-  width: 100%;
-  height: 200px;
+  width: 100px;
+  height: 100px;
 
   & .playOverlay {
     display: none;
@@ -39,6 +40,7 @@ const Meta = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 50px;
 `;
 
 const Title = styled.span`

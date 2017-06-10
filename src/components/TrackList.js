@@ -9,7 +9,7 @@ const Wrapper = styled.ul`
   position: relative;
   padding-top: 15px;
   margin-left: 10px;
-  display: grid;
+  display: list;
   grid-template-rows: repeat(auto-fit, 250px);
   grid-template-columns: repeat(auto-fit, 200px);
   grid-column-gap: 20px;
