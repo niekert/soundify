@@ -5,6 +5,8 @@ import { DragSource } from 'react-dnd';
 import { DRAGGABLE_TYPES } from 'app-constants';
 import { prop, ifProp } from 'styled-tools';
 import ArtWork from 'components/Track/ArtWork';
+import QueueButton from 'components/buttons/QueueButton';
+import LikeButton from 'components/buttons/LikeButton';
 import PlayOverlay from './PlayOverlay';
 
 const Wrapper = styled.li`
@@ -34,6 +36,12 @@ const PlayerArtwork = styled(ArtWork)`
   }
 `;
 
+const ButtonBar = styled.div`
+  margin-top: 10px;
+  height: 30px;
+  flex-direction: row;
+`;
+
 const Meta = styled.div`
   overflow: hidden;
   flex: 1;
@@ -44,7 +52,7 @@ const Meta = styled.div`
 `;
 
 const Title = styled.span`
-  font-size: .8em;
+  font-size: 1em;
   white-space: nowrap;
   display: block;
   overflow: hidden;
@@ -52,7 +60,7 @@ const Title = styled.span`
 `;
 
 const User = styled.span`
-  font-size: .7em;
+  font-size: .9em;
   margin-top: 5px;
   color: ${props => props.theme.colors.secondaryText}
 `;
@@ -67,6 +75,7 @@ class Track extends PureComponent {
     onClick: PropTypes.func.isRequired,
     onQueue: PropTypes.func.isRequired,
     toggleLike: PropTypes.func.isRequired, // TODO: implement
+    likeActive: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -89,6 +98,8 @@ class Track extends PureComponent {
       connectDragPreview,
       isDragging,
       toggleLike,
+      likeActive,
+      onQueue,
     } = this.props;
 
     return (
@@ -101,7 +112,6 @@ class Track extends PureComponent {
           <PlayOverlay
             className="playOverlay"
             trackId={track.id}
-            onQueue={this._onQueueClicked}
             likeActive={track.user_favorite}
             onToggleLike={toggleLike}
             isPlaying={this.props.isPlaying}
@@ -112,6 +122,15 @@ class Track extends PureComponent {
             {track.title}
           </Title>
           <User>{track.user.username}</User>
+          <ButtonBar>
+            <LikeButton
+              onToggle={toggleLike}
+              trackId={track.id}
+              active={likeActive}
+            />
+            {track.favoritings_count}
+            <QueueButton onClick={onQueue} trackId={track.id} />
+          </ButtonBar>
         </Meta>
       </Wrapper>
     );

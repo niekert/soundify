@@ -8,10 +8,11 @@ import { withHandlers } from 'recompose';
 const Button = styled.button`
   background: none;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
   cursor: pointer;
-  color: ${prop('theme.colors.primaryText')};
+  color: ${prop('theme.colors.cta')};
 
 svg path {
     ${ifProp('active', '', 'fill: none')};

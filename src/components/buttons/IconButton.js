@@ -8,8 +8,9 @@ const Button = styled.button`
   background: none;
   padding: 0;
   cursor: pointer;
-  color: ${prop('theme.colors.primaryText')};
+  color: ${prop('theme.colors.cta')};
   transition: transform 100ms ease-out;
+  margin-left: 10px;
 
   &:hover {
     transform: scale(1.05);

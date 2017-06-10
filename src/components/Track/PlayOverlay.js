@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import Play from 'components/icons/Play';
 import Pause from 'components/icons/Pause';
 import styled, { css } from 'styled-components';
-import QueueButton from 'components/buttons/QueueButton';
-import LikeButton from 'components/buttons/LikeButton';
 import { prop } from 'styled-tools';
 
 const icon = css`
@@ -17,39 +15,14 @@ const icon = css`
 
 const PlayerIcon = styled.div`
   ${icon}
-  height: 25%;
-  width: 25%;
+  height: 50%;
+  width: 50%;
   background: ${props => props.theme.colors.cta};
   color: ${prop('theme.colors.reverse.background')};
 
   svg {
     width: 35%;
     fill: white;
-  }
-`;
-
-const SecondaryIcon = styled.div`
-  ${icon}
-  cursor: pointer;
-  height: 20%;
-  width: 20%;
-  padding: 0;
-  border: 1px solid ${prop('theme.colors.primaryText')};
-  background: rgba(0, 0, 0, .3);
-  transition: transform 75ms ease-out;
-  display: flex;
-  align-items: stretch;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  svg {
-    width: 50%;
-    height: 50%;
-    left: 1px;
-    position: relative;
-    color: ${prop('theme.colors.primaryText')};
   }
 `;
 
@@ -70,36 +43,15 @@ const Wrapper = styled.div`
   background: rgba(0, 0, 0, .3);
 `;
 
-const PlayOverlay = ({
-  isPlaying,
-  trackId,
-  className,
-  onToggleLike,
-  likeActive,
-  onQueue,
-}) => (
+const PlayOverlay = ({ isPlaying, className }) => (
   <Wrapper className={className}>
-    <SecondaryIcon>
-      <LikeButton
-        onToggle={onToggleLike}
-        trackId={trackId}
-        active={likeActive}
-      />
-    </SecondaryIcon>
     <PlayerIcon>
       {isPlaying ? <Pause /> : <PlayIcon />}
     </PlayerIcon>
-    <SecondaryIcon>
-      <QueueButton onClick={onQueue} trackId={trackId} />
-    </SecondaryIcon>
   </Wrapper>
 );
 PlayOverlay.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  trackId: PropTypes.number.isRequired,
-  onToggleLike: PropTypes.func.isRequired,
-  onQueue: PropTypes.func.isRequired,
-  likeActive: PropTypes.bool,
   className: PropTypes.string, // TODO: fix this ugly hack
 };
 PlayOverlay.defaultProps = {
