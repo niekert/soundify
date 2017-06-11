@@ -18,8 +18,8 @@ const PlayerButtons = styled.div`
 const IconCss = css`
   svg {
     color: ${props => props.theme.colors.primaryText};
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
     position: relative;
   }
 
@@ -34,9 +34,9 @@ const IconCss = css`
 
 const PlayButton = styled.button`
   padding: 0;
-  height: 40px;
+  height: 35px;
   top: -1px;
-  width: 40px;
+  width: 35px;
   cursor: pointer;
   position: relative;
   background: transparent;

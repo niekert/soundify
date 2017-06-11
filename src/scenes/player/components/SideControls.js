@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import VolumeIcon from 'components/icons/VolumeIcon';
-import PlayQueueIcon from 'components/icons/PlayQueue';
-import ChromecastIcon from 'components/icons/Chromecast';
+import VolumeMax from 'components/icons/VolumeMax';
+import VolumeMute from 'components/icons/VolumeMute';
+import PlayQueueIcon from 'components/icons/TracksQueue';
+import ChromecastIcon from 'components/icons/Cast';
 import IconButtonComponent from 'components/buttons/IconButton';
 import PopOver from 'components/helpers/Popover';
 import Slider from 'components/Slider';
-import { onlyUpdateForKeys, compose, withHandlers } from 'recompose';
+import { onlyUpdateForKeys, compose, withHandlers, withState } from 'recompose';
 import styled from 'styled-components';
+import { ifProp } from 'styled-tools';
 import PlayQueueContainer from '../containers/PlayQueueContainer';
 
 const Wrapper = styled.div`
@@ -27,8 +29,8 @@ const IconButton = styled(IconButtonComponent)`
   margin-left: 1.5em;
 
   svg {
-    width: 16px;
-    height: 16px;
+    width: ${ifProp('large', '18px', '16px')};
+    height: ${ifProp('large', '18px', '16px')};
   }
 `;
 
@@ -39,9 +41,18 @@ const VolumeBar = styled.div`
 
 const enhance = compose(
   onlyUpdateForKeys(['volume']),
+  withState('beforeMuteVolume', 'setOnMuteVolume', 100),
   withHandlers({
     onChange: ({ setVolume }) => e => setVolume(Number(e.target.value)),
-    mute: ({ setVolume }) => () => setVolume(0),
+    mute: ({ setVolume, volume, setOnMuteVolume, beforeMuteVolume }) => () => {
+      if (volume === 0) {
+        setVolume(beforeMuteVolume);
+        return;
+      }
+
+      setOnMuteVolume(volume);
+      setVolume(0);
+    },
   }),
 );
 
@@ -49,8 +60,18 @@ function cast() {
   alert('not implemented yet');
 }
 
+const VolumeIcon = ({ volume, onClick }) => (
+  <IconButton onClick={onClick}>
+    {volume === 0 ? <VolumeMute /> : <VolumeMax />}
+  </IconButton>
+);
+VolumeIcon.propTypes = {
+  volume: PropTypes.number,
+  onClick: PropTypes.func.isRequired,
+};
+
 const PlayQueueButton = () => (
-  <IconButton>
+  <IconButton large>
     <PlayQueueIcon />
   </IconButton>
 );
@@ -64,9 +85,7 @@ const SideControls = enhance(({ volume, onChange, mute }) => (
       <ChromecastIcon />
     </IconButton>
     <VolumeControl>
-      <IconButton onClick={mute}>
-        <VolumeIcon />
-      </IconButton>
+      <VolumeIcon onClick={mute} volume={volume} />
       <VolumeBar>
         <Slider percentage={volume} onChange={onChange} />
       </VolumeBar>

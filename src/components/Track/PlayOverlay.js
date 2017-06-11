@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Play from 'components/icons/Play';
+import PlayIcon from 'components/icons/Play';
 import Pause from 'components/icons/Pause';
 import styled, { css } from 'styled-components';
 import QueueButton from 'components/buttons/QueueButton';
@@ -23,7 +23,7 @@ const PlayerIcon = styled.div`
   color: ${prop('theme.colors.reverse.background')};
 
   svg {
-    width: 35%;
+    width: 75%;
     fill: white;
   }
 `;
@@ -47,15 +47,9 @@ const SecondaryIcon = styled.div`
   svg {
     width: 50%;
     height: 50%;
-    left: 1px;
     position: relative;
     color: ${prop('theme.colors.primaryText')};
   }
-`;
-
-const PlayIcon = styled(Play)`
-  position: relative;
-  left: 2px;
 `;
 
 const Wrapper = styled.div`

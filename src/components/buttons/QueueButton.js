@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import QueueIcon from 'components/icons/PlayQueue';
-import CheckIcon from 'components/icons/CheckIcon';
+import styled from 'styled-components';
+import QueueAdd from 'components/icons/QueueAdd';
+import CheckIcon from 'components/icons/PlaylistAddCheck';
 import IconButton from './IconButton';
+
+const QueueIcon = styled(QueueAdd)`
+  position: relative;
+`;
 
 class QueueButton extends Component {
   static propTypes = {
