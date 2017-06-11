@@ -1,43 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { lighten, alpha } from 'utils/color';
 import { compose, withState, withHandlers } from 'recompose';
 import { prop, ifProp } from 'styled-tools';
 
 const Bar = styled.div`
   flex: 1;
-  height: 5px;
   position: relative;
-  border-radius: 5px;
-  background: ${props => lighten(props.theme.colors.secondaryActive, 0.3)};
 `;
 
-const Active = styled.div`
-  will-change: width;
-  position: relative;
-  height: 100%;
-  border-radius: 5px;
-  background: ${props => (props.highlight ? props.theme.colors.active : alpha(props.theme.colors.primaryText, 0.7))};
+const seekLine = css`
+  -webkit-appearance: none;
+  position: absolute;
+  background: none;
+  width: 100%;
+  margin: 0;
 `;
 
 const Seek = styled.input`
-  position: absolute;
+  ${seekLine}
   top: -10px;
   height: 20px;
-  width: 100%;
-  opacity: 0;
+
+  &::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    pointer-events: none;
+    opacity: ${ifProp('highlight', 1, 0)};
+    z-index: 30;
+    width: 10px;
+    height: 10px;
+    background: ${prop('theme.colors.primaryText')};
+    border-radius: 50%;
+    position: relative;
+  }
 `;
 
-const Scrubber = styled.div`
-  width: 10px;
-  height: 10px;
-  position: absolute;
+const Progress = styled.progress`
+  ${seekLine}
+  top: -3px;
   pointer-events: none;
-  transform: translateX(-50%);
-  bottom: -2px;
-  border-radius: 50%;
-  background: ${prop('theme.colors.primaryText')};
+  height: 6px;
+  z-index: 20;
+
+  &::-webkit-progress-value {
+    -webkit-appearance: none;
+    background: ${props => (props.active ? props.theme.colors.active : alpha(props.theme.colors.primaryText, 0.7))};
+    height: 6px;
+    border-radius: 6px;
+    z-index: 50;
+  }
+
+  &::-webkit-progress-bar {
+    border-radius: 6px;
+    background: ${props => lighten(props.theme.colors.secondaryActive, 0.3)};
+    border-radius: 5px;
+    height: 6px;
+  }
 `;
 
 const enhance = compose(
@@ -51,19 +74,15 @@ const enhance = compose(
 const Slider = enhance(
   ({ onChange, percentage = 0, hoverActive, mouseEnter, mouseLeave }) => (
     <Bar>
-      <Active
-        style={{
-          width: `${percentage}%`,
-        }}
-        highlight={hoverActive}
-      />
-      {hoverActive && <Scrubber style={{ left: `${percentage}%` }} />}
       <Seek
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
+        highlight={hoverActive}
         type="range"
+        value={percentage}
         onChange={onChange}
       />
+      <Progress value={percentage} max={100} active={hoverActive} />
     </Bar>
   ),
 );
