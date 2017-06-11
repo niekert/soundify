@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import HeartIcon from 'components/icons/Heart';
+import HeartIcon from 'components/icons/FavoriteHeart';
 import { ifProp, prop } from 'styled-tools';
 import { withHandlers } from 'recompose';
 
@@ -12,10 +12,6 @@ const Button = styled.button`
   height: 100%;
   cursor: pointer;
   color: ${prop('theme.colors.primaryText')};
-
-svg path {
-    ${ifProp('active', '', 'fill: none')};
-  }
 `;
 
 const enhance = withHandlers({
@@ -27,7 +23,7 @@ const enhance = withHandlers({
 
 const LikeButton = enhance(({ onClick, active }) => (
   <Button active={active} onClick={onClick}>
-    <HeartIcon />
+    <HeartIcon isActive={active} />
   </Button>
 ));
 LikeButton.propTypes = {
