@@ -15,6 +15,7 @@ const FavoriteHeart = ({ fill, isActive, ...props }) => (
 
 FavoriteHeart.propTypes = {
   fill: PropTypes.string,
+  isActive: PropTypes.bool,
 };
 FavoriteHeart.defaultProps = {
   fill: 'currentColor',

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import VolumeMax from 'components/icons/VolumeMax';
 import VolumeMute from 'components/icons/VolumeMute';
 import PlayQueueIcon from 'components/icons/TracksQueue';
-import ChromecastIcon from 'components/icons/Chromecast';
+import ChromecastIcon from 'components/icons/Cast';
 import IconButtonComponent from 'components/buttons/IconButton';
 import PopOver from 'components/helpers/Popover';
 import Slider from 'components/Slider';
