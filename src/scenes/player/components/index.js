@@ -134,7 +134,11 @@ class Player extends PureComponent {
   };
 
   _onKeyDown = e => {
-    if (e.code === 'Space' && this.props.track) {
+    if (
+      e.code === 'Space' &&
+      this.props.track &&
+      e.target.tagName !== 'INPUT'
+    ) {
       e.preventDefault();
       this.props.togglePlaying(!this.props.isPlaying);
     }
