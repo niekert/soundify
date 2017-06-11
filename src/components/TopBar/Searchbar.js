@@ -14,8 +14,8 @@ const Form = styled.form`
 
 const IconWrapper = styled.div`
   position: absolute;
-  height: 16px;
-  width: 16px;
+  height: 24px;
+  width: 24px;
   left: 30px;
   color: #222326;
 `;
@@ -26,7 +26,7 @@ const Input = styled.input`
   width: 300px;
   align-self: center;
   height: 30px;
-  padding: 5px 12px 4px 25px;
+  padding: 5px 12px 4px 30px;
   font-size: 14px;
   line-height: 19px;
   color: #3e3e40;
