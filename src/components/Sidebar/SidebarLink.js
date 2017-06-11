@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { darken } from 'utils/color';
 import { prop, ifProp } from 'styled-tools';
-import VolumeIcon from 'components/icons/VolumeIcon';
+import VolumeIcon from 'components/icons/VolumeMax';
 
 const activeCss = css`
   color: ${prop('theme.colors.primaryText')};
