@@ -20,7 +20,7 @@ export function fetchAuthedUser() {
     dispatch({ type: AUTH_START });
 
     api
-      .fetchUser()
+      .fetchMe() // Me is always the current user
       .then(data =>
         dispatch({
           type: AUTH_USER,

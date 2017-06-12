@@ -1,9 +1,29 @@
-import { compose } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
+import { fetchProfile } from './actions';
 import ProfilePage from './components/ProfilePage';
+import { userStatus, user } from './selectors';
 
-const mapStateToProps = (state, ownProps) => {};
+const mapStateToProps = (state, ownProps) => {
+  const userId = ownProps.match.params.profileId;
 
-const enhance = compose(connect(mapStateToProps));
+  const stater = user(state, userId);
+  return {
+    userId,
+    status: userStatus(state, userId),
+    user: user(state, userId),
+  };
+};
+
+const enhance = compose(
+  connect(mapStateToProps, { fetchProfile }),
+  lifecycle({
+    componentDidMount() {
+      window.requestIdleCallback(() => {
+        this.props.fetchProfile(this.props.userId);
+      });
+    },
+  }),
+);
 
 export default enhance(ProfilePage);

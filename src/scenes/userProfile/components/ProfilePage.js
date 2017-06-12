@@ -1,3 +1,11 @@
 import React from 'react';
 
-export default () => <div>profile</div>;
+function ProfilePage(props) {
+  return (
+    <div>
+      {JSON.stringify(props)}
+    </div>
+  );
+}
+
+export default ProfilePage;

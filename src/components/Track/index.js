@@ -116,7 +116,7 @@ class Track extends PureComponent {
           <Title>
             {track.title}
           </Title>
-          <UserLink to={`/profile/${track.user.username}`}>
+          <UserLink to={`/profile/${track.user.id}`}>
             {track.user.username}
           </UserLink>
         </Meta>

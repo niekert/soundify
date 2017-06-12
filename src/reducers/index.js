@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   entities: entitiesReducer,
   timeline: timelineReducer,
-  userProfile,
+  users: userProfile,
   data: dataReducer,
 });
 

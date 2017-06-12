@@ -34,7 +34,7 @@ export default {
     });
   },
 
-  fetchUser() {
+  fetchMe() {
     if (!this.token) {
       return Promise.reject();
     }
@@ -42,6 +42,10 @@ export default {
     return fetch(
       `https://api.soundcloud.com/me?oauth_token=${this.token}`,
     ).then(resp => resp.json());
+  },
+
+  fetchUser(userId) {
+    return this.fetchWithToken(`/users/${userId}`).then(resp => resp.json());
   },
 
   authCallback(location) {
