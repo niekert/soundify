@@ -8,6 +8,7 @@ import { prop } from 'styled-tools';
 import theme from 'theme';
 import ModalContainer from 'scenes/modals';
 import PlayerContainer from 'scenes/player';
+import UserProfileContainer from 'scenes/userProfile';
 import TopBarContainer from 'containers/TopBarContainer';
 import SidebarContainer from 'containers/SidebarContainer';
 import LogoutContainer from 'containers/LogoutContainer';
@@ -50,6 +51,7 @@ const AuthedShell = () => (
         component={TimelineContainer}
       />
       <Route path="/track/:trackId" component={TrackContainer} />
+      <Route path="/profile/:profileId" component={UserProfileContainer} />
       <ModalContainer />
     </MainContent>
     <PlayerContainer />
