@@ -7,7 +7,6 @@ export const FETCH_PROFILE_SUCCESS = `${FETCH_PROFILE}_SUCCESS`;
 
 export function fetchProfile(userId) {
   return dispatch => {
-    console.log('dispatching', userId);
     dispatch({
       type: FETCH_PROFILE,
       payload: { userId },
@@ -22,5 +21,11 @@ export function fetchProfile(userId) {
         entities: normalized.entities,
       });
     });
+  };
+}
+
+export function fetchProfileTracks (userId) {
+  return dispatch => {
+
   };
 }

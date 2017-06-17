@@ -7,7 +7,6 @@ import { userStatus, user } from './selectors';
 const mapStateToProps = (state, ownProps) => {
   const userId = ownProps.match.params.profileId;
 
-  const stater = user(state, userId);
   return {
     userId,
     status: userStatus(state, userId),
@@ -21,6 +20,7 @@ const enhance = compose(
     componentDidMount() {
       window.requestIdleCallback(() => {
         this.props.fetchProfile(this.props.userId);
+        this.props.fetchProfileTracks(this.props.userId);
       });
     },
   }),

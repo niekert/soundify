@@ -25,7 +25,10 @@ function fetchTimelineSuccess({ id, timeline }) {
       id,
       timeline: normalized.result,
     },
-    entities: normalized.entities,
+    entities: {
+      ...normalized.entities,
+      feed: schema.extractFeed(id, normalized.result.tracks),
+    },
   };
 }
 
