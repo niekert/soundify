@@ -1,13 +1,12 @@
 import api from 'api';
 import { normalize } from 'normalizr';
+import { saveFeed } from 'scenes/tracksFeed/actions';
 import * as schema from 'schema';
 
 export const FETCH_TIMELINE = 'FETCH_TIMELINE';
 export const SET_ACTIVE_TIMELINE = 'SET_ACTIVE_TIMELINE';
 export const FETCH_TIMELINE_SUCCESS = 'FETCH_TIMELINE_SUCCESS';
 export const FETCH_TIMELINE_ERROR = 'FETCH_TIMELINE_ERROR';
-export const FETCH_NEXT = 'FETCH_NEXT';
-export const FETCH_NEXT_SUCCESS = 'FETCH_NEXT_SUCCESS';
 
 const fetchTimeline = id => ({
   type: FETCH_TIMELINE,
@@ -16,20 +15,19 @@ const fetchTimeline = id => ({
   },
 });
 
-function fetchTimelineSuccess({ id, timeline }) {
+function fetchTimelineSuccess(dispatch, { id, timeline }) {
   const normalized = normalize(timeline, schema.timeline);
 
-  return {
+  dispatch(saveFeed(id, normalized.result.tracks, normalized.result.next));
+
+  dispatch({
     type: FETCH_TIMELINE_SUCCESS,
     payload: {
       id,
       timeline: normalized.result,
     },
-    entities: {
-      ...normalized.entities,
-      feed: schema.extractFeed(id, normalized.result.tracks),
-    },
-  };
+    entities: normalized.entities,
+  });
 }
 
 export function submitSearch(query) {
@@ -47,12 +45,10 @@ export function submitSearch(query) {
         next: json.next_href,
       }))
       .then(timeline =>
-        dispatch(
-          fetchTimelineSuccess({
-            id,
-            timeline,
-          }),
-        ),
+        fetchTimelineSuccess(dispatch, {
+          id,
+          timeline,
+        }),
       )
       .catch(err =>
         dispatch({
@@ -82,12 +78,10 @@ export function fetchLikes() {
         tracks: json.collection,
       }))
       .then(timeline =>
-        dispatch(
-          fetchTimelineSuccess({
-            id,
-            timeline,
-          }),
-        ),
+        fetchTimelineSuccess(dispatch, {
+          id,
+          timeline,
+        }),
       )
       .catch(err =>
         dispatch({
@@ -98,36 +92,6 @@ export function fetchLikes() {
   };
 }
 
-export function fetchNext(timelineId, nextUrl) {
-  return dispatch => {
-    api.fetchNext(nextUrl).then(resp => {
-      let tracks = resp.collection;
-      if (timelineId === 'stream') {
-        // TODO: solve better
-        tracks = resp.collection.map(item => item.origin);
-      }
-
-      const normalized = normalize(tracks, schema.arrayOfTracks);
-      dispatch({
-        type: FETCH_NEXT_SUCCESS,
-        payload: {
-          id: timelineId,
-          next: resp.next_href,
-          tracks: normalized.result,
-        },
-        entities: normalized.entities,
-      });
-    });
-
-    dispatch({
-      type: FETCH_NEXT,
-      payload: {
-        id: timelineId,
-      },
-    });
-  };
-}
-
 export function fetchPlaylist(playlistId) {
   const id = `playlist::${playlistId}`;
 
@@ -135,12 +99,10 @@ export function fetchPlaylist(playlistId) {
     dispatch(fetchTimeline(id));
 
     api.fetchPlaylist(playlistId).then(json =>
-      dispatch(
-        fetchTimelineSuccess({
-          id,
-          timeline: json,
-        }),
-      ),
+      fetchTimelineSuccess(dispatch, {
+        id,
+        timeline: json,
+      }),
     );
   };
 }
@@ -161,12 +123,10 @@ export function fetchStream() {
         tracks: json.collection.map(item => item.origin),
       }))
       .then(json =>
-        dispatch(
-          fetchTimelineSuccess({
-            id,
-            timeline: json,
-          }),
-        ),
+        fetchTimelineSuccess(dispatch, {
+          id,
+          timeline: json,
+        }),
       );
   };
 }

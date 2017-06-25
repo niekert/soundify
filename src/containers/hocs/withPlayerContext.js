@@ -8,12 +8,12 @@ const withPlayerContext = ComposedComponent => {
   const EnhancePlayercontext = props => <ComposedComponent {...props} />;
 
   const mapStateToProps = state => {
-    const { isPlaying, activeTrackId, activeTimelineId } = state.data.player;
+    const { isPlaying, activeTrackId, activeFeedId } = state.data.player;
 
     return {
       isPlaying,
       activeTrackId,
-      activeTimelineId, // TODO: rename this
+      activeFeedId,
     };
   };
 

@@ -48,6 +48,12 @@ export default {
     return this.fetchWithToken(`/users/${userId}`).then(resp => resp.json());
   },
 
+  fetchUserTracks(userId) {
+    return this.fetchWithToken(`/users/${userId}/tracks`).then(resp =>
+      resp.json(),
+    );
+  },
+
   authCallback(location) {
     SC.connectCallback.call({ location }); // hacky but works lol
   },

@@ -4,26 +4,22 @@ const defaultPlayerState = {
   active: false,
   activeTrackId: null,
   isPlaying: false,
-  activeTimelineId: null,
+  activeFeedId: null,
   trackHistory: [],
 };
 
 export default (state = defaultPlayerState, action) => {
   switch (action.type) {
     case TOGGLE_TRACK: {
-      const {
-        trackId,
-        isPlaying,
-        timelineId,
-        previousTrackId,
-      } = action.payload;
+      const { trackId, isPlaying, feedId, previousTrackId } = action.payload;
+
       return {
         ...state,
         active: true,
         activeTrackId: trackId,
         isPlaying,
         previousTrackId,
-        activeTimelineId: timelineId || state.activeTimelineId,
+        activeFeedId: feedId || state.activeFeedId,
         trackHistory: [...state.trackHistory, state.activeTrackId],
       };
     }

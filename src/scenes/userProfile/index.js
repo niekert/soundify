@@ -1,6 +1,6 @@
 import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
-import { fetchProfile } from './actions';
+import { fetchProfile, fetchProfileTracks } from './actions';
 import ProfilePage from './components/ProfilePage';
 import { userStatus, user } from './selectors';
 
@@ -14,8 +14,13 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+const actions = {
+  fetchProfile,
+  fetchProfileTracks,
+};
+
 const enhance = compose(
-  connect(mapStateToProps, { fetchProfile }),
+  connect(mapStateToProps, actions),
   lifecycle({
     componentDidMount() {
       window.requestIdleCallback(() => {

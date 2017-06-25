@@ -35,8 +35,9 @@ class TrackList extends PureComponent {
     toggleLike: PropTypes.func.isRequired,
     fetchNext: PropTypes.func.isRequired,
     hasNext: PropTypes.bool,
+    next: PropTypes.string,
     tracks: PropTypes.arrayOf(PropTypes.object),
-    timelineId: PropTypes.string,
+    feedId: PropTypes.string,
     isPlaying: PropTypes.bool,
     activeTrackId: PropTypes.number,
   };
@@ -46,19 +47,20 @@ class TrackList extends PureComponent {
     activeTrackId: null,
     hasNext: false,
     isPlaying: false,
-    timelineId: '',
+    feedId: '',
   };
 
   componentDidMount() {
     this.intersectionObserver = new window.IntersectionObserver(entries => {
       const [sentinel] = entries; // Always on first index
       if (sentinel.intersectionRatio > 0 && this.props.hasNext) {
-        this.props.fetchNext();
+        this.props.fetchNext(this.props.feedId, this.props.next);
       }
     });
 
     this.intersectionObserver.observe(this._nextObserver);
   }
+
 
   _nextObserverRef = c => {
     this._nextObserver = c;
@@ -68,7 +70,7 @@ class TrackList extends PureComponent {
     this.props.toggleTrack({
       trackId,
       isPlaying: toggle,
-      timelineId: this.props.timelineId,
+      feedId: this.props.feedId,
     });
   };
 

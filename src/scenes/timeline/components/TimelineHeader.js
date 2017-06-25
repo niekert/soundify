@@ -11,7 +11,7 @@ import ArtworkGrid from './ArtworkGrid';
 const Wrapper = styled.div`
   display: flex;
   padding: 15px 10px;
-  margin-bottom: 20px;
+margin-bottom: 20px;
 `;
 
 const Subtitle = styled.span`
