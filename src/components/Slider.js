@@ -34,6 +34,7 @@ const Seek = styled.input`
     z-index: 30;
     width: 10px;
     height: 10px;
+    top: -1px;
     background: ${prop('theme.colors.primaryText')};
     border-radius: 50%;
     position: relative;
@@ -44,13 +45,13 @@ const Progress = styled.progress`
   ${seekLine}
   top: -3px;
   pointer-events: none;
-  height: 6px;
+  height: 4px;
   z-index: 20;
 
   &::-webkit-progress-value {
     -webkit-appearance: none;
     background: ${props => (props.active ? props.theme.colors.active : alpha(props.theme.colors.primaryText, 0.7))};
-    height: 6px;
+    height: 4px;
     border-radius: 6px;
     z-index: 50;
   }
@@ -59,7 +60,7 @@ const Progress = styled.progress`
     border-radius: 6px;
     background: ${props => lighten(props.theme.colors.secondaryActive, 0.3)};
     border-radius: 5px;
-    height: 6px;
+    height: 4px;
   }
 `;
 

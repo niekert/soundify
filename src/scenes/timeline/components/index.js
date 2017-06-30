@@ -34,7 +34,6 @@ class Timeline extends PureComponent {
     if (!isReady) {
       return <Loader />;
     }
-    const isLoading = status !== OK || timeline.status === PENDING;
 
     return (
       <Wrapper>
@@ -47,7 +46,6 @@ class Timeline extends PureComponent {
           />,
           <TracksFeedContainer feedId={timelineId} key="tracklist" />,
         ]}
-        {isLoading && <Loader />}
       </Wrapper>
     );
   }
