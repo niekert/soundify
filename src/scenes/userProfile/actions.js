@@ -1,5 +1,6 @@
 import api from 'api';
 import { normalize } from 'normalizr';
+import { saveFeed } from 'scenes/tracksFeed/actions';
 import * as schema from 'schema';
 
 export const FETCH_PROFILE = 'userProfile/FETCH_PROFILE';
@@ -27,20 +28,19 @@ export function fetchProfile(userId) {
   };
 }
 
-function fetchProfileFeedSuccess(tracks, userId, feed) {
+function fetchProfileFeedSuccess(dispatch, tracks, userId, feed) {
   const normalizedTracks = normalize(tracks, schema.arrayOfTracks);
 
-  return {
+  dispatch(saveFeed(`${userId}::${feed}`, normalizedTracks.result));
+
+  dispatch({
     type: FETCH_PROFILE_FEED_SUCCESS,
     payload: {
       userId,
       feed,
     },
-    entities: {
-      ...normalizedTracks.entities,
-      feeds: schema.extractFeed(`${userId}::${feed}`, normalizedTracks.result),
-    },
-  };
+    entities: normalizedTracks.entities,
+  });
 }
 
 export function fetchProfileTracks(userId) {
@@ -48,7 +48,7 @@ export function fetchProfileTracks(userId) {
     api
       .fetchUserTracks(userId)
       .then(tracks =>
-        dispatch(fetchProfileFeedSuccess(tracks, userId, 'tracks')),
+        fetchProfileFeedSuccess(dispatch, tracks, userId, 'tracks'),
       );
   };
 }

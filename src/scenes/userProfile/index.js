@@ -10,7 +10,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     userId,
     status: userStatus(state, userId),
-    user: user(state, userId),
   };
 };
 

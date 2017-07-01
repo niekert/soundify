@@ -2,7 +2,7 @@ import React from 'react';
 import { array, object, func } from 'prop-types';
 import styled, { css, keyframes } from 'styled-components';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'; // ES6
-import { H3 } from 'components/styles/Headings';
+import { H3 } from 'components/styles/Typography';
 import { withHandlers, compose } from 'recompose';
 import { prop } from 'styled-tools';
 import Track from './Track';
@@ -22,8 +22,7 @@ const Wrapper = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  ${backstyles}
-  border-radius: 2px;
+  ${backstyles} border-radius: 2px;
   z-index: 100;
   bottom: 30px;
   left: -140px;
@@ -32,8 +31,7 @@ const Wrapper = styled.div`
 
   &:before {
     content: '';
-    ${backstyles}
-    position: absolute;
+    ${backstyles} position: absolute;
     width: 10px;
     height: 10px;
     transform: rotate(45deg);
@@ -48,7 +46,7 @@ const Wrapper = styled.div`
     left: 0;
     width: 100%;
     height: 10px;
-      background: ${prop('theme.colors.primaryBackground')};
+    background: ${prop('theme.colors.primaryBackground')};
   }
 `;
 
@@ -89,7 +87,7 @@ const PlayQueue = ({
   findIndex,
   removeFromQueue,
   timeline, // eslint-disable-line
-}) => (
+}) =>
   <Wrapper>
     {!queue.length
       ? <QueueEmpty />
@@ -103,7 +101,7 @@ const PlayQueue = ({
             transitionLeave
             transitionLeaveTimeout={300}
           >
-            {queue.map(queueItem => (
+            {queue.map(queueItem =>
               <Track
                 key={`${queueItem.id}`}
                 id={queueItem.id}
@@ -113,12 +111,11 @@ const PlayQueue = ({
                 artworkUrl={queueItem.track.artwork_url}
                 title={queueItem.track.title}
                 artist={queueItem.track.user.username}
-              />
-            ))}
+              />,
+            )}
           </TrackList>,
         ]}
-  </Wrapper>
-);
+  </Wrapper>;
 PlayQueue.propTypes = {
   queue: array.isRequired,
   findIndex: func.isRequired,

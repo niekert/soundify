@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import PlayButton from 'components/buttons/PlayButton';
 import styled from 'styled-components';
 import { formatPlaytime } from 'helpers/format';
-import { H1 } from 'components/styles/Headings';
+import { H1 } from 'components/styles/Typography';
 import { pure } from 'recompose';
 import { prop } from 'styled-tools';
 import ArtworkGrid from './ArtworkGrid';
@@ -11,7 +11,7 @@ import ArtworkGrid from './ArtworkGrid';
 const Wrapper = styled.div`
   display: flex;
   padding: 15px 10px;
-margin-bottom: 20px;
+  margin-bottom: 20px;
 `;
 
 const Subtitle = styled.span`
@@ -27,12 +27,16 @@ const Title = styled(H1)`
   font-weight: 600;
 `;
 
-const TimelineHeader = ({ timeline, tracks, timelineId }) => (
+const TimelineHeader = ({ timeline, tracks, timelineId }) =>
   <Wrapper>
     <ArtworkGrid tracks={tracks} />
     <div>
-      <Subtitle>{timeline.type || 'playlist'}</Subtitle>
-      <Title>{timeline.title}</Title>
+      <Subtitle>
+        {timeline.type || 'playlist'}
+      </Subtitle>
+      <Title>
+        {timeline.title}
+      </Title>
       {timeline.kind === 'timeline' &&
         <Subtitle>
           Created by {timeline.user.username} ● {timeline.tracks.length} tracks,
@@ -41,8 +45,7 @@ const TimelineHeader = ({ timeline, tracks, timelineId }) => (
       {tracks.length > 0 &&
         <PlayButton trackId={tracks[0].id} timelineId={timelineId} />}
     </div>
-  </Wrapper>
-);
+  </Wrapper>;
 TimelineHeader.propTypes = {
   timeline: PropTypes.object.isRequired,
   timelineId: PropTypes.string.isRequired,

@@ -21,11 +21,10 @@ const Icon = styled(QueueIcon)`
   margin-bottom: 15px;
 `;
 
-const QueueEmpty = () => (
+const QueueEmpty = () =>
   <Wrapper>
     <Icon />
     Queue tracks by pressing the add to queue icon.
-  </Wrapper>
-);
+  </Wrapper>;
 
 export default QueueEmpty;
