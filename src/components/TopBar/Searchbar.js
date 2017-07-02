@@ -52,7 +52,7 @@ const enhance = compose(
   }),
 );
 
-const Searchbar = enhance(({ query, onChange, onSubmit }) => (
+const Searchbar = enhance(({ query, onChange, onSubmit }) =>
   <Form onSubmit={onSubmit}>
     <IconWrapper>
       <SearchIcon />
@@ -63,8 +63,8 @@ const Searchbar = enhance(({ query, onChange, onSubmit }) => (
       value={decodeURIComponent(query)}
       onChange={onChange}
     />
-  </Form>
-));
+  </Form>,
+);
 Searchbar.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,

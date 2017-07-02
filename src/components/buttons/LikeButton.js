@@ -21,11 +21,11 @@ const enhance = withHandlers({
   },
 });
 
-const LikeButton = enhance(({ onClick, active }) => (
+const LikeButton = enhance(({ onClick, active }) =>
   <Button active={active} onClick={onClick}>
     <HeartIcon isActive={active} />
-  </Button>
-));
+  </Button>,
+);
 LikeButton.propTypes = {
   active: PropTypes.bool,
   onToggle: PropTypes.func.isRequired,

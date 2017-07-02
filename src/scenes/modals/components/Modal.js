@@ -42,11 +42,10 @@ const StyledModal = styled(ReactModal).attrs({
   animation: ${dialogIn} 100ms ease-out forwards;
 `;
 
-const Modal = ({ isOpen = true, children, ...props }) => (
+const Modal = ({ isOpen = true, children, ...props }) =>
   <StyledModal isOpen={isOpen} className="cpoool" {...props}>
     {children}
-  </StyledModal>
-);
+  </StyledModal>;
 Modal.propTypes = {
   children: node,
   isOpen: bool,

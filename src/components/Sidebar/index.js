@@ -32,7 +32,8 @@ const NewPlaylist = styled.button`
   background: none;
   margin: auto 0;
   z-index: 10;
-  border-top: 1px solid ${props => alpha(props.theme.colors.secondaryText, 0.5)};
+  border-top: 1px solid ${props =>
+      alpha(props.theme.colors.secondaryText, 0.5)};
   color: ${prop('theme.colors.secondaryText')};
   font-size: ${prop('theme.fontSize.caption')};
   padding: 15px 0;
@@ -84,7 +85,7 @@ class Sidebar extends PureComponent {
         <SectionWrapper>
           <Label>Playlists</Label>
           <Section>
-            {playlists.map(({ title, id }) => (
+            {playlists.map(({ title, id }) =>
               <PlaylistDropTarget key={`playlist-${id}`}>
                 <SidebarLink
                   isPlaying={activeFeedId === `playlist::${id}`}
@@ -92,13 +93,11 @@ class Sidebar extends PureComponent {
                 >
                   {title}
                 </SidebarLink>
-              </PlaylistDropTarget>
-            ))}
+              </PlaylistDropTarget>,
+            )}
           </Section>
         </SectionWrapper>
-        <NewPlaylist onClick={addPlaylist}>
-          Add Playlist
-        </NewPlaylist>
+        <NewPlaylist onClick={addPlaylist}>Add Playlist</NewPlaylist>
       </SidebarWrapper>
     );
   }

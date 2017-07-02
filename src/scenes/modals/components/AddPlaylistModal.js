@@ -32,7 +32,7 @@ const enhance = compose(
   setDisplayName('AddPlaylistModal'),
 );
 
-const AddPlaylistModal = ({ onRequestClose, name, onSubmit, onChange }) => (
+const AddPlaylistModal = ({ onRequestClose, name, onSubmit, onChange }) =>
   <Modal onRequestClose={onRequestClose} contentLabel="Add playlist">
     <ModalHeader>Add playlist</ModalHeader>
     <form onSubmit={onSubmit}>
@@ -45,8 +45,8 @@ const AddPlaylistModal = ({ onRequestClose, name, onSubmit, onChange }) => (
         fullWidth
       />
       <Subtitle>
-        Pro tip: enter the URL of a SoundCloud playlist here
-        and Soundify will save it as one of your own!
+        Pro tip: enter the URL of a SoundCloud playlist here and Soundify will
+        save it as one of your own!
       </Subtitle>
       <Buttons horizontal>
         <Button cta type="submit">
@@ -57,8 +57,7 @@ const AddPlaylistModal = ({ onRequestClose, name, onSubmit, onChange }) => (
         </Button>
       </Buttons>
     </form>
-  </Modal>
-);
+  </Modal>;
 AddPlaylistModal.propTypes = {
   onRequestClose: func.isRequired,
   name: string,

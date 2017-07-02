@@ -60,23 +60,21 @@ function cast() {
   alert('not implemented yet');
 }
 
-const VolumeIcon = ({ volume, onClick }) => (
+const VolumeIcon = ({ volume, onClick }) =>
   <IconButton onClick={onClick}>
     {volume === 0 ? <VolumeMute /> : <VolumeMax />}
-  </IconButton>
-);
+  </IconButton>;
 VolumeIcon.propTypes = {
   volume: PropTypes.number,
   onClick: PropTypes.func.isRequired,
 };
 
-const PlayQueueButton = () => (
+const PlayQueueButton = () =>
   <IconButton large>
     <PlayQueueIcon />
-  </IconButton>
-);
+  </IconButton>;
 
-const SideControls = enhance(({ volume, onChange, mute }) => (
+const SideControls = enhance(({ volume, onChange, mute }) =>
   <Wrapper>
     <PopOver triggerButton={PlayQueueButton} width="600" align="center">
       <PlayQueueContainer />
@@ -90,8 +88,8 @@ const SideControls = enhance(({ volume, onChange, mute }) => (
         <Slider percentage={volume} onChange={onChange} />
       </VolumeBar>
     </VolumeControl>
-  </Wrapper>
-));
+  </Wrapper>,
+);
 SideControls.propTypes = {
   volume: PropTypes.number,
   setVolume: PropTypes.func.isRequired,

@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   height: 200px;
   width: 200px;
   margin-right: 30px;
-  box-shadow: ${prop('theme.shadows.depth2')}
+  box-shadow: ${prop('theme.shadows.depth2')};
 `;
 
 const ArtworkWrapper = styled(Artwork)`
@@ -28,13 +28,13 @@ const ArtworkGrid = ({ tracks }) => {
     <Wrapper>
       {tracks
         .slice(0, 4)
-        .map(track => (
+        .map(track =>
           <ArtworkWrapper
             key={track.id}
             artworkUrl={track.artwork_url}
             size="200x200"
-          />
-        ))}
+          />,
+        )}
     </Wrapper>
   );
 };

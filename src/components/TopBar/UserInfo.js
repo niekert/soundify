@@ -35,15 +35,16 @@ const ArrowWrapper = styled.div`
   transform: ${ifProp('isOpen', 'rotate(270deg)', 'rotate(90deg)')};
 `;
 
-const UserInfo = ({ username, avatarUrl, isOpen, onClick }) => (
+const UserInfo = ({ username, avatarUrl, isOpen, onClick }) =>
   <Wrapper onClick={onClick}>
     <Avatar src={avatarUrl} />
-    <Username>{username}</Username>
+    <Username>
+      {username}
+    </Username>
     <ArrowWrapper isOpen={isOpen}>
       <ArrowIcon />
     </ArrowWrapper>
-  </Wrapper>
-);
+  </Wrapper>;
 UserInfo.propTypes = {
   onClick: func,
   username: string.isRequired,

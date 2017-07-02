@@ -34,11 +34,9 @@ const DropdownLink = styled(Link)`
   ${linkStyles}
 `;
 
-const Href = styled.a`
-  ${linkStyles}
-`;
+const Href = styled.a`${linkStyles};`;
 
-const UserDropdown = ({ user }) => (
+const UserDropdown = ({ user }) =>
   <PopOver
     triggerButton={
       <UserInfo avatarUrl={user.avatar_url} username={user.username} />
@@ -51,12 +49,9 @@ const UserDropdown = ({ user }) => (
       <Href href="mailto:niekkruse70@gmail.com?SUBJECT=Soundify%20Feedback">
         Leave feedback
       </Href>
-      <DropdownLink to="/logout">
-        Sign out
-      </DropdownLink>
+      <DropdownLink to="/logout">Sign out</DropdownLink>
     </DropdownWrapper>
-  </PopOver>
-);
+  </PopOver>;
 UserDropdown.propTypes = {
   user: PropTypes.object.isRequired,
 };

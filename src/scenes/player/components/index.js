@@ -22,7 +22,10 @@ const Wrapper = styled.div`
   user-selectable: none;
   background-size: cover !important;
   box-shadow: ${prop('theme.shadows.depth2')};
-  background: ${props => (props.artwork ? `url(${getArtworkUrl(props.artwork, '500x500')}) 50% 50% no-repeat` : props.theme.colors.primaryBackground)};
+  background: ${props =>
+    props.artwork
+      ? `url(${getArtworkUrl(props.artwork, '500x500')}) 50% 50% no-repeat`
+      : props.theme.colors.primaryBackground};
   display: flex;
   justify-content: center;
   transition: transform .2s ease-out;

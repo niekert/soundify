@@ -15,9 +15,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const LeftWrapper = styled.div`
-  display: flex;
-`;
+const LeftWrapper = styled.div`display: flex;`;
 
 const ActiveTrackArtwork = styled(ArtWork)`
   width: 55px;

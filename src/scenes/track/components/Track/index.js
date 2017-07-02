@@ -2,7 +2,7 @@ import React from 'react';
 import TrackDetails from '../TrackDetails';
 import { Wrapper } from './styles';
 
-export default ({ track }) => (
+export default ({ track }) =>
   <Wrapper>
     {track &&
       <TrackDetails
@@ -11,5 +11,4 @@ export default ({ track }) => (
         userUrl={track.user.permalink_url}
         title={track.title}
       />}
-  </Wrapper>
-);
+  </Wrapper>;

@@ -30,7 +30,6 @@ class TimelineContainer extends PureComponent {
     playlist: null,
   };
 
-
   render() {
     const { timeline, tracks, timelineId } = this.props;
 
@@ -40,11 +39,7 @@ class TimelineContainer extends PureComponent {
         <Route path="/playlist/:id" component={PlaylistContainer} />
         <Route path="/stream" component={StreamContainer} />
         <Route path="/search/:query" component={SearchResultContainer} />
-        <Timeline
-          timeline={timeline}
-          tracks={tracks}
-          timelineId={timelineId}
-        />
+        <Timeline timeline={timeline} tracks={tracks} timelineId={timelineId} />
       </Wrapper>
     );
   }

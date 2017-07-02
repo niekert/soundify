@@ -53,16 +53,22 @@ class SeekBar extends PureComponent {
   render() {
     const { totalSeconds, playedSeconds, isActive } = this.props;
 
-    const percentage = playedSeconds > 0
-      ? Number(Number(playedSeconds / totalSeconds * 100).toFixed(2)) // todo: clarify lol
-      : 0;
+    const percentage =
+      playedSeconds > 0
+        ? Number(Number(playedSeconds / totalSeconds * 100).toFixed(2)) // todo: clarify lol
+        : 0;
 
     return (
       <Wrapper>
-        {isActive && <CurrentTime>{formatSeconds(playedSeconds)}</CurrentTime>}
+        {isActive &&
+          <CurrentTime>
+            {formatSeconds(playedSeconds)}
+          </CurrentTime>}
         <Slider percentage={percentage} onChange={this._onSeekChange} />
         {isActive &&
-          <Time>-{formatSeconds(totalSeconds - playedSeconds)}</Time>}
+          <Time>
+            -{formatSeconds(totalSeconds - playedSeconds)}
+          </Time>}
       </Wrapper>
     );
   }

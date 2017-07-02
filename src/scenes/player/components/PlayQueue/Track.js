@@ -88,8 +88,12 @@ const Track = ({
           <Handle />
           <TrackArtwork artworkUrl={artworkUrl} size="200x200" />
           <Meta>
-            <Title>{title}</Title>
-            <Artist>{artist}</Artist>
+            <Title>
+              {title}
+            </Title>
+            <Artist>
+              {artist}
+            </Artist>
           </Meta>
           <CloseButton onClick={onClickRemove}>
             <CloseIcon />

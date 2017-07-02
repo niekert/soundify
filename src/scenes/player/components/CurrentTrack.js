@@ -41,12 +41,10 @@ const Title = styled.span`
 const Artist = styled.span`
   padding-top: 5px;
   font-size: .7em;
-  color: ${props => props.theme.colors.secondaryText}
+  color: ${props => props.theme.colors.secondaryText};
 `;
 
-const Row = styled.div`
-  display: flex;
-`;
+const Row = styled.div`display: flex;`;
 
 const enhance = compose(
   withHandlers({
@@ -55,24 +53,28 @@ const enhance = compose(
   }),
 );
 
-const CurrentTrack = enhance(({ track, onClickLike }) => (
+const CurrentTrack = enhance(({ track, onClickLike }) =>
   <Wrapper>
     {track && [
       <PlayerArtwork artworkUrl={track.artwork_url} key="artwork" />,
       <Meta key="meta">
         <Row>
-          <Title>{track.title}</Title>
+          <Title>
+            {track.title}
+          </Title>
           <LikeButton
             toggleLike={onClickLike}
             active={track.user_favorite}
             trackId={track.id}
           />
         </Row>
-        <Artist>{track.user.username}</Artist>
+        <Artist>
+          {track.user.username}
+        </Artist>
       </Meta>,
     ]}
-  </Wrapper>
-));
+  </Wrapper>,
+);
 
 CurrentTrack.propTypes = {
   track: PropTypes.object,

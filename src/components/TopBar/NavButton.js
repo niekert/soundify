@@ -10,7 +10,7 @@ export default styled.button`
 
   &:hover {
     color: ${props => props.theme.colors.primaryText};
-    line-height:43px;
+    line-height: 43px;
     border-bottom: 1px solid ${props => props.theme.colors.active};
   }
 `;

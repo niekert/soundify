@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const Chromecast = ({ fill, ...props }) => (
+const Chromecast = ({ fill, ...props }) =>
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
     <g fill="none">
       <path
@@ -11,8 +11,7 @@ const Chromecast = ({ fill, ...props }) => (
       />
       <path d="M0 0h24v24H0z" />
     </g>
-  </svg>
-);
+  </svg>;
 
 Chromecast.propTypes = {
   fill: PropTypes.string,

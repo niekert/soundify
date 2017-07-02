@@ -37,7 +37,7 @@ const MainContent = styled.div`
   color: ${prop('theme.colors.reverse.primaryText')};
 `;
 
-const AuthedShell = () => (
+const AuthedShell = () =>
   <AppShell>
     {window.location.pathname.includes('index.html') && <Redirect to="/" />}
     <Route path="/" component={SidebarContainer} />
@@ -55,8 +55,7 @@ const AuthedShell = () => (
       <ModalContainer />
     </MainContent>
     <PlayerContainer />
-  </AppShell>
-);
+  </AppShell>;
 
 class App extends Component {
   static propTypes = {

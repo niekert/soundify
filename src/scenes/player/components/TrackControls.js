@@ -45,7 +45,7 @@ const PlayButton = styled.button`
   justify-content: center;
   transition: transform .1s ease-out, color .1s ease-out;
 
-  ${IconCss}
+  ${IconCss};
 `;
 
 const ChangeTrackButton = styled.button`
@@ -56,7 +56,7 @@ const ChangeTrackButton = styled.button`
   cursor: pointer;
   background: none;
 
-  ${IconCss}
+  ${IconCss};
 `;
 
 const LikeButtonWrapper = styled.div`
@@ -74,7 +74,7 @@ const TrackControls = ({
   onTogglePlay,
   onNext,
   isPlaying,
-}) => (
+}) =>
   <PlayerButtons>
     <ChangeTrackButton onClick={onPrev}>
       <PreviousTrackIcon />
@@ -93,8 +93,7 @@ const TrackControls = ({
           trackId={track.id}
         />
       </LikeButtonWrapper>}
-  </PlayerButtons>
-);
+  </PlayerButtons>;
 TrackControls.propTypes = {
   track: PropTypes.object,
   toggleLike: PropTypes.func.isRequired,

@@ -26,7 +26,9 @@ export const Button = styled.button`
   cursor: pointer;
   background: none;
 
-  ${ifProp('cta', css`
+  ${ifProp(
+    'cta',
+    css`
     background: ${prop('theme.colors.cta')};
     color: ${prop('theme.colors.primaryText')};
 
@@ -34,22 +36,27 @@ export const Button = styled.button`
     &:focus {
       background: ${props => lighten(props.theme.colors.cta, 0.1)};
     }
-  `)}
-
-  ${ifProp('cancel', css`
+  `,
+  )} ${ifProp(
+      'cancel',
+      css`
     border: 1px solid ${prop('theme.colors.secondaryText')};
     color: ${prop('theme.colors.secondaryText')};
 
     &:hover,
     &:focus {
-      border: 1px solid ${props => lighten(props.theme.colors.secondaryText, 0.2)};
+      border: 1px solid ${props =>
+        lighten(props.theme.colors.secondaryText, 0.2)};
       color: ${props => lighten(props.theme.colors.secondaryText, 0.2)};
     }
-  `)};
+  `,
+    )};
 `;
 
 export const ButtonGroup = styled.div`
-  ${ifProp('horizontal', css`
+  ${ifProp(
+    'horizontal',
+    css`
     margin-left: -5px;
     margin-right: -5px;
 
@@ -57,5 +64,6 @@ export const ButtonGroup = styled.div`
       margin-left: 5px;
       margin-right: 5px;
     }
-  `)};
+  `,
+  )};
 `;

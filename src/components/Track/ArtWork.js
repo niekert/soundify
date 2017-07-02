@@ -15,7 +15,7 @@ const Image = styled.img`
   max-width: 100%;
 `;
 
-const ArtWork = ({ artworkUrl, useImg, size, children, ...props }) => (
+const ArtWork = ({ artworkUrl, useImg, size, children, ...props }) =>
   <Wrapper
     style={{
       backgroundImage: !useImg && `url(${getArtworkUrl(artworkUrl, size)}`,
@@ -24,8 +24,7 @@ const ArtWork = ({ artworkUrl, useImg, size, children, ...props }) => (
   >
     {useImg && <Image alt={artworkUrl} src={getArtworkUrl(artworkUrl, size)} />}
     {children}
-  </Wrapper>
-);
+  </Wrapper>;
 
 ArtWork.propTypes = {
   artworkUrl: PropTypes.string,

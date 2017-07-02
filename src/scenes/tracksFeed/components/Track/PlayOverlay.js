@@ -16,8 +16,7 @@ const icon = css`
 `;
 
 const PlayerIcon = styled.div`
-  ${icon}
-  height: 25%;
+  ${icon} height: 25%;
   width: 25%;
   background: ${props => props.theme.colors.cta};
   color: ${prop('theme.colors.reverse.background')};
@@ -29,8 +28,7 @@ const PlayerIcon = styled.div`
 `;
 
 const SecondaryIcon = styled.div`
-  ${icon}
-  cursor: pointer;
+  ${icon} cursor: pointer;
   height: 20%;
   width: 20%;
   padding: 0;
@@ -71,7 +69,7 @@ const PlayOverlay = ({
   onToggleLike,
   likeActive,
   onQueue,
-}) => (
+}) =>
   <Wrapper className={className}>
     <SecondaryIcon>
       <LikeButton
@@ -86,8 +84,7 @@ const PlayOverlay = ({
     <SecondaryIcon>
       <QueueButton onClick={onQueue} trackId={trackId} />
     </SecondaryIcon>
-  </Wrapper>
-);
+  </Wrapper>;
 PlayOverlay.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   trackId: PropTypes.number.isRequired,

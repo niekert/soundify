@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import enhanceClickOutside from 'react-click-outside';
 
-const Wrapper = styled.div`
-  position: relative;
-`;
+const Wrapper = styled.div`position: relative;`;
 
 class Popover extends React.Component {
   static propTypes = {

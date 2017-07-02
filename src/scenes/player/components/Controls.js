@@ -19,8 +19,8 @@ const Wrapper = styled.div`
 const CurrentTrackContainer = styled.div`
   align-self: center;
   display: flex;
-  justify-content: center;tr
-  width: 100%;
+  justify-content: center;
+  tr: 100%;
   overflow: hidden;
   padding: 0 30px 10px;
   font-weight: 300;

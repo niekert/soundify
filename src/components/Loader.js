@@ -21,7 +21,11 @@ const animation = keyframes`
 const Dot = styled.div`
   width: 16px;
   height: 16px;
-  background-color: ${ifProp('light', prop('theme.colors.primaryText'), prop('theme.colors.reverse.primaryText'))};
+  background-color: ${ifProp(
+    'light',
+    prop('theme.colors.primaryText'),
+    prop('theme.colors.reverse.primaryText'),
+  )};
   opacity: .8;
   margin: 0 5px;
   border-radius: 100%;
@@ -29,13 +33,12 @@ const Dot = styled.div`
   animation: ${animation} 1.4s ${props => props.delay} infinite ease-in-out both;
 `;
 
-const Loader = ({ light, ...props }) => (
+const Loader = ({ light, ...props }) =>
   <Wrapper {...props}>
     <Dot light={light} delay="-0.32s" />
     <Dot light={light} delay="-0.16s" />
     <Dot light={light} />
-  </Wrapper>
-);
+  </Wrapper>;
 Loader.propTypes = {
   light: bool,
 };
