@@ -4,6 +4,7 @@ import { OK, INITIAL, DONE } from 'app-constants';
 import Loading from 'components/Loader';
 import styled from 'styled-components';
 import TracksFeedContainer from 'scenes/tracksFeed';
+import ProfileTabBar from './ProfileTabBar';
 import ProfileHeaderContainer from '../containers/ProfileHeaderContainer';
 
 const Wrapper = styled.div`
@@ -19,6 +20,7 @@ function ProfilePage({ userId, status = INITIAL, feed = 'tracks' }) {
     <Wrapper>
       {status === OK && [
         <ProfileHeaderContainer userId={userId} key="profileHeader" />,
+        <ProfileTabBar key="tab-bar" />,
         <TracksFeedContainer feedId={`${userId}::${feed}`} key="tracksFeed" />,
       ]}
       {!DONE.includes(status) && <Loading />}

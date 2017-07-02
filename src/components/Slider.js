@@ -19,7 +19,8 @@ const seekLine = css`
 `;
 
 const Seek = styled.input`
-  ${seekLine} top: -10px;
+  ${seekLine};
+  top: -10px;
   height: 20px;
 
   &::-webkit-slider-runnable-track {

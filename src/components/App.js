@@ -51,7 +51,10 @@ const AuthedShell = () =>
         component={TimelineContainer}
       />
       <Route path="/track/:trackId" component={TrackContainer} />
-      <Route path="/profile/:profileId" component={UserProfileContainer} />
+      <Route
+        path="/profile/:profileId/:feedId"
+        component={UserProfileContainer}
+      />
       <ModalContainer />
     </MainContent>
     <PlayerContainer />
