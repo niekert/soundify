@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { OK, INITIAL, PENDING } from 'app-constants';
-import Tracklist from 'components/TrackList';
+import TracksFeedContainer from 'scenes/tracksFeed';
 import Loader from 'components/Loader';
 import TimelineHeader from './TimelineHeader';
 
@@ -20,7 +20,6 @@ class Timeline extends PureComponent {
     tracks: PropTypes.arrayOf(PropTypes.object),
     status: PropTypes.string,
     timelineId: PropTypes.string,
-    fetchNext: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -29,13 +28,12 @@ class Timeline extends PureComponent {
   };
 
   render() {
-    const { status, timeline, tracks, fetchNext, timelineId } = this.props;
+    const { status, timeline, tracks, timelineId } = this.props;
 
     const isReady = !!timeline && timeline.tracks;
     if (!isReady) {
       return <Loader />;
     }
-    const isLoading = status !== OK || timeline.status === PENDING;
 
     return (
       <Wrapper>
@@ -46,15 +44,8 @@ class Timeline extends PureComponent {
             timeline={timeline}
             timelineId={timelineId}
           />,
-          <Tracklist
-            tracks={tracks}
-            hasNext={!!timeline.next}
-            fetchNext={fetchNext}
-            timelineId={timelineId}
-            key="tracklist"
-          />,
+          <TracksFeedContainer feedId={timelineId} key="tracklist" />,
         ]}
-        {isLoading && <Loader />}
       </Wrapper>
     );
   }

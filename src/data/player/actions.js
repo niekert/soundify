@@ -7,18 +7,13 @@ export const TOGGLE_PLAYING = 'TOGGLE_PLAYING';
 export const NEXT = 'next';
 export const PREV = 'prev';
 
-export function toggleTrack({
-  trackId,
-  isPlaying = true,
-  timelineId,
-  ...props
-}) {
+export function toggleTrack({ trackId, isPlaying = true, feedId, ...props }) {
   return {
     type: TOGGLE_TRACK,
     payload: {
       trackId,
       isPlaying,
-      timelineId,
+      feedId,
       ...props,
     },
   };
@@ -28,9 +23,9 @@ export function changeTrack(changeType) {
   return (dispatch, getState) => {
     const state = getState();
     const { player, queue } = state.data;
-    const { activeTimelineId, activeTrackId, previousTrackId } = player;
+    const { activeFeedId, activeTrackId, previousTrackId } = player;
 
-    const timeline = timelineById(state, activeTimelineId);
+    const timeline = timelineById(state, activeFeedId);
     const currentTrackIndex = trackIndex(
       timeline,
       previousTrackId || activeTrackId,

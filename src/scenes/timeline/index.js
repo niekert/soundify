@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { INITIAL } from 'app-constants';
 import { Route } from 'react-router-dom';
 import { activeTimeline, activeTimelineTracks } from 'selectors/timeline';
 import withUser from 'containers/hocs/withUser';
@@ -25,21 +24,15 @@ class TimelineContainer extends PureComponent {
     timeline: PropTypes.object,
     timelineId: PropTypes.string,
     tracks: PropTypes.arrayOf(PropTypes.object).isRequired,
-    status: PropTypes.string.isRequired,
-    fetchNext: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     playlist: null,
   };
 
-  _onNearEnd = () => {
-    const { timeline } = this.props;
-    this.props.fetchNext(timeline.id, timeline.next);
-  };
 
   render() {
-    const { timeline, status, tracks, timelineId } = this.props;
+    const { timeline, tracks, timelineId } = this.props;
 
     return (
       <Wrapper>
@@ -50,8 +43,6 @@ class TimelineContainer extends PureComponent {
         <Timeline
           timeline={timeline}
           tracks={tracks}
-          status={status}
-          fetchNext={this._onNearEnd}
           timelineId={timelineId}
         />
       </Wrapper>
@@ -65,7 +56,6 @@ function mapStateToProps(state) {
   return {
     timeline,
     tracks: activeTimelineTracks(state),
-    status: timeline ? timeline.status : INITIAL,
     timelineId: state.timeline.active,
   };
 }

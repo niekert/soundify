@@ -19,8 +19,7 @@ const seekLine = css`
 `;
 
 const Seek = styled.input`
-  ${seekLine}
-  top: -10px;
+  ${seekLine} top: -10px;
   height: 20px;
 
   &::-webkit-slider-runnable-track {
@@ -34,6 +33,7 @@ const Seek = styled.input`
     z-index: 30;
     width: 10px;
     height: 10px;
+    top: -1px;
     background: ${prop('theme.colors.primaryText')};
     border-radius: 50%;
     position: relative;
@@ -41,16 +41,18 @@ const Seek = styled.input`
 `;
 
 const Progress = styled.progress`
-  ${seekLine}
-  top: -3px;
+  ${seekLine} top: -3px;
   pointer-events: none;
-  height: 6px;
+  height: 4px;
   z-index: 20;
 
   &::-webkit-progress-value {
     -webkit-appearance: none;
-    background: ${props => (props.active ? props.theme.colors.active : alpha(props.theme.colors.primaryText, 0.7))};
-    height: 6px;
+    background: ${props =>
+      props.active
+        ? props.theme.colors.active
+        : alpha(props.theme.colors.primaryText, 0.7)};
+    height: 4px;
     border-radius: 6px;
     z-index: 50;
   }
@@ -59,7 +61,7 @@ const Progress = styled.progress`
     border-radius: 6px;
     background: ${props => lighten(props.theme.colors.secondaryActive, 0.3)};
     border-radius: 5px;
-    height: 6px;
+    height: 4px;
   }
 `;
 
@@ -72,7 +74,7 @@ const enhance = compose(
 );
 
 const Slider = enhance(
-  ({ onChange, percentage = 0, hoverActive, mouseEnter, mouseLeave }) => (
+  ({ onChange, percentage = 0, hoverActive, mouseEnter, mouseLeave }) =>
     <Bar>
       <Seek
         onMouseEnter={mouseEnter}
@@ -83,8 +85,7 @@ const Slider = enhance(
         onChange={onChange}
       />
       <Progress value={percentage} max={100} active={hoverActive} />
-    </Bar>
-  ),
+    </Bar>,
 );
 Slider.propTypes = {
   onChange: PropTypes.func.isRequired,

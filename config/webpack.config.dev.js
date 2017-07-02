@@ -92,6 +92,9 @@ module.exports = {
         loader: 'eslint-loader',
         include: paths.appSrc,
         options: {
+          emitError: false,
+          failOnWarning: false,
+          emitWarning: true,
           failOnError: false,
         }
       },

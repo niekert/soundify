@@ -4,6 +4,37 @@ import queryString from 'query-string';
 
 const localstorageKey = 'authToken';
 
+const fetchRecursive = fetcher => {
+  const recursiveFetch = (collection, nextUrl) => {
+    if (nextUrl) {
+      return fetch(nextUrl)
+        .then(resp => resp.json())
+        .then(data =>
+          recursiveFetch([...collection, ...data.collection], data.next_href),
+        );
+    }
+
+    return Promise.resolve(collection);
+  };
+
+  return fetcher()
+    .then(resp => resp.json())
+    .then(resp => recursiveFetch(resp.collection, resp.next_href));
+};
+
+function fetchNextRecursive(collectionData, next) {
+  const fetchNext = (data, nextUrl) =>
+    fetch(nextUrl).then(res => res.json()).then(res => {
+      if (res.next_url) {
+        return fetchNext([...data, ...res.collection], res.next_url);
+      }
+
+      return [...data, ...res.collection];
+    });
+
+  return fetchNext(collectionData, next);
+}
+
 export default {
   token: window.localStorage.getItem(localstorageKey),
 
@@ -34,14 +65,30 @@ export default {
     });
   },
 
-  fetchUser() {
+  fetchMe() {
     if (!this.token) {
       return Promise.reject();
     }
 
-    return fetch(
-      `https://api.soundcloud.com/me?oauth_token=${this.token}`,
-    ).then(resp => resp.json());
+    return Promise.all([
+      this.fetchWithToken('/me').then(resp => resp.json()),
+      fetchRecursive(() => this.fetchWithToken('/me/followings')),
+    ]).then(([user, followings]) => ({
+      ...user,
+      followings,
+    }));
+  },
+
+  fetchUser(userId) {
+    return this.fetchWithToken(`/users/${userId}`).then(resp => resp.json());
+  },
+
+  fetchUserTracks(userId, feed = 'tracks') {
+    return this.fetchWithToken(`/users/${userId}/${feed}`, {
+      query: {
+        linked_partitioning: 1,
+      },
+    }).then(resp => resp.json());
   },
 
   authCallback(location) {

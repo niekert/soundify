@@ -7,10 +7,12 @@ import rootReducer from './reducers';
 
 const localStorageSlicer = paths => state => ({
   settings: state.settings,
-  player: {
-    ...state.player,
-    isPlaying: false,
-    trackHistory: [],
+  data: {
+    player: {
+      ...state.data.player,
+      isPlaying: false,
+      trackHistory: [],
+    },
   },
 });
 

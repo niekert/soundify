@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { status as statusPropType } from 'PropTypes';
 import styled from 'styled-components';
 import { ifProp } from 'styled-tools';
+import Loader from 'components/Loader';
 import withPlayerContext from 'containers/hocs/withPlayerContext';
+import { isDone } from 'utils/status';
 import Track from './Track';
 
 const Wrapper = styled.ul`
@@ -25,8 +28,14 @@ const FetchNextTrigger = styled.div`
   display: ${ifProp('active', 'block', 'none')};
 `;
 
-const NoTracks = styled.h2`
+const Loading = styled(Loader)`
+  position: absolute;
+  bottom: -150px;
+  display: block;
+  width: 100%;
 `;
+
+const NoTracks = styled.h2``;
 
 class TrackList extends PureComponent {
   static propTypes = {
@@ -35,8 +44,10 @@ class TrackList extends PureComponent {
     toggleLike: PropTypes.func.isRequired,
     fetchNext: PropTypes.func.isRequired,
     hasNext: PropTypes.bool,
+    status: statusPropType,
+    next: PropTypes.string,
     tracks: PropTypes.arrayOf(PropTypes.object),
-    timelineId: PropTypes.string,
+    feedId: PropTypes.string,
     isPlaying: PropTypes.bool,
     activeTrackId: PropTypes.number,
   };
@@ -46,14 +57,14 @@ class TrackList extends PureComponent {
     activeTrackId: null,
     hasNext: false,
     isPlaying: false,
-    timelineId: '',
+    feedId: '',
   };
 
   componentDidMount() {
     this.intersectionObserver = new window.IntersectionObserver(entries => {
       const [sentinel] = entries; // Always on first index
       if (sentinel.intersectionRatio > 0 && this.props.hasNext) {
-        this.props.fetchNext();
+        this.props.fetchNext(this.props.feedId, this.props.next);
       }
     });
 
@@ -68,7 +79,7 @@ class TrackList extends PureComponent {
     this.props.toggleTrack({
       trackId,
       isPlaying: toggle,
-      timelineId: this.props.timelineId,
+      feedId: this.props.feedId,
     });
   };
 
@@ -78,13 +89,14 @@ class TrackList extends PureComponent {
       activeTrackId,
       isPlaying,
       hasNext,
+      status,
       queueTrack,
       toggleLike,
     } = this.props;
 
     return (
       <Wrapper>
-        {tracks.map((track, index) => (
+        {tracks.map((track, index) =>
           <Track
             key={`${track.id}-${index}`} // eslint-disable-line
             isPlaying={track.id === activeTrackId && isPlaying}
@@ -92,13 +104,13 @@ class TrackList extends PureComponent {
             toggleLike={toggleLike}
             onClick={this._trackClicked}
             onQueue={queueTrack}
-          />
-        ))}
+          />,
+        )}
         <FetchNextTrigger innerRef={this._nextObserverRef} active={hasNext} />
-        {!tracks.length &&
-          <NoTracks>
-            There's nothing here brah
-          </NoTracks>}
+        {isDone(status) &&
+          !tracks.length &&
+          <NoTracks>There's nothing here brah</NoTracks>}
+        {!isDone(status) && <Loading />}
       </Wrapper>
     );
   }

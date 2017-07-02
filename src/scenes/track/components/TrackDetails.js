@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Artwork from 'components/Track/ArtWork';
-import { H1, H2 } from 'components/styles/Headings';
+import { H1, H2 } from 'components/styles/Typography';
 
 const Wrapper = styled.div`
   padding: 60px;
@@ -44,14 +44,17 @@ const TrackDetails = ({
   likeCount,
   uploadDate,
   tags,
-}) => (
+}) =>
   <Wrapper>
     <ArtworkImage artworkUrl={artworkUrl} useImg />
     <TrackInfo>
-      <Artist>{username}</Artist>
-      <Title>{title}</Title>
+      <Artist>
+        {username}
+      </Artist>
+      <Title>
+        {title}
+      </Title>
     </TrackInfo>
-  </Wrapper>
-);
+  </Wrapper>;
 
 export default TrackDetails;

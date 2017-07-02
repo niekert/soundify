@@ -13,7 +13,6 @@ const Button = styled.button`
 
   &:hover {
     transform: scale(1.05);
-    // color: ${prop('theme.colors.primaryText')};
   }
 
   svg {
@@ -22,12 +21,14 @@ const Button = styled.button`
   }
 `;
 
-const IconButton = ({ children, tooltip, ...props }) => (
-  <Button data-tip={tooltip} {...props}>
-    {children}
-    <ReactTooltip />
-  </Button>
-);
+function IconButton({ children, tooltip, ...props }) {
+  return (
+    <Button data-tip={tooltip} {...props}>
+      {children}
+      <ReactTooltip />
+    </Button>
+  );
+}
 IconButton.propTypes = {
   children: node,
   tooltip: string,

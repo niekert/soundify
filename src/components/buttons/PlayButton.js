@@ -12,7 +12,7 @@ const Button = styled.button`
   background: ${prop('theme.colors.cta')};
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #FFF;
+  color: #fff;
   cursor: pointer;
   font-weight: 200;
   transition: transform 50ms ease-out;
@@ -31,12 +31,12 @@ const enhance = compose(
       isPlaying,
       timelineId,
       activeTrackId,
-      activeTimelineId,
+      activeFeedId,
       trackId,
     }) => e => {
       e.preventDefault();
 
-      const toggle = !(timelineId === activeTimelineId && isPlaying);
+      const toggle = !(timelineId === activeFeedId && isPlaying);
 
       toggleTrack({
         trackId: toggle ? trackId : activeTrackId,
@@ -49,16 +49,15 @@ const enhance = compose(
   setDisplayName('PlayButton'),
 );
 
-const PlayButton = ({ isPlaying, timelineId, activeTimelineId, onClick }) => (
+const PlayButton = ({ isPlaying, timelineId, activeFeedId, onClick }) =>
   <Button onClick={onClick}>
-    {isPlaying && timelineId === activeTimelineId ? 'Pause' : 'Play'}
-  </Button>
-);
+    {isPlaying && timelineId === activeFeedId ? 'Pause' : 'Play'}
+  </Button>;
 PlayButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   timelineId: PropTypes.string.isRequired,
   isPlaying: PropTypes.bool,
-  activeTimelineId: PropTypes.string,
+  activeFeedId: PropTypes.string,
 };
 
 export default enhance(PlayButton);

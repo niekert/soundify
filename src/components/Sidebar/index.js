@@ -58,7 +58,7 @@ class Sidebar extends PureComponent {
   static propTypes = {
     addPlaylist: PropTypes.func.isRequired,
     playlists: PropTypes.arrayOf(PropTypes.object),
-    activeTimelineId: PropTypes.string,
+    activeFeedId: PropTypes.string,
   };
 
   static defaultProps = {
@@ -66,17 +66,17 @@ class Sidebar extends PureComponent {
   };
 
   render() {
-    const { playlists, addPlaylist, activeTimelineId } = this.props;
+    const { playlists, addPlaylist, activeFeedId } = this.props;
 
     return (
       <SidebarWrapper>
         <SectionWrapper>
           <Label>Your Music</Label>
           <Section>
-            <SidebarLink to="/likes" isPlaying={activeTimelineId === 'likes'}>
+            <SidebarLink to="/likes" isPlaying={activeFeedId === 'likes'}>
               Likes
             </SidebarLink>
-            <SidebarLink to="/stream" isPlaying={activeTimelineId === 'stream'}>
+            <SidebarLink to="/stream" isPlaying={activeFeedId === 'stream'}>
               Stream
             </SidebarLink>
           </Section>
@@ -87,7 +87,7 @@ class Sidebar extends PureComponent {
             {playlists.map(({ title, id }) => (
               <PlaylistDropTarget key={`playlist-${id}`}>
                 <SidebarLink
-                  isPlaying={activeTimelineId === `playlist::${id}`}
+                  isPlaying={activeFeedId === `playlist::${id}`}
                   to={`/playlist/${id}`}
                 >
                   {title}

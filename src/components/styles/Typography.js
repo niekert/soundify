@@ -17,3 +17,8 @@ export const H3 = styled.h3`
   font-weight: 300;
   margin-bottom: .5em;
 `;
+
+export const Paragraph = styled.p`
+  font-size: 14px;
+  color: ${prop('theme.colors.reverse.primaryText')};
+`;

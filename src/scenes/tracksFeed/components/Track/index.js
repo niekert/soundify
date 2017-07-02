@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { darken } from 'utils/color';
 import { DragSource } from 'react-dnd';
 import { DRAGGABLE_TYPES } from 'app-constants';
 import { prop, ifProp } from 'styled-tools';
@@ -49,10 +51,15 @@ const Title = styled.span`
   text-overflow: ellipsis;
 `;
 
-const User = styled.span`
+const UserLink = styled(Link)`
   font-size: .7em;
   margin-top: 5px;
-  color: ${props => props.theme.colors.secondaryText}
+  color: ${prop('theme.colors.secondaryText')};
+  text-decoration: none;
+
+  &:hover {
+    color: ${props => darken(props.theme.colors.secondaryText, 1)}
+  }
 `;
 
 class Track extends PureComponent {
@@ -109,7 +116,9 @@ class Track extends PureComponent {
           <Title>
             {track.title}
           </Title>
-          <User>{track.user.username}</User>
+          <UserLink to={`/profile/${track.user.id}`}>
+            {track.user.username}
+          </UserLink>
         </Meta>
       </Wrapper>
     );
