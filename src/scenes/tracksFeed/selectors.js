@@ -20,3 +20,11 @@ export function makeFeedSelector() {
     return returnVal;
   });
 }
+
+export function feedById(feeds, feedId) {
+  return feeds[feedId];
+}
+
+export function trackIndex(feed, trackId) {
+  return feed.trackIds.findIndex(id => id === trackId);
+}

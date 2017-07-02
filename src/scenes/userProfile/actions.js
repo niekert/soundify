@@ -45,10 +45,10 @@ function fetchProfileFeedSuccess(dispatch, feed, userId, feedName) {
   );
 }
 
-export function fetchProfileTracks(userId) {
+export function fetchProfileFeed(userId, feedName) {
   return dispatch => {
     api
-      .fetchUserTracks(userId)
-      .then(feed => fetchProfileFeedSuccess(dispatch, feed, userId, 'tracks'));
+      .fetchUserFeed(userId, feedName)
+      .then(feed => fetchProfileFeedSuccess(dispatch, feed, userId, feedName));
   };
 }
