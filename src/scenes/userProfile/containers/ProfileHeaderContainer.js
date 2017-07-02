@@ -16,8 +16,6 @@ function mapStateToProps(state, { userId }) {
     description,
   } = user;
 
-  console.log('user is', user);
-
   return {
     username,
     followers,

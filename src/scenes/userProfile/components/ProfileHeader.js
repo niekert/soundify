@@ -4,7 +4,7 @@ import { prop } from 'styled-tools';
 import { H1, Paragraph } from 'components/styles/Typography';
 
 const Wrapper = styled.div`
-  padding: ${prop('theme.spacing.space3')};
+  padding: ${prop('theme.spacing.space3')} 10px;
   display: flex;
 `;
 

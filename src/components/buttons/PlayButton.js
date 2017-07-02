@@ -12,7 +12,7 @@ const Button = styled.button`
   background: ${prop('theme.colors.cta')};
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #FFF;
+  color: #fff;
   cursor: pointer;
   font-weight: 200;
   transition: transform 50ms ease-out;
@@ -49,11 +49,10 @@ const enhance = compose(
   setDisplayName('PlayButton'),
 );
 
-const PlayButton = ({ isPlaying, timelineId, activeFeedId, onClick }) => (
+const PlayButton = ({ isPlaying, timelineId, activeFeedId, onClick }) =>
   <Button onClick={onClick}>
     {isPlaying && timelineId === activeFeedId ? 'Pause' : 'Play'}
-  </Button>
-);
+  </Button>;
 PlayButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   timelineId: PropTypes.string.isRequired,
