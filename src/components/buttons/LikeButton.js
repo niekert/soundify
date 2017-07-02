@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import HeartIcon from 'components/icons/FavoriteHeart';
-import { ifProp, prop } from 'styled-tools';
+import { prop } from 'styled-tools';
 import { withHandlers } from 'recompose';
 
 const Button = styled.button`

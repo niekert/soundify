@@ -1,7 +1,5 @@
-import React from 'react';
-import { func, bool } from 'prop-types';
 import { compose, lifecycle } from 'recompose';
-import { togglePlaying, changeTrack, NEXT, PREV } from 'data/player/actions';
+import { togglePlaying, changeTrack } from 'data/player/actions';
 import { toggleLike, fetchTrack } from 'data/tracks/actions';
 import { trackById } from 'selectors/tracks';
 import { connect } from 'react-redux';

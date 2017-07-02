@@ -15,7 +15,7 @@ class LoginContainer extends PureComponent {
     window.removeEventListener('message', this._onAuthMessageReceived);
   }
 
-  _onLoginClicked = e => {
+  _onLoginClicked = () => {
     window.addEventListener('message', this._onAuthMessageReceived, false);
     this.props.attemptAuth();
   };

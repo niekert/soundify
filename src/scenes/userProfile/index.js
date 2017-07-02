@@ -2,7 +2,7 @@ import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { fetchProfile, fetchProfileTracks } from './actions';
 import ProfilePage from './components/ProfilePage';
-import { userStatus, user } from './selectors';
+import { userStatus } from './selectors';
 
 const mapStateToProps = (state, ownProps) => {
   const userId = ownProps.match.params.profileId;

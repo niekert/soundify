@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { setVolume } from 'data/settings/actions';
 import SideControls from '../components/SideControls';

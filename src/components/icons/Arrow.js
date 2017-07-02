@@ -15,6 +15,7 @@ const ArrowIcon = ({ fill, isOpen, ...props }) =>
   </svg>;
 ArrowIcon.propTypes = {
   fill: PropTypes.string,
+  isOpen: PropTypes.bool,
 };
 ArrowIcon.defaultProps = {
   fill: 'currentColor',

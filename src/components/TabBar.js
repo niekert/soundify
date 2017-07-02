@@ -1,4 +1,5 @@
 import React from 'react';
+import { node } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -17,5 +18,9 @@ function TabBar({ children }) {
     </Wrapper>
   );
 }
+
+TabBar.propTypes = {
+  children: node.isRrequired,
+};
 
 export default TabBar;

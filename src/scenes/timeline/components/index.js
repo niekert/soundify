@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { OK, INITIAL, PENDING } from 'app-constants';
+import { INITIAL } from 'app-constants';
 import TracksFeedContainer from 'scenes/tracksFeed';
 import Loader from 'components/Loader';
 import TimelineHeader from './TimelineHeader';
@@ -18,7 +18,6 @@ class Timeline extends PureComponent {
   static propTypes = {
     timeline: PropTypes.object,
     tracks: PropTypes.arrayOf(PropTypes.object),
-    status: PropTypes.string,
     timelineId: PropTypes.string,
   };
 
@@ -28,7 +27,7 @@ class Timeline extends PureComponent {
   };
 
   render() {
-    const { status, timeline, tracks, timelineId } = this.props;
+    const { timeline, tracks, timelineId } = this.props;
 
     const isReady = !!timeline && timeline.tracks;
     if (!isReady) {

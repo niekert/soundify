@@ -22,19 +22,6 @@ const fetchRecursive = fetcher => {
     .then(resp => recursiveFetch(resp.collection, resp.next_href));
 };
 
-function fetchNextRecursive(collectionData, next) {
-  const fetchNext = (data, nextUrl) =>
-    fetch(nextUrl).then(res => res.json()).then(res => {
-      if (res.next_url) {
-        return fetchNext([...data, ...res.collection], res.next_url);
-      }
-
-      return [...data, ...res.collection];
-    });
-
-  return fetchNext(collectionData, next);
-}
-
 export default {
   token: window.localStorage.getItem(localstorageKey),
 

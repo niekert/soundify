@@ -3,14 +3,7 @@ import { number, func, bool, element } from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import { DRAGGABLE_TYPES } from 'app-constants';
 
-const PlaylistDropTarget = ({
-  playlistId,
-  addTrackToPlaylist,
-  connectDropTarget,
-  canDrop,
-  isOver,
-  children,
-}) =>
+const PlaylistDropTarget = ({ connectDropTarget, canDrop, isOver, children }) =>
   connectDropTarget(
     <div>
       {React.cloneElement(React.Children.only(children), {
@@ -29,11 +22,12 @@ PlaylistDropTarget.propTypes = {
 };
 
 const playlistTarget = {
-  canDrop(props) {
+  canDrop() {
     return true;
   },
 
   drop(props, monitor) {
+    // eslint-disable-next-line
     console.log('dropped a track', props, monitor.getItem());
   },
 };

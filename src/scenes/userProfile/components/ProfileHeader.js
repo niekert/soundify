@@ -1,4 +1,5 @@
 import React from 'react';
+import { number, string } from 'prop-types';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import { H1, Paragraph } from 'components/styles/Typography';
@@ -43,9 +44,9 @@ function ProfileHeader({
   username,
   followers,
   following,
-  fullName,
+  fullName, // eslint-disable-line
   avatarUrl,
-  city,
+  city, // eslint-disable-line
   tracksCount = 100,
   description,
 }) {
@@ -74,5 +75,16 @@ function ProfileHeader({
     </Wrapper>
   );
 }
+
+ProfileHeader.propTypes = {
+  username: string.isRequired,
+  followers: number.isRequired,
+  following: number.isRequired,
+  tracksCount: number.isRequired,
+  fullName: string,
+  avatarUrl: string,
+  city: string,
+  description: number,
+};
 
 export default ProfileHeader;

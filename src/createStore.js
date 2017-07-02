@@ -5,7 +5,7 @@ import persistState from 'redux-localstorage';
 import { isDev } from 'helpers/env';
 import rootReducer from './reducers';
 
-const localStorageSlicer = paths => state => ({
+const localStorageSlicer = () => state => ({
   settings: state.settings,
   data: {
     player: {
@@ -17,10 +17,8 @@ const localStorageSlicer = paths => state => ({
 });
 
 export default () => {
-  const devTool = window.__REDUX_DEVTOOLS_EXTENSION__;
-
   const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    (isDev() && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
   const enhancer = composeEnhancers(
     applyMiddleware(thunkMiddleware, promiseMiddleware),

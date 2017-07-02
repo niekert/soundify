@@ -1,4 +1,5 @@
 import React from 'react';
+import { string } from 'prop-types';
 import styled from 'styled-components';
 import Artwork from 'components/Track/ArtWork';
 import { H1, H2 } from 'components/styles/Typography';
@@ -35,16 +36,7 @@ const Title = styled(H1)`
   font-weight: 600;
 `;
 
-const TrackDetails = ({
-  artworkUrl,
-  title,
-  username,
-  artistUrl,
-  playCount,
-  likeCount,
-  uploadDate,
-  tags,
-}) =>
+const TrackDetails = ({ artworkUrl, title, username }) =>
   <Wrapper>
     <ArtworkImage artworkUrl={artworkUrl} useImg />
     <TrackInfo>
@@ -56,5 +48,11 @@ const TrackDetails = ({
       </Title>
     </TrackInfo>
   </Wrapper>;
+
+TrackDetails.propTypes = {
+  artworkUrl: string.isRequired,
+  title: string.isRequired,
+  username: string.isRequired,
+};
 
 export default TrackDetails;

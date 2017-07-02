@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react"
-  ],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2016,
@@ -12,11 +8,12 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "prettier"
-  ],
+  "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["error", {"trailingComma": "all", "singleQuote": true}],
+    "prettier/prettier": [
+      "error",
+      { "trailingComma": "all", "singleQuote": true }
+    ],
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
@@ -24,14 +21,14 @@
     "react/forbid-prop-types": 0,
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
-    "import/prefer-default-export": 1,
+    "import/prefer-default-export": 0,
     "react/no-array-index-key": 1,
     "no-underscore-dangle": 0,
     "react/no-unescaped-entities": 0,
     "react/prop-types": 1,
     "no-unused-vars": 1,
     "no-debugger": 1,
-    "react/require-default-props": 0 // Because of default param values :)
+    "react/require-default-props": 0
   },
   "env": {
     "node": true,

@@ -31,6 +31,7 @@ function ProfilePage({ userId, status = INITIAL, feed = 'tracks' }) {
 ProfilePage.propTypes = {
   userId: string.isRequired,
   status: string,
+  feed: string,
 };
 
 export default ProfilePage;
