@@ -70,7 +70,7 @@ export default {
     return this.fetchWithToken(`/users/${userId}`).then(resp => resp.json());
   },
 
-  fetchUserTracks(userId, feed = 'tracks') {
+  fetchUserFeed(userId, feed) {
     return this.fetchWithToken(`/users/${userId}/${feed}`, {
       query: {
         linked_partitioning: 1,

@@ -14,6 +14,10 @@ export const Item = styled(NavLink)`
   text-decoration: none;
   text-align: center;
 
+  &:hover {
+    opacity: .9;
+  }
+
   &.tabActive {
     color: ${prop('theme.colors.cta')};
     border-bottom: 2px solid ${prop('theme.colors.cta')};

@@ -6,7 +6,7 @@ function ProfileTabBar({ urlBase }) {
   return (
     <TabBar>
       <TapbarItem to={urlBase}>Tracks</TapbarItem>
-      <TapbarItem to={`${urlBase}/likes`}>Likes</TapbarItem>
+      <TapbarItem to={`${urlBase}/favorites`}>Likes</TapbarItem>
     </TabBar>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { number, string } from 'prop-types';
+import abbreviateNumber from 'number-abbreviate';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import { H1, Paragraph } from 'components/styles/Typography';
@@ -62,10 +63,10 @@ function ProfileHeader({
             <Bold>{tracksCount}</Bold> tracks
           </Stat>
           <Stat>
-            <Bold>{followers}</Bold> followers
+            <Bold>{abbreviateNumber(followers)}</Bold> followers
           </Stat>
           <Stat>
-            <Bold>{following}</Bold> following
+            <Bold>{abbreviateNumber(following)}</Bold> following
           </Stat>
         </StatsContainer>
         <Description>

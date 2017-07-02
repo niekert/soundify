@@ -1,4 +1,4 @@
-import { timelineById, trackIndex } from 'selectors/timeline';
+import { feedById, trackIndex } from 'scenes/tracksFeed/selectors';
 import { unqueue } from 'data/queue/actions';
 
 export const TOGGLE_TRACK = 'TOGGLE_TRACK';
@@ -25,14 +25,14 @@ export function changeTrack(changeType) {
     const { player, queue } = state.data;
     const { activeFeedId, activeTrackId, previousTrackId } = player;
 
-    const timeline = timelineById(state, activeFeedId);
+    const currentFeed = feedById(state.feeds, activeFeedId);
     const currentTrackIndex = trackIndex(
-      timeline,
+      currentFeed,
       previousTrackId || activeTrackId,
     );
     if (changeType === PREV) {
       const nextTrackId =
-        timeline.tracks[currentTrackIndex - 1] || timeline.tracks[0]; // start over if there's no tracks
+        currentFeed.trackIds[currentTrackIndex - 1] || currentFeed.trackIds[0]; // start over if there's no tracks
       dispatch(
         toggleTrack({
           trackId: nextTrackId,
@@ -56,7 +56,7 @@ export function changeTrack(changeType) {
     }
 
     const nextTrackId =
-      timeline.tracks[currentTrackIndex + 1] || timeline.tracks[0]; // start over if there's no tracks
+      currentFeed.trackIds[currentTrackIndex + 1] || currentFeed.tracksIds[0]; // start over if there's no tracks
 
     dispatch(
       toggleTrack({

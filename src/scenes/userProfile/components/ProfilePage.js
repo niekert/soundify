@@ -1,5 +1,5 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { string, oneOf } from 'prop-types';
 import { OK, INITIAL, DONE } from 'app-constants';
 import Loading from 'components/Loader';
 import styled from 'styled-components';
@@ -15,13 +15,16 @@ const Wrapper = styled.div`
   max-height: 0;
 `;
 
-function ProfilePage({ userId, status = INITIAL, feed = 'tracks', urlBase }) {
+function ProfilePage({ userId, status = INITIAL, feedId, urlBase }) {
   return (
     <Wrapper>
       {status === OK && [
         <ProfileHeaderContainer userId={userId} key="profileHeader" />,
         <ProfileTabBar urlBase={urlBase} key="tab-bar" />,
-        <TracksFeedContainer feedId={`${userId}::${feed}`} key="tracksFeed" />,
+        <TracksFeedContainer
+          feedId={`${userId}::${feedId}`}
+          key="tracksFeed"
+        />,
       ]}
       {!DONE.includes(status) && <Loading />}
     </Wrapper>
@@ -31,8 +34,8 @@ function ProfilePage({ userId, status = INITIAL, feed = 'tracks', urlBase }) {
 ProfilePage.propTypes = {
   userId: string.isRequired,
   urlBase: string.isRequired,
+  feedId: oneOf(['tracks', 'favorites']),
   status: string,
-  feed: string,
 };
 
 export default ProfilePage;
