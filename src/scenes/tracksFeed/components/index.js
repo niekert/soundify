@@ -4,7 +4,6 @@ import { status as statusPropType } from 'PropTypes';
 import styled from 'styled-components';
 import { ifProp } from 'styled-tools';
 import Loader from 'components/Loader';
-import withPlayerContext from 'containers/hocs/withPlayerContext';
 import { isDone } from 'utils/status';
 import Track from './Track';
 
@@ -116,4 +115,4 @@ class TrackList extends PureComponent {
   }
 }
 
-export default withPlayerContext(TrackList);
+export default TrackList;
