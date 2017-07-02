@@ -9,7 +9,7 @@ It is still at a very early stage of development so no web player is available y
 
 Feedback, [issues](https://github.com/niekert/soundify/issues), PRs, etc. are very welcome!
 
-## Technologies used
+## Built with
 
 - React
 - Redux
