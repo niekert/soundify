@@ -50,6 +50,12 @@ class Popover extends React.Component {
     }
   }
 
+  _onChildClicked = () => {
+    if (this.props.closeOnClick) {
+      this.setState({ isOpen: false });
+    }
+  };
+
   _renderTriggerButton() {
     let triggerButton = this.props.triggerButton;
     if (typeof triggerButton === 'function') {
@@ -76,7 +82,9 @@ class Popover extends React.Component {
         innerRef={c => (this._element = c)} // eslint-disable-line
       >
         {this._renderTriggerButton()}
-        {this.state.isOpen && children}
+        <div onClick={this._onChildClicked}>
+          {this.state.isOpen && children}
+        </div>
       </Wrapper>
     );
   }

@@ -41,8 +41,10 @@ const UserDropdown = ({ user }) =>
     triggerButton={
       <UserInfo avatarUrl={user.avatar_url} username={user.username} />
     }
+    closeOnClick
   >
     <DropdownWrapper>
+      <DropdownLink to={`/profile/${user.id}`}>Profile</DropdownLink>
       <Href href="https://soundcloud.com" target="_blank">
         Soundcloud.com
       </Href>
