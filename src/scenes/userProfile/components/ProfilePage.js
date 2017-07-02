@@ -15,12 +15,12 @@ const Wrapper = styled.div`
   max-height: 0;
 `;
 
-function ProfilePage({ userId, status = INITIAL, feed = 'tracks' }) {
+function ProfilePage({ userId, status = INITIAL, feed = 'tracks', urlBase }) {
   return (
     <Wrapper>
       {status === OK && [
         <ProfileHeaderContainer userId={userId} key="profileHeader" />,
-        <ProfileTabBar key="tab-bar" />,
+        <ProfileTabBar urlBase={urlBase} key="tab-bar" />,
         <TracksFeedContainer feedId={`${userId}::${feed}`} key="tracksFeed" />,
       ]}
       {!DONE.includes(status) && <Loading />}
@@ -30,6 +30,7 @@ function ProfilePage({ userId, status = INITIAL, feed = 'tracks' }) {
 
 ProfilePage.propTypes = {
   userId: string.isRequired,
+  urlBase: string.isRequired,
   status: string,
   feed: string,
 };

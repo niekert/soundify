@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     userId,
+    urlBase: `/profile/${userId}`,
     status: userStatus(state, userId),
   };
 };

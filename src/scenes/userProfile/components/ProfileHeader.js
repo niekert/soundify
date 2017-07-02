@@ -84,7 +84,7 @@ ProfileHeader.propTypes = {
   fullName: string,
   avatarUrl: string,
   city: string,
-  description: number,
+  description: string,
 };
 
 export default ProfileHeader;
