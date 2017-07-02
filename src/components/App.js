@@ -52,7 +52,7 @@ const AuthedShell = () =>
       />
       <Route path="/track/:trackId" component={TrackContainer} />
       <Route
-        path="/profile/:profileId/:feedId"
+        path="/profile/:profileId/:feedId?"
         component={UserProfileContainer}
       />
       <ModalContainer />

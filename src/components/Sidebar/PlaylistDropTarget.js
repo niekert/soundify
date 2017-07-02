@@ -13,8 +13,8 @@ const PlaylistDropTarget = ({ connectDropTarget, canDrop, isOver, children }) =>
   );
 
 PlaylistDropTarget.propTypes = {
-  playlistId: number.isRequired,
-  addTrackToPlaylist: func.isRequired,
+  playlistId: number,
+  addTrackToPlaylist: func,
   connectDropTarget: func.isRequired,
   children: element.isRequired,
   canDrop: bool,
