@@ -83,10 +83,12 @@ export default {
     return this.fetchWithToken(`/users/${userId}`).then(resp => resp.json());
   },
 
-  fetchUserTracks(userId) {
-    return this.fetchWithToken(`/users/${userId}/tracks`).then(resp =>
-      resp.json(),
-    );
+  fetchUserTracks(userId, feed = 'tracks') {
+    return this.fetchWithToken(`/users/${userId}/${feed}`, {
+      query: {
+        linked_partitioning: 1,
+      },
+    }).then(resp => resp.json());
   },
 
   authCallback(location) {

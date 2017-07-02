@@ -12,6 +12,7 @@ export default createReducer(
         ...state,
         [feedId]: {
           trackIds,
+          status: OK,
           next,
         },
       };

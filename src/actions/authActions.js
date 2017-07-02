@@ -1,5 +1,7 @@
 import SC from 'soundcloud';
 import queryString from 'query-string';
+import { normalize } from 'normalizr';
+import * as schema from 'schema';
 import api from 'api';
 
 export const AUTH_TOKEN = 'AUTH_TOKEN';
@@ -21,12 +23,15 @@ export function fetchAuthedUser() {
 
     api
       .fetchMe() // Me is always the current user
-      .then(data =>
+      .then(data => {
+        const normalized = normalize(data, schema.me);
+
         dispatch({
           type: AUTH_USER,
-          payload: data,
-        }),
-      )
+          payload: normalized.result,
+          entities: normalized.entities,
+        });
+      })
       .catch(error => {
         dispatch({
           type: AUTH_USER,

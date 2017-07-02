@@ -28,27 +28,27 @@ export function fetchProfile(userId) {
   };
 }
 
-function fetchProfileFeedSuccess(dispatch, tracks, userId, feed) {
-  const normalizedTracks = normalize(tracks, schema.arrayOfTracks);
-
-  dispatch(saveFeed(`${userId}::${feed}`, normalizedTracks.result));
+function fetchProfileFeedSuccess(dispatch, feed, userId, feedName) {
+  const normalizedTracks = normalize(feed.collection, schema.arrayOfTracks);
 
   dispatch({
     type: FETCH_PROFILE_FEED_SUCCESS,
     payload: {
       userId,
-      feed,
+      feedName,
     },
     entities: normalizedTracks.entities,
   });
+
+  dispatch(
+    saveFeed(`${userId}::${feedName}`, normalizedTracks.result, feed.next_href),
+  );
 }
 
 export function fetchProfileTracks(userId) {
   return dispatch => {
     api
       .fetchUserTracks(userId)
-      .then(tracks =>
-        fetchProfileFeedSuccess(dispatch, tracks, userId, 'tracks'),
-      );
+      .then(feed => fetchProfileFeedSuccess(dispatch, feed, userId, 'tracks'));
   };
 }

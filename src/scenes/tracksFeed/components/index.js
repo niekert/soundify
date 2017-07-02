@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ifProp } from 'styled-tools';
 import Loader from 'components/Loader';
 import withPlayerContext from 'containers/hocs/withPlayerContext';
-import { PENDING } from 'app-constants';
+import { isDone } from 'utils/status';
 import Track from './Track';
 
 const Wrapper = styled.ul`
@@ -107,8 +107,10 @@ class TrackList extends PureComponent {
           />,
         )}
         <FetchNextTrigger innerRef={this._nextObserverRef} active={hasNext} />
-        {!tracks.length && <NoTracks>There's nothing here brah</NoTracks>}
-        {status === PENDING && <Loading />}
+        {isDone(status) &&
+          !tracks.length &&
+          <NoTracks>There's nothing here brah</NoTracks>}
+        {!isDone(status) && <Loading />}
       </Wrapper>
     );
   }

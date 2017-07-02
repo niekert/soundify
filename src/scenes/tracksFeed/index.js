@@ -7,10 +7,10 @@ import TrackFeed from './components';
 const makeMapStateToProps = () => {
   const getFeed = makeFeedSelector();
 
-  return function mapStateToProps(state, props) {
+  return function mapStateToProps(state, { feedId }) {
     return {
-      feedId: props.feedId,
-      ...getFeed(state, props),
+      feedId,
+      ...getFeed(state, feedId),
     };
   };
 };
