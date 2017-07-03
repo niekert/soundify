@@ -12,6 +12,7 @@ const localStorageSlicer = () => state => ({
       ...state.data.player,
       isPlaying: false,
       trackHistory: [],
+      prevTracksHistory: [],
     },
   },
 });

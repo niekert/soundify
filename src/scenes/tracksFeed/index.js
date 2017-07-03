@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { queueTrack } from 'data/queue/actions';
 import { toggleLike } from 'actions/trackActions';
-import { toggleTrack } from 'data/player/actions';
+import { playTrack, togglePlaying } from 'data/player/actions';
 import { playerContext } from 'selectors/player';
 import { fetchNext } from './actions';
 import { makeFeedSelector } from './selectors';
@@ -21,7 +21,8 @@ const makeMapStateToProps = () => {
 
 const actions = {
   fetchNext,
-  toggleTrack,
+  playTrack,
+  pauseTrack: () => togglePlaying(false),
   queueTrack,
   toggleLike,
 };

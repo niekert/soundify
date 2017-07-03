@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { queueTrack } from 'data/queue/actions';
 import { toggleLike } from 'actions/trackActions';
-import { toggleTrack } from 'data/player/actions';
+import { playTrack, togglePlaying } from 'data/player/actions';
 
 const withPlayerContext = ComposedComponent => {
   const EnhancePlayercontext = props => <ComposedComponent {...props} />;
@@ -18,7 +18,8 @@ const withPlayerContext = ComposedComponent => {
   };
 
   return connect(mapStateToProps, {
-    toggleTrack,
+    togglePlaying,
+    playTrack,
     toggleLike,
     queueTrack,
   })(EnhancePlayercontext);

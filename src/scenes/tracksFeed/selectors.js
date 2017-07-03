@@ -1,3 +1,4 @@
+import { get } from 'lodash';
 import { INITIAL } from 'app-constants';
 import { createSelector } from 'reselect';
 
@@ -27,4 +28,10 @@ export function feedById(feeds, feedId) {
 
 export function trackIndex(feed, trackId) {
   return feed.trackIds.findIndex(id => id === trackId);
+}
+
+export function trackIdByIndex(state, feedId, indexInFeed) {
+  const feed = feedById(state.feeds, feedId);
+
+  return get(feed, `trackIds[${indexInFeed}]`);
 }

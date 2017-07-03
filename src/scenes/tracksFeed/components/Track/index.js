@@ -67,9 +67,12 @@ class Track extends PureComponent {
     track: PropTypes.object.isRequired,
     connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,
+    feedId: PropTypes.string.isRequired,
+    playTrack: PropTypes.func.isRequired,
+    pauseTrack: PropTypes.func.isRequired,
+    trackIndex: PropTypes.number,
     isDragging: PropTypes.bool,
     isPlaying: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
     onQueue: PropTypes.func.isRequired,
     toggleLike: PropTypes.func.isRequired, // TODO: implement
   };
@@ -80,7 +83,23 @@ class Track extends PureComponent {
 
   _onTrackClicked = e => {
     e.preventDefault();
-    this.props.onClick(this.props.track.id, !this.props.isPlaying);
+    const {
+      isPlaying,
+      feedId,
+      playTrack,
+      pauseTrack,
+      trackIndex,
+      track,
+    } = this.props;
+    if (isPlaying) {
+      pauseTrack();
+    } else {
+      playTrack({
+        feedId,
+        indexInFeed: trackIndex,
+        trackId: track.id,
+      });
+    }
   };
 
   _onQueueClicked = () => {

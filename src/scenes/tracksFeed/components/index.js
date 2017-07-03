@@ -38,7 +38,8 @@ const NoTracks = styled.h2``;
 
 class TrackList extends PureComponent {
   static propTypes = {
-    toggleTrack: PropTypes.func.isRequired,
+    playTrack: PropTypes.func.isRequired,
+    pauseTrack: PropTypes.func.isRequired,
     queueTrack: PropTypes.func.isRequired,
     toggleLike: PropTypes.func.isRequired,
     fetchNext: PropTypes.func.isRequired,
@@ -74,14 +75,6 @@ class TrackList extends PureComponent {
     this._nextObserver = c;
   };
 
-  _trackClicked = (trackId, toggle) => {
-    this.props.toggleTrack({
-      trackId,
-      isPlaying: toggle,
-      feedId: this.props.feedId,
-    });
-  };
-
   render() {
     const {
       tracks,
@@ -90,6 +83,9 @@ class TrackList extends PureComponent {
       hasNext,
       status,
       queueTrack,
+      playTrack,
+      pauseTrack,
+      feedId,
       toggleLike,
     } = this.props;
 
@@ -98,10 +94,13 @@ class TrackList extends PureComponent {
         {tracks.map((track, index) =>
           <Track
             key={`${track.id}-${index}`} // eslint-disable-line
+            trackIndex={index}
+            feedId={feedId}
             isPlaying={track.id === activeTrackId && isPlaying}
             track={track}
             toggleLike={toggleLike}
-            onClick={this._trackClicked}
+            playTrack={playTrack}
+            pauseTrack={pauseTrack}
             onQueue={queueTrack}
           />,
         )}

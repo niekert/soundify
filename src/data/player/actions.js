@@ -1,70 +1,80 @@
-import { feedById, trackIndex } from 'scenes/tracksFeed/selectors';
+import { feedById, trackIdByIndex } from 'scenes/tracksFeed/selectors';
 import { unqueue } from 'data/queue/actions';
 
 export const TOGGLE_TRACK = 'TOGGLE_TRACK';
+export const PLAY_TRACK = 'PLAY_TRACK';
 export const TOGGLE_PLAYING = 'TOGGLE_PLAYING';
+
+export const NEXT_TRACK = 'NEXT_TRACK';
+export const PREV_TRACK = 'PREV_TRACK';
+export const PLAY_QUEUED_TRACK = 'PLAY_QUEUED_TRACK';
 
 export const NEXT = 'next';
 export const PREV = 'prev';
 
-export function toggleTrack({ trackId, isPlaying = true, feedId, ...props }) {
+export function playTrack({ feedId, indexInFeed, trackId }) {
   return {
-    type: TOGGLE_TRACK,
+    type: PLAY_TRACK,
     payload: {
-      trackId,
-      isPlaying,
       feedId,
-      ...props,
+      trackId,
+      indexInFeed,
     },
   };
 }
 
-export function changeTrack(changeType) {
+export function prevTrack() {
+  return {
+    type: PREV_TRACK,
+  };
+}
+
+export function nextTrack() {
   return (dispatch, getState) => {
     const state = getState();
     const { player, queue } = state.data;
-    const { activeFeedId, activeTrackId, previousTrackId } = player;
-
-    const currentFeed = feedById(state.feeds, activeFeedId);
-    const currentTrackIndex = trackIndex(
-      currentFeed,
-      previousTrackId || activeTrackId,
-    );
-    if (changeType === PREV) {
-      const nextTrackId =
-        currentFeed.trackIds[currentTrackIndex - 1] || currentFeed.trackIds[0]; // start over if there's no tracks
-      dispatch(
-        toggleTrack({
-          trackId: nextTrackId,
-          isPlaying: player.isPlaying,
-        }),
-      );
-      return;
-    }
+    const { activeFeedId, indexInFeed, prevTracksHistory } = player;
 
     if (queue.length) {
       const nextTrackId = queue[0].trackId;
       dispatch(unqueue()); // Remove the track from queue
-      dispatch(
-        toggleTrack({
+
+      dispatch({
+        type: NEXT_TRACK,
+        payload: {
           trackId: nextTrackId,
-          previousTrackId: previousTrackId || activeTrackId, // Never replace the prev track on queue
-          isPlaying: player.isPlaying,
-        }),
-      );
+        },
+      });
       return;
     }
 
-    const nextTrackId =
-      currentFeed.trackIds[currentTrackIndex + 1] || currentFeed.tracksIds[0]; // start over if there's no tracks
+    const [lastPrevTrackId, ...trackHistory] = prevTracksHistory;
+    if (lastPrevTrackId) {
+      dispatch({
+        type: NEXT_TRACK,
+        payload: {
+          trackId: lastPrevTrackId,
+          prevTracksHistory: trackHistory,
+        },
+      });
+      return;
+    }
 
-    dispatch(
-      toggleTrack({
-        trackId: nextTrackId,
-        isPlaying: player.isPlaying,
-      }),
-    );
+    const nextIndexInFeed = indexInFeed + 1;
+    dispatch({
+      type: NEXT_TRACK,
+      payload: {
+        trackId: trackIdByIndex(state, activeFeedId, nextIndexInFeed),
+        indexInFeed: nextIndexInFeed,
+      },
+    });
   };
+}
+
+export function changeTrack(changeType) {
+  if (changeType === NEXT) {
+    nextTrack();
+  }
 }
 
 export function togglePlaying(toggle) {

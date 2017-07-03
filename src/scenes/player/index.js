@@ -1,5 +1,5 @@
 import { compose, lifecycle } from 'recompose';
-import { togglePlaying, changeTrack } from 'data/player/actions';
+import { togglePlaying, nextTrack, prevTrack } from 'data/player/actions';
 import { toggleLike, fetchTrack } from 'data/tracks/actions';
 import { trackById } from 'selectors/tracks';
 import { connect } from 'react-redux';
@@ -21,7 +21,8 @@ function mapStateToProps(state) {
 const enhance = compose(
   connect(mapStateToProps, {
     togglePlaying,
-    changeTrack,
+    nextTrack,
+    prevTrack,
     toggleLike,
     fetchTrack,
   }),

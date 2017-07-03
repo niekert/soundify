@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
+import { func, number, object, bool } from 'prop-types';
 import { ipcRenderer } from 'electron';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NEXT, PREV } from 'data/player/actions';
 import { alpha } from 'utils/color';
@@ -46,13 +46,14 @@ const PLAY_PAUSE = 'play_pause';
 
 class Player extends PureComponent {
   static propTypes = {
-    togglePlaying: PropTypes.func.isRequired,
-    changeTrack: PropTypes.func.isRequired,
-    toggleLike: PropTypes.func.isRequired,
-    volume: PropTypes.number.isRequired,
-    track: PropTypes.object,
-    isPlaying: PropTypes.bool,
-    isActive: PropTypes.bool,
+    togglePlaying: func.isRequired,
+    nextTrack: func.isRequired,
+    prevTrack: func.isRequired,
+    toggleLike: func.isRequired,
+    volume: number.isRequired,
+    track: object,
+    isPlaying: bool,
+    isActive: bool,
   };
 
   static defaultProps = {
@@ -123,7 +124,7 @@ class Player extends PureComponent {
   _onMediaKeyReceived = (event, message) => {
     switch (message) {
       case NEXT:
-        this._onNext();
+        this.props.nextTrack();
         break;
       case PREV:
         this._onPrev();
@@ -154,7 +155,7 @@ class Player extends PureComponent {
   };
 
   _onNext = () => {
-    this.props.changeTrack(NEXT);
+    this.props.nextTrack();
   };
 
   _onPrev = () => {
@@ -163,12 +164,12 @@ class Player extends PureComponent {
       this._audioElement.currentTime = 0;
       this._audioElement.play();
     } else {
-      this.props.changeTrack(PREV);
+      this.props.prevTrack();
     }
   };
 
   _onEnded = () => {
-    this.props.changeTrack(NEXT);
+    this.props.nextTrack();
   };
 
   _onTogglePlay = () => {

@@ -27,7 +27,8 @@ const enhance = compose(
   withPlayerContext,
   withHandlers({
     onClick: ({
-      toggleTrack,
+      togglePlaying,
+      playTrack,
       isPlaying,
       timelineId,
       activeTrackId,
@@ -35,14 +36,15 @@ const enhance = compose(
       trackId,
     }) => e => {
       e.preventDefault();
-
-      const toggle = !(timelineId === activeFeedId && isPlaying);
-
-      toggleTrack({
-        trackId: toggle ? trackId : activeTrackId,
-        timelineId,
-        isPlaying: toggle,
-      });
+      if (activeFeedId === timelineId) {
+        togglePlaying(!isPlaying);
+      } else {
+        playTrack({
+          trackId,
+          feedId: timelineId,
+          indexInFeed: 0,
+        });
+      }
     },
   }),
   pure,
