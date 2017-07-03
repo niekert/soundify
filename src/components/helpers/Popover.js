@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -12,6 +13,7 @@ class Popover extends React.Component {
       .isRequired,
     triggerProps: PropTypes.object,
     children: PropTypes.node,
+    closeOnClick: PropTypes.bool,
     onToggle: PropTypes.func,
   };
 
