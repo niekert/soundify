@@ -5,13 +5,15 @@ import { FETCH_TRACK_SUCCESS, FETCH_TRACK } from './actions';
 // The actual track is saved in entities reducer
 export default function(state = {}, action) {
   switch (action.type) {
-    case FETCH_TRACK:
+    case FETCH_TRACK: {
+      const { trackId, status } = action.payload;
       return {
         ...state,
-        [action.payload]: {
-          status: PENDING,
+        [trackId]: {
+          status,
         },
       };
+    }
     case FETCH_TRACK_SUCCESS:
       return {
         ...state,

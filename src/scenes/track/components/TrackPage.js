@@ -1,9 +1,15 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
-import TrackDetails from '../TrackDetails';
-import { Wrapper } from './styles';
+import styled from 'styled-components';
+import TrackDetails from './TrackDetails';
 
-function Track({ track }) {
+export const Wrapper = styled.div`
+  width: 100%;
+  padding: 50px 20px;
+  margin: 0 auto;
+`;
+
+function TrackPage({ track }) {
   return (
     <Wrapper>
       {track &&
@@ -17,7 +23,7 @@ function Track({ track }) {
   );
 }
 
-Track.propTypes = {
+TrackPage.propTypes = {
   track: shape({
     artwork_url: string,
     username: string,
@@ -25,3 +31,5 @@ Track.propTypes = {
     title: string,
   }),
 };
+
+export default TrackPage;

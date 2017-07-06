@@ -1,10 +1,10 @@
 import React from 'react';
-import { fetchTrack } from 'actions/trackActions';
+import { fetchTrack } from 'data/tracks/actions';
 import { string, object, func } from 'prop-types';
 import { trackById, trackStatus } from 'selectors/tracks';
 import { connect } from 'react-redux';
 import { INITIAL } from 'app-constants';
-import Track from './components/Track';
+import TrackPage from './components/TrackPage';
 
 class TrackContainer extends React.Component {
   static propTypes = {
@@ -21,7 +21,7 @@ class TrackContainer extends React.Component {
   }
 
   render() {
-    return <Track {...this.props} />;
+    return <TrackPage {...this.props} />;
   }
 }
 
