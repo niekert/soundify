@@ -45,13 +45,11 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.0",
     "soundcloud": "^3.1.2",
-    "styled-components": "v2.0.0-15",
+    "styled-components": "^2.1.1",
     "styled-tools": "^0.1.4",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
-    "electron": "1.6.10",
-    "electron-builder": "^19.13.0",
     "autoprefixer": "6.7.2",
     "babel-core": "6.22.1",
     "babel-eslint": "7.1.1",
@@ -69,6 +67,8 @@
     "detect-port": "1.0.1",
     "devtron": "^1.4.0",
     "dotenv": "2.0.0",
+    "electron": "1.6.10",
+    "electron-builder": "^19.13.0",
     "electron-devtools-installer": "^2.2.0",
     "electron-packager": "^8.5.2",
     "eslint": "3.19.0",
@@ -132,8 +132,12 @@
     "build": "BROWSER=none NODE_PATH=src/ yarn react-build && yarn electron-build"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
     "testPathIgnorePatterns": [
       "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
     ],
@@ -144,7 +148,9 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     }
