@@ -3,6 +3,7 @@ import { PLAY_TRACK, NEXT_TRACK, PREV_TRACK, TOGGLE_PLAYING } from './actions';
 
 const defaultPlayerState = {
   indexInFeed: null,
+  active: false,
   isPlaying: false,
   activeFeedId: null,
   trackHistory: [],
@@ -21,6 +22,7 @@ export default createReducer(defaultPlayerState, {
       ...state,
       activeTrackId: trackId,
       isPlaying: true,
+      active: true,
       activeFeedId: feedId,
       indexInFeed,
     };
