@@ -6,7 +6,8 @@ const path = require('path');
 const webpack = require('webpack');
 const config = require('../config/webpack.config.electron');
 const paths = require('../config/paths');
-const packager = require('electron-packager');
+const builder = require('electron-builder');
+const platform = builder.Platform;
 
 // Copy electronMain and package.json to the build directory
 fs.copySync(paths.appPackageJson, path.join(paths.appBuild, 'package.json'), {
@@ -33,14 +34,22 @@ fs.copySync(
 fs.copySync(paths.serverDir, path.join(paths.appBuild, 'server'));
 fs.copySync(paths.appNodeModules, path.join(paths.appBuild, 'node_modules'));
 
-// prettier-ignore
-packager(
-  {
-    dir: paths.appBuild,
-    asar: false,
-    overwrite: true,
+builder.build({
+  targets: platform.MAC.createTarget(),
+  config: {
+    publish: [
+      {
+        provider: 'github',
+        owner: 'niekert',
+        repo: 'soundify',
+      },
+    ],
+    appId: 'com.electron.soundify',
+    productName: 'Soundify',
+    directories: {
+      buildResources: 'build/',
+      app: 'build',
+      output: 'dist',
+    },
   },
-  (error, appPaths) => {
-    console.log('omg!!!', appPaths);
-  }
-);
+});
