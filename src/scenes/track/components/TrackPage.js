@@ -1,5 +1,5 @@
 import React from 'react';
-import { shape, string } from 'prop-types';
+import { shape, string, func, bool } from 'prop-types';
 import styled from 'styled-components';
 import TrackDetails from './TrackDetails';
 
@@ -9,11 +9,15 @@ export const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
-function TrackPage({ track }) {
+function TrackPage({ track, playTrack, pauseTrack, isPlaying }) {
   return (
     <Wrapper>
       {track &&
         <TrackDetails
+          trackId={track.id}
+          playTrack={playTrack}
+          pauseTrack={pauseTrack}
+          isPlaying={isPlaying}
           artworkUrl={track.artwork_url}
           username={track.user.username}
           userUrl={track.user.permalink_url}
@@ -30,6 +34,9 @@ TrackPage.propTypes = {
     permalink_url: string,
     title: string,
   }),
+  playTrack: func.isRequired,
+  pauseTrack: func.isRequired,
+  isPlaying: bool,
 };
 
 export default TrackPage;

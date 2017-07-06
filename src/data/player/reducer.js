@@ -3,6 +3,7 @@ import { PLAY_TRACK, NEXT_TRACK, PREV_TRACK, TOGGLE_PLAYING } from './actions';
 
 const defaultPlayerState = {
   indexInFeed: null,
+  activeTrackId: null,
   active: false,
   isPlaying: false,
   activeFeedId: null,
@@ -15,7 +16,7 @@ export default createReducer(defaultPlayerState, {
     const {
       feedId = state.activeFeedId, // Keep the current feed if no feed is given
       trackId,
-      indexInFeed,
+      indexInFeed = state.indexInFeed,
     } = action.payload;
 
     return {
@@ -33,6 +34,15 @@ export default createReducer(defaultPlayerState, {
       indexInFeed = state.indexInFeed,
       prevTracksHistory = state.prevTracksHistory,
     } = action.payload;
+
+    if (!trackId) {
+      return {
+        ...state,
+        isPlaying: false,
+        activeTrackId: null,
+        indexInFeed: 0,
+      };
+    }
 
     return {
       ...state,
