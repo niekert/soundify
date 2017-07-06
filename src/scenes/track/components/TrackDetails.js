@@ -5,8 +5,10 @@ import PlayIcon from 'components/icons/Play';
 import PauseIcon from 'components/icons/Pause';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
+import TrackTabBarContainer from 'containers/TrackTabBarContainer';
 import Artwork from 'components/Track/ArtWork';
 import { H1, H2 } from 'components/styles/Typography';
+import TagBar from './TagBar';
 
 const Wrapper = styled.div`
   padding: 60px;
@@ -20,6 +22,8 @@ const Wrapper = styled.div`
 
 const ArtworkImage = styled(Artwork)`
   width: 100%;
+  min-width: 200px;
+  min-height: 200px;
   flex: 1;
   margin-right: 20px;
   border-radius: 3px;
@@ -35,6 +39,12 @@ const TrackInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+`;
+
+const InfoBar = styled.div`
+  position: absolute;
+  bottom: 10px;
 `;
 
 const Artist = styled(H2)`
@@ -67,9 +77,11 @@ const PlayButton = styled.button`
 `;
 
 const TrackDetails = ({
+  trackId,
   artworkUrl,
   title,
   isPlaying,
+  tags,
   username,
   onClick, // eslint-disable-line
 }) =>
@@ -85,6 +97,10 @@ const TrackDetails = ({
       <Title>
         {title}
       </Title>
+      {!!tags && <TagBar tags={tags} />}
+      <InfoBar>
+        <TrackTabBarContainer trackId={trackId} />
+      </InfoBar>
     </TrackInfo>
   </Wrapper>;
 
@@ -99,12 +115,18 @@ const enhance = withHandlers({
 });
 
 TrackDetails.propTypes = {
+  trackId: string.isRequired,
   artworkUrl: string.isRequired,
   title: string.isRequired,
   username: string.isRequired,
+  tags: string,
   isPlaying: bool,
   playTrack: func.isRequired, // eslint-disable-line
   pauseTrack: func.isRequired, // eslint-disable-line
+};
+
+TrackDetails.defaultProps = {
+  tags: null,
 };
 
 export default enhance(TrackDetails);

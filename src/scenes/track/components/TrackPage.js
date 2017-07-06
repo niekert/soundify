@@ -21,6 +21,7 @@ function TrackPage({ track, playTrack, pauseTrack, isPlaying }) {
           artworkUrl={track.artwork_url}
           username={track.user.username}
           userUrl={track.user.permalink_url}
+          tags={track.tag_list}
           title={track.title}
         />}
     </Wrapper>
