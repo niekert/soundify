@@ -167,4 +167,10 @@ export default {
       }),
     }).then(resp => resp.json());
   },
+
+  toggleFollowing(userId, toggle) {
+    return this.fetchWithToken(`/me/followings/${userId}`, {
+      method: toggle ? 'PUT' : 'DELETE',
+    }).then(resp => resp.json());
+  },
 };

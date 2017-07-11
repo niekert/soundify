@@ -6,7 +6,8 @@ import ProfilePage from './components/ProfilePage';
 import { userStatus } from './selectors';
 
 const mapStateToProps = (state, ownProps) => {
-  const { profileId: userId, feedId = 'tracks' } = ownProps.match.params;
+  const { profileId, feedId = 'tracks' } = ownProps.match.params;
+  const userId = parseInt(profileId, 10); // as numbers in the api response
 
   const feed = state.feeds[`${userId}::${feedId}`];
 
