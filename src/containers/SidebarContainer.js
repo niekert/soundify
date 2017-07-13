@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from 'components/Sidebar';
+import { pinnedProfiles } from 'selectors/settings';
 import { showModal, ADD_PLAYLIST_MODAL } from 'scenes/modals';
 import { fetchPlaylists } from 'data/playlists/actions';
 import withUser from 'containers/hocs/withUser';
@@ -23,6 +24,7 @@ class SidebarContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     playlists: state.data.playlists.data,
+    pinnedProfiles: pinnedProfiles(state.data.settings),
     activeFeedId: state.data.player.isPlaying
       ? state.data.player.activeFeedId
       : undefined,

@@ -35,11 +35,14 @@ const enhance = compose(
       });
     },
     componentWillReceiveProps(nextProps) {
-      if (
+      if (nextProps.userId !== this.props.userId && nextProps.status !== OK) {
+        nextProps.fetchProfile(nextProps.userId);
+        nextProps.fetchProfileFeed(nextProps.userId, nextProps.feedId);
+      } else if (
         nextProps.feedId !== this.props.feedId &&
         nextProps.feedStatus !== OK
       ) {
-        this.props.fetchProfileFeed(nextProps.userId, nextProps.feedId);
+        nextProps.fetchProfileFeed(nextProps.userId, nextProps.feedId);
       }
     },
   }),
