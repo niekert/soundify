@@ -40,6 +40,7 @@ export default {
     displaySmall: '20px',
     heading: '18px',
     subheading: '16px',
+    icon: '24px',
 
     // body
     body: '17px',
