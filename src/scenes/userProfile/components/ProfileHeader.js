@@ -3,7 +3,8 @@ import { number, string, func, bool } from 'prop-types';
 import abbreviateNumber from 'number-abbreviate';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
-import FollowButton from 'components/buttons/FollowButton';
+import FollowButton from './FollowButton';
+import ProfileDropdown from './ProfileDropdown';
 import { H1, Paragraph } from 'components/styles/Typography';
 
 const Wrapper = styled.div`
@@ -51,6 +52,8 @@ function ProfileHeader({
   toggleFollowing,
   followersCount,
   followingCount,
+  toggleSidebarPin,
+  isPinned,
   fullName, // eslint-disable-line
   avatarUrl,
   city, // eslint-disable-line
@@ -69,6 +72,12 @@ function ProfileHeader({
             toggleFollowing={toggleFollowing}
             userId={userId}
             isFollowing={isFollowing}
+          />
+          <ProfileDropdown
+            userId={userId}
+            userName={username}
+            isPinned={isPinned}
+            togglePinSidebar={toggleSidebarPin}
           />
         </UserRow>
         <StatsContainer>
@@ -93,7 +102,9 @@ function ProfileHeader({
 ProfileHeader.propTypes = {
   username: string.isRequired,
   toggleFollowing: func.isRequired,
+  toggleSidebarPin: func.isRequired,
   isFollowing: bool,
+  isPinned: bool,
   userId: number.isRequired,
   followersCount: number.isRequired,
   followingCount: number.isRequired,

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { toggleFollowing } from 'actions/authActions';
+import { toggleSidebarPin } from 'data/settings/actions';
 import { getUser } from '../selectors';
 import ProfileHeader from '../components/ProfileHeader';
 
@@ -20,6 +21,7 @@ function mapStateToProps(state, { userId }) {
 
   return {
     username,
+    isPinned: !!state.data.settings.pinnedProfiles.has(userId),
     isFollowing: me.followings.includes(parseInt(userId, 10)),
     followersCount,
     followingCount,
@@ -34,6 +36,7 @@ function mapStateToProps(state, { userId }) {
 
 const actions = {
   toggleFollowing,
+  toggleSidebarPin,
 };
 
 export default connect(mapStateToProps, actions)(ProfileHeader);

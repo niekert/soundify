@@ -45,6 +45,7 @@ const UserInfo = ({ username, avatarUrl, isOpen, onClick }) =>
       <ArrowIcon />
     </ArrowWrapper>
   </Wrapper>;
+
 UserInfo.propTypes = {
   onClick: func,
   username: string.isRequired,
