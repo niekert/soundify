@@ -21,7 +21,7 @@ function mapStateToProps(state, { userId }) {
 
   return {
     username,
-    isPinned: !!state.data.settings.pinnedProfiles.has(userId),
+    isPinned: !!state.data.settings.pinnedProfiles[userId],
     isFollowing: me.followings.includes(parseInt(userId, 10)),
     followersCount,
     followingCount,

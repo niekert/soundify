@@ -1,10 +1,9 @@
 import { createReducer } from 'redux-create-reducer';
-import { Map } from 'immutable';
 import { SET_VOLUME, TOGGLE_SIDEBAR_PROFILE_PIN } from './actions';
 
 const defaultState = {
-  volumePercentage: 100, // TODO: use redux-localstorage
-  pinnedProfiles: new Map(),
+  volumePercentage: 100,
+  pinnedProfiles: {},
 };
 
 export default createReducer(defaultState, {
@@ -16,17 +15,17 @@ export default createReducer(defaultState, {
   },
   [TOGGLE_SIDEBAR_PROFILE_PIN](state, action) {
     const { userId, userName } = action.payload;
+    const pinnedProfiles = { ...state.pinnedProfiles };
 
-    if (state.pinnedProfiles.has(userId)) {
-      return {
-        ...state,
-        pinnedProfiles: state.pinnedProfiles.delete(userId),
-      };
+    if (pinnedProfiles[userId]) {
+      delete pinnedProfiles[userId];
+    } else {
+      pinnedProfiles[userId] = userName;
     }
 
     return {
       ...state,
-      pinnedProfiles: state.pinnedProfiles.set(userId, userName),
+      pinnedProfiles,
     };
   },
 });
