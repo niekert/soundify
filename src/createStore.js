@@ -6,8 +6,8 @@ import { isDev } from 'helpers/env';
 import rootReducer from './reducers';
 
 const localStorageSlicer = () => state => ({
-  settings: state.settings,
   data: {
+    settings: state.data.settings,
     player: {
       ...state.data.player,
       isPlaying: false,

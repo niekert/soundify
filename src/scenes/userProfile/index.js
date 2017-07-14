@@ -6,7 +6,8 @@ import ProfilePage from './components/ProfilePage';
 import { userStatus } from './selectors';
 
 const mapStateToProps = (state, ownProps) => {
-  const { profileId: userId, feedId = 'tracks' } = ownProps.match.params;
+  const { profileId, feedId = 'tracks' } = ownProps.match.params;
+  const userId = parseInt(profileId, 10); // as numbers in the api response
 
   const feed = state.feeds[`${userId}::${feedId}`];
 
@@ -34,11 +35,14 @@ const enhance = compose(
       });
     },
     componentWillReceiveProps(nextProps) {
-      if (
+      if (nextProps.userId !== this.props.userId && nextProps.status !== OK) {
+        nextProps.fetchProfile(nextProps.userId);
+        nextProps.fetchProfileFeed(nextProps.userId, nextProps.feedId);
+      } else if (
         nextProps.feedId !== this.props.feedId &&
         nextProps.feedStatus !== OK
       ) {
-        this.props.fetchProfileFeed(nextProps.userId, nextProps.feedId);
+        nextProps.fetchProfileFeed(nextProps.userId, nextProps.feedId);
       }
     },
   }),

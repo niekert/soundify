@@ -2,21 +2,30 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from 'utils/color';
 import styled from 'styled-components';
-import { prop } from 'styled-tools';
+import { prop, ifProp } from 'styled-tools';
 import PlaylistDropTarget from './PlaylistDropTarget';
 import SidebarLink from './SidebarLink';
 
 const SidebarWrapper = styled.div`
   position: relative;
   width: 200px;
-  overflow: hidden;
-  position: relative;
   grid-row: 1 / 3;
-  display: grid;
-  grid-template-rows: 1fr 1fr 50px;
+  display: flex;
+  flex-direction: column;
   background: ${prop('theme.colors.primaryBackground')};
   user-select: none;
   z-index: 1;
+`;
+
+const LinksWrapper = styled.div`
+  margin-top: 50px;
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  max-height: 100%;
+  overflow: auto;
+  justify-content: space-around;
+  align-items: space-around;
 `;
 
 const Label = styled.label`
@@ -44,8 +53,8 @@ const NewPlaylist = styled.button`
 `;
 
 const SectionWrapper = styled.div`
-  display: flex;
-  width: 200px;
+  width: 100%;
+  margin-bottom: 30px;
   flex-direction: column;
   justify-content: center;
 `;
@@ -58,6 +67,12 @@ const Section = styled.div`
 class Sidebar extends PureComponent {
   static propTypes = {
     addPlaylist: PropTypes.func.isRequired,
+    pinnedProfiles: PropTypes.arrayOf(
+      PropTypes.shape({
+        userId: PropTypes.string.isRequired,
+        userName: PropTypes.string.isRequired,
+      }),
+    ),
     playlists: PropTypes.arrayOf(PropTypes.object),
     activeFeedId: PropTypes.string,
   };
@@ -67,36 +82,52 @@ class Sidebar extends PureComponent {
   };
 
   render() {
-    const { playlists, addPlaylist, activeFeedId } = this.props;
+    const { playlists, addPlaylist, pinnedProfiles, activeFeedId } = this.props;
+    const hasPinnedProfiles = pinnedProfiles.length > 0;
 
     return (
-      <SidebarWrapper>
-        <SectionWrapper>
-          <Label>Your Music</Label>
-          <Section>
-            <SidebarLink to="/likes" isPlaying={activeFeedId === 'likes'}>
-              Likes
-            </SidebarLink>
-            <SidebarLink to="/stream" isPlaying={activeFeedId === 'stream'}>
-              Stream
-            </SidebarLink>
-          </Section>
-        </SectionWrapper>
-        <SectionWrapper>
-          <Label>Playlists</Label>
-          <Section>
-            {playlists.map(({ title, id }) =>
-              <PlaylistDropTarget key={`playlist-${id}`}>
+      <SidebarWrapper hasPinnedProfiles={hasPinnedProfiles}>
+        <LinksWrapper>
+          <SectionWrapper>
+            <Label>Your Music</Label>
+            <Section>
+              <SidebarLink to="/likes" isPlaying={activeFeedId === 'likes'}>
+                Likes
+              </SidebarLink>
+              <SidebarLink to="/stream" isPlaying={activeFeedId === 'stream'}>
+                Stream
+              </SidebarLink>
+            </Section>
+          </SectionWrapper>
+          {hasPinnedProfiles &&
+            <SectionWrapper>
+              <Label>Profiles</Label>
+              {pinnedProfiles.map(({ userId, userName }) =>
                 <SidebarLink
-                  isPlaying={activeFeedId === `playlist::${id}`}
-                  to={`/playlist/${id}`}
+                  key={userId}
+                  to={`/profile/${userId}`}
+                  isPlaying={activeFeedId && activeFeedId.includes(userId)}
                 >
-                  {title}
-                </SidebarLink>
-              </PlaylistDropTarget>,
-            )}
-          </Section>
-        </SectionWrapper>
+                  {userName}
+                </SidebarLink>,
+              )}
+            </SectionWrapper>}
+          <SectionWrapper>
+            <Label>Playlists</Label>
+            <Section>
+              {playlists.map(({ title, id }) =>
+                <PlaylistDropTarget key={`playlist-${id}`}>
+                  <SidebarLink
+                    isPlaying={activeFeedId === `playlist::${id}`}
+                    to={`/playlist/${id}`}
+                  >
+                    {title}
+                  </SidebarLink>
+                </PlaylistDropTarget>,
+              )}
+            </Section>
+          </SectionWrapper>
+        </LinksWrapper>
         <NewPlaylist onClick={addPlaylist}>Add Playlist</NewPlaylist>
       </SidebarWrapper>
     );

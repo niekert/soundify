@@ -1,8 +1,10 @@
 import React from 'react';
-import { number, string } from 'prop-types';
+import { number, string, func, bool } from 'prop-types';
 import abbreviateNumber from 'number-abbreviate';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
+import FollowButton from './FollowButton';
+import ProfileDropdown from './ProfileDropdown';
 import { H1, Paragraph } from 'components/styles/Typography';
 
 const Wrapper = styled.div`
@@ -36,6 +38,8 @@ const Description = styled(Paragraph)`
   -webkit-box-orient: vertical;
 `;
 
+const UserRow = styled.div`display: flex;`;
+
 const Stat = styled.li`margin-right: 40px;`;
 const Bold = styled.span`font-weight: 600;`;
 
@@ -43,30 +47,48 @@ const StatsContainer = styled.ul`display: flex;`;
 
 function ProfileHeader({
   username,
-  followers,
-  following,
+  isFollowing,
+  userId,
+  toggleFollowing,
+  followersCount,
+  followingCount,
+  toggleSidebarPin,
+  isPinned,
   fullName, // eslint-disable-line
   avatarUrl,
   city, // eslint-disable-line
-  tracksCount = 100,
+  tracksCount,
   description,
 }) {
   return (
     <Wrapper>
       <UserAvatar url={avatarUrl} />
       <InfoContainer>
-        <H1>
-          {username}
-        </H1>
+        <UserRow>
+          <H1>
+            {username}
+          </H1>
+          <FollowButton
+            toggleFollowing={toggleFollowing}
+            userId={userId}
+            isFollowing={isFollowing}
+          />
+          <ProfileDropdown
+            userId={userId}
+            userName={username}
+            isPinned={isPinned}
+            togglePinSidebar={toggleSidebarPin}
+          />
+        </UserRow>
         <StatsContainer>
           <Stat>
             <Bold>{tracksCount}</Bold> tracks
           </Stat>
           <Stat>
-            <Bold>{abbreviateNumber(followers)}</Bold> followers
+            <Bold>{abbreviateNumber(followersCount)}</Bold> followers
           </Stat>
           <Stat>
-            <Bold>{abbreviateNumber(following)}</Bold> following
+            <Bold>{abbreviateNumber(followingCount)}</Bold> following
           </Stat>
         </StatsContainer>
         <Description>
@@ -79,8 +101,13 @@ function ProfileHeader({
 
 ProfileHeader.propTypes = {
   username: string.isRequired,
-  followers: number.isRequired,
-  following: number.isRequired,
+  toggleFollowing: func.isRequired,
+  toggleSidebarPin: func.isRequired,
+  isFollowing: bool,
+  isPinned: bool,
+  userId: number.isRequired,
+  followersCount: number.isRequired,
+  followingCount: number.isRequired,
   tracksCount: number.isRequired,
   fullName: string,
   avatarUrl: string,

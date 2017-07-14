@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, oneOf } from 'prop-types';
+import { string, number, oneOf } from 'prop-types';
 import { OK, INITIAL, DONE } from 'app-constants';
 import Loading from 'components/Loader';
 import styled from 'styled-components';
@@ -32,7 +32,7 @@ function ProfilePage({ userId, status = INITIAL, feedId, urlBase }) {
 }
 
 ProfilePage.propTypes = {
-  userId: string.isRequired,
+  userId: number.isRequired,
   urlBase: string.isRequired,
   feedId: oneOf(['tracks', 'favorites']),
   status: string,

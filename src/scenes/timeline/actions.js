@@ -112,7 +112,6 @@ export function fetchStream() {
 
   return dispatch => {
     dispatch(fetchTimeline(id));
-
     api
       .fetchStream()
       .then(json => ({
@@ -120,7 +119,9 @@ export function fetchStream() {
         title: 'Stream',
         next: json.next_href,
         future: json.next_future,
-        tracks: json.collection.map(item => item.origin),
+        tracks: json.collection
+          .map(item => item.origin)
+          .filter(item => item.kind === 'track'),
       }))
       .then(json =>
         fetchTimelineSuccess(dispatch, {

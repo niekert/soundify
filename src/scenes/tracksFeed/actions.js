@@ -23,8 +23,10 @@ export function fetchNext(feedId, nextUrl) {
       let tracks = resp.collection;
 
       if (feedId === 'stream') {
-        // TODO: solve better
-        tracks = resp.collection.map(item => item.origin);
+        // TODO: remove this when an ACTUAL stream feed is implemented
+        tracks = resp.collection
+          .map(item => item.origin)
+          .filter(item => !!item && item.kind === 'track');
       }
 
       const normalized = normalize(tracks, arrayOfTracks);

@@ -77,11 +77,12 @@ class Popover extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, ...props } = this.props;
 
     return (
       <Wrapper
         innerRef={c => (this._element = c)} // eslint-disable-line
+        {...props}
       >
         {this._renderTriggerButton()}
         <div onClick={this._onChildClicked}>

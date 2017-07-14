@@ -11,6 +11,8 @@ export const NO_AUTH = 'NO_AUTH';
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_CALLBACK = 'SCConnect';
 
+export const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING';
+
 export function authCallback(location) {
   return () => {
     api.authCallback(location);
@@ -41,6 +43,25 @@ export function fetchAuthedUser() {
 
         throw error;
       });
+  };
+}
+
+export function toggleFollowing(userId, toggle) {
+  const storeToggle = isFollowing => ({
+    type: TOGGLE_FOLLOWING,
+    payload: {
+      userId,
+      isFollowing,
+    },
+  });
+
+  return dispatch => {
+    api
+      .toggleFollowing(userId, toggle)
+      .then(() => dispatch(storeToggle(toggle)))
+      .catch(() => dispatch(storeToggle(!toggle)));
+
+    dispatch(storeToggle(toggle));
   };
 }
 
