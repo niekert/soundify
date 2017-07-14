@@ -10,7 +10,10 @@ import FeedTypePicker from './FeedTypePicker';
 import GridFeed from './GridFeed';
 import ListFeed from './ListFeed';
 
-const Wrapper = styled.div`position: relative;`;
+const Wrapper = styled.div`
+  position: relative;
+  padding-left: 10px;
+`;
 
 const Loading = styled(Loader)`
   position: absolute;
@@ -74,11 +77,10 @@ class TracksFeed extends PureComponent {
             activeFeedType={activeFeedType}
             setFeedType={setTrackFeedType}
           />}
-        <Feed {...props} />
         <FetchNextTrigger innerRef={this._nextObserverRef} active={hasNext} />
-        {isDone(status) &&
-          !this.props.tracks.length &&
-          <NoTracks>There's nothing here brah</NoTracks>}
+        {isDone(status) && !this.props.tracks.length
+          ? <NoTracks>There's nothing here brah</NoTracks>
+          : <Feed {...props} />}
         {!isDone(status) && <Loading />}
       </Wrapper>
     );

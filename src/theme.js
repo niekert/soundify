@@ -17,6 +17,7 @@ export default {
       background: '#f5f5f5',
       primaryText: '#333',
       secondaryText: '#948784',
+      outline: '#a5a5a5a5',
     },
   },
   fontWeight: {

@@ -5,7 +5,7 @@ import Track from './Track';
 
 const Wrapper = styled.ul`
   position: relative;
-  padding-top: 15px 0 0 10px;
+  padding-top: 15px 0 0 0;
   display: grid;
   grid-template-rows: repeat(auto-fit, 100%);
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
