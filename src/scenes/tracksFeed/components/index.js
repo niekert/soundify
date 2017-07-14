@@ -13,6 +13,7 @@ import ListFeed from './ListFeed';
 const Wrapper = styled.div`
   position: relative;
   padding-left: 10px;
+  padding-top: 10px;
 `;
 
 const Loading = styled(Loader)`

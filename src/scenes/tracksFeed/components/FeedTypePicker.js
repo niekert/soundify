@@ -8,7 +8,7 @@ import { FEED_TYPES, GRID, LIST, feedTypePropType } from '../feedTypes';
 
 const Wrapper = styled.div`
   position: absolute;
-  top: -35px;
+  top: -25px;
   right: 0;
 `;
 
