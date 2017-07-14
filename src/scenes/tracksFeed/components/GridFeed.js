@@ -5,11 +5,10 @@ import Track from './Track';
 
 const Wrapper = styled.ul`
   position: relative;
-  padding-top: 15px;
-  margin-left: 10px;
+  padding-top: 15px 0 0 10px;
   display: grid;
-  grid-template-rows: repeat(auto-fit, 250px);
-  grid-template-columns: repeat(auto-fit, 200px);
+  grid-template-rows: repeat(auto-fit, 100%);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-column-gap: 20px;
   grid-row-gap: 10px;
   width: 100%;
@@ -17,7 +16,7 @@ const Wrapper = styled.ul`
   user-select: none;
 `;
 
-function TrackList({
+function GridFeed({
   tracks,
   activeTrackId,
   isPlaying,
@@ -46,7 +45,7 @@ function TrackList({
   );
 }
 
-TrackList.propTypes = {
+GridFeed.propTypes = {
   playTrack: PropTypes.func.isRequired,
   pauseTrack: PropTypes.func.isRequired,
   queueTrack: PropTypes.func.isRequired,
@@ -57,7 +56,7 @@ TrackList.propTypes = {
   activeTrackId: PropTypes.number,
 };
 
-TrackList.defaultProps = {
+GridFeed.defaultProps = {
   tracks: [],
   activeTrackId: null,
   hasNext: false,
@@ -65,4 +64,4 @@ TrackList.defaultProps = {
   feedId: '',
 };
 
-export default TrackList;
+export default GridFeed;
