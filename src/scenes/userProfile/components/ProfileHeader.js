@@ -3,9 +3,9 @@ import { number, string, func, bool } from 'prop-types';
 import abbreviateNumber from 'number-abbreviate';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
+import { H1, Paragraph } from 'components/styles/Typography';
 import FollowButton from './FollowButton';
 import ProfileDropdown from './ProfileDropdown';
-import { H1, Paragraph } from 'components/styles/Typography';
 
 const Wrapper = styled.div`
   padding: ${prop('theme.spacing.space3')} 10px;
