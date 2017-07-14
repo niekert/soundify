@@ -56,6 +56,7 @@ const SectionWrapper = styled.div`
   width: 100%;
   margin-bottom: 30px;
   flex-direction: column;
+  margin: auto 0;
   justify-content: center;
 `;
 

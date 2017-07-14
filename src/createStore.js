@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { merge } from 'lodash';
 import thunkMiddleware from 'redux-thunk';
 import promiseMiddleware from 'redux-promise';
 import persistState from 'redux-localstorage';
@@ -25,6 +26,8 @@ export default () => {
     applyMiddleware(thunkMiddleware, promiseMiddleware),
     persistState('', {
       slicer: localStorageSlicer,
+      merge: (initialState, persistedState) =>
+        merge({}, initialState, persistedState),
     }),
   );
 
