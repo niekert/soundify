@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import { bool, func, string, array } from 'prop-types';
 import { status as statusPropType } from 'PropTypes';
 import { isDone } from 'utils/status';
-import { ifProp } from 'styled-tools';
+import { OK } from 'app-constants';
+import { ifProp, prop } from 'styled-tools';
 import styled from 'styled-components';
 import Loader from 'components/Loader';
 import { GRID, LIST, feedTypePropType } from '../feedTypes';
@@ -12,8 +13,7 @@ import ListFeed from './ListFeed';
 
 const Wrapper = styled.div`
   position: relative;
-  padding-left: 10px;
-  padding-top: 10px;
+  padding: 10px 0 20px 10px;
 `;
 
 const Loading = styled(Loader)`
@@ -25,7 +25,7 @@ const Loading = styled(Loader)`
 
 const FetchNextTrigger = styled.div`
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
   display: ${ifProp('active', 'block', 'none')};
 `;
 
@@ -55,10 +55,20 @@ class TracksFeed extends PureComponent {
       const [sentinel] = entries; // Always on first index
       if (sentinel.intersectionRatio > 0 && this.props.hasNext) {
         this.props.fetchNext(this.props.feedId, this.props.next);
+        this._fetchingNext = true;
+        this.intersectionObserver.disconnect();
       }
     });
 
     this.intersectionObserver.observe(this._nextObserver);
+  }
+
+  componentDidUpdate() {
+    if (this._fetchingNext && this.props.status === OK) {
+      console.log('reconnecting');
+      this.intersectionObserver.observe(this._nextObserver);
+      this._fetchingNext = false;
+    }
   }
 
   _nextObserverRef = c => {

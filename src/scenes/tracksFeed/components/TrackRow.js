@@ -10,9 +10,9 @@ import {
   withHandlers,
 } from 'recompose';
 import { formatSeconds } from 'helpers/format';
-import HeartIcon from 'components/icons/FavoriteHeart';
-import VolumeIcon from 'components/icons/VolumeMax';
-import PlayIcon from 'components/icons/Play';
+import Heart from 'components/icons/FavoriteHeart';
+import VolumeMax from 'components/icons/VolumeMax';
+import Play from 'components/icons/Play';
 import CalendarIcon from 'components/icons/Calendar';
 import ClockIcon from 'components/icons/Clock';
 import styled, { css } from 'styled-components';
@@ -56,24 +56,29 @@ const TitleColumn = styled(Column)`
 `;
 
 const IconColumn = styled(Column)`
-  opacity: 1;
+  opacity: ${ifProp('isSelected', 1, 0.5)};
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
+`;
 
-  svg {
-    cursor: pointer;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    ${ifProp(
-      'hasBorder',
-      `
-      border: 2px solid black;
-      `,
-    )}
-  }
+const VolumeIcon = styled(VolumeMax)`
+  width: 24px;
+  height: 24px;
+`;
+
+const PlayIcon = styled(Play)`
+  cursor: pointer;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: 2px solid black;
+`;
+
+const HeartIcon = styled(Heart)`
+  width: ${prop('theme.fontSize.iconSmall')};
+  height: ${prop('theme.fontSize.iconSmall')};
 `;
 
 const ProfileLink = styled(Link)`
@@ -114,8 +119,8 @@ const enhance = compose(
   }),
   onlyUpdateForKeys(['isActive', 'isPlaying']),
   withHandlers({
-    onClick: ({ setSelectedTrackId, track }) => () => {
-      setSelectedTrackId(track.id);
+    onClick: ({ setSelectedTrackId, track, index }) => () => {
+      setSelectedTrackId(track.id, index);
     },
     onDoubleClick: ({ handleDoubleClick, track, index }) => () => {
       handleDoubleClick(track.id, index);
@@ -129,7 +134,7 @@ const columnProps = [
   { flexGrow: 3 },
   { flexGrow: 2 },
   { width: 150, flexShrink: 1 },
-  { width: 50, flexShrink: 1 },
+  { width: 60, flexShrink: 1 },
 ];
 
 export function HeaderRow() {
@@ -152,12 +157,12 @@ export function HeaderRow() {
 function TrackRow({ track, isPlaying, isActive, onDoubleClick, onClick }) {
   return (
     <Row isActive={isActive} onClick={onClick} onDoubleClick={onDoubleClick}>
-      <IconColumn hasBorder {...columnProps[0]}>
+      <IconColumn isSelected {...columnProps[0]}>
         {isPlaying && <VolumeIcon />}
-        {!isPlaying && isActive && <PlayIcon />}
+        {!isPlaying && isActive && <PlayIcon onClick={onDoubleClick} />}
       </IconColumn>
-      <IconColumn {...columnProps[1]}>
-        {isActive && <HeartIcon isActive={track.user_favorite} />}
+      <IconColumn isSelected={isActive} {...columnProps[1]}>
+        <HeartIcon isActive={track.user_favorite} />
       </IconColumn>
       <TitleColumn {...columnProps[2]}>
         {track.title}

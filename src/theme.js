@@ -14,6 +14,7 @@ export default {
     outline: '#222326',
     cta: '#0095ff',
     reverse: {
+      primaryBackground: '#ffffff',
       background: '#f5f5f5',
       primaryText: '#333',
       secondaryText: '#948784',
@@ -42,6 +43,7 @@ export default {
     heading: '18px',
     subheading: '16px',
     icon: '24px',
+    iconSmall: '16px',
 
     // body
     body: '17px',
