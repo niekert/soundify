@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { bool, func, string } from 'prop-types';
+import { bool, func, string, array } from 'prop-types';
 import { status as statusPropType } from 'PropTypes';
 import { isDone } from 'utils/status';
 import { ifProp } from 'styled-tools';
@@ -37,6 +37,7 @@ class TracksFeed extends PureComponent {
   static propTypes = {
     setTrackFeedType: func.isRequired,
     feedId: string.isRequired,
+    tracks: array,
     next: string,
     hasNext: bool,
     fetchNext: func.isRequired,

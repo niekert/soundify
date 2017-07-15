@@ -1,4 +1,4 @@
-import { feedById, trackIdByIndex } from 'scenes/tracksFeed/selectors';
+import { trackIdByIndex } from 'scenes/tracksFeed/selectors';
 import { unqueue } from 'data/queue/actions';
 
 export const TOGGLE_TRACK = 'TOGGLE_TRACK';

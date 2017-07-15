@@ -25,7 +25,7 @@ const Button = styled.button`
 const enhance = compose(
   withState('isMouseOver', 'setMouseOver', false),
   withHandlers({
-    onClick: ({ userId, isFollowing, toggleFollowing }) => e => {
+    onClick: ({ userId, isFollowing, toggleFollowing }) => () => {
       toggleFollowing(userId, !isFollowing);
     },
     onMouseEnter: ({ setMouseOver }) => () => setMouseOver(true),

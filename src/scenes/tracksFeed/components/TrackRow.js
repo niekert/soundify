@@ -169,7 +169,7 @@ function TrackRow({ track, isPlaying, isActive, onDoubleClick, onClick }) {
       </Column>
       <Column {...columnProps[4]}>
         <time title={track.created_at}>
-          {moment(track.created_at).fromNow()}
+          {moment(track.created_at.split(/ \+/)[0]).fromNow()}
         </time>
       </Column>
       <Column {...columnProps[5]}>
