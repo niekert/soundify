@@ -121,7 +121,7 @@ export function fetchStream() {
         future: json.next_future,
         tracks: json.collection
           .map(item => item.origin)
-          .filter(item => item.kind === 'track'),
+          .filter(item => !!item && item.kind === 'track'),
       }))
       .then(json =>
         fetchTimelineSuccess(dispatch, {
