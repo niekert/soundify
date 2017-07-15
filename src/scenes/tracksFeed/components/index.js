@@ -1,30 +1,19 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, string } from 'prop-types';
 import { status as statusPropType } from 'PropTypes';
-import styled from 'styled-components';
-import { ifProp } from 'styled-tools';
-import Loader from 'components/Loader';
 import { isDone } from 'utils/status';
-import Track from './Track';
+import { ifProp } from 'styled-tools';
+import styled from 'styled-components';
+import Loader from 'components/Loader';
+import { GRID, LIST, feedTypePropType } from '../feedTypes';
+import FeedTypePicker from './FeedTypePicker';
+import GridFeed from './GridFeed';
+import ListFeed from './ListFeed';
 
-const Wrapper = styled.ul`
+const Wrapper = styled.div`
   position: relative;
-  padding-top: 15px;
-  margin-left: 10px;
-  display: grid;
-  grid-template-rows: repeat(auto-fit, 250px);
-  grid-template-columns: repeat(auto-fit, 200px);
-  grid-column-gap: 20px;
-  grid-row-gap: 10px;
-  width: 100%;
-  height: auto;
-  user-select: none;
-`;
-
-const FetchNextTrigger = styled.div`
-  position: absolute;
-  bottom: 10px;
-  display: ${ifProp('active', 'block', 'none')};
+  padding-left: 10px;
+  padding-top: 10px;
 `;
 
 const Loading = styled(Loader)`
@@ -34,30 +23,26 @@ const Loading = styled(Loader)`
   width: 100%;
 `;
 
+const FetchNextTrigger = styled.div`
+  position: absolute;
+  bottom: 10px;
+  display: ${ifProp('active', 'block', 'none')};
+`;
+
 const NoTracks = styled.h2``;
 
-class TrackList extends PureComponent {
-  static propTypes = {
-    playTrack: PropTypes.func.isRequired,
-    pauseTrack: PropTypes.func.isRequired,
-    queueTrack: PropTypes.func.isRequired,
-    toggleLike: PropTypes.func.isRequired,
-    fetchNext: PropTypes.func.isRequired,
-    hasNext: PropTypes.bool,
-    status: statusPropType,
-    next: PropTypes.string,
-    tracks: PropTypes.arrayOf(PropTypes.object),
-    feedId: PropTypes.string,
-    isPlaying: PropTypes.bool,
-    activeTrackId: PropTypes.number,
-  };
+const feedTypesMap = new Map([[GRID, GridFeed], [LIST, ListFeed]]);
 
-  static defaultProps = {
-    tracks: [],
-    activeTrackId: null,
-    hasNext: false,
-    isPlaying: false,
-    feedId: '',
+class TracksFeed extends PureComponent {
+  static propTypes = {
+    setTrackFeedType: func.isRequired,
+    feedId: string.isRequired,
+    next: string,
+    hasNext: bool,
+    fetchNext: func.isRequired,
+    status: statusPropType,
+    showFeedPicker: bool,
+    activeFeedType: feedTypePropType,
   };
 
   componentDidMount() {
@@ -77,41 +62,30 @@ class TrackList extends PureComponent {
 
   render() {
     const {
-      tracks,
-      activeTrackId,
-      isPlaying,
+      showFeedPicker = true,
+      setTrackFeedType,
       hasNext,
       status,
-      queueTrack,
-      playTrack,
-      pauseTrack,
-      feedId,
-      toggleLike,
+      activeFeedType = GRID,
+      ...props
     } = this.props;
+    const Feed = feedTypesMap.get(activeFeedType);
 
     return (
       <Wrapper>
-        {tracks.map((track, index) =>
-          <Track
-            key={`${track.id}-${index}`} // eslint-disable-line
-            trackIndex={index}
-            feedId={feedId}
-            isPlaying={track.id === activeTrackId && isPlaying}
-            track={track}
-            toggleLike={toggleLike}
-            playTrack={playTrack}
-            pauseTrack={pauseTrack}
-            onQueue={queueTrack}
-          />,
-        )}
+        {showFeedPicker &&
+          <FeedTypePicker
+            activeFeedType={activeFeedType}
+            setFeedType={setTrackFeedType}
+          />}
         <FetchNextTrigger innerRef={this._nextObserverRef} active={hasNext} />
-        {isDone(status) &&
-          !tracks.length &&
-          <NoTracks>There's nothing here brah</NoTracks>}
+        {isDone(status) && !this.props.tracks.length
+          ? <NoTracks>There's nothing here brah</NoTracks>
+          : <Feed {...props} />}
         {!isDone(status) && <Loading />}
       </Wrapper>
     );
   }
 }
 
-export default TrackList;
+export default TracksFeed;

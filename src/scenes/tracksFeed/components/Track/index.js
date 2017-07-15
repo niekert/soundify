@@ -20,11 +20,12 @@ const Wrapper = styled.li`
 
 const PlayerArtwork = styled(ArtWork)`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-repeat: no-repeat;
   box-shadow: ${prop('theme.shadows.depth2')};
-  background-size: cover;
   width: 100%;
-  height: 200px;
 
   & .playOverlay {
     display: none;
@@ -36,6 +37,7 @@ const PlayerArtwork = styled(ArtWork)`
 `;
 
 const Meta = styled.div`
+  margin-top: 10px;
   overflow: hidden;
   flex: 1;
   display: flex;

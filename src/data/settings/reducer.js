@@ -1,8 +1,14 @@
 import { createReducer } from 'redux-create-reducer';
-import { SET_VOLUME, TOGGLE_SIDEBAR_PROFILE_PIN } from './actions';
+import { GRID } from 'scenes/tracksFeed/feedTypes';
+import {
+  SET_VOLUME,
+  SET_TRACK_FEED_TYPE,
+  TOGGLE_SIDEBAR_PROFILE_PIN,
+} from './actions';
 
 const defaultState = {
   volumePercentage: 100,
+  trackFeedType: GRID,
   pinnedProfiles: {},
 };
 
@@ -26,6 +32,12 @@ export default createReducer(defaultState, {
     return {
       ...state,
       pinnedProfiles,
+    };
+  },
+  [SET_TRACK_FEED_TYPE](state, action) {
+    return {
+      ...state,
+      trackFeedType: action.payload,
     };
   },
 });

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { queueTrack } from 'data/queue/actions';
 import { toggleLike } from 'actions/trackActions';
+import { setTrackFeedType } from 'data/settings/actions';
 import { playTrack, togglePlaying } from 'data/player/actions';
 import { playerContext } from 'selectors/player';
 import { fetchNext } from './actions';
@@ -13,6 +14,7 @@ const makeMapStateToProps = () => {
   return function mapStateToProps(state, { feedId }) {
     return {
       feedId,
+      activeFeedType: state.data.settings.trackFeedType,
       ...getFeed(state, feedId),
       ...playerContext(state),
     };
@@ -22,6 +24,7 @@ const makeMapStateToProps = () => {
 const actions = {
   fetchNext,
   playTrack,
+  setTrackFeedType,
   pauseTrack: () => togglePlaying(false),
   queueTrack,
   toggleLike,

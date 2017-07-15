@@ -17,6 +17,7 @@ export default {
       background: '#f5f5f5',
       primaryText: '#333',
       secondaryText: '#948784',
+      outline: '#a5a5a5a5',
     },
   },
   fontWeight: {
@@ -40,6 +41,7 @@ export default {
     displaySmall: '20px',
     heading: '18px',
     subheading: '16px',
+    icon: '24px',
 
     // body
     body: '17px',
