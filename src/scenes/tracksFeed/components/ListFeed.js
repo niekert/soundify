@@ -45,7 +45,7 @@ class ListFeed extends PureComponent {
         <HeaderRow />
         {tracks.map((track, index) =>
           <TrackRow
-            key={`trackrow-${track.id}-${index}`}
+            key={`trackrow-${track.id}-${index}`} // eslint-disable-line
             track={track}
             index={index}
             setSelectedTrackId={this._handleTrackSelected}

@@ -42,7 +42,7 @@ export default createReducer(defaultPlayerState, {
       trackHistory: [state.activeTrackId, ...state.trackHistory],
     };
   },
-  [PREV_TRACK](state, action) {
+  [PREV_TRACK](state) {
     const [lastTrack, ...trackHistory] = state.trackHistory;
 
     return {

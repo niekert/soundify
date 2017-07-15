@@ -31,7 +31,6 @@ const enhance = compose(
       playTrack,
       isPlaying,
       timelineId,
-      activeTrackId,
       activeFeedId,
       trackId,
     }) => e => {

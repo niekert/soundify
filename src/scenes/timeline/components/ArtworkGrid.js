@@ -26,15 +26,13 @@ const ArtworkGrid = ({ tracks }) => {
   }
   return (
     <Wrapper>
-      {tracks
-        .slice(0, 4)
-        .map((track, index) =>
-          <ArtworkWrapper
-            key={`${track.id}-${index}`}
-            artworkUrl={track.artwork_url}
-            size="200x200"
-          />,
-        )}
+      {tracks.slice(0, 4).map((track, index) =>
+        <ArtworkWrapper
+          key={`${track.id}-${index}`} // eslint-disable-line
+          artworkUrl={track.artwork_url}
+          size="200x200"
+        />,
+      )}
     </Wrapper>
   );
 };

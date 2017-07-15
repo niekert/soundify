@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from 'utils/color';
 import styled from 'styled-components';
-import { prop, ifProp } from 'styled-tools';
+import { prop } from 'styled-tools';
 import PlaylistDropTarget from './PlaylistDropTarget';
 import SidebarLink from './SidebarLink';
 
