@@ -46,6 +46,10 @@ class TracksFeed extends PureComponent {
     activeFeedType: feedTypePropType,
   };
 
+  static defaultProps = {
+    tracks: [],
+  };
+
   componentDidMount() {
     this.intersectionObserver = new window.IntersectionObserver(entries => {
       const [sentinel] = entries; // Always on first index
