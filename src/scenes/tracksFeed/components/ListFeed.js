@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react';
-import TimeAgo from 'react-timeago';
 import { func, arrayOf, string, bool, number, object } from 'prop-types';
-import { formatSeconds } from 'helpers/format';
-import styled, { css } from 'styled-components';
-import { prop, ifProp } from 'styled-tools';
+import styled from 'styled-components';
 import TrackRow, { HeaderRow } from './TrackRow';
 
 const Wrapper = styled.section`width: 100%;`;
