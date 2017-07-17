@@ -22,7 +22,7 @@ function TagBar({ tags }) {
   return (
     <Wrapper>
       {tagItems.map(tag =>
-        <Tag>
+        <Tag key={tag}>
           #{trim(tag, '"')}
         </Tag>,
       )}
