@@ -12,12 +12,11 @@ import TagBar from './TagBar';
 
 const Wrapper = styled.div`
   padding: 60px;
-  padding: 5em;
+  padding: 0em;
   display: flex;
   justify-content: center;
   margin: 0 auto;
   max-width: 100%;
-  padding: 15px;
 `;
 
 const ArtworkImage = styled(Artwork)`

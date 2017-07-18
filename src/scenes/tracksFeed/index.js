@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { queueTrack } from 'data/queue/actions';
-import { toggleLike } from 'actions/trackActions';
+import { toggleLike } from 'data/tracks/actions';
 import { setTrackFeedType } from 'data/settings/actions';
 import { playTrack, togglePlaying } from 'data/player/actions';
 import { playerContext } from 'selectors/player';

@@ -4,13 +4,15 @@ import styled from 'styled-components';
 import TrackComments from 'scenes/trackComments';
 import TrackDetails from './TrackDetails';
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   padding: 50px 20px;
   margin: 0 auto;
 `;
 
-export const CommentsWrapper = styled.div`margin-left: 15px;`;
+const BottomWrapper = styled.div`display: flex;`;
+
+const CommentsContainer = styled.div`flex: 2;`;
 
 function TrackPage({ track, playTrack, pauseTrack, isPlaying }) {
   return (
@@ -28,7 +30,12 @@ function TrackPage({ track, playTrack, pauseTrack, isPlaying }) {
           tags={track.tag_list}
           title={track.title}
         />,
-        <TrackComments key="track-comments" trackId={track.id} />,
+        <BottomWrapper key="bottomWrapper">
+          <CommentsContainer>
+            <TrackComments />
+          </CommentsContainer>
+          <div style={{ flex: 1 }} />
+        </BottomWrapper>,
       ]}
     </Wrapper>
   );
