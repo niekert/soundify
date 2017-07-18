@@ -3,7 +3,7 @@ import { compose, lifecycle } from 'recompose';
 import { fetchComments, postComment } from './actions';
 import TrackComments from './components/TrackComments';
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state, { trackId }) {
   return {};
 }
 
@@ -12,4 +12,13 @@ const actions = {
   postComment,
 };
 
-export default connect(mapStateToProps, actions)(TrackComments);
+const enhance = compose(
+  connect(mapStateToProps, actions),
+  lifecycle({
+    componentDidMount() {
+      this.props.fetchComments(this.props.trackId);
+    },
+  }),
+);
+
+export default enhance(TrackComments);

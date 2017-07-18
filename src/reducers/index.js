@@ -3,6 +3,7 @@ import dataReducer from 'data/reducer';
 import timelineReducer from 'scenes/timeline/reducer';
 import userProfile from 'scenes/userProfile/reducer';
 import feedsReducer from 'scenes/tracksFeed/reducer';
+import commentsReducer from 'scenes/trackComments/reducer';
 import authReducer from './authReducer';
 import entitiesReducer from './entitiesReducer';
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   timeline: timelineReducer,
   users: userProfile,
   feeds: feedsReducer,
+  comments: commentsReducer,
   data: dataReducer,
 });
 

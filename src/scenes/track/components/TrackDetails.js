@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, func, bool } from 'prop-types';
+import { string, number, func, bool } from 'prop-types';
 import { withHandlers } from 'recompose';
 import PlayIcon from 'components/icons/Play';
 import PauseIcon from 'components/icons/Pause';
@@ -114,7 +114,7 @@ const enhance = withHandlers({
 });
 
 TrackDetails.propTypes = {
-  trackId: string.isRequired,
+  trackId: number.isRequired,
   artworkUrl: string.isRequired,
   title: string.isRequired,
   username: string.isRequired,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { shape, string, func, bool } from 'prop-types';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 import TrackComments from 'scenes/trackComments';
 import TrackDetails from './TrackDetails';
 
@@ -10,7 +11,10 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
-const BottomWrapper = styled.div`display: flex;`;
+const BottomWrapper = styled.div`
+  margin-top: ${prop('theme.spacing.space2')};
+  display: flex;
+`;
 
 const CommentsContainer = styled.div`flex: 2;`;
 
@@ -32,7 +36,7 @@ function TrackPage({ track, playTrack, pauseTrack, isPlaying }) {
         />,
         <BottomWrapper key="bottomWrapper">
           <CommentsContainer>
-            <TrackComments />
+            <TrackComments trackId={track.id} />
           </CommentsContainer>
           <div style={{ flex: 1 }} />
         </BottomWrapper>,

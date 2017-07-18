@@ -9,6 +9,7 @@ const TAG_BAR_REGEX = /(?:[^\s"]+|"[^"]*")+/g;
 const Wrapper = styled.ul`
   display: flex;
   margin-top: 10px;
+  flex-wrap: wrap;
 `;
 
 const Tag = styled.li`
