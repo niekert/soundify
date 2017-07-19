@@ -21,7 +21,7 @@ const AppShell = styled.div`
   height: 100vh;
   width: 100vw;
   display: grid;
-  grid-template: 50px 1fr 75px / 200px 1fr;
+  grid-template: 50px minMax(0, 1fr) 75px / 200px 1fr;
   background: ${prop('theme.colors.primaryBackground')};
   color: ${prop('theme.colors.primaryText')};
 `;

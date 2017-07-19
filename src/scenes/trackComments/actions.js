@@ -29,15 +29,16 @@ export function fetchComments(trackId) {
           entities,
         }),
       )
-      .catch(error =>
+      .catch(error => {
         dispatch({
           type: FETCH_COMMENTS_ERROR,
           payload: {
             trackId,
             error,
           },
-        }),
-      );
+        });
+        throw error;
+      });
   };
 }
 

@@ -3,6 +3,7 @@ import { merge } from 'lodash';
 const defaultEntities = {
   tracks: {},
   user: {},
+  comments: {},
 };
 
 export default (state = defaultEntities, action) => {

@@ -45,12 +45,18 @@ const Meta = styled.div`
   justify-content: center;
 `;
 
-const Title = styled.span`
+const TitleLink = styled(Link)`
   font-size: .8em;
+  color: inherit;
   white-space: nowrap;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const UserLink = styled(Link)`
@@ -134,9 +140,9 @@ class Track extends PureComponent {
           />
         </PlayerArtwork>
         <Meta innerRef={el => connectDragPreview(el)}>
-          <Title>
+          <TitleLink to={`/track/${track.id}`}>
             {track.title}
-          </Title>
+          </TitleLink>
           <UserLink to={`/profile/${track.user.id}`}>
             {track.user.username}
           </UserLink>

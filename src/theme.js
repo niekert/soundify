@@ -19,6 +19,7 @@ export default {
       primaryText: '#333',
       secondaryText: '#948784',
       outline: '#a5a5a5a5',
+      card: '#FFF',
     },
   },
   fontWeight: {

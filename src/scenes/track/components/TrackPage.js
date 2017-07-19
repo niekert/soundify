@@ -7,16 +7,26 @@ import TrackDetails from './TrackDetails';
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 50px 20px;
+  padding: 50px 20px 0;
   margin: 0 auto;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  max-width: 1300px;
 `;
 
 const BottomWrapper = styled.div`
   margin-top: ${prop('theme.spacing.space2')};
+  flex-shrink: 1;
+  align-items: flex-start;
   display: flex;
 `;
 
-const CommentsContainer = styled.div`flex: 2;`;
+const CommentsContainer = styled.div`
+  flex: 2;
+  max-width: 50%;
+  min-width: 300px;
+`;
 
 function TrackPage({ track, playTrack, pauseTrack, isPlaying }) {
   return (
@@ -31,6 +41,7 @@ function TrackPage({ track, playTrack, pauseTrack, isPlaying }) {
           artworkUrl={track.artwork_url}
           username={track.user.username}
           userUrl={track.user.permalink_url}
+          userId={track.user.id}
           tags={track.tag_list}
           title={track.title}
         />,

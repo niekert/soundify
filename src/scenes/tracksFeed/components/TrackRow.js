@@ -165,7 +165,9 @@ function TrackRow({ track, isPlaying, isActive, onDoubleClick, onClick }) {
         <HeartIcon isActive={track.user_favorite} />
       </IconColumn>
       <TitleColumn {...columnProps[2]}>
-        {track.title}
+        <ProfileLink to={`/track/${track.id}`}>
+          {track.title}
+        </ProfileLink>
       </TitleColumn>
       <Column {...columnProps[3]}>
         <ProfileLink to={`/profile/${track.user.id}`}>

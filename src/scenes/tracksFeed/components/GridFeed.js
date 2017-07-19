@@ -33,6 +33,7 @@ function GridFeed({
           key={`${track.id}-${index}`} // eslint-disable-line
           trackIndex={index}
           feedId={feedId}
+          userId={track.user.id}
           isPlaying={track.id === activeTrackId && isPlaying}
           track={track}
           toggleLike={toggleLike}

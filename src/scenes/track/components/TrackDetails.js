@@ -1,5 +1,6 @@
 import React from 'react';
 import { string, number, func, bool } from 'prop-types';
+import { Link } from 'react-router-dom';
 import { withHandlers } from 'recompose';
 import PlayIcon from 'components/icons/Play';
 import PauseIcon from 'components/icons/Pause';
@@ -15,7 +16,9 @@ const Wrapper = styled.div`
   padding: 0em;
   display: flex;
   justify-content: center;
-  margin: 0 auto;
+  margin-bottom: ${prop('theme.spacing.space1')};
+  align-self: stretch;
+  flex-shrink: 0;
   max-width: 100%;
 `;
 
@@ -24,6 +27,8 @@ const ArtworkImage = styled(Artwork)`
   min-width: 200px;
   min-height: 200px;
   flex: 1;
+  max-height: 300px;
+  max-width: 300px;
   margin-right: 20px;
   border-radius: 3px;
 
@@ -46,8 +51,18 @@ const InfoBar = styled.div`
   bottom: 10px;
 `;
 
-const Artist = styled(H2)`
+const ArtistLink = styled(Link)`
+  color: inherit;
+  font-size: 1.5em;
+  opacity: .8;
+  line-height: ${prop('theme.lineHeights.heading')};
+  margin-bottom: .5em;
+  text-decoration: none;
   font-weight: 300;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const Title = styled(H1)`
@@ -78,6 +93,7 @@ const PlayButton = styled.button`
 const TrackDetails = ({
   trackId,
   artworkUrl,
+  userId,
   title,
   isPlaying,
   tags,
@@ -90,9 +106,9 @@ const TrackDetails = ({
       {isPlaying ? <PauseIcon /> : <PlayIcon />}
     </PlayButton>
     <TrackInfo>
-      <Artist>
+      <ArtistLink to={`/profile/${userId}`}>
         {username}
-      </Artist>
+      </ArtistLink>
       <Title>
         {title}
       </Title>
@@ -115,6 +131,7 @@ const enhance = withHandlers({
 
 TrackDetails.propTypes = {
   trackId: number.isRequired,
+  userId: number.isRequired,
   artworkUrl: string.isRequired,
   title: string.isRequired,
   username: string.isRequired,

@@ -1,10 +1,18 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
+import { INITIAL } from 'app-constants';
 import { fetchComments, postComment } from './actions';
 import TrackComments from './components/TrackComments';
 
 function mapStateToProps(state, { trackId }) {
-  return {};
+  const { status = INITIAL, commentIds = [] } =
+    state.comments.get(trackId) || {};
+
+  return {
+    status,
+    comments: commentIds.map(commentId => state.entities.comments[commentId]),
+    trackId,
+  };
 }
 
 const actions = {
