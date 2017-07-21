@@ -125,7 +125,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "react-start": "BROWSER=none NODE_PATH=src/ node scripts/start.js",
-    "electron-start": "ELECTRON_DEV=1 electron .",
+    "electron-start": "ELECTRON_DEV=1 electron . --icon=assets/icon.icns",
     "electron-build": "node scripts/electron-build.js",
     "react-build": "NODE_PATH=src/ node scripts/build.js",
     "start": "PORT=3000 concurrently 'yarn react-start' 'wait-on http://localhost:3000 && yarn electron-start'",
@@ -133,12 +133,8 @@
     "build": "BROWSER=none NODE_PATH=src/ yarn react-build && yarn electron-build"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+    "setupFiles": ["<rootDir>/config/polyfills.js"],
     "testPathIgnorePatterns": [
       "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
     ],
@@ -149,9 +145,7 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
+    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     }

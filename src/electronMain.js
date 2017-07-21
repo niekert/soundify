@@ -39,6 +39,7 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: bounds.width,
     height: bounds.height,
+    icon: path.join(__dirname, '../assets/icon.png'),
     experimentalFeatures: true,
     titleBarStyle: 'hidden-inset',
     webPreferences: {
