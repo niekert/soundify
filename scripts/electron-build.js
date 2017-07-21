@@ -47,7 +47,7 @@ builder.build({
     appId: 'com.electron.soundify',
     productName: 'Soundify',
     directories: {
-      buildResources: 'build/',
+      buildResources: 'assets/',
       app: 'build',
       output: 'dist',
     },
