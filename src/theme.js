@@ -22,6 +22,9 @@ export default {
       card: '#FFF',
     },
   },
+  gradients: {
+    cta: (angle = 45) => `linear-gradient(${angle}deg, #0095ff, #7E53FF)`,
+  },
   fontWeight: {
     bold: 700,
     semibold: 600,

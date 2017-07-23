@@ -1,5 +1,6 @@
 import React from 'react';
 import PlayIcon from 'components/icons/Play';
+import CommentIcon from 'components/icons/Comment';
 import abbreviateNumber from 'number-abbreviate';
 import FavoriteHeartIcon from 'components/icons/FavoriteHeart';
 import { number } from 'prop-types';
@@ -40,6 +41,7 @@ function TrackTabBar({ trackId, playCount, likeCount, commentCount }) {
         {abbreviateNumber(likeCount)}
       </Item>
       <Item>
+        <CommentIcon />
         {abbreviateNumber(commentCount)}
       </Item>
     </Wrapper>

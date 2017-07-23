@@ -18,7 +18,7 @@ const icon = css`
 const PlayerIcon = styled.div`
   ${icon} height: 25%;
   width: 25%;
-  background: ${props => props.theme.colors.cta};
+  background: ${props => props.theme.gradients.cta(45)};
   color: ${prop('theme.colors.reverse.background')};
 
   svg {

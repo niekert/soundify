@@ -2,6 +2,7 @@ import React from 'react';
 import { Link as LinkComponent } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { prop } from 'styled-tools';
+import TimeAgo from 'components/helpers/TimeAgo';
 
 const Wrapper = styled.div`
   border-bottom: 1px solid ${prop('theme.colors.reverse.outline')};
@@ -46,8 +47,9 @@ const Link = styled(LinkComponent)`
   }
 `;
 
-const TimeAgo = styled.span`
+const TimeAgoWrapper = styled.span`
   ${label};
+  flex-shrink: 0;
   text-align: right;
 `;
 
@@ -65,9 +67,9 @@ function Comment({ datePosted, userId, userName, avatarUrl, body, timestamp }) {
           {body}
         </CommentBody>
       </CommentBodyWrapper>
-      <TimeAgo>
-        {datePosted}
-      </TimeAgo>
+      <TimeAgoWrapper>
+        <TimeAgo timestamp={datePosted} />
+      </TimeAgoWrapper>
     </Wrapper>
   );
 }

@@ -27,11 +27,8 @@ const Link = styled(NavLink)`
   &.${prop('activeClassName')},
   &.dropActive,
   &:hover {
-    ${activeCss}
+    ${activeCss};
   }
-
-  ${ifProp('isLinkActive', activeCss)};
-
 
   &.${prop('activeClassName')}:before {
     content: '';

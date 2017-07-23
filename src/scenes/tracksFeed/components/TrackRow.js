@@ -2,7 +2,7 @@
 import React from 'react';
 import { func, object, bool } from 'prop-types';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+import { prop, ifProp } from 'styled-tools';
 import {
   compose,
   onlyUpdateForKeys,
@@ -17,7 +17,7 @@ import CalendarIcon from 'components/icons/Calendar';
 import ClockIcon from 'components/icons/Clock';
 import styled, { css } from 'styled-components';
 import { alpha } from 'utils/color';
-import { prop, ifProp } from 'styled-tools';
+import TimeAgo from 'components/helpers/TimeAgo';
 
 const selected = css`
   background: ${props => alpha(props.theme.colors.reverse.outline, 0.2)};
@@ -175,9 +175,7 @@ function TrackRow({ track, isPlaying, isActive, onDoubleClick, onClick }) {
         </ProfileLink>
       </Column>
       <Column {...columnProps[4]}>
-        <time title={track.created_at}>
-          {moment(track.created_at.split(/ \+/)[0]).fromNow()}
-        </time>
+        <TimeAgo timestamp={track.created_at} />
       </Column>
       <Column {...columnProps[5]}>
         {formatSeconds(track.duration / 1000)}

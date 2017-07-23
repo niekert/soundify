@@ -9,7 +9,7 @@ const Button = styled.button`
   width: 100px;
   height: 30px;
   border-radius: 50px;
-  background: ${prop('theme.colors.cta')};
+  background: ${props => props.theme.gradients.cta(45)};
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #fff;
@@ -19,7 +19,6 @@ const Button = styled.button`
 
   &:hover {
     transform: scale(1.05);
-    background: ${prop('theme.colors.cta')};
   }
 `;
 
