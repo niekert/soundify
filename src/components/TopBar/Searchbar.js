@@ -5,6 +5,7 @@ import SearchIcon from 'components/icons/SearchIcon';
 import { compose, withState, withHandlers } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 
 const Form = styled.form`
   display: flex;
@@ -16,12 +17,12 @@ const IconWrapper = styled.div`
   position: absolute;
   height: 24px;
   width: 24px;
-  left: 30px;
+  left: 17px;
   color: #222326;
 `;
 
 const Input = styled.input`
-  margin-left: 25px;
+  margin-left: ${prop('theme.spacing.space1')};
   height: 22px;
   width: 300px;
   align-self: center;

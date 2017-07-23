@@ -5,7 +5,6 @@ import { prop } from 'styled-tools';
 import TimeAgo from 'components/helpers/TimeAgo';
 
 const Wrapper = styled.div`
-  border-bottom: 1px solid ${prop('theme.colors.reverse.outline')};
   margin: 0 ${prop('theme.spacing.space2')};
   padding: ${prop('theme.spacing.space1')} 0;
   height: auto;
@@ -23,6 +22,7 @@ const Avatar = styled.img`
 const CommentBodyWrapper = styled.div`
   font-weight: 300;
   width: 100%;
+  border-bottom: 1px solid ${prop('theme.colors.reverse.outline')};
 `;
 
 const CommentBody = styled.p`
@@ -50,6 +50,7 @@ const Link = styled(LinkComponent)`
 const TimeAgoWrapper = styled.span`
   ${label};
   flex-shrink: 0;
+  border-bottom: 1px solid ${prop('theme.colors.reverse.outline')};
   text-align: right;
 `;
 

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import Searchbar from 'components/TopBar/Searchbar';
+import Waves from 'components/icons/Waves';
 import { Link } from 'react-router-dom';
 import UserDropdown from './UserDropdown';
-import SoundCloudLogo from './SoundCloudLogo';
 
 const Wrapper = styled.div`
   grid-column: 2;
@@ -15,14 +15,15 @@ const Wrapper = styled.div`
   color: ${prop('theme.colors.reverse.primaryText')};
   display: flex;
   height: 50px;
-  padding: 0 25px;
+  padding: 0 ${prop('theme.spacing.space1')};
   justify-content: flex-start;
   box-shadow: 0 2px 7px rgba(0, 0, 0, .1);
   -webkit-app-region: drag;
 `;
 
-const Logo = styled(SoundCloudLogo)`
+const Logo = styled(Waves)`
   color: ${prop('theme.colors.reverse.primaryText')};
+  padding: 10px 0;
   cursor: pointer;
   height: 100%;
   width: 50px;
