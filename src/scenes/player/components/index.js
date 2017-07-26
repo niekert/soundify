@@ -141,7 +141,8 @@ class Player extends PureComponent {
     if (
       e.code === 'Space' &&
       this.props.track &&
-      e.target.tagName !== 'INPUT'
+      e.target.tagName !== 'INPUT' &&
+      e.target.tagName !== 'TEXTAREA'
     ) {
       e.preventDefault();
       this.props.togglePlaying(!this.props.isPlaying);

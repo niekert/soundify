@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, object } from 'prop-types';
+import { arrayOf, object, number, func, string } from 'prop-types';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import { DONE, INITIAL } from 'app-constants';
@@ -13,10 +13,20 @@ const Wrapper = styled.div`
   box-shadow: ${prop('theme.shadows.depth1')};
 `;
 
-function TrackComments({ comments = [], status = INITIAL }) {
+function TrackComments({
+  comments = [],
+  status = INITIAL,
+  trackId,
+  ownAvatarUrl,
+  postComment,
+}) {
   return (
     <Wrapper>
-      <PostCommentForm />
+      <PostCommentForm
+        trackId={trackId}
+        postComment={postComment}
+        avatarUrl={ownAvatarUrl}
+      />
       {comments.map(comment =>
         <Comment
           key={comment.id}
@@ -26,6 +36,7 @@ function TrackComments({ comments = [], status = INITIAL }) {
           userId={comment.user_id}
           avatarUrl={comment.user.avatar_url}
           userName={comment.user.username}
+          timestamp={comment.timestamp}
         />,
       )}
       {!DONE.includes(status) && <Loader />}
@@ -35,6 +46,9 @@ function TrackComments({ comments = [], status = INITIAL }) {
 
 TrackComments.propTypes = {
   status: statusPropType.isRequired,
+  trackId: number.isRequired,
+  postComment: func.isRequired,
+  ownAvatarUrl: string.isRequired,
   comments: arrayOf(object).isRequired,
 };
 

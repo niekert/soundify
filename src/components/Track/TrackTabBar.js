@@ -29,7 +29,7 @@ const HeartIcon = styled(FavoriteHeartIcon)`
   max-width: 14px;
 `;
 
-function TrackTabBar({ trackId, playCount, likeCount, commentCount }) {
+function TrackTabBar({ playCount, likeCount, commentCount }) {
   return (
     <Wrapper>
       <Item>
@@ -49,7 +49,6 @@ function TrackTabBar({ trackId, playCount, likeCount, commentCount }) {
 }
 
 TrackTabBar.propTypes = {
-  trackId: number.isRequired,
   playCount: number.isRequired,
   likeCount: number.isRequired,
   commentCount: number.isRequired,

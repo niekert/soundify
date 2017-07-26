@@ -42,4 +42,6 @@ export function fetchComments(trackId) {
   };
 }
 
-export function postComment(trackId, comment, timestamp) {}
+export function postComment(trackId, comment, timestamp) {
+  return timestamp;
+}

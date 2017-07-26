@@ -3,7 +3,7 @@ import { bool, func, string, array } from 'prop-types';
 import { status as statusPropType } from 'PropTypes';
 import { isDone } from 'utils/status';
 import { OK } from 'app-constants';
-import { ifProp, prop } from 'styled-tools';
+import { ifProp } from 'styled-tools';
 import styled from 'styled-components';
 import Loader from 'components/Loader';
 import { GRID, LIST, feedTypePropType } from '../feedTypes';
@@ -65,7 +65,6 @@ class TracksFeed extends PureComponent {
 
   componentDidUpdate() {
     if (this._fetchingNext && this.props.status === OK) {
-      console.log('reconnecting');
       this.intersectionObserver.observe(this._nextObserver);
       this._fetchingNext = false;
     }

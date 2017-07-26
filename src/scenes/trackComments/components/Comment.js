@@ -1,27 +1,16 @@
 import React from 'react';
+import { string, number } from 'prop-types';
 import { Link as LinkComponent } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { prop } from 'styled-tools';
 import TimeAgo from 'components/helpers/TimeAgo';
-
-const Wrapper = styled.div`
-  margin: 0 ${prop('theme.spacing.space2')};
-  padding: ${prop('theme.spacing.space1')} 0;
-  height: auto;
-  display: flex;
-`;
-
-const Avatar = styled.img`
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  margin-right: ${prop('theme.spacing.space1')};
-  flex-shrink: 0;
-`;
+import { formatSeconds } from 'helpers/format';
+import { Wrapper, Avatar } from '../styles';
 
 const CommentBodyWrapper = styled.div`
   font-weight: 300;
   width: 100%;
+  overflow: hidden;
   border-bottom: 1px solid ${prop('theme.colors.reverse.outline')};
 `;
 
@@ -62,7 +51,7 @@ function Comment({ datePosted, userId, userName, avatarUrl, body, timestamp }) {
         <DateAndTime>
           <Link to={`/profile/${userId}`}>{userName}</Link>
           &nbsp;
-          <Link to="#">@ 0:12</Link>
+          <Link to="#">@ {formatSeconds(timestamp / 1000)}</Link>
         </DateAndTime>
         <CommentBody>
           {body}
@@ -74,5 +63,14 @@ function Comment({ datePosted, userId, userName, avatarUrl, body, timestamp }) {
     </Wrapper>
   );
 }
+
+Comment.propTypes = {
+  datePosted: string.isRequired,
+  userId: number.isRequired,
+  userName: string.isRequired,
+  avatarUrl: string.isRequired,
+  body: string.isRequired,
+  timestamp: string.isRequired,
+};
 
 export default Comment;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { string } from 'prop-types';
 import styled from 'styled-components';
 import { alpha } from 'utils/color';
 import { trim } from 'lodash';
@@ -31,4 +32,7 @@ function TagBar({ tags }) {
   );
 }
 
+TagBar.propTypes = {
+  tags: string,
+};
 export default TagBar;

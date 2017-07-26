@@ -32,7 +32,7 @@ const CurrentTrackLink = styled(Link)`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-weight: 300;
+  font-weight: 400;
   text-decoration: none;
   font-size: 12px;
 

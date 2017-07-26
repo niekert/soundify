@@ -9,7 +9,7 @@ import Controls from './Controls';
 const Wrapper = styled.div`
   padding: 0 15px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minMax(100px, 1fr) auto;
   z-index: 10;
   align-items: center;
   width: 100%;

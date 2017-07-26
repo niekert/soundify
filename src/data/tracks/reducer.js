@@ -1,4 +1,4 @@
-import { PENDING, OK } from 'app-constants';
+import { OK } from 'app-constants';
 import { FETCH_TRACK_SUCCESS, FETCH_TRACK } from './actions';
 
 // Keeps track of the status of track.

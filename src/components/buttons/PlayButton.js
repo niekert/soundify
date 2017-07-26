@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { pure, withHandlers, compose, setDisplayName } from 'recompose';
 import withPlayerContext from 'containers/hocs/withPlayerContext';
 import styled from 'styled-components';
-import { prop } from 'styled-tools';
 
 const Button = styled.button`
   width: 100px;

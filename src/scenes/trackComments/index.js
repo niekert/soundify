@@ -12,6 +12,7 @@ function mapStateToProps(state, { trackId }) {
     status,
     comments: commentIds.map(commentId => state.entities.comments[commentId]),
     trackId,
+    ownAvatarUrl: state.auth.user.avatar_url,
   };
 }
 

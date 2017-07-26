@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import TrackTabBarContainer from 'containers/TrackTabBarContainer';
 import Artwork from 'components/Track/ArtWork';
-import { H1, H2 } from 'components/styles/Typography';
+import { H1 } from 'components/styles/Typography';
 import TagBar from './TagBar';
 
 const Wrapper = styled.div`

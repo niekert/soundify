@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 
 const Logo = styled(Waves)`
   color: ${prop('theme.colors.reverse.primaryText')};
-  padding: 10px 0;
+  padding: ${prop('theme.spacing.space1')} 0;
   cursor: pointer;
   height: 100%;
   width: 50px;
