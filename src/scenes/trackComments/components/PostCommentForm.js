@@ -1,5 +1,6 @@
 import React from 'react';
 import { func, string } from 'prop-types';
+import SendIcon from 'components/icons/Send';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import { Wrapper, Avatar } from '../styles';
@@ -20,10 +21,21 @@ const TextArea = styled.textarea`
   font-size: 14px;
 `;
 
+const SubmitButton = styled.button`
+  background: none;
+  color: black;
+
+  svg {
+    width: 42px;
+    height: 42px;
+  }
+`;
+
 const PostCommentForm = ({ postComment, avatarUrl }) =>
   <Form onSubmit={postComment}>
     <Avatar src={avatarUrl} />
     <TextArea maxLength={250} placeholder="Post a comment" />
+    <SubmitButton type="submit" />
   </Form>;
 
 PostCommentForm.propTypes = {

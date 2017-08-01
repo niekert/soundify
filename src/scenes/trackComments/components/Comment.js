@@ -70,7 +70,7 @@ Comment.propTypes = {
   userName: string.isRequired,
   avatarUrl: string.isRequired,
   body: string.isRequired,
-  timestamp: string.isRequired,
+  timestamp: number.isRequired,
 };
 
 export default Comment;

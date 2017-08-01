@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { prop } from 'styled-tools';
 
 export const Wrapper = styled.div`
+  position: relative;
   margin: 0 ${prop('theme.spacing.space2')};
   padding: ${prop('theme.spacing.space1')} 0;
   height: auto;
