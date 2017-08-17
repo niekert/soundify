@@ -26,11 +26,11 @@
     "number-abbreviate": "^2.0.0",
     "prop-types": "^15.5.7",
     "query-string": "^4.3.2",
-    "react": "^15.5.0",
+    "react": "next",
     "react-click-outside": "2.3",
     "react-dnd": "^2.3.0",
     "react-dnd-html5-backend": "^2.3.0",
-    "react-dom": "^15.5.0",
+    "react-dom": "next",
     "react-loadable": "^3.1.0",
     "react-modal": "^1.7.7",
     "react-redux": "5.0.5",
@@ -135,8 +135,12 @@
     "build": "BROWSER=none NODE_PATH=src/ yarn react-build && yarn electron-build"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
     "testPathIgnorePatterns": [
       "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
     ],
@@ -147,7 +151,9 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     }
