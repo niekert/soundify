@@ -6,7 +6,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { prop } from 'styled-tools';
 import theme from 'theme';
-import ModalContainer from 'scenes/modals';
+// import ModalContainer from 'scenes/modals';
 import PlayerContainer from 'scenes/player';
 import UserProfileContainer from 'scenes/userProfile';
 import TopBarContainer from 'containers/TopBarContainer';
@@ -55,7 +55,7 @@ const AuthedShell = () =>
         path="/profile/:profileId/:feedId?"
         component={UserProfileContainer}
       />
-      <ModalContainer />
+      {/* <ModalContainer /> */}
     </MainContent>
     <PlayerContainer />
   </AppShell>;

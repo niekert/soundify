@@ -1,6 +1,6 @@
 import React from 'react';
 import { node, bool } from 'prop-types';
-import ReactModal from 'react-modal';
+// import ReactModal from 'react-modal';
 import styled, { keyframes } from 'styled-components';
 import { prop } from 'styled-tools';
 
@@ -20,7 +20,7 @@ const dialogIn = keyframes`
   }
 `;
 
-const StyledModal = styled(ReactModal).attrs({
+const StyledModal = styled.div.attrs({
   style: {
     overlay: {
       background: 'rgba(154, 194, 222, 0.5)',
