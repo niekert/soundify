@@ -1,7 +1,7 @@
 import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { OK, INITIAL } from 'app-constants';
-import { fetchProfile, fetchProfileFeed } from './actions';
+import { fetchProfile, fetchProfileFeed } from 'data/users/actions';
 import ProfilePage from './components/ProfilePage';
 import { userStatus } from './selectors';
 

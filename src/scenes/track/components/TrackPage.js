@@ -3,6 +3,7 @@ import { shape, string, func, bool } from 'prop-types';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import TrackComments from 'scenes/trackComments';
+import ProfileTile from 'scenes/ProfileTile';
 import TrackDetails from './TrackDetails';
 
 const Wrapper = styled.div`
@@ -28,6 +29,8 @@ const CommentsContainer = styled.div`
   min-width: 300px;
 `;
 
+const SideContainer = styled.div`flex: 1;`;
+
 function TrackPage({ track, playTrack, pauseTrack, isPlaying }) {
   return (
     <Wrapper>
@@ -49,7 +52,9 @@ function TrackPage({ track, playTrack, pauseTrack, isPlaying }) {
           <CommentsContainer>
             <TrackComments trackId={track.id} />
           </CommentsContainer>
-          <div style={{ flex: 1 }} />
+          <SideContainer>
+            <ProfileTile userId={track.user.id} />
+          </SideContainer>
         </BottomWrapper>,
       ]}
     </Wrapper>
