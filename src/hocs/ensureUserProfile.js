@@ -24,4 +24,4 @@ const enhance = compose(
   }),
 );
 
-export default () => enhance;
+export default enhance;

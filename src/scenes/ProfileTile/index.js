@@ -4,7 +4,13 @@ import ensureUserProfile from 'hocs/ensureUserProfile';
 import ProfileTile from './components';
 
 function mapStateToProps(state, { userId }) {
+  const { avatar_url: avatarUrl, username, followers_count: followersCount } =
+    state.entities.user[userId] || {};
+
   return {
+    avatarUrl,
+    username,
+    followersCount,
     userId,
   };
 }

@@ -4,7 +4,7 @@ import abbreviateNumber from 'number-abbreviate';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import { H1, Paragraph } from 'components/styles/Typography';
-import FollowButton from './FollowButton';
+import FollowButton from 'scenes/FollowButton';
 import ProfileDropdown from './ProfileDropdown';
 
 const Wrapper = styled.div`
@@ -47,9 +47,7 @@ const StatsContainer = styled.ul`display: flex;`;
 
 function ProfileHeader({
   username,
-  isFollowing,
   userId,
-  toggleFollowing,
   followersCount,
   followingCount,
   toggleSidebarPin,
@@ -68,11 +66,7 @@ function ProfileHeader({
           <H1>
             {username}
           </H1>
-          <FollowButton
-            toggleFollowing={toggleFollowing}
-            userId={userId}
-            isFollowing={isFollowing}
-          />
+          <FollowButton userId={userId} />
           <ProfileDropdown
             userId={userId}
             userName={username}
@@ -101,9 +95,7 @@ function ProfileHeader({
 
 ProfileHeader.propTypes = {
   username: string.isRequired,
-  toggleFollowing: func.isRequired,
   toggleSidebarPin: func.isRequired,
-  isFollowing: bool,
   isPinned: bool,
   userId: number.isRequired,
   followersCount: number.isRequired,
